@@ -1,0 +1,44 @@
+require:
+  - rubocop-factory_bot
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.0
+  SuggestExtensions: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Style/Documentation:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+  AllowedPatterns:
+    - '\s*#:?\s.*'
+
+Style/CommentAnnotation:
+  Enabled: true
+  Keywords:
+    - TODO
+    - FIXME
+    - OPTIMIZE
+    - HACK
+    - REVIEW
+    - NOTE
+    - NOTE FOR REVIEWER
+    - NOTE FOR AUTHOR
+
+# TODO: Remove these and customize cop to allow rbs-inline syntax
+Layout/LeadingCommentSpace:
+  Enabled: false
+Layout/EmptyLineAfterMagicComment:
+  Enabled: false
+Style/AccessorGrouping:
+  Enabled: false
+Style/CommentedKeyword:
+  Enabled: false
