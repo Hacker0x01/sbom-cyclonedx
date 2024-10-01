@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Standard - A standard may consist of regulations, industry or organizational-specific standards, maturity models, best practices, or any other requirements which can be evaluated against or attested to.
-module Sbom
+module SBOM
   module Cyclonedx
     class Standard < SchemaObject
       # BOM Reference - An optional identifier which can be used to reference the object elsewhere in the BOM. Every bom-ref must be unique within the BOM.

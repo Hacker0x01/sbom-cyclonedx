@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Component
-module Sbom
+module SBOM
   module Cyclonedx
     class Component < SchemaObject
       # Component Type - Specifies the type of component. For software components, classify as application if no more specific appropriate classification is available or cannot be determined for the component.

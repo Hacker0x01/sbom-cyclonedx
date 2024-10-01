@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Protocol Properties - Properties specific to cryptographic assets of type: `protocol`.
-module Sbom
+module SBOM
   module Cyclonedx
     class ProtocolProperties < SchemaObject
       # Type - The concrete protocol type.

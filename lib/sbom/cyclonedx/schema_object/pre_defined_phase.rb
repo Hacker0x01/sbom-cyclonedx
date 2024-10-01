@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Pre-Defined Phase
-module Sbom
+module SBOM
   module Cyclonedx
     class PreDefinedPhase < SchemaObject
       # Phase - A pre-defined phase in the product lifecycle.

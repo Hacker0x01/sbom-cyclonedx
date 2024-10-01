@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Risk
-module Sbom
+module SBOM
   module Cyclonedx
     class Risk < SchemaObject
       # Name - The name of the risk.

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Input and Output Parameters
-module Sbom
+module SBOM
   module Cyclonedx
     class InputOutputMlParameter < SchemaObject
       # Input/Output Format - The data format for input/output to the model.

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Anonymous class from DataGovernanceResponsibleParty
-module Sbom
+module SBOM
   module Cyclonedx
     class DataGovernanceResponsibleParty < SchemaObject
       # Organization - The organization that is responsible for specific data governance role(s).

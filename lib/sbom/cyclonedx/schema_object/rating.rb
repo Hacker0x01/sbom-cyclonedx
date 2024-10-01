@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Rating - Defines the severity or risk ratings of a vulnerability.
-module Sbom
+module SBOM
   module Cyclonedx
     class Rating < SchemaObject
       # The source that calculated the severity or risk rating of the vulnerability.

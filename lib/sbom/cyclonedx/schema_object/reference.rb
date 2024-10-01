@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Reference
-module Sbom
+module SBOM
   module Cyclonedx
     class Reference < SchemaObject
       # ID - An identifier that uniquely identifies the vulnerability.

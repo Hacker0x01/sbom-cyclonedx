@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Fairness Assessment - Information about the benefits and harms of the model to an identified at risk group.
-module Sbom
+module SBOM
   module Cyclonedx
     class FairnessAssessment < SchemaObject
       # Group at Risk - The groups or individuals at risk of being systematically disadvantaged by the model.

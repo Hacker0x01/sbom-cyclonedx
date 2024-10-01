@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # CycloneDX Bill of Materials Standard
-module Sbom
+module SBOM
   module Cyclonedx
     class Root < SchemaObject
       # Data Name - The name of the data.

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Patch - Specifies an individual patch
-module Sbom
+module SBOM
   module Cyclonedx
     class Patch < SchemaObject
       # Patch Type - Specifies the purpose for the patch including the resolution of defects, security issues, or new behavior or functionality.

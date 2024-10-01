@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Target - Target which a clame may be made against.
-module Sbom
+module SBOM
   module Cyclonedx
     class Target < SchemaObject
       # Organizations - The list of organizations which claims are made against.

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Event - Represents something that happened that may trigger a response.
-module Sbom
+module SBOM
   module Cyclonedx
     class Event < SchemaObject
       # Unique Identifier (UID) - The unique identifier of the event.

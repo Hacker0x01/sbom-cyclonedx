@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Secured By - Specifies the mechanism by which the cryptographic asset is secured by
-module Sbom
+module SBOM
   module Cyclonedx
     class SecuredBy < SchemaObject
       # Mechanism - Specifies the mechanism by which the cryptographic asset is secured by.

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Frame
-module Sbom
+module SBOM
   module Cyclonedx
     class Frame < SchemaObject
       # Package - A package organizes modules into namespaces, providing a unique namespace for each type it contains.

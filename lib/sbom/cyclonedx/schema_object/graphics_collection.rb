@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Graphics Collection - A collection of graphics that represent various measurements.
-module Sbom
+module SBOM
   module Cyclonedx
     class GraphicsCollection < SchemaObject
       # Description - A description of this collection of graphics.

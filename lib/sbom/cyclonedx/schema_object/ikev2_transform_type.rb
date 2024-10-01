@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # IKEv2 Transform Types - The IKEv2 transform types supported (types 1-4), defined in [RFC 7296 section 3.3.2](https://www.ietf.org/rfc/rfc7296.html#section-3.3.2), and additional properties.
-module Sbom
+module SBOM
   module Cyclonedx
     class Ikev2TransformType < SchemaObject
       # Encryption Algorithm (ENCR) - Transform Type 1: encryption algorithms

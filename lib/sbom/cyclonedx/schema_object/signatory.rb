@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Signatory - A person or organization authorized on behalf of an organization to assert validity of this document.
-module Sbom
+module SBOM
   module Cyclonedx
     class Signatory < SchemaObject
       # Name - The signatory's name.

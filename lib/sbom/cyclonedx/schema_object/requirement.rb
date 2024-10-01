@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Requirement
-module Sbom
+module SBOM
   module Cyclonedx
     class Requirement < SchemaObject
       # BOM Reference - An optional identifier which can be used to reference the object elsewhere in the BOM. Every bom-ref must be unique within the BOM.

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Diff - The patch file (or diff) that shows changes. Refer to https://en.wikipedia.org/wiki/Diff
-module Sbom
+module SBOM
   module Cyclonedx
     class Diff < SchemaObject
       # Diff text - Specifies the optional text of the diff

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Credits - Individuals or organizations credited with the discovery of the vulnerability.
-module Sbom
+module SBOM
   module Cyclonedx
     class Credit < SchemaObject
       # Organizations - The organizations credited with vulnerability discovery.

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # SWID Tag - Specifies metadata and content for ISO-IEC 19770-2 Software Identification (SWID) Tags.
-module Sbom
+module SBOM
   module Cyclonedx
     class Swid < SchemaObject
       # Tag ID - Maps to the tagId of a SoftwareIdentity.

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Release notes
-module Sbom
+module SBOM
   module Cyclonedx
     class ReleaseNote < SchemaObject
       # Type - The software versioning type. It is recommended that the release type use one of 'major', 'minor', 'patch', 'pre-release', or 'internal'. Representing all possible software release types is not practical, so standardizing on the recommended values, whenever possible, is strongly encouraged.

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Version
-module Sbom
+module SBOM
   module Cyclonedx
     class Version < SchemaObject
       # Version - A single version of a component or service.

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Executes specific commands or tools in order to accomplish its owning task as part of a sequence.
-module Sbom
+module SBOM
   module Cyclonedx
     class Step < SchemaObject
       # Name - A name for the step.

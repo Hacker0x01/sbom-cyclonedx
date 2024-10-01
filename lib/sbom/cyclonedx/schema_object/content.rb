@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Data Contents - The contents or references to the contents of the data being described.
-module Sbom
+module SBOM
   module Cyclonedx
     class Content < SchemaObject
       # Data Attachment - An optional way to include textual or encoded data.

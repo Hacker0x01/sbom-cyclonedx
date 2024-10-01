@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Data Reference
-module Sbom
+module SBOM
   module Cyclonedx
     class DataReference < SchemaObject
       # Reference - References a data component by the components bom-ref attribute

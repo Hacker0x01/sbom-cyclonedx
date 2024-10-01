@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Anonymous class from Command
-module Sbom
+module SBOM
   module Cyclonedx
     class Command < SchemaObject
       # Executed - A text representation of the executed command.

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # BOM Metadata
-module Sbom
+module SBOM
   module Cyclonedx
     class Metadatum < SchemaObject
       # Timestamp - The date and time (timestamp) when the BOM was created.

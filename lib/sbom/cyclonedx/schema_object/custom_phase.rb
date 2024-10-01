@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Custom Phase
-module Sbom
+module SBOM
   module Cyclonedx
     class CustomPhase < SchemaObject
       # Name - The name of the lifecycle phase

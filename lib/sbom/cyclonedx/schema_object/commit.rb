@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Commit - Specifies an individual commit
-module Sbom
+module SBOM
   module Cyclonedx
     class Commit < SchemaObject
       # UID - A unique identifier of the commit. This may be version control specific. For example, Subversion uses revision numbers whereas git uses commit hashes.

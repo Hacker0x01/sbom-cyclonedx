@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Environmental Considerations - Describes various environmental impact metrics.
-module Sbom
+module SBOM
   module Cyclonedx
     class EnvironmentalConsideration < SchemaObject
       # Energy Consumptions - Describes energy consumption information incurred for one or more component lifecycle activities.

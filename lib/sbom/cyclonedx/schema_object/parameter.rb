@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Parameter - A representation of a functional parameter.
-module Sbom
+module SBOM
   module Cyclonedx
     class Parameter < SchemaObject
       # Name - The name of the parameter.

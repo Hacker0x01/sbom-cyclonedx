@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Energy consumption - Describes energy consumption information incurred for the specified lifecycle activity.
-module Sbom
+module SBOM
   module Cyclonedx
     class EnergyConsumption < SchemaObject
       # Activity - The type of activity that is part of a machine learning model development or operational lifecycle.

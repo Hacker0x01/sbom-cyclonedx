@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # CycloneDX Bill of Materials Standard
-module Sbom
+module SBOM
   module Cyclonedx
     class Root < SchemaObject
       # BOM Serial Number - Every BOM generated SHOULD have a unique serial number, even if the contents of the BOM have not changed over time. If specified, the serial number must conform to [RFC 4122](https://www.ietf.org/rfc/rfc4122.html). Use of serial numbers is recommended.

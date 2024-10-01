@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Impact Analysis - An assessment of the impact and exploitability of the vulnerability.
-module Sbom
+module SBOM
   module Cyclonedx
     class Analysis < SchemaObject
       attr_accessor :state #: ImpactAnalysisState

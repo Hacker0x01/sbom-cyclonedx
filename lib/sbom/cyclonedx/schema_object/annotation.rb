@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Annotations - A comment, note, explanation, or similar textual content which provides additional context to the object(s) being annotated.
-module Sbom
+module SBOM
   module Cyclonedx
     class Annotation < SchemaObject
       # BOM Reference - An optional identifier which can be used to reference the annotation elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.

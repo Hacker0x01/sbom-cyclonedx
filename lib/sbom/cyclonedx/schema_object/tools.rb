@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Tools - The tool(s) used to identify, confirm, or score the vulnerability.
-module Sbom
+module SBOM
   module Cyclonedx
     class Tools < SchemaObject
       # Components - A list of software and hardware components used as tools.

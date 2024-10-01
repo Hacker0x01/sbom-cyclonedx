@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Licensee - The individual or organization for which a license was granted to
-module Sbom
+module SBOM
   module Cyclonedx
     class Licensee < SchemaObject
       # Licensee (Organization) - The organization that was granted the license

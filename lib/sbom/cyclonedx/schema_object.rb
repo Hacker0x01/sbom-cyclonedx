@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 # rbs_inline: enabled
-module Sbom
+module SBOM
   module Cyclonedx
     # TODO: Add JSON serialization logic
     class SchemaObject

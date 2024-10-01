@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Graphic
-module Sbom
+module SBOM
   module Cyclonedx
     class Graphic < SchemaObject
       # Name - The name of the graphic.

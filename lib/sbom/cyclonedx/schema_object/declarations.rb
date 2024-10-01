@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Declarations - The list of declarations which describe the conformance to standards. Each declaration may include attestations, claims, and evidence.
-module Sbom
+module SBOM
   module Cyclonedx
     class Definitions < SchemaObject
       # Assessors - The list of assessors evaluating claims and determining conformance to requirements and confidence in that assessment.

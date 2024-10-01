@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Evidence - Provides the ability to document evidence collected through various forms of extraction or analysis.
-module Sbom
+module SBOM
   module Cyclonedx
     class ComponentEvidence < SchemaObject
       # Identity Evidence - Evidence that substantiates the identity of a component. The identity may be an object or an array of identity objects. Support for specifying identity as a single object was introduced in CycloneDX v1.5. Arrays were introduced in v1.6. It is recommended that all implementations use arrays, even if only one identity object is specified.

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Formula - Describes workflows and resources that captures rules and other aspects of how the associated BOM component or service was formed.
-module Sbom
+module SBOM
   module Cyclonedx
     class Formula < SchemaObject
       # BOM Reference - An optional identifier which can be used to reference the formula elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.

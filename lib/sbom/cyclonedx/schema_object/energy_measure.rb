@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Energy Measure - A measure of energy.
-module Sbom
+module SBOM
   module Cyclonedx
     class EnergyMeasure < SchemaObject
       # Value - Quantity of energy.

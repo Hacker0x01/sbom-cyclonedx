@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Source - The source of the issue where it is documented
-module Sbom
+module SBOM
   module Cyclonedx
     class Source < SchemaObject
       # Name - The name of the source.

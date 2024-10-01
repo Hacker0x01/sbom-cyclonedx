@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Issue - An individual issue that has been resolved.
-module Sbom
+module SBOM
   module Cyclonedx
     class Issue < SchemaObject
       # Issue Type - Specifies the type of issue

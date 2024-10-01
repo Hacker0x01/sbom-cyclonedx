@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Volume - An identifiable, logical unit of data storage tied to a physical device.
-module Sbom
+module SBOM
   module Cyclonedx
     class Volume < SchemaObject
       # Unique Identifier (UID) - The unique identifier for the volume instance within its deployment context.

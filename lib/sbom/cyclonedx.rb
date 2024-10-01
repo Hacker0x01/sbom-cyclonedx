@@ -3,7 +3,7 @@
 
 require_relative "cyclonedx/version"
 
-module Sbom
+module SBOM
   module Cyclonedx
     class Error < StandardError; end
     # Your code goes here...

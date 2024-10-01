@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Licensing information - Licensing details describing the licensor/licensee, license type, renewal and expiration dates, and other important metadata
-module Sbom
+module SBOM
   module Cyclonedx
     class Licensing < SchemaObject
       # Alternate License Identifiers - License identifiers that may be used to manage licenses and their lifecycle

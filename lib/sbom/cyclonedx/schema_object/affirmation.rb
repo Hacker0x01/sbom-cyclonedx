@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Affirmation - A concise statement affirmed by an individual regarding all declarations, often used for third-party auditor acceptance or recipient acknowledgment. It includes a list of authorized signatories who assert the validity of the document on behalf of the organization.
-module Sbom
+module SBOM
   module Cyclonedx
     class Affirmation < SchemaObject
       # Statement - The brief statement affirmed by an individual regarding all declarations.\n*- Notes This could be an affirmation of acceptance by a third-party auditor or receiving individual of a file.

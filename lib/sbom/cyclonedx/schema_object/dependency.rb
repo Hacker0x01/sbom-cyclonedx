@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Dependency - Defines the direct dependencies of a component, service, or the components provided/implemented by a given component. Components or services that do not have their own dependencies must be declared as empty elements within the graph. Components or services that are not represented in the dependency graph may have unknown dependencies. It is recommended that implementations assume this to be opaque and not an indicator of an object being dependency-free. It is recommended to leverage compositions to indicate unknown dependency graphs.
-module Sbom
+module SBOM
   module Cyclonedx
     class Dependency < SchemaObject
       # Reference - References a component or service by its bom-ref attribute

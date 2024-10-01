@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Confidence Interval - The confidence interval of the metric.
-module Sbom
+module SBOM
   module Cyclonedx
     class ConfidenceInterval < SchemaObject
       # Lower Bound - The lower bound of the confidence interval.

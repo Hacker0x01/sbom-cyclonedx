@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Certificate Properties - Properties for cryptographic assets of asset type 'certificate'
-module Sbom
+module SBOM
   module Cyclonedx
     class CertificateProperty < SchemaObject
       # Subject Name - The subject name for the certificate

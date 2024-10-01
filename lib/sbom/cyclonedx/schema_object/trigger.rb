@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Trigger - Represents a resource that can conditionally activate (or fire) tasks based upon associated events and their data.
-module Sbom
+module SBOM
   module Cyclonedx
     class Trigger < SchemaObject
       # BOM Reference - An optional identifier which can be used to reference the trigger elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.

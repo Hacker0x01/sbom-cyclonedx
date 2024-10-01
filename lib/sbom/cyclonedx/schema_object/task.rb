@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Task - Describes the inputs, sequence of steps and resources used to accomplish a task and its output.
-module Sbom
+module SBOM
   module Cyclonedx
     class Task < SchemaObject
       # BOM Reference - An optional identifier which can be used to reference the task elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.

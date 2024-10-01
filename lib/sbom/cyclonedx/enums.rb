@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 # rbs_inline: enabled
 
-module Sbom
+module SBOM
   module Cyclonedx
     # TODO: Instead of using constants, make each value a subclass of its enum and each enum a subclass of some "Enum"
     # base class. This will allow us to use .is_a?, etc. to check for enum membership.

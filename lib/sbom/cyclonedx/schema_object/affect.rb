@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Affect
-module Sbom
+module SBOM
   module Cyclonedx
     class Affect < SchemaObject
       # Reference - References a component or service by the objects bom-ref

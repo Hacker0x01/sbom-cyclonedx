@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Identity Evidence - Evidence that substantiates the identity of a component.
-module Sbom
+module SBOM
   module Cyclonedx
     class ComponentIdentityEvidence < SchemaObject
       # Field - The identity field of the component which the evidence describes.

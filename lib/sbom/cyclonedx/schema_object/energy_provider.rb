@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Energy Provider - Describes the physical provider of energy used for model development or operations.
-module Sbom
+module SBOM
   module Cyclonedx
     class EnergyProvider < SchemaObject
       # BOM Reference - An optional identifier which can be used to reference the energy provider elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.

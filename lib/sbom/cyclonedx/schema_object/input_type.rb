@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Input type - Type that represents various input data types and formats.
-module Sbom
+module SBOM
   module Cyclonedx
     class InputType < SchemaObject
       # Source - A reference to the component or service that provided the input to the task (e.g., reference to a service with data flow value of `inbound`)

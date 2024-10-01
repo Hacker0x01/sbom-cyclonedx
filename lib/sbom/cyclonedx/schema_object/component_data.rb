@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Anonymous class from ComponentData
-module Sbom
+module SBOM
   module Cyclonedx
     class ComponentData < SchemaObject
       # BOM Reference - An optional identifier which can be used to reference the dataset elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.

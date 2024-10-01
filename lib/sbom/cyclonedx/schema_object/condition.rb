@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Condition - A condition that was used to determine a trigger should be activated.
-module Sbom
+module SBOM
   module Cyclonedx
     class Condition < SchemaObject
       # Description - Describes the set of conditions which cause the trigger to activate.

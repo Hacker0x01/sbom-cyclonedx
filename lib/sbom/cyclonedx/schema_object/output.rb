@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Anonymous class from Output
-module Sbom
+module SBOM
   module Cyclonedx
     class Output < SchemaObject
       # Type - Describes the type of data output.

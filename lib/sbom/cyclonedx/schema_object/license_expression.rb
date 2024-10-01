@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # SPDX License Expression - A tuple of exactly one SPDX License Expression.
-module Sbom
+module SBOM
   module Cyclonedx
     class LicenseExpression < SchemaObject
       # SPDX License Expression - A valid SPDX license expression Refer to https://spdx.org/specifications for syntax requirements

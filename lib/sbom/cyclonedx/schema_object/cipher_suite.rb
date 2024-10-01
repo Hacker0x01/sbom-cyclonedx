@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Cipher Suite - Object representing a cipher suite
-module Sbom
+module SBOM
   module Cyclonedx
     class CipherSuite < SchemaObject
       # Common Name - A common name for the cipher suite.

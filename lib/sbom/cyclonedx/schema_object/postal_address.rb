@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Postal address - An address used to identify a contactable location.
-module Sbom
+module SBOM
   module Cyclonedx
     class PostalAddress < SchemaObject
       # BOM Reference - An optional identifier which can be used to reference the address elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.

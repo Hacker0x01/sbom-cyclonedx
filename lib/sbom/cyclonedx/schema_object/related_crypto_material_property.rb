@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Related Cryptographic Material Properties - Properties for cryptographic assets of asset type: `related-crypto-material`
-module Sbom
+module SBOM
   module Cyclonedx
     class RelatedCryptoMaterialProperties < SchemaObject
       # relatedCryptoMaterialType - The type for the related cryptographic material

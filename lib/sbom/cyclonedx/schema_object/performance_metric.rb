@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Performance Metric
-module Sbom
+module SBOM
   module Cyclonedx
     class PerformanceMetric < SchemaObject
       # Type - The type of performance metric.

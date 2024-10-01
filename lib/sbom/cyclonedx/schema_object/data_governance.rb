@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Data Governance - Data governance captures information regarding data ownership, stewardship, and custodianship, providing insights into the individuals or entities responsible for managing, overseeing, and safeguarding the data throughout its lifecycle.
-module Sbom
+module SBOM
   module Cyclonedx
     class DataGovernance < SchemaObject
       # Data Custodians - Data custodians are responsible for the safe custody, transport, and storage of data.

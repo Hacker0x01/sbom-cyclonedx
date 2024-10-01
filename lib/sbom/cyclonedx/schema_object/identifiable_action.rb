@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Identifiable Action - Specifies an individual commit
-module Sbom
+module SBOM
   module Cyclonedx
     class IdentifiableAction < SchemaObject
       # Timestamp - The timestamp in which the action occurred

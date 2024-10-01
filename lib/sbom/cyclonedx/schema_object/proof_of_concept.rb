@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Proof of Concept - Evidence used to reproduce the vulnerability.
-module Sbom
+module SBOM
   module Cyclonedx
     class ProofOfConcept < SchemaObject
       # Steps to Reproduce - Precise steps to reproduce the vulnerability.

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # CO2 Measure - A measure of carbon dioxide (CO2).
-module Sbom
+module SBOM
   module Cyclonedx
     class Co2Measure < SchemaObject
       # Value - Quantity of carbon dioxide (CO2).

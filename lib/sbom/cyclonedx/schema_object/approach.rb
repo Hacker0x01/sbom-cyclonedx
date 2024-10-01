@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Approach - The overall approach to learning used by the model for problem solving.
-module Sbom
+module SBOM
   module Cyclonedx
     class Approach < SchemaObject
       # Learning Type - Learning types describing the learning problem or hybrid learning problem.

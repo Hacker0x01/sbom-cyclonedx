@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Hash
-module Sbom
+module SBOM
   module Cyclonedx
     class Hash < SchemaObject
       attr_accessor :alg #: HashAlg

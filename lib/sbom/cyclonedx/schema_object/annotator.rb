@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Annotator - The organization, person, component, or service which created the textual content of the annotation.
-module Sbom
+module SBOM
   module Cyclonedx
     class Annotator < SchemaObject
       # The organization that created the annotation

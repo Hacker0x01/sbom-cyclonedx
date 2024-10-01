@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Advisory - Title and location where advisory information can be obtained. An advisory is a notification of a threat to a component, service, or system.
-module Sbom
+module SBOM
   module Cyclonedx
     module Constrained
       # Identifier for referable and therefore interlinkable elements. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.

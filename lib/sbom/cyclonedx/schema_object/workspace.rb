@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Workspace - A named filesystem or data resource shareable by workflow tasks.
-module Sbom
+module SBOM
   module Cyclonedx
     class Workspace < SchemaObject
       # BOM Reference - An optional identifier which can be used to reference the workspace elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.

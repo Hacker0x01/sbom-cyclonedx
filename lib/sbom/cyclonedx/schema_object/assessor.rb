@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # CycloneDX Bill of Materials Standard
-module Sbom
+module SBOM
   module Cyclonedx
     class Root < SchemaObject
       # BOM Reference - An optional identifier which can be used to reference the object elsewhere in the BOM. Every bom-ref must be unique within the BOM.

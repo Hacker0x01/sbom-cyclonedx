@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Considerations - What considerations should be taken into account regarding the model's construction, training, and application?
-module Sbom
+module SBOM
   module Cyclonedx
     class Consideration < SchemaObject
       # Users - Who are the intended users of the model?

@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Attestation - Maps requirements to claims and provides conformance and confidence scores.
-module Sbom
+module SBOM
   module Cyclonedx
     class Attestation < SchemaObject
       # Summary - The short description explaining the main points of the attestation.

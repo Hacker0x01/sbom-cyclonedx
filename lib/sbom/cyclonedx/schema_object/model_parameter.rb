@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Model Parameters - Hyper-parameters for construction of the model.
-module Sbom
+module SBOM
   module Cyclonedx
     class ModelParameter < SchemaObject
       # Approach - The overall approach to learning used by the model for problem solving.

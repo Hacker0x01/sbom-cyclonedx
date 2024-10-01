@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Method
-module Sbom
+module SBOM
   module Cyclonedx
     class Method < SchemaObject
       # Technique - The technique used in this method of analysis.

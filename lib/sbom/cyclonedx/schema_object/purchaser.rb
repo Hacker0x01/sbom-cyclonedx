@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Purchaser - The individual or organization that purchased the license
-module Sbom
+module SBOM
   module Cyclonedx
     class Purchaser < SchemaObject
       # Purchaser (Organization) - The organization that purchased the license

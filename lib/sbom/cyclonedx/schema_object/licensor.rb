@@ -2,7 +2,7 @@
 # rbs_inline: enabled
 
 # Licensor - The individual or organization that grants a license to another individual or organization
-module Sbom
+module SBOM
   module Cyclonedx
     class Licensor < SchemaObject
       # Licensor (Organization) - The organization that granted the license
