@@ -8,8 +8,12 @@ module SBOM
       # Licensor (Organization) - The organization that granted the license
       attr_accessor :organization #: OrganizationalEntity
 
+      validate :organization, required: -> { individual.nil? }
+
       # Licensor (Individual) - The individual, not associated with an organization, that granted the license
       attr_accessor :individual #: OrganizationalContact
+
+      validate :individual, required: -> { organization.nil? }
     end
   end
 end

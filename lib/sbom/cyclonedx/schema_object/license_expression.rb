@@ -9,8 +9,10 @@ module SBOM
       # Examples:
       #   "Apache-2.0 AND (MIT OR GPL-2.0-only)"
       #   "GPL-3.0-only WITH Classpath-exception-2.0"
-      # TODO: Validate
+      # TODO: Validate syntax
       attr_accessor :expression #: String
+
+      validate :expression, required: true
 
       attr_accessor :acknowledgement #: LicenseAcknowledgement
 

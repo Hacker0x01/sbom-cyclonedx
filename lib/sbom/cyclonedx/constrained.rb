@@ -15,16 +15,6 @@ module SBOM
         end
       end
 
-      class BOMSerialNumber < String
-        REGEX = /\Aurn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\Z/
-
-        def initialize(value)
-          raise ArgumentError, "BOMSerialNumber must match the regex #{REGEX}" unless value.match?(REGEX)
-
-          super(value)
-        end
-      end
-
       # BOM-Link Document - Descriptor for a BOM document. See https://cyclonedx.org/capabilities/bomlink/
       class BOMLinkDocument < String
         REGEX = %r{\Aurn:cdx:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/[1-9][0-9]*\Z}
@@ -96,38 +86,6 @@ module SBOM
 
         def initialize(value)
           raise ArgumentError, "Locale must match the regex #{REGEX}" unless value.match?(REGEX)
-
-          super(value)
-        end
-      end
-
-      # OWASP OpenCRE Identifier(s)
-      class OpenCRE < String
-        REGEX = /\ACRE:[0-9]+-[0-9]+\Z/
-
-        def initialize(value)
-          raise ArgumentError, "OpenCRE must match the regex #{REGEX}" unless value.match?(REGEX)
-
-          super(value)
-        end
-      end
-
-      # Version Range - A version range specified in Package URL Version Range syntax (vers) which is defined at https://github.com/package-url/purl-spec/VERSION-RANGE-SPEC.rst
-      # Examples:
-      #   "vers:cargo/9.0.14",
-      #   "vers:npm/1.2.3|>=2.0.0|<5.0.0",
-      #   "vers:pypi/0.0.0|0.0.1|0.0.2|0.0.3|1.0|2.0pre1",
-      #   "vers:tomee/>=1.0.0-beta1|<=1.7.5|>=7.0.0-M1|<=7.0.7|>=7.1.0|<=7.1.2|>=8.0.0-M1|<=8.0.1",
-      #   "vers:gem/>=2.2.0|!= 2.2.1|<2.3.0"
-      # TODO: Validate according to PURL spec
-      class VersionRange < String
-        MIN_LENGTH = 1
-        MAX_LENGTH = 4096
-
-        def initialize(value)
-          unless value.length.between?(MIN_LENGTH, MAX_LENGTH)
-            raise ArgumentError, "VersionRange must be between #{MIN_LENGTH} and #{MAX_LENGTH} characters"
-          end
 
           super(value)
         end

@@ -8,6 +8,8 @@ module SBOM
       # Reference - References a component or service by its bom-ref attribute
       attr_accessor :ref #: RefLink
 
+      validate :ref, required: true
+
       # Depends On - The bom-ref identifiers of the components or services that are dependencies of this dependency object.
       attr_accessor :depends_on #: Set[RefLink]
 

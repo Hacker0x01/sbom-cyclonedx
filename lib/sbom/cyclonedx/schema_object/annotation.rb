@@ -11,14 +11,22 @@ module SBOM
       # Subjects - The object in the BOM identified by its bom-ref. This is often a component or service, but may be any object type supporting bom-refs.
       attr_accessor :subjects #: Set[RefLink | BOMLinkElement]
 
+      validate :subjects, required: true
+
       # Annotator - The organization, person, component, or service which created the textual content of the annotation.
       attr_accessor :annotator #: Annotator
+
+      validate :annotator, required: true
 
       # Timestamp - The date and time (timestamp) when the annotation was created.
       attr_accessor :timestamp #: DateTime
 
+      validate :timestamp, required: true
+
       # Text - The textual content of the annotation.
       attr_accessor :text #: String
+
+      validate :text, required: true
 
       # Signature - Enveloped signature in [JSON Signature Format (JSF)](https://cyberphone.github.io/doc/security/jsf.html).
       attr_accessor :signature #: Signature

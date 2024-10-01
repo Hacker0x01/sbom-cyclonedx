@@ -19,6 +19,8 @@ module SBOM
       # Example: "ticker-service"
       attr_accessor :name #: String
 
+      validate :name, required: true
+
       # Service Version - The service version.
       attr_accessor :version #: String
 
@@ -38,10 +40,14 @@ module SBOM
       attr_accessor :trust_zone #: String
 
       # Data - Specifies information about the data including the directional flow of data and the data classification.
-      attr_accessor :data #: [ServiceDatum]
+      attr_accessor :data #: [ServiceData]
 
       # Service License(s)
-      attr_accessor :licenses #: LicenseChoice
+      attr_accessor :licenses #: [[WrappedLicense] | [LicenseExpression]]
+
+      validate :licenses, lambda { |value|
+        value.nil? || value.all? { |v| v.all?(WrappedLicense) || (v.first.is_a?(LicenseExpression) && v.length == 1) }
+      }
 
       # External References - External references provide a way to document systems, sites, and information that may be relevant but are not included with the BOM. They may also establish specific relationships within or external to the BOM.
       attr_accessor :external_references #: [ExternalReference]

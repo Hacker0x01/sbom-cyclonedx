@@ -21,7 +21,10 @@ module SBOM
       attr_accessor :descriptions #: [String]
 
       # OWASP OpenCRE Identifier(s) - The Common Requirements Enumeration (CRE) identifier(s). CRE is a structured and standardized framework for uniting security standards and guidelines. CRE links each section of a resource to a shared topic identifier (a Common Requirement). Through this shared topic link, all resources map to each other. Use of CRE promotes clear and unambiguous communication among stakeholders.
-      attr_accessor :open_cre #: [OpenCRE]
+      # Example: ["CRE:764-507"]
+      attr_accessor :open_cre #: [String]
+
+      validate :open_cre, all: { pattern: /\ACRE:[0-9]+-[0-9]+\Z/ }
 
       # Parent BOM Reference - The optional `bom-ref` to a parent requirement. This establishes a hierarchy of requirements. Top-level requirements must not define a parent. Only child requirements should define parents.
       attr_accessor :parent #: RefLink

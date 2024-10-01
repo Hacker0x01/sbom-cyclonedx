@@ -6,7 +6,9 @@ module SBOM
   module Cyclonedx
     class Issue < SchemaObject
       # Issue Type - Specifies the type of issue
-      attr_accessor :type #: String
+      attr_accessor :type #: IssueType
+
+      validate :type, required: true
 
       # Issue ID - The identifier of the issue assigned by the source of the issue
       attr_accessor :id #: String

@@ -35,10 +35,11 @@ module SBOM
       # classical security level - The classical security level that a cryptographic algorithm provides (in bits).
       attr_accessor :classical_security_level #: Integer
 
+      validate :classical_security_level, minimum: 0
+
       # NIST security strength category - The NIST security strength category as defined in https://csrc.nist.gov/projects/post-quantum-cryptography/post-quantum-cryptography-standardization/evaluation-criteria/security-(evaluation-criteria). A value of 0 indicates that none of the categories are met.
       attr_accessor :nist_quantum_security_level #: Integer
 
-      validate :classical_security_level, minimum: 0
       validate :nist_quantum_security_level, minimum: 0, maximum: 6
     end
   end

@@ -11,6 +11,9 @@ module SBOM
       # Aggregate - Specifies an aggregate type that describe how complete a relationship is.
       attr_accessor :aggregate #: AggregateType
 
+      validate :aggregate, required: true
+      default :aggregate, AggregateType::NOT_SPECIFIED
+
       # BOM references - The bom-ref identifiers of the components or services being described. Assemblies refer to nested relationships whereby a constituent part may include other constituent parts. References do not cascade to child parts. References are explicit for the specified constituent part only.
       attr_accessor :assemblies #: Set[RefLink | BOMLinkElement]
 

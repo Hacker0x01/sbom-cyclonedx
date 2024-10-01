@@ -8,6 +8,8 @@ module SBOM
       # Reference - References a component or service by the objects bom-ref
       attr_accessor :ref #: RefLink | BOMLinkElement
 
+      validate :ref, required: true
+
       # Versions - Zero or more individual versions or range of versions.
       attr_accessor :versions #: [Version]
     end

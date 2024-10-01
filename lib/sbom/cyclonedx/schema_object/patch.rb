@@ -8,6 +8,8 @@ module SBOM
       # Patch Type - Specifies the purpose for the patch including the resolution of defects, security issues, or new behavior or functionality.
       attr_accessor :type #: PatchType
 
+      validate :type, required: true
+
       # Diff - The patch file (or diff) that shows changes. Refer to [https://en.wikipedia.org/wiki/Diff](https://en.wikipedia.org/wiki/Diff)
       attr_accessor :diff #: Diff
 

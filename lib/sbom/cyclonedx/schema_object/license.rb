@@ -12,9 +12,13 @@ module SBOM
       # Example: "Apache-2.0"
       attr_accessor :id #: LicenseID
 
+      validate :id, required: -> { name.nil? }
+
       # License Name - The name of the license. This may include the name of a commercial or proprietary license or an open source license that may not be defined by SPDX.
       # Example: "Acme Software License"
       attr_accessor :name #: String
+
+      validate :name, required: -> { id.nil? }
 
       attr_accessor :acknowledgement #: LicenseAcknowledgementEnumeration
 

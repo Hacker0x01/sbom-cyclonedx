@@ -9,16 +9,18 @@ module SBOM
       # TODO: Validate
       attr_accessor :content_type #: String
 
+      default :content_type, "text/plain"
+
       # Attachment Text - The attachment data. Proactive controls such as input validation and sanitization should be employed to prevent misuse of attachment text.
       attr_accessor :content #: String
+
+      validate :content, required: true
 
       # Encoding - Specifies the optional encoding the text is represented in.
       def encoding
         # Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string.
         "base64"
       end
-
-      default :content_type, "text/plain"
     end
   end
 end

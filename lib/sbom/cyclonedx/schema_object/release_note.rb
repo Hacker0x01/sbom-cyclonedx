@@ -13,6 +13,8 @@ module SBOM
       # * internal = Internal releases are not for public consumption and are intended to be used exclusively by the project or manufacturer that produced it.
       attr_accessor :type #: String
 
+      validate :type, required: true
+
       # Title - The title of the release.
       attr_accessor :title #: String
 

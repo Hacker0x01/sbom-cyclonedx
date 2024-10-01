@@ -10,6 +10,8 @@ module SBOM
 
       # Release note content - Specifies the full content of the release note.
       attr_accessor :text #: Attachment
+
+      validate :text, required: true
     end
   end
 end

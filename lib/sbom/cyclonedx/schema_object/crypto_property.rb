@@ -8,6 +8,8 @@ module SBOM
       # Asset Type - Cryptographic assets occur in several forms. Algorithms and protocols are most commonly implemented in specialized cryptographic libraries. They may, however, also be 'hardcoded' in software components. Certificates and related cryptographic material like keys, tokens, secrets or passwords are other cryptographic assets to be modelled.
       attr_accessor :asset_type #: AssetType
 
+      validate :asset_type, required: true
+
       # Algorithm Properties - Additional properties specific to a cryptographic algorithm.
       attr_accessor :algorithm_properties #: AlgorithmProperties
 

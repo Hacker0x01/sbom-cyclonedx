@@ -14,11 +14,17 @@ module SBOM
       # Organization - The organization that provides energy.
       attr_accessor :organization #: OrganizationalEntity
 
+      validate :organization, required: true
+
       # Energy Source - The energy source for the energy provider.
       attr_accessor :energy_source #: EnergySource
 
+      validate :energy_source, required: true
+
       # Energy Provided - The energy provided by the energy source for an associated activity.
       attr_accessor :energy_provided #: EnergyMeasure
+
+      validate :energy_provided, required: true
 
       # External References - External references provide a way to document systems, sites, and information that may be relevant but are not included with the BOM. They may also establish specific relationships within or external to the BOM.
       attr_accessor :external_references #: [ExternalReference]

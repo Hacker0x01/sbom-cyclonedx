@@ -8,21 +8,18 @@ module SBOM
       # Version - A single version of a component or service.
       attr_accessor :version #: String
 
+      validate :version, required: -> { range.nil? }, max_length: 1024
+
       # Version Range - A version range specified in Package URL Version Range syntax (vers) which is defined at https://github.com/package-url/purl-spec/blob/master/VERSION-RANGE-SPEC.rst
-      attr_accessor :range #: VersionRange
+      # TODO: Validate syntax
+      attr_accessor :range #: String
+
+      validate :range, required: -> { version.nil? }, min_length: 1, max_length: 4096
 
       # Status - The vulnerability status for the version or range of versions.
       attr_accessor :status #: AffectedStatus
 
-      def initialize(version: nil, range: nil, status: nil)
-        raise "Version must have either a version or a range" if version.nil? && range.nil?
-
-        @version = version
-        @range = range
-        @status = status
-
-        super
-      end
+      default :status, AffectedStatus::AFFECTED
     end
   end
 end

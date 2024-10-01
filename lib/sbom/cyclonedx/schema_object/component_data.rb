@@ -11,6 +11,8 @@ module SBOM
       # Type of Data - The general theme or subject matter of the data being specified.
       attr_accessor :type #: ComponentDataType
 
+      validate :type, required: true
+
       # Dataset Name - The name of the dataset.
       attr_accessor :name #: String
 

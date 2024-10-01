@@ -1,15 +1,18 @@
 # frozen_string_literal: true
 # rbs_inline: enabled
 
-# Hash Objects
 module SBOM
   module Cyclonedx
-    class ServiceDatum < SchemaObject
+    class ServiceData < SchemaObject
       # Directional Flow - Specifies the flow direction of the data. Direction is relative to the service. Inbound flow states that data enters the service. Outbound flow states that data leaves the service. Bi-directional states that data flows both ways and unknown states that the direction is not known.
       attr_accessor :flow #: DataFlowDirection
 
+      validate :flow, required: true
+
       # Data Classification - Data classification tags data according to its type, sensitivity, and value if altered, stolen, or destroyed.
       attr_accessor :classification #: String
+
+      validate :classification, required: true
 
       # Name - Name for the defined data
       # Example: "Credit card reporting"

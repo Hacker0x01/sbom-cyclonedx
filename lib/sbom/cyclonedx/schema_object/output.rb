@@ -17,11 +17,17 @@ module SBOM
       # Resource - A reference to an independent resource generated as output by the task.
       attr_accessor :resource #: ResourceReferenceChoice
 
+      validate :resource, required: -> { environment_vars.nil? && data.nil? }
+
       # Data - Outputs that have the form of data.
       attr_accessor :data #: Attachment
 
+      validate :data, required: -> { resource.nil? && environment_vars.nil? }
+
       # Environment variables - Outputs that have the form of environment variables.
       attr_accessor :environment_vars #: Set[Property | String]
+
+      validate :environment_vars, required: -> { resource.nil? && data.nil? }
 
       # Properties - Provides the ability to document properties in a name-value store. This provides flexibility to include data not officially supported in the standard without having to use additional namespaces or create extensions. Unlike key-value stores, properties support duplicate names, each potentially having different values. Property names of interest to the general public are encouraged to be registered in the [CycloneDX Property Taxonomy](https://github.com/CycloneDX/cyclonedx-property-taxonomy). Formal registration is optional.
       attr_accessor :properties #: [Property]

@@ -10,6 +10,8 @@ module SBOM
 
       # URL - Location where the advisory can be obtained.
       attr_accessor :url #: URI
+
+      validate :url, required: true
     end
   end
 end

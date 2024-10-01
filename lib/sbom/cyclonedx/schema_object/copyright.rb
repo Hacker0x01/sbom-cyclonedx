@@ -7,6 +7,8 @@ module SBOM
     class Copyright < SchemaObject
       # Copyright Text - The textual content of the copyright.
       attr_accessor :text #: String
+
+      validate :text, required: true
     end
   end
 end

@@ -8,8 +8,12 @@ module SBOM
       # Purchaser (Organization) - The organization that purchased the license
       attr_accessor :organization #: OrganizationalEntity
 
+      validate :organization, required: -> { individual.nil? }
+
       # Purchaser (Individual) - The individual, not associated with an organization, that purchased the license
       attr_accessor :individual #: OrganizationalContact
+
+      validate :individual, required: -> { organization.nil? }
     end
   end
 end

@@ -8,8 +8,12 @@ module SBOM
       # BOM Reference - An optional identifier which can be used to reference the workflow elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.
       attr_accessor :bom_ref #: RefLink
 
+      validate :bom_ref, required: true
+
       # Unique Identifier (UID) - The unique identifier for the resource instance within its deployment context.
       attr_accessor :uid #: String
+
+      validate :uid, required: true
 
       # Name - The name of the resource instance.
       attr_accessor :name #: String
@@ -29,6 +33,8 @@ module SBOM
       # Task types - Indicates the types of activities performed by the set of workflow tasks.
       attr_accessor :task_types #: [TaskType]
 
+      validate :task_types, required: true
+
       # Trigger - The trigger that initiated the task.
       attr_accessor :trigger #: Trigger
 
@@ -36,7 +42,7 @@ module SBOM
       attr_accessor :steps #: Set[Step]
 
       # Inputs - Represents resources and data brought into a task at runtime by executor or task commands
-      attr_accessor :inputs #: Set[InputType]
+      attr_accessor :inputs #: Set[Input]
 
       # Outputs - Represents resources and data output from a task at runtime by executor or task commands
       attr_accessor :outputs #: Set[Output]

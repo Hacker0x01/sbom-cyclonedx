@@ -8,6 +8,8 @@ module SBOM
       # Name - The name of the property. Duplicate names are allowed, each potentially having a different value.
       attr_accessor :name #: String
 
+      validate :name, required: true
+
       # Value - The value of the property.
       attr_accessor :value #: String
     end

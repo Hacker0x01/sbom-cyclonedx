@@ -6,8 +6,9 @@ module SBOM
   module Cyclonedx
     class Root < SchemaObject
       # BOM Serial Number - Every BOM generated SHOULD have a unique serial number, even if the contents of the BOM have not changed over time. If specified, the serial number must conform to [RFC 4122](https://www.ietf.org/rfc/rfc4122.html). Use of serial numbers is recommended.
-      attr_accessor :serial_number #: BOMSerialNumber
+      attr_accessor :serial_number #: String
 
+      validate :serial_number, pattern: "\Aurn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\Z"
       default :serial_number, -> { BOMSerialNumber.new("urn:uuid:#{SecureRandom.uuid}") }
 
       # Version - Whenever an existing BOM is modified, either manually or through automated processes, the version of the BOM SHOULD be incremented by 1. When a system is presented with multiple BOMs with identical serial numbers, the system SHOULD use the most recent version of the BOM. The default version is '1'.
@@ -63,9 +64,15 @@ module SBOM
         "CycloneDX"
       end
 
+      # Since this is hard-coded, it will always pass, but we want to capture that it is required.
+      validate :bom_format, required: true
+
       def spec_version
         "1.6"
       end
+
+      # Since this is hard-coded, it will always pass, but we want to capture that it is required.
+      validate :spec_version, required: true
     end
   end
 end

@@ -11,6 +11,8 @@ module SBOM
       # Module - A module or class that encloses functions/methods and other code.
       attr_accessor :module #: String
 
+      validate :module, required: true
+
       # Function - A block of code designed to perform a particular task.
       attr_accessor :function #: String
 

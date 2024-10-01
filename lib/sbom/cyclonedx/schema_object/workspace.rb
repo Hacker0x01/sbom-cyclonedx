@@ -8,8 +8,12 @@ module SBOM
       # BOM Reference - An optional identifier which can be used to reference the workspace elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.
       attr_accessor :bom_ref #: RefLink
 
+      validate :bom_ref, required: true
+
       # Unique Identifier (UID) - The unique identifier for the resource instance within its deployment context.
       attr_accessor :uid #: String
+
+      validate :uid, required: true
 
       # Name - The name of the resource instance.
       attr_accessor :name #: String

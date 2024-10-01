@@ -8,14 +8,18 @@ module SBOM
       # URL - The URI (URL or URN) to the external reference. External references are URIs and therefore can accept any URL scheme including https ([RFC-7230](https://www.ietf.org/rfc/rfc7230.txt)), mailto ([RFC-2368](https://www.ietf.org/rfc/rfc2368.txt)), tel ([RFC-3966](https://www.ietf.org/rfc/rfc3966.txt)), and dns ([RFC-4501](https://www.ietf.org/rfc/rfc4501.txt)). External references may also include formally registered URNs such as [CycloneDX BOM-Link](https://cyclonedx.org/capabilities/bomlink/) to reference CycloneDX BOMs or any object within a BOM. BOM-Link transforms applicable external references into relationships that can be expressed in a BOM or across BOMs.
       attr_accessor :url #: URI | BOMLinkElement | BOMLinkDocument
 
+      validate :url, required: true
+
       # Comment - An optional comment describing the external reference
       attr_accessor :comment #: String
 
       # Type - Specifies the type of external reference.
       attr_accessor :type #: ExternalReferenceType
 
+      validate :type, required: true
+
       # Hashes - The hashes of the external reference (if applicable).
-      attr_accessor :hashes #: [Hash]
+      attr_accessor :hashes #: [HashData]
     end
   end
 end

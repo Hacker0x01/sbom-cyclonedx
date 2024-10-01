@@ -8,8 +8,12 @@ module SBOM
       # BOM Reference - References an object by its bom-ref attribute
       attr_accessor :ref #: RefLink | BOMLinkElement
 
+      validate :ref, required: -> { external_reference.nil? }
+
       # External reference - Reference to an externally accessible resource.
       attr_accessor :external_reference #: ExternalReference
+
+      validate :external_reference, required: -> { ref.nil? }
     end
   end
 end

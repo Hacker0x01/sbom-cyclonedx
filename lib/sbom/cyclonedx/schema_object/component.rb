@@ -8,6 +8,8 @@ module SBOM
       # Component Type - Specifies the type of component. For software components, classify as application if no more specific appropriate classification is available or cannot be determined for the component.
       attr_accessor :type #: ComponentType
 
+      validate :type, required: true
+
       # Mime-Type - The optional mime-type of the component. When used on file components, the mime-type can provide additional context about the kind of file being represented, such as an image, font, or executable. Some library or framework components may also have an associated mime-type.
       attr_accessor :mime_type #: MimeType
 
@@ -35,6 +37,8 @@ module SBOM
       # Example: "tomcat-catalina"
       attr_accessor :name #: String
 
+      validate :name, required: true
+
       # Component Version - The component version. The version should ideally comply with semantic versioning but is not enforced.
       attr_accessor :version #: String
 
@@ -44,11 +48,17 @@ module SBOM
       # Component Scope - Specifies the scope of the component. If scope is not specified, 'required' scope SHOULD be assumed by the consumer of the BOM.
       attr_accessor :scope #: Scope
 
+      default :scope, Scope::REQUIRED
+
       # Component Hashes - The hashes of the component.
-      attr_accessor :hashes #: [Hash]
+      attr_accessor :hashes #: [HashData]
 
       # Component License(s)
-      attr_accessor :licenses #: LicenseChoice
+      attr_accessor :licenses #: [[WrappedLicense] | [LicenseExpression]]
+
+      validate :licenses, lambda { |value|
+        value.nil? || value.all? { |v| v.all?(WrappedLicense) || (v.first.is_a?(LicenseExpression) && v.length == 1) }
+      }
 
       # Component Copyright - A copyright notice informing users of the underlying claims to copyright ownership in a published work.
       # Example: "Acme Inc"
@@ -77,7 +87,7 @@ module SBOM
       attr_accessor :swhid #: [String]
 
       # SWID Tag - Asserts the identity of the component using [ISO-IEC 19770-2 Software Identification (SWID) Tags](https://www.iso.org/standard/65666.html). Refer to `@.evidence.identity` to optionally provide evidence that substantiates the assertion of the component's identity.
-      attr_accessor :swid #: Swid
+      attr_accessor :swid #: SWID
 
       # Component Modified From Original - [Deprecated] This will be removed in a future version. Use the pedigree element instead to supply information on exactly how the component was modified. A boolean value indicating if the component has been modified from the original. A value of true indicates the component is a derivative of the original. A value of false indicates the component has not been modified from the original.
       attr_accessor :modified #: bool
