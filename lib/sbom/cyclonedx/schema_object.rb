@@ -2,6 +2,7 @@
 # rbs_inline: enabled
 module Sbom
   module Cyclonedx
+    # TODO: Add JSON serialization logic
     class SchemaObject
       # TODO: Implicit cast/convert/parse to non-JSON types (e.g. DateTime, URI, etc.) as-needed
       def initialize(**kwargs)
@@ -20,6 +21,8 @@ module Sbom
         end
 
         def default(name, value)
+          value = value.call if value.respond_to?(:call)
+
           defaults[name] = value
         end
 

@@ -15,6 +15,16 @@ module Sbom
         end
       end
 
+      class BOMSerialNumber < String
+        REGEX = /\Aurn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\Z/
+
+        def initialize(value)
+          raise ArgumentError, "BOMSerialNumber must match the regex #{REGEX}" unless value.match?(REGEX)
+
+          super(value)
+        end
+      end
+
       # BOM-Link Document - Descriptor for a BOM document. See https://cyclonedx.org/capabilities/bomlink/
       class BOMLinkDocument < String
         REGEX = %r{\Aurn:cdx:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/[1-9][0-9]*\Z}
