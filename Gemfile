@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in sbom-cyclonedx.gemspec
+# Specify your gem's dependencies in sbom-cyclone_dx.gemspec
 gemspec
 
 gem "debug", "~> 1.9", ">= 1.9.2"

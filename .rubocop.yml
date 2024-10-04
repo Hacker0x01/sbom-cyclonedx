@@ -38,6 +38,12 @@ Layout/LeadingCommentSpace:
   Enabled: false
 Layout/EmptyLineAfterMagicComment:
   Enabled: false
+Metrics/AbcSize:
+  Max: 20
+Metrics/MethodLength:
+  Max: 16
+RSpec/MultipleExpectations:
+  Max: 4
 Style/AccessorGrouping:
   Enabled: false
 Style/CommentedKeyword:

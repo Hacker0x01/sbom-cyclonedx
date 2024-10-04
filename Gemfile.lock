@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sbom-cyclonedx (0.1.0)
+    sbom-cyclone_dx (0.1.0)
       activesupport (~> 7.2, >= 7.2.1)
       email_address (~> 0.2, >= 0.2.4)
 
@@ -166,7 +166,7 @@ DEPENDENCIES
   rubocop-factory_bot (~> 2.26, >= 2.26.1)
   rubocop-performance (~> 1.21, >= 1.21.1)
   rubocop-rspec (~> 3.0, >= 3.0.4)
-  sbom-cyclonedx!
+  sbom-cyclone_dx!
   steep (~> 1.7, >= 1.7.1)
   typeprof (~> 0.21, >= 0.21.11)
 

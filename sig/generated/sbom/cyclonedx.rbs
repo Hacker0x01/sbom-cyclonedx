@@ -1,7 +1,0 @@
-# Generated from lib/sbom/cyclonedx.rb with RBS::Inline
-module SBOM
-  module Cyclonedx
-    class Error < StandardError
-    end
-  end
-end
