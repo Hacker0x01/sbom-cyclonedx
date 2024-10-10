@@ -1,0 +1,40 @@
+module SBOM
+  module CycloneDX
+    class Annotation
+      include SchemaObject
+      extend SchemaObject::ClassMethods
+
+      attr_accessor bom_ref: String?
+      attr_accessor text: String
+
+      attr_reader subjects: Set[String]
+      attr_reader annotator: Annotator
+      attr_reader timestamp: DateTime
+
+      def subjects=: (Set[String] | Array[String]) -> Set[String]
+      def annotator=: (Annotator | Hash[String | Symbol, untyped]) -> Annotator
+      def timestamp=: (DateTime | String) -> DateTime
+
+      class Annotator
+        include SchemaObject
+        extend SchemaObject::ClassMethods
+
+        attr_reader organization: OrganizationalEntity
+        attr_reader individual: OrganizationalContact
+        attr_reader component: Component
+        attr_reader service: Service
+
+        def organization=: (OrganizationalEntity | Hash[String | Symbol, untyped]) -> OrganizationalEntity
+        def individual=: (OrganizationalContact | Hash[String | Symbol, untyped]) -> OrganizationalContact
+        def component=: (Component | Hash[String | Symbol, untyped]) -> Component
+        def service=: (Service | Hash[String | Symbol, untyped]) -> Service
+      end
+
+      class OrganizationAnnotator < Annotator
+        type hash_form = {
+          organization: OrganizationalEntity | Hash[String | Symbol, untyped]
+        }
+      end
+    end
+  end
+end

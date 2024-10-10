@@ -6,7 +6,7 @@ module SBOM
   module CycloneDX
     Task = SchemaObject.build("Task") do
       # BOM Reference - An optional identifier which can be used to reference the task elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.
-      prop :bom_ref, String, json_name: "bom-ref", pattern: Pattern::REF_LINK, required: true
+      prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK, required: true
 
       # Unique Identifier (UID) - The unique identifier for the resource instance within its deployment context.
       prop :uid, String, required: true

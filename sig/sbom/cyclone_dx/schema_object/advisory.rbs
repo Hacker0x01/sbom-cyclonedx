@@ -1,0 +1,35 @@
+# module SBOM
+#   module CycloneDX
+#     class Advisory < ::Struct
+#       include SchemaObject::InstanceMethods
+#       extend SchemaObject::ClassMethods
+
+#       attr_accessor title: String?
+#       attr_reader url: URI
+
+#       def url=: (castableURI) -> URI
+
+#       def initialize: (?title: String?, url: castableURI) -> instance
+#     end
+#   end
+# end
+
+module SBOM
+  module CycloneDX
+    class Advisory < ::Struct[untyped]
+      def self.new: (?title: String?, url: castableURI) -> instance
+
+      def self.[]: (?title: String?, url: castableURI) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :title, :url ]
+
+      def members: () -> [ :title, :url ]
+
+      attr_accessor title: untyped
+
+      attr_accessor url: untyped
+    end
+  end
+end

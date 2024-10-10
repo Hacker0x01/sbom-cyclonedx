@@ -6,7 +6,7 @@ module SBOM
   module CycloneDX
     Service = SchemaObject.build("Service") do
       # BOM Reference - An optional identifier which can be used to reference the service elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.
-      prop :bom_ref, String, json_name: "bom-ref", pattern: Pattern::REF_LINK
+      prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
 
       # Provider - The organization that provides the service.
       prop :provider, OrganizationalEntity
@@ -32,7 +32,7 @@ module SBOM
       prop :authenticated, :bool
 
       # Crosses Trust Boundary - A boolean value indicating if use of the service crosses a trust zone or boundary. A value of true indicates that by using the service, a trust boundary is crossed. A value of false indicates that by using the service, a trust boundary is not crossed.
-      prop :x_trust_boundary, :bool, json_name: "x-trust-boundary"
+      prop :x_trust_boundary, :bool, json_alias: "x-trust-boundary"
 
       # Trust Zone - The name of the trust zone the service resides in.
       prop :trust_zone, String

@@ -6,7 +6,7 @@ module SBOM
   module CycloneDX
     ComponentData = SchemaObject.build("ComponentData") do
       # BOM Reference - An optional identifier which can be used to reference the dataset elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.
-      prop :bom_ref, String, json_name: "bom-ref", pattern: Pattern::REF_LINK
+      prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
 
       # Type of Data - The general theme or subject matter of the data being specified.
       prop :type, String, enum: Enum::COMPONENT_DATA_TYPE, required: true

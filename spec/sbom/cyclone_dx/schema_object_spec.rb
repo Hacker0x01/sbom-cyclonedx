@@ -5,7 +5,7 @@ require "schema_object"
 
 RSpec.describe SBOM::CycloneDX::SchemaObject do
   let(:klass_name) { "LibraryBook" }
-  let(:klass_json_name) { "libraryBook" }
+  let(:klass_json_alias) { "libraryBook" }
 
   it "creates a class with the correct name" do
     klass = described_class.build(klass_name) {}
@@ -14,11 +14,11 @@ RSpec.describe SBOM::CycloneDX::SchemaObject do
 
   it "creates a class with the correct JSON name" do
     klass = described_class.build(klass_name) {}
-    expect(klass::JSON_NAME).to eq(klass_json_name)
+    expect(klass::JSON_NAME).to eq(klass_json_alias)
   end
 
   it "creates a class with the correct JSON name when specified" do
-    klass = described_class.build(klass_name, json_name: "library-book") {}
+    klass = described_class.build(klass_name, json_alias: "library-book") {}
     expect(klass::JSON_NAME).to eq("library-book")
   end
 

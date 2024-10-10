@@ -6,7 +6,7 @@ module SBOM
   module CycloneDX
     PostalAddress = SchemaObject.build("PostalAddress") do
       # BOM Reference - An optional identifier which can be used to reference the address elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.
-      prop :bom_ref, String, json_name: "bom-ref", pattern: Pattern::REF_LINK
+      prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
 
       # Country - The country name or the two-letter ISO 3166-1 country code.
       prop :country, String

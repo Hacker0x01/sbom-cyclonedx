@@ -6,7 +6,7 @@ module SBOM
   module CycloneDX
     Standard = SchemaObject.build("Standard") do
       # BOM Reference - An optional identifier which can be used to reference the object elsewhere in the BOM. Every bom-ref must be unique within the BOM.
-      prop :bom_ref, String, json_name: "bom-ref", pattern: Pattern::REF_LINK
+      prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
 
       # Name - The name of the standard. This will often be a shortened, single name of the standard.
       prop :name, String
@@ -34,7 +34,7 @@ module SBOM
 
       Level = SchemaObject.build("Level") do
         # BOM Reference - An optional identifier which can be used to reference the object elsewhere in the BOM. Every bom-ref must be unique within the BOM.
-        prop :bom_ref, String, json_name: "bom-ref", pattern: Pattern::REF_LINK
+        prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
 
         # Identifier - The identifier used in the standard to identify a specific level.
         prop :identifier, String
@@ -51,7 +51,7 @@ module SBOM
 
       Requirement = SchemaObject.build("Requirement") do
         # BOM Reference - An optional identifier which can be used to reference the object elsewhere in the BOM. Every bom-ref must be unique within the BOM.
-        prop :bom_ref, String, json_name: "bom-ref", pattern: Pattern::REF_LINK
+        prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
 
         # Identifier - The unique identifier used in the standard to identify a specific requirement. This should match what is in the standard and should not be the requirements bom-ref.
         prop :identifier, String

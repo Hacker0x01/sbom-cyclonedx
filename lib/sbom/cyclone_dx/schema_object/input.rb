@@ -5,7 +5,7 @@
 module SBOM
   module CycloneDX
     Input = SchemaObject.build("Input") do
-      json_name "inputType"
+      json_alias "inputType"
 
       # Source - A reference to the component or service that provided the input to the task (e.g., reference to a service with data flow value of `inbound`)
       prop :source, ResourceReferenceChoice

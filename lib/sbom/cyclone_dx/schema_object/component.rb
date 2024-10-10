@@ -10,10 +10,10 @@ module SBOM
 
       # Mime-Type - The optional mime-type of the component. When used on file components, the mime-type can provide additional context about the kind of file being represented, such as an image, font, or executable. Some library or framework components may also have an associated mime-type.
       # TODO: Use a mime-type gem
-      prop :mime_type, String, json_name: "mime-type", pattern: Pattern::MIME_TYPE
+      prop :mime_type, String, json_alias: "mime-type", pattern: Pattern::MIME_TYPE
 
       # BOM Reference - An optional identifier which can be used to reference the component elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.
-      prop :bom_ref, String, json_name: "bom-ref", pattern: Pattern::REF_LINK
+      prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
 
       # Component Supplier -  The organization that supplied the component. The supplier may often be the manufacturer, but may also be a distributor or repackager.
       prop :supplier, OrganizationalEntity

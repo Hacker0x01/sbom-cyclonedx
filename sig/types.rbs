@@ -1,0 +1,28 @@
+type fieldValue = String |
+                  Integer |
+                  Float |
+                  bool |
+                  DateTime |
+                  URI |
+                  EmailAddress |
+                  Array[fieldValue] |
+                  Set[fieldValue] |
+                  SBOM::CycloneDX::SchemaObject::ClassMethods |
+                  nil
+type castableFieldValue = jsonObject | fieldValue
+
+type castableInteger = Integer | String
+type castableFloat = Float | String
+type mabyeBool = bool | String
+type castableDateTime = DateTime | String
+type castableURI = URI | String
+type castableEmailAddress = EmailAddress | String
+type mabyeArray = Array[fieldValue] | Set[fieldValue]
+type castableSet = Set[fieldValue] | Array[fieldValue]
+type castableSchemaObject = SBOM::CycloneDX::SchemaObject | Hash[Symbol, fieldValue]
+
+type jsonObject = Float | Integer | String | bool | Array[jsonObject] | Hash[String, jsonObject] | nil
+
+module URI
+  def self.parse: (String) -> URI
+end

@@ -1,0 +1,129 @@
+module SBOM
+  module CycloneDX
+    module SchemaObject
+      def self.build: (String, *Symbol) ?{ () [self: ::Class] -> void } -> ::Class
+
+      module ClassMethods
+        include _ReflectionMethods
+
+        type memberProperty[T] = {
+          ?json_alias: String,
+          ?const: bool,
+          ?default: (T | ^() -> T)?,
+          ?required: bool | ^(Base) -> bool,
+          ?validations: Array[Validator[T]],
+          ?typecast: ^(castableFieldValue?) -> T
+        }
+        type anyValidators = { ?valid: ^(fieldValue) -> bool }
+        type numericValidators[T < Numeric] = {
+          ?minimum: T,
+          ?maximum: T,
+          ?valid: ^(T) -> bool
+        }
+        type stringValidators = {
+          ?pattern: Regexp,
+          ?max_length: Integer,
+          ?min_length: Integer,
+          ?enum: Array[String],
+          ?valid: ^(String) -> bool
+        }
+        type allValidators = anyValidators & numericValidators[Integer | Float] & stringValidators
+        type toTypeSimple = :integer | :float | :string | :bool | :datetime | :uri | :email_address | ClassMethods
+        type toTypeCollection = :array | :set
+
+        @members_definitions: Hash[Symbol, MemberDefinition[fieldValue]]
+        @members_properties: Hash[Symbol, memberProperty[fieldValue]]
+
+        def json_alias: (Symbol, String) -> void
+        def const: (Symbol, fieldValue) -> void
+        def default: (Symbol, fieldValue | ^() -> fieldValue ) -> void
+        def required: (Symbol, ?(bool | ^(Base) -> bool)) -> void
+        def cast: (Symbol, to: toTypeSimple) -> void |
+                  (Symbol, to: toTypeCollection, items: ^(castableFieldValue?) -> fieldValue) -> void |
+                  (to: toTypeSimple) -> ^(castableFieldValue?) -> fieldValue |
+                  (to: toTypeCollection, items: ^(castableFieldValue?) -> fieldValue) -> ^(castableFieldValue?) -> fieldValue
+        def validate: (
+                        Symbol,
+                        **(Integer | Float | Regexp | Array[String] | ^(fieldValue) -> bool)
+                      ) -> void
+
+        def members: () -> Array[Symbol]
+        def members_definitions: () -> Hash[Symbol, MemberDefinition[fieldValue]]
+
+        private def freeze_definition!: () -> void
+        private def add_member_property: [T] (Symbol, Symbol, String | T | bool | Hash[Symbol, Validator[T]] | ^() -> T | bool ) -> void
+      end
+
+      class Base
+        JSON_ALIAS: String
+
+        @defaults: Hash[Symbol, fieldValue]
+        @values: Struct[untyped]
+
+        def initialize: (**untyped) -> void
+        private def cast_and_validate: (Symbol, castableFieldValue) -> fieldValue
+        private def defaults: () -> Hash[Symbol, fieldValue]
+        private def required?: (Symbol) -> bool
+        private def cast: (Symbol, castableFieldValue) -> fieldValue
+        private def validate: (Symbol, fieldValue) -> Array[String]
+        private def validate!: (Symbol, fieldValue) -> void
+        private def format_errors: (Hash[Symbol, Array[String]]) -> String
+
+        class ValueObject < ::Struct[untyped]
+          def self.new: (?value: untyped) -> instance
+
+          def self.[]: (?value: untyped) -> instance
+
+          def self.keyword_init?: () -> true
+
+          def self.members: () -> [:value]
+
+          def members: () -> [:value]
+
+          attr_accessor value: untyped
+        end
+      end
+
+      class Validator[T]
+        @message: String
+        @block: ^(T) -> bool
+
+        def initialize: [T] (?String?) { (T) -> bool } -> void
+        def validate: (T) -> String?
+        def valid?: (T) -> bool
+
+        def self.maximum: [T < Integer | Float] (T) -> Validator[T]
+        def self.minimum: [T < Integer | Float] (T) -> Validator[T]
+        def self.max_length: (Integer) -> Validator[String]
+        def self.min_length: (Integer) -> Validator[String]
+        def self.pattern: (Regexp) -> Validator[String]
+        def self.enum: (Array[String]) -> Validator[String]
+      end
+
+      class MemberDefinition[T]
+        attr_reader json_alias: String
+        attr_reader const: bool
+        attr_reader default: T
+        attr_reader required: bool | ^(Base) -> bool
+        attr_reader typecast: ^(castableFieldValue?) -> fieldValue
+        attr_reader validations: Array[Validator[T]]
+
+        def self.new: [T] (
+          json_alias: String,
+          const: bool,
+          ?default: T | ^() -> T,
+          required: bool | ^(Base) -> bool,
+          typecast: ^(castableFieldValue?) -> fieldValue,
+          validations: Array[Validator[T]]
+        ) -> instance
+      end
+    end
+
+    interface _ReflectionMethods
+      def alias_method: (::Symbol | ::String new_name, ::Symbol | ::String old_name) -> ::Symbol
+      def define_method: (Symbol | String arg0, ?Proc | Method | UnboundMethod arg1) ?{ () -> void } -> Symbol
+      def instance_methods: (?boolish include_super) -> ::Array[Symbol]
+      def undef_method: (::Symbol) -> void
+    end
+  end
+end

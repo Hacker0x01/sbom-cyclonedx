@@ -50,7 +50,7 @@ module SBOM
 
       Occurrence = SchemaObject.build("Occurrence") do
         # BOM Reference - An optional identifier which can be used to reference the occurrence elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.
-        prop :bom_ref, String, json_name: "bom-ref", pattern: Pattern::REF_LINK
+        prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
 
         # Location - The location or path to where the component was found.
         prop :location, String, required: true

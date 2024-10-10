@@ -1,0 +1,59 @@
+module SBOM
+  module CycloneDX
+    module SchemaBuilder
+      class SchemaDefinition
+        attr_accessor name: String
+        attr_accessor json_alias: String
+        attr_accessor member_definitions: Hash[Symbol, MemberDefinition]
+
+        def self.new: (name: String, json_alias: String, member_definitions: Hash[Symbol, MemberDefinition?]) -> instance
+      end
+
+      class MemberDefinition[T]
+        attr_reader json_alias: String
+        attr_reader const: bool
+        attr_reader default: T
+        attr_reader required: bool
+        attr_reader validations: Array[^(T) -> bool]
+
+        def self.new: (
+          json_alias: String,
+          const: bool,
+          ?default: T,
+          required: bool,
+          validations: Array[^(T) -> bool]
+        ) -> instance
+      end
+
+      def self.build: (String name, *Symbol member_names, ?json_alias: String?) ?{ () -> void } -> singleton(SchemaObject)
+
+      class KlassBuilder[T]
+        def initialize: (Array[Symbol] member_names) ?{ () -> void } -> void
+
+        def []: (Symbol name) -> MemberDefinition[T]
+
+        def json_alias: (Symbol name, String json_alias) -> void
+
+        def const: (Symbol name, T value) -> void
+
+        def default: (Symbol name, T value) -> void
+
+        def required: (Symbol name) -> void
+
+        def validate: (Symbol name, ^(T) -> bool validation) -> void
+
+        private
+
+        def property: (Symbol name) -> {
+          ?json_alias: String,
+          ?const: bool,
+          ?default: T,
+          ?required: bool,
+          ?validations: Array[^(T) -> bool]
+        }
+
+        def add_property_arg: (Symbol name, Symbol arg_name, untyped arg_value) -> void
+      end
+    end
+  end
+end

@@ -57,7 +57,7 @@ module SBOM
 
       Assessor = SchemaObject.build("Assessor") do
         # BOM Reference - An optional identifier which can be used to reference the object elsewhere in the BOM. Every bom-ref must be unique within the BOM.
-        prop :bom_ref, String, json_name: "bom-ref", pattern: Pattern::REF_LINK
+        prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
 
         # Third Party - The boolean indicating if the assessor is outside the organization generating claims. A value of false indicates a self assessor.
         prop :third_party, :bool
@@ -118,7 +118,7 @@ module SBOM
 
       Claim = SchemaObject.build("Claim") do
         # BOM Reference - An optional identifier which can be used to reference the object elsewhere in the BOM. Every bom-ref must be unique within the BOM.
-        prop :bom_ref, String, json_name: "bom-ref", pattern: Pattern::REF_LINK
+        prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
 
         # Target - The `bom-ref` to a target representing a specific system, application, API, module, team, person, process, business unit, company, etc...  that this claim is being applied to.
         prop :target, String, pattern: Pattern::REF_LINK
@@ -147,7 +147,7 @@ module SBOM
 
       Evidence = SchemaObject.build("Evidence") do
         # BOM Reference - An optional identifier which can be used to reference the object elsewhere in the BOM. Every bom-ref must be unique within the BOM.
-        prop :bom_ref, String, json_name: "bom-ref", pattern: Pattern::REF_LINK
+        prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
 
         # Property Name - The reference to the property name as defined in the [CycloneDX Property Taxonomy](https://github.com/CycloneDX/cyclonedx-property-taxonomy/).
         prop :property_name, String
