@@ -1,0 +1,23 @@
+module SBOM
+  module CycloneDX
+    class Graphic < ::Struct[untyped]
+      def self.new: (?name: untyped, ?image: untyped) -> instance
+
+      def self.[]: (?name: untyped, ?image: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :name, :image ]
+
+      def members: () -> [ :name, :image ]
+
+      attr_accessor name: untyped
+
+      attr_accessor image: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

@@ -1,0 +1,54 @@
+module SBOM
+  module CycloneDX
+    class Composition < ::Struct[untyped]
+      def self.new: (
+        aggregate: String,
+        ?bom_ref: String?,
+        ?assemblies: Array[String]?,
+        ?dependencies: Array[Component | Service]?,
+        ?vulnerabilities: Array[Vulnerability]?,
+        ?signature: signature?
+      ) -> instance
+
+      def self.[]: (
+        aggregate: String,
+        ?bom_ref: String?,
+        ?assemblies: Array[String]?,
+        ?dependencies: Array[Component | Service]?,
+        ?vulnerabilities: Array[Vulnerability]?,
+        ?signature: signature?
+      ) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :bom_ref, :aggregate, :assemblies, :dependencies, :vulnerabilities, :signature ]
+
+      def members: () -> [ :bom_ref, :aggregate, :assemblies, :dependencies, :vulnerabilities, :signature ]
+
+      def initialize: (
+        aggregate: String,
+        ?bom_ref: String?,
+        ?assemblies: Array[String]?,
+        ?dependencies: Array[Component | Service]?,
+        ?vulnerabilities: Array[Vulnerability]?,
+        ?signature: signature?
+      ) -> void
+
+      attr_accessor bom_ref: String?
+
+      attr_accessor aggregate: String
+
+      attr_accessor assemblies: Array[String]?
+
+      attr_accessor dependencies: Array[Component | Service]?
+
+      attr_accessor vulnerabilities: Array[Vulnerability]?
+
+      attr_accessor signature: signature?
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

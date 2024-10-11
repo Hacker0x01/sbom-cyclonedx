@@ -1,0 +1,27 @@
+module SBOM
+  module CycloneDX
+    class Attachment < ::Struct[untyped]
+      def self.new: (content: String, ?content_type: String, ?encoding: nil | "base64") -> instance
+
+      def self.[]: (content: String, ?content_type: String, ?encoding: nil | "base64") -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :content_type, :content, :encoding ]
+
+      def members: () -> [ :content_type, :content, :encoding ]
+
+      def initialize: (content: String, ?content_type: String, ?encoding: nil | "base64") -> void
+
+      attr_accessor content_type: String
+
+      attr_accessor content: String
+
+      attr_accessor encoding: nil | "base64"
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

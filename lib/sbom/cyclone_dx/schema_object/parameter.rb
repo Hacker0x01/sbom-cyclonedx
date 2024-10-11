@@ -1,18 +1,29 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Parameter - A representation of a functional parameter.
 module SBOM
   module CycloneDX
-    Parameter = SchemaObject.build("Parameter") do
+    class Parameter < Struct.new(
+      "Parameter",
       # Name - The name of the parameter.
-      prop :name, String
-
+      :name,
       # Value - The value of the parameter.
-      prop :value, String
-
+      :value,
       # Data type - The data type of the parameter.
-      prop :data_type, String
+      :data_type,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      def valid?
+        Validator.valid?(String, name) &&
+          Validator.valid?(String, value) &&
+          Validator.valid?(String, data_type)
+      end
     end
   end
 end

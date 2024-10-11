@@ -1,0 +1,33 @@
+module SBOM
+  module CycloneDX
+    class PostalAddress < ::Struct[untyped]
+      def self.new: (?bom_ref: untyped, ?country: untyped, ?region: untyped, ?locality: untyped, ?post_office_box_number: untyped, ?postal_code: untyped, ?street_address: untyped) -> instance
+
+      def self.[]: (?bom_ref: untyped, ?country: untyped, ?region: untyped, ?locality: untyped, ?post_office_box_number: untyped, ?postal_code: untyped, ?street_address: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :bom_ref, :country, :region, :locality, :post_office_box_number, :postal_code, :street_address ]
+
+      def members: () -> [ :bom_ref, :country, :region, :locality, :post_office_box_number, :postal_code, :street_address ]
+
+      attr_accessor bom_ref: untyped
+
+      attr_accessor country: untyped
+
+      attr_accessor region: untyped
+
+      attr_accessor locality: untyped
+
+      attr_accessor post_office_box_number: untyped
+
+      attr_accessor postal_code: untyped
+
+      attr_accessor street_address: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

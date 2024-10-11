@@ -1,21 +1,32 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Fairness Assessment - Information about the benefits and harms of the model to an identified at risk group.
 module SBOM
   module CycloneDX
-    FairnessAssessment = SchemaObject.build("FairnessAssessment") do
+    class FairnessAssessment < Struct.new(
+      "FairnessAssessment",
       # Group at Risk - The groups or individuals at risk of being systematically disadvantaged by the model.
-      prop :group_at_risk, String
-
+      :group_at_risk,
       # Benefits - Expected benefits to the identified groups.
-      prop :benefits, String
-
+      :benefits,
       # Harms - Expected harms to the identified groups.
-      prop :harms, String
-
+      :harms,
       # Mitigation Strategy - With respect to the benefits and harms outlined, please describe any mitigation strategy implemented.
-      prop :mitigation_strategy, String
+      :mitigation_strategy,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      def valid?
+        Validator.valid?(String, group_at_risk) &&
+          Validator.valid?(String, benefits) &&
+          Validator.valid?(String, harms) &&
+          Validator.valid?(String, mitigation_strategy)
+      end
     end
   end
 end

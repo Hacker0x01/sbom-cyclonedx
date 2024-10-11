@@ -1,15 +1,30 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Note - A note containing the locale and content.
 module SBOM
   module CycloneDX
-    Note = SchemaObject.build("Note") do
+    class Note < Struct.new(
+      "Note",
       # Locale - The ISO-639 (or higher) language code and optional ISO-3166 (or higher) country code. Examples include: "en", "en-US", "fr" and "fr-CA"
-      prop :locale, String, pattern: Pattern::LOCALE
-
+      :locale,
       # Release note content - Specifies the full content of the release note.
-      prop :text, Attachment, required: true
+      :text,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      def initialize(text:, locale: nil)
+        super(locale: locale, text: text)
+      end
+
+      def valid?
+        Validator.valid?(String, locale, pattern: Pattern::LOCALE) &&
+          Validator.valid?(Attachment, text, required: true)
+      end
     end
   end
 end

@@ -1,0 +1,41 @@
+module SBOM
+  module CycloneDX
+    class Commit < ::Struct[untyped]
+      def self.new: (
+        ?uid: String?,
+        ?url: uriString?,
+        ?author: IdentifiableAction?,
+        ?committer: IdentifiableAction?,
+        ?message: String?
+      ) -> instance
+
+      def self.[]: (
+        ?uid: String?,
+        ?url: uriString?,
+        ?author: IdentifiableAction?,
+        ?committer: IdentifiableAction?,
+        ?message: String?
+      ) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :uid, :url, :author, :committer, :message ]
+
+      def members: () -> [ :uid, :url, :author, :committer, :message ]
+
+      attr_accessor uid: String?
+
+      attr_accessor url: uriString?
+
+      attr_accessor author: IdentifiableAction?
+
+      attr_accessor committer: IdentifiableAction?
+
+      attr_accessor message: String?
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

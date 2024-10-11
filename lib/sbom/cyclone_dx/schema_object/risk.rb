@@ -1,15 +1,26 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Risk
 module SBOM
   module CycloneDX
-    Risk = SchemaObject.build("Risk") do
+    class Risk < Struct.new(
+      "Risk",
       # Name - The name of the risk.
-      prop :name, String
-
+      :name,
       # Mitigation Strategy - Strategy used to address this risk.
-      prop :mitigation_strategy, String
+      :mitigation_strategy,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      def valid?
+        Validator.valid?(String, name) &&
+          Validator.valid?(String, mitigation_strategy)
+      end
     end
   end
 end

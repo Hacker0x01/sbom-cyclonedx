@@ -1,0 +1,21 @@
+module SBOM
+  module CycloneDX
+    class InputOutputMLParameter < ::Struct[untyped]
+      def self.new: (?format: untyped) -> instance
+
+      def self.[]: (?format: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :format ]
+
+      def members: () -> [ :format ]
+
+      attr_accessor format: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

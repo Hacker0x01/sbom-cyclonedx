@@ -1,0 +1,29 @@
+module SBOM
+  module CycloneDX
+    class ModelCard < ::Struct[untyped]
+      def self.new: (?bom_ref: untyped, ?model_parameters: untyped, ?quantitative_analysis: untyped, ?considerations: untyped, ?properties: untyped) -> instance
+
+      def self.[]: (?bom_ref: untyped, ?model_parameters: untyped, ?quantitative_analysis: untyped, ?considerations: untyped, ?properties: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :bom_ref, :model_parameters, :quantitative_analysis, :considerations, :properties ]
+
+      def members: () -> [ :bom_ref, :model_parameters, :quantitative_analysis, :considerations, :properties ]
+
+      attr_accessor bom_ref: untyped
+
+      attr_accessor model_parameters: untyped
+
+      attr_accessor quantitative_analysis: untyped
+
+      attr_accessor considerations: untyped
+
+      attr_accessor properties: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

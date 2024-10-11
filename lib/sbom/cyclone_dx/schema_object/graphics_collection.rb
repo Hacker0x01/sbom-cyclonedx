@@ -1,15 +1,26 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Graphics Collection - A collection of graphics that represent various measurements.
 module SBOM
   module CycloneDX
-    GraphicsCollection = SchemaObject.build("GraphicsCollection") do
+    class GraphicsCollection < Struct.new(
+      "GraphicsCollection",
       # Description - A description of this collection of graphics.
-      prop :description, String
-
+      :description,
       # Collection - A collection of graphics.
-      prop :collection, [Graphic]
+      :collection,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      def valid?
+        Validator.valid?(String, description) &&
+          Validator.valid?(Array, collection, items: Graphic)
+      end
     end
   end
 end

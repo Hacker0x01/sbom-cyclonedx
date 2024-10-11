@@ -1,0 +1,23 @@
+module SBOM
+  module CycloneDX
+    class Note < ::Struct[untyped]
+      def self.new: (?locale: untyped, ?text: untyped) -> instance
+
+      def self.[]: (?locale: untyped, ?text: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :locale, :text ]
+
+      def members: () -> [ :locale, :text ]
+
+      attr_accessor locale: untyped
+
+      attr_accessor text: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

@@ -1,24 +1,37 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Formula - Describes workflows and resources that captures rules and other aspects of how the associated BOM component or service was formed.
 module SBOM
   module CycloneDX
-    Formula = SchemaObject.build("Formula") do
+    class Formula < Struct.new(
+      "Formula",
       # BOM Reference - An optional identifier which can be used to reference the formula elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.
-      prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
-
+      :bom_ref,
       # Components - Transient components that are used in tasks that constitute one or more of this formula's workflows
-      prop :components, Set[Component]
-
+      :components,
       # Services - Transient services that are used in tasks that constitute one or more of this formula's workflows
-      prop :services, Set[Service]
-
+      :services,
       # Workflows - List of workflows that can be declared to accomplish specific orchestrated goals and independently triggered.
-      prop :workflows, Set[Workflow]
-
+      :workflows,
       # Properties - Provides the ability to document properties in a name-value store. This provides flexibility to include data not officially supported in the standard without having to use additional namespaces or create extensions. Unlike key-value stores, properties support duplicate names, each potentially having different values. Property names of interest to the general public are encouraged to be registered in the [CycloneDX Property Taxonomy](https://github.com/CycloneDX/cyclonedx-property-taxonomy). Formal registration is optional.
-      prop :properties, [Property]
+      :properties,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      json_name :bom_ref, "bom-ref"
+
+      def valid?
+        Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
+          Validator.valid?(Array, components, unique: true, items: Component) &&
+          Validator.valid?(Array, services, unique: true, items: Service) &&
+          Validator.valid?(Array, workflows, unique: true, items: Workflow) &&
+          Validator.valid?(Array, properties, unique: true, items: Property)
+      end
     end
   end
 end

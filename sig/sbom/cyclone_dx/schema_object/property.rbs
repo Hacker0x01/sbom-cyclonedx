@@ -1,0 +1,23 @@
+module SBOM
+  module CycloneDX
+    class Property < ::Struct[untyped]
+      def self.new: (?name: untyped, ?value: untyped) -> instance
+
+      def self.[]: (?name: untyped, ?value: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :name, :value ]
+
+      def members: () -> [ :name, :value ]
+
+      attr_accessor name: untyped
+
+      attr_accessor value: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

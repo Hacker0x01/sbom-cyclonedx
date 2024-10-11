@@ -1,18 +1,33 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Patch - Specifies an individual patch
 module SBOM
   module CycloneDX
-    Patch = SchemaObject.build("Patch") do
+    class Patch < Struct.new(
+      "Patch",
       # Patch Type - Specifies the purpose for the patch including the resolution of defects, security issues, or new behavior or functionality.
-      prop :type, String, enum: Enum::PATCH_TYPE, required: true
-
+      :type,
       # Diff - The patch file (or diff) that shows changes. Refer to [https://en.wikipedia.org/wiki/Diff](https://en.wikipedia.org/wiki/Diff)
-      prop :diff, Diff
-
+      :diff,
       # Resolves - A collection of issues the patch resolves
-      prop :resolves, [Issue]
+      :resolves,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      def initialize(type:, diff: nil, resolves: nil)
+        super
+      end
+
+      def valid?
+        Validator.valid?(String, type, enum: Enum::PATCH_TYPE, required: true) &&
+          Validator.valid?(Diff, diff) &&
+          Validator.valid?(Array, resolves, items: Issue)
+      end
     end
   end
 end

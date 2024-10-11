@@ -1,0 +1,29 @@
+module SBOM
+  module CycloneDX
+    module Pattern
+      BOM_LINK: ::Regexp
+
+      BOM_LINK_DOCUMENT: ::Regexp
+
+      BOM_LINK_ELEMENT: ::Regexp
+
+      CONTENT_TYPE: ::Regexp
+
+      HASH_VALUE: ::Regexp
+
+      LOCALE: ::Regexp
+
+      MIME_TYPE: ::Regexp
+
+      OPEN_CRE: ::Regexp
+
+      REF_LINK: ::Regexp
+
+      REF_LINK_OR_BOM_LINK_ELEMENT: ::Regexp
+
+      URN_UUID: ::Regexp
+
+      UUID: ::Regexp
+    end
+  end
+end

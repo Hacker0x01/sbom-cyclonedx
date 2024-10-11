@@ -1,0 +1,33 @@
+module SBOM
+  module CycloneDX
+    class Declarations < ::Struct[untyped]
+      def self.new: (?assessors: untyped, ?attestations: untyped, ?claims: untyped, ?evidence: untyped, ?targets: untyped, ?affirmation: untyped, ?signature: untyped) -> instance
+
+      def self.[]: (?assessors: untyped, ?attestations: untyped, ?claims: untyped, ?evidence: untyped, ?targets: untyped, ?affirmation: untyped, ?signature: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :assessors, :attestations, :claims, :evidence, :targets, :affirmation, :signature ]
+
+      def members: () -> [ :assessors, :attestations, :claims, :evidence, :targets, :affirmation, :signature ]
+
+      attr_accessor assessors: untyped
+
+      attr_accessor attestations: untyped
+
+      attr_accessor claims: untyped
+
+      attr_accessor evidence: untyped
+
+      attr_accessor targets: untyped
+
+      attr_accessor affirmation: untyped
+
+      attr_accessor signature: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

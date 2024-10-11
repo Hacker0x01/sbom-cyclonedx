@@ -1,0 +1,31 @@
+module SBOM
+  module CycloneDX
+    class Issue < ::Struct[untyped]
+      def self.new: (?type: untyped, ?id: untyped, ?name: untyped, ?description: untyped, ?source: untyped, ?references: untyped) -> instance
+
+      def self.[]: (?type: untyped, ?id: untyped, ?name: untyped, ?description: untyped, ?source: untyped, ?references: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :type, :id, :name, :description, :source, :references ]
+
+      def members: () -> [ :type, :id, :name, :description, :source, :references ]
+
+      attr_accessor type: untyped
+
+      attr_accessor id: untyped
+
+      attr_accessor name: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor source: untyped
+
+      attr_accessor references: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

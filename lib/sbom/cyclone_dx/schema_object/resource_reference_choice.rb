@@ -1,15 +1,36 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Resource reference choice - A reference to a locally defined resource (e.g., a bom-ref) or an externally accessible resource.
 module SBOM
   module CycloneDX
-    ResourceReferenceChoice = SchemaObject.build("ResourceReferenceChoice") do
+    class ResourceReferenceChoice < Struct.new(
+      "ResourceReferenceChoice",
       # BOM Reference - References an object by its bom-ref attribute
-      prop :ref, String, pattern: Pattern::REF_LINK_OR_BOM_LINK_ELEMENT, required: -> { external_reference.nil? }
-
+      :ref,
       # External reference - Reference to an externally accessible resource.
-      prop :external_reference, ExternalReference, required: -> { ref.nil? }
+      :external_reference,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      def initialize(ref: nil, external_reference: nil)
+        raise ArgumentError, "must provide either ref or external_reference" if ref.nil? && external_reference.nil?
+
+        super
+      end
+
+      def valid?
+        Validator.valid?(
+          String, ref,
+          pattern: Pattern::REF_LINK_OR_BOM_LINK_ELEMENT,
+          required: external_reference.nil?
+        ) &&
+          Validator.valid?(ExternalReference, external_reference, required: ref.nil?)
+      end
     end
   end
 end

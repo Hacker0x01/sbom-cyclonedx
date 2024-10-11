@@ -1,0 +1,53 @@
+module SBOM
+  module CycloneDX
+    class Workflow < ::Struct[untyped]
+      def self.new: (?bom_ref: untyped, ?uid: untyped, ?name: untyped, ?description: untyped, ?resource_references: untyped, ?tasks: untyped, ?task_dependencies: untyped, ?task_types: untyped, ?trigger: untyped, ?steps: untyped, ?inputs: untyped, ?outputs: untyped, ?time_start: untyped, ?time_end: untyped, ?workspaces: untyped, ?runtime_topology: untyped, ?properties: untyped) -> instance
+
+      def self.[]: (?bom_ref: untyped, ?uid: untyped, ?name: untyped, ?description: untyped, ?resource_references: untyped, ?tasks: untyped, ?task_dependencies: untyped, ?task_types: untyped, ?trigger: untyped, ?steps: untyped, ?inputs: untyped, ?outputs: untyped, ?time_start: untyped, ?time_end: untyped, ?workspaces: untyped, ?runtime_topology: untyped, ?properties: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :bom_ref, :uid, :name, :description, :resource_references, :tasks, :task_dependencies, :task_types, :trigger, :steps, :inputs, :outputs, :time_start, :time_end, :workspaces, :runtime_topology, :properties ]
+
+      def members: () -> [ :bom_ref, :uid, :name, :description, :resource_references, :tasks, :task_dependencies, :task_types, :trigger, :steps, :inputs, :outputs, :time_start, :time_end, :workspaces, :runtime_topology, :properties ]
+
+      attr_accessor bom_ref: untyped
+
+      attr_accessor uid: untyped
+
+      attr_accessor name: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor resource_references: untyped
+
+      attr_accessor tasks: untyped
+
+      attr_accessor task_dependencies: untyped
+
+      attr_accessor task_types: untyped
+
+      attr_accessor trigger: untyped
+
+      attr_accessor steps: untyped
+
+      attr_accessor inputs: untyped
+
+      attr_accessor outputs: untyped
+
+      attr_accessor time_start: untyped
+
+      attr_accessor time_end: untyped
+
+      attr_accessor workspaces: untyped
+
+      attr_accessor runtime_topology: untyped
+
+      attr_accessor properties: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

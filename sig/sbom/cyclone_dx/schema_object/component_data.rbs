@@ -1,0 +1,99 @@
+module SBOM
+  module CycloneDX
+    class ComponentData < ::Struct[untyped]
+      def self.new: (
+        type: String,
+        ?bom_ref: String?,
+        ?name: String?,
+        ?contents: Content?,
+        ?classification: String?,
+        ?sensitive_data: Array[String]?,
+        ?graphics: GraphicsCollection?,
+        ?description: String?,
+        ?governance: DataGovernance?
+      ) -> instance
+
+      def self.[]:(
+        type: String,
+        ?bom_ref: String?,
+        ?name: String?,
+        ?contents: Content?,
+        ?classification: String?,
+        ?sensitive_data: Array[String]?,
+        ?graphics: GraphicsCollection?,
+        ?description: String?,
+        ?governance: DataGovernance?
+      ) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :bom_ref, :type, :name, :contents, :classification, :sensitive_data, :graphics, :description, :governance ]
+
+      def members: () -> [ :bom_ref, :type, :name, :contents, :classification, :sensitive_data, :graphics, :description, :governance ]
+
+      def initialize: (
+        type: String,
+        ?bom_ref: String?,
+        ?name: String?,
+        ?contents: Content?,
+        ?classification: String?,
+        ?sensitive_data: Array[String]?,
+        ?graphics: GraphicsCollection?,
+        ?description: String?,
+        ?governance: DataGovernance?
+      ) -> void
+
+      attr_accessor bom_ref: String?
+
+      attr_accessor type: String
+
+      attr_accessor name: String?
+
+      attr_accessor contents: Content?
+
+      attr_accessor classification: String?
+
+      attr_accessor sensitive_data: Array[String]?
+
+      attr_accessor graphics: GraphicsCollection?
+
+      attr_accessor description: String?
+
+      attr_accessor governance: DataGovernance?
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+
+      class Content < ::Struct[untyped]
+        def self.new: (
+          ?attachment: Attachment?,
+          ?url: uriString?,
+          ?properties: Array[Property]?
+        ) -> instance
+
+        def self.[]: (
+          ?attachment: Attachment?,
+          ?url: uriString?,
+          ?properties: Array[Property]?
+        ) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :attachment, :url, :properties ]
+
+        def members: () -> [ :attachment, :url, :properties ]
+
+        attr_accessor attachment: Attachment?
+
+        attr_accessor url: uriString?
+
+        attr_accessor properties: Array[Property]?
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+      end
+    end
+  end
+end

@@ -1,0 +1,33 @@
+module SBOM
+  module CycloneDX
+    class Input < ::Struct[untyped]
+      def self.new: (?source: untyped, ?target: untyped, ?resource: untyped, ?parameters: untyped, ?environment_vars: untyped, ?data: untyped, ?properties: untyped) -> instance
+
+      def self.[]: (?source: untyped, ?target: untyped, ?resource: untyped, ?parameters: untyped, ?environment_vars: untyped, ?data: untyped, ?properties: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :source, :target, :resource, :parameters, :environment_vars, :data, :properties ]
+
+      def members: () -> [ :source, :target, :resource, :parameters, :environment_vars, :data, :properties ]
+
+      attr_accessor source: untyped
+
+      attr_accessor target: untyped
+
+      attr_accessor resource: untyped
+
+      attr_accessor parameters: untyped
+
+      attr_accessor environment_vars: untyped
+
+      attr_accessor data: untyped
+
+      attr_accessor properties: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

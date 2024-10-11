@@ -1,0 +1,25 @@
+module SBOM
+  module CycloneDX
+    class IdentifiableAction < ::Struct[untyped]
+      def self.new: (?timestamp: untyped, ?name: untyped, ?email: untyped) -> instance
+
+      def self.[]: (?timestamp: untyped, ?name: untyped, ?email: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :timestamp, :name, :email ]
+
+      def members: () -> [ :timestamp, :name, :email ]
+
+      attr_accessor timestamp: untyped
+
+      attr_accessor name: untyped
+
+      attr_accessor email: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

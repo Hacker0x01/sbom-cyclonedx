@@ -1,0 +1,25 @@
+module SBOM
+  module CycloneDX
+    class DataGovernance < ::Struct[untyped]
+      def self.new: (?custodians: untyped, ?stewards: untyped, ?owners: untyped) -> instance
+
+      def self.[]: (?custodians: untyped, ?stewards: untyped, ?owners: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :custodians, :stewards, :owners ]
+
+      def members: () -> [ :custodians, :stewards, :owners ]
+
+      attr_accessor custodians: untyped
+
+      attr_accessor stewards: untyped
+
+      attr_accessor owners: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

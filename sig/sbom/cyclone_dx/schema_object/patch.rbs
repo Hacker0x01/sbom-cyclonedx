@@ -1,0 +1,25 @@
+module SBOM
+  module CycloneDX
+    class Patch < ::Struct[untyped]
+      def self.new: (?type: untyped, ?diff: untyped, ?resolves: untyped) -> instance
+
+      def self.[]: (?type: untyped, ?diff: untyped, ?resolves: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :type, :diff, :resolves ]
+
+      def members: () -> [ :type, :diff, :resolves ]
+
+      attr_accessor type: untyped
+
+      attr_accessor diff: untyped
+
+      attr_accessor resolves: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

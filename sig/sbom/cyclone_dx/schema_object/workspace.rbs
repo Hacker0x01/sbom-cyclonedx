@@ -1,0 +1,43 @@
+module SBOM
+  module CycloneDX
+    class Workspace < ::Struct[untyped]
+      def self.new: (?bom_ref: untyped, ?uid: untyped, ?name: untyped, ?aliases: untyped, ?description: untyped, ?resource_references: untyped, ?access_mode: untyped, ?mount_path: untyped, ?managed_data_type: untyped, ?volume_request: untyped, ?volume: untyped, ?properties: untyped) -> instance
+
+      def self.[]: (?bom_ref: untyped, ?uid: untyped, ?name: untyped, ?aliases: untyped, ?description: untyped, ?resource_references: untyped, ?access_mode: untyped, ?mount_path: untyped, ?managed_data_type: untyped, ?volume_request: untyped, ?volume: untyped, ?properties: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :bom_ref, :uid, :name, :aliases, :description, :resource_references, :access_mode, :mount_path, :managed_data_type, :volume_request, :volume, :properties ]
+
+      def members: () -> [ :bom_ref, :uid, :name, :aliases, :description, :resource_references, :access_mode, :mount_path, :managed_data_type, :volume_request, :volume, :properties ]
+
+      attr_accessor bom_ref: untyped
+
+      attr_accessor uid: untyped
+
+      attr_accessor name: untyped
+
+      attr_accessor aliases: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor resource_references: untyped
+
+      attr_accessor access_mode: untyped
+
+      attr_accessor mount_path: untyped
+
+      attr_accessor managed_data_type: untyped
+
+      attr_accessor volume_request: untyped
+
+      attr_accessor volume: untyped
+
+      attr_accessor properties: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

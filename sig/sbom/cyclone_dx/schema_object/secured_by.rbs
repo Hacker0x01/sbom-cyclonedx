@@ -1,0 +1,23 @@
+module SBOM
+  module CycloneDX
+    class SecuredBy < ::Struct[untyped]
+      def self.new: (?mechanism: untyped, ?algorithm_ref: untyped) -> instance
+
+      def self.[]: (?mechanism: untyped, ?algorithm_ref: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :mechanism, :algorithm_ref ]
+
+      def members: () -> [ :mechanism, :algorithm_ref ]
+
+      attr_accessor mechanism: untyped
+
+      attr_accessor algorithm_ref: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

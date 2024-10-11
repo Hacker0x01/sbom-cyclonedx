@@ -1,37 +1,54 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 module SBOM
   module CycloneDX
-    ServiceData = SchemaObject.build("ServiceData") do
+    class ServiceData < Struct.new(
+      "ServiceData",
       # Directional Flow - Specifies the flow direction of the data. Direction is relative to the service. Inbound flow states that data enters the service. Outbound flow states that data leaves the service. Bi-directional states that data flows both ways and unknown states that the direction is not known.
-      prop :flow, String, enum: Enum::DATA_FLOW_DIRECTION, required: true
-
+      :flow,
       # Data Classification - Data classification tags data according to its type, sensitivity, and value if altered, stolen, or destroyed.
-      prop :classification, String, required: true
-
+      :classification,
       # Name - Name for the defined data
       # Example: "Credit card reporting"
-      prop :name, String
-
+      :name,
       # Description - Short description of the data content and usage
       # Example: "Credit card information being exchanged in between the web app and the database"
-      prop :description, String
-
+      :description,
       # Data Governance
-      prop :governance, DataGovernance
-
+      :governance,
       # Source - The URI, URL, or BOM-Link of the components or services the data came in from
-      prop :source,
-           one_of: [URI, String],
-           required: true,
-           pattern: ->(value) { (value.is_a?(String) && Pattern::BOM_LINK) || nil }
-
+      :source,
       # Destination - The URI, URL, or BOM-Link of the components or services the data is sent to
-      prop :destination,
-           one_of: [URI, String],
-           required: true,
-           pattern: ->(value) { (value.is_a?(String) && Pattern::BOM_LINK) || nil }
+      :destination,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      def initialize( # rubocop:disable Metrics/ParameterLists
+        flow:,
+        classification:,
+        source:,
+        destination:,
+        name: nil,
+        description: nil,
+        governance: nil
+      )
+        super
+      end
+
+      def valid?
+        Validator.valid?(String, flow, enum: Enum::DATA_FLOW_DIRECTION, required: true) &&
+          Validator.valid?(String, classification, required: true) &&
+          Validator.valid?(String, name) &&
+          Validator.valid?(String, description) &&
+          Validator.valid?(DataGovernance, governance) &&
+          Validator.valid?(Union, source, klasses: [URI, String], pattern: Pattern::BOM_LINK, required: true) &&
+          Validator.valid?(Union, destination, klasses: [URI, String], pattern: Pattern::BOM_LINK, required: true)
+      end
     end
   end
 end

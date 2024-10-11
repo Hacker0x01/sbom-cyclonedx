@@ -1,0 +1,37 @@
+module SBOM
+  module CycloneDX
+    class Standard < ::Struct[untyped]
+      def self.new: (?bom_ref: untyped, ?name: untyped, ?version: untyped, ?description: untyped, ?owner: untyped, ?requirements: untyped, ?levels: untyped, ?external_references: untyped, ?signature: untyped) -> instance
+
+      def self.[]: (?bom_ref: untyped, ?name: untyped, ?version: untyped, ?description: untyped, ?owner: untyped, ?requirements: untyped, ?levels: untyped, ?external_references: untyped, ?signature: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :bom_ref, :name, :version, :description, :owner, :requirements, :levels, :external_references, :signature ]
+
+      def members: () -> [ :bom_ref, :name, :version, :description, :owner, :requirements, :levels, :external_references, :signature ]
+
+      attr_accessor bom_ref: untyped
+
+      attr_accessor name: untyped
+
+      attr_accessor version: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor owner: untyped
+
+      attr_accessor requirements: untyped
+
+      attr_accessor levels: untyped
+
+      attr_accessor external_references: untyped
+
+      attr_accessor signature: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

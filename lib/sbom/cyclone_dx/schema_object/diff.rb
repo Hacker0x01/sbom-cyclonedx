@@ -1,15 +1,26 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Diff - The patch file (or diff) that shows changes. Refer to https://en.wikipedia.org/wiki/Diff
 module SBOM
   module CycloneDX
-    Diff = SchemaObject.build("Diff") do
+    class Diff < Struct.new(
+      "Diff",
       # Diff text - Specifies the optional text of the diff
-      prop :text, Attachment
-
+      :text,
       # URL - Specifies the URL to the diff
-      prop :url, URI
+      :url,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      def valid?
+        Validator.valid?(Attachment, text) &&
+          Validator.valid?(URI, url)
+      end
     end
   end
 end

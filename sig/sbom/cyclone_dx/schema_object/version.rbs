@@ -1,0 +1,25 @@
+module SBOM
+  module CycloneDX
+    class Version < ::Struct[untyped]
+      def self.new: (?version: untyped, ?range: untyped, ?status: untyped) -> instance
+
+      def self.[]: (?version: untyped, ?range: untyped, ?status: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :version, :range, :status ]
+
+      def members: () -> [ :version, :range, :status ]
+
+      attr_accessor version: untyped
+
+      attr_accessor range: untyped
+
+      attr_accessor status: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

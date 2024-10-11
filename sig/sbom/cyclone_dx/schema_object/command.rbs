@@ -1,0 +1,23 @@
+module SBOM
+  module CycloneDX
+    class Command < ::Struct[untyped]
+      def self.new: (?executed: String?, ?properties: Array[Property]?) -> instance
+
+      def self.[]: (?executed: String?, ?properties: Array[Property]?) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :executed, :properties ]
+
+      def members: () -> [ :executed, :properties ]
+
+      attr_accessor executed: String?
+
+      attr_accessor properties: Array[Property]?
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

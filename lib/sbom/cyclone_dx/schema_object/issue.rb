@@ -1,35 +1,65 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Issue - An individual issue that has been resolved.
 module SBOM
   module CycloneDX
-    Issue = SchemaObject.build("Issue") do
+    class Issue < Struct.new(
+      "Issue",
       # Issue Type - Specifies the type of issue
-      prop :type, String, enum: Enum::ISSUE_TYPE, required: true
-
+      :type,
       # Issue ID - The identifier of the issue assigned by the source of the issue
-      prop :id, String
-
+      :id,
       # Issue Name - The name of the issue
-      prop :name, String
-
+      :name,
       # Issue Description - A description of the issue
-      prop :description, String
-
+      :description,
       # Source - The source of the issue where it is documented
-      prop :source, Source
-
+      :source,
       # References - A collection of URL's for reference. Multiple URLs are allowed.
-      prop :references, [URI]
+      :references,
+      keyword_init: true
+    )
+      include SchemaObject
 
-      Source = SchemaObject.build("Source") do
+      def initialize(
+        type:,
+        id: nil,
+        name: nil,
+        description: nil,
+        source: nil,
+        references: nil
+      )
+        super
+      end
+
+      def valid?
+        Validator.valid?(String, type, enum: Enum::ISSUE_TYPE, required: true) &&
+          Validator.valid?(String, id) &&
+          Validator.valid?(String, name) &&
+          Validator.valid?(String, description) &&
+          Validator.valid?(Source, source) &&
+          Validator.valid?(Array, references, items: URI)
+      end
+
+      class Source < Struct.new(
+        "Source",
         # Name - The name of the source.
         # Examples: "National Vulnerability Database", "NVD", "Apache"
-        prop :name, String
-
+        :name,
         # URL - The url of the issue documentation as provided by the source
-        prop :url, URI
+        :url,
+        keyword_init: true
+      )
+        include SchemaObject
+
+        def valid?
+          Validator.valid?(String, name) &&
+            Validator.valid?(URI, url)
+        end
       end
     end
   end

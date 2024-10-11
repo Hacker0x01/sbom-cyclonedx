@@ -1,15 +1,28 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../schema_object"
 
 # CO2 Measure - A measure of carbon dioxide (CO2).
 module SBOM
   module CycloneDX
-    CO2Measure = SchemaObject.build("CO2Measure") do
+    class CO2Measure < Struct.new(
+      "CO2Measure",
       # Value - Quantity of carbon dioxide (CO2).
-      prop :value, Float, required: true
+      :value,
+      # Unit - Unit of carbon dioxide (CO2), currently specified as a const "tCO2eq".
+      :unit,
+      keyword_init: true
+    )
+      include SchemaObject
 
-      # Unit - Unit of carbon dioxide (CO2).
-      prop :unit, String, required: true, const: true, default: "tCO2eq"
+      def initialize(value:)
+        super(value: value, unit: "tCO2eq")
+      end
+
+      def valid?
+        Validator.valid?(Float, value, required: true) &&
+          Validator.valid?(String, unit, const: "tCO2eq", required: true)
+      end
     end
   end
 end

@@ -1,0 +1,93 @@
+module SBOM
+  module CycloneDX
+    module Enum
+      ACCESS_MODE: ::Array[String]
+
+      ACTIVITY: ::Array[String]
+
+      AFFECTED_STATUS: ::Array[String]
+
+      AGGREGATE_TYPE: ::Array[String]
+
+      ALGORITHM_MODE: ::Array[String]
+
+      ASSET_TYPE: ::Array[String]
+
+      CERTIFICATION_LEVEL: ::Array[String]
+
+      COMPONENT_DATA_TYPE: ::Array[String]
+
+      COMPONENT_TYPE: ::Array[String]
+
+      CRYPTO_FUNCTION: ::Array[String]
+
+      DATA_FLOW_DIRECTION: ::Array[String]
+
+      ENERGY_SOURCE: ::Array[String]
+
+      EXECUTION_ENVIRONMENT: ::Array[String]
+
+      EXTERNAL_REFERENCE_TYPE: ::Array[String]
+
+      FIELD: ::Array[String]
+
+      HASH_ALG: ::Array[String]
+
+      IMPACT_ANALYSIS_JUSTIFICATION: ::Array[String]
+
+      IMPACT_ANALYSIS_STATE: ::Array[String]
+
+      IMPLEMENTATION_PLATFORM: ::Array[String]
+
+      ISSUE_TYPE: ::Array[String]
+
+      LEARNING_TYPE: ::Array[String]
+
+      LICENSE_ACKNOWLEDGEMENT: ::Array[String]
+
+      LICENSE_ID: ::Array[String]
+
+      LICENSE_TYPE: ::Array[String]
+
+      OUTPUT_TYPE: ::Array[String]
+
+      PADDING: ::Array[String]
+
+      PATCH_TYPE: ::Array[String]
+
+      PHASE: ::Array[String]
+
+      PRIMITIVE: ::Array[String]
+
+      PROTOCOL_TYPE: ::Array[String]
+
+      RELATED_CRYPTO_MATERIAL_STATE: ::Array[String]
+
+      RELATED_CRYPTO_MATERIAL_TYPE: ::Array[String]
+
+      RESPONSE: ::Array[String]
+
+      SCOPE: ::Array[String]
+
+      SCORE_METHOD: ::Array[String]
+
+      SEVERITY: ::Array[String]
+
+      SIGNATURE_ALGORITHM: ::Array[String]
+
+      SIGNATURE_KEY_TYPE: ::Array[String]
+
+      SIGNATURE_EC_CRV: ::Array[String]
+
+      SIGNATURE_OKP_CRV: ::Array[String]
+
+      TASK_TYPE: ::Array[String]
+
+      TECHNIQUE: ::Array[String]
+
+      TRIGGER_TYPE: ::Array[String]
+
+      VOLUME_MODE: ::Array[String]
+    end
+  end
+end

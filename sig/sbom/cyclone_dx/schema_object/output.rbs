@@ -1,0 +1,33 @@
+module SBOM
+  module CycloneDX
+    class Output < ::Struct[untyped]
+      def self.new: (?type: untyped, ?source: untyped, ?target: untyped, ?resource: untyped, ?data: untyped, ?environment_vars: untyped, ?properties: untyped) -> instance
+
+      def self.[]: (?type: untyped, ?source: untyped, ?target: untyped, ?resource: untyped, ?data: untyped, ?environment_vars: untyped, ?properties: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :type, :source, :target, :resource, :data, :environment_vars, :properties ]
+
+      def members: () -> [ :type, :source, :target, :resource, :data, :environment_vars, :properties ]
+
+      attr_accessor type: untyped
+
+      attr_accessor source: untyped
+
+      attr_accessor target: untyped
+
+      attr_accessor resource: untyped
+
+      attr_accessor data: untyped
+
+      attr_accessor environment_vars: untyped
+
+      attr_accessor properties: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

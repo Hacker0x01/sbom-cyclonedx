@@ -1,0 +1,27 @@
+module SBOM
+  module CycloneDX
+    class PerformanceMetric < ::Struct[untyped]
+      def self.new: (?type: untyped, ?value: untyped, ?slice: untyped, ?confidence_interval: untyped) -> instance
+
+      def self.[]: (?type: untyped, ?value: untyped, ?slice: untyped, ?confidence_interval: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :type, :value, :slice, :confidence_interval ]
+
+      def members: () -> [ :type, :value, :slice, :confidence_interval ]
+
+      attr_accessor type: untyped
+
+      attr_accessor value: untyped
+
+      attr_accessor slice: untyped
+
+      attr_accessor confidence_interval: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

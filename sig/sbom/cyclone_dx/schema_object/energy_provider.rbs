@@ -1,0 +1,31 @@
+module SBOM
+  module CycloneDX
+    class EnergyProvider < ::Struct[untyped]
+      def self.new: (?bom_ref: untyped, ?description: untyped, ?organization: untyped, ?energy_source: untyped, ?energy_provided: untyped, ?external_references: untyped) -> instance
+
+      def self.[]: (?bom_ref: untyped, ?description: untyped, ?organization: untyped, ?energy_source: untyped, ?energy_provided: untyped, ?external_references: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :bom_ref, :description, :organization, :energy_source, :energy_provided, :external_references ]
+
+      def members: () -> [ :bom_ref, :description, :organization, :energy_source, :energy_provided, :external_references ]
+
+      attr_accessor bom_ref: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor organization: untyped
+
+      attr_accessor energy_source: untyped
+
+      attr_accessor energy_provided: untyped
+
+      attr_accessor external_references: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

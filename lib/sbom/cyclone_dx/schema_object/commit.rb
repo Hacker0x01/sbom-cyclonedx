@@ -1,24 +1,33 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../schema_object"
 
 # Commit - Specifies an individual commit
 module SBOM
   module CycloneDX
-    Commit = SchemaObject.build("Commit") do
+    class Commit < Struct.new(
+      "Commit",
       # UID - A unique identifier of the commit. This may be version control specific. For example, Subversion uses revision numbers whereas git uses commit hashes.
-      prop :uid, String
-
+      :uid,
       # URL - The URL to the commit. This URL will typically point to a commit in a version control system.
-      prop :url, URI
-
+      :url,
       # Author - The author who created the changes in the commit
-      prop :author, IdentifiableAction
-
+      :author,
       # Committer - The person who committed or pushed the commit
-      prop :committer, IdentifiableAction
-
+      :committer,
       # Message - The text description of the contents of the commit
-      prop :message, String
+      :message,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      def valid?
+        Validator.valid?(String, uid) &&
+          Validator.valid?(URI, url) &&
+          Validator.valid?(IdentifiableAction, author) &&
+          Validator.valid?(IdentifiableAction, committer) &&
+          Validator.valid?(String, message)
+      end
     end
   end
 end

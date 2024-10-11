@@ -1,0 +1,51 @@
+module SBOM
+  module CycloneDX
+    module Validator
+      type fieldValue = Integer |
+                        Float |
+                        String |
+                        bool |
+                        DateTime |
+                        URI |
+                        EmailAddress |
+                        Array[fieldValue] |
+                        SBOM::CycloneDX::SchemaObject |
+                        nil
+      type fieldType =
+        singleton(Integer) |
+        singleton(Float) |
+        singleton(String) |
+        singleton(DateTime) |
+        singleton(URI) |
+        singleton(EmailAddress) |
+        singleton(Array) |
+        singleton(SBOM::CycloneDX::Boolean) |
+        singleton(SBOM::CycloneDX::Union) |
+        Class
+
+      def self.valid?: (fieldType, untyped, ?required: bool, **untyped) -> bool
+
+      private def self.valid_integer?: (untyped, ?maximum: Integer?, ?minimum: Integer?, **untyped) -> bool
+      private def self.valid_float?: (untyped, ?maximum: Integer?, ?minimum: Integer?, **untyped) -> bool
+      private def self.valid_numeric?: (Numeric, ?maximum: Integer?, ?minimum: Integer?) -> bool
+      private def self.valid_boolean?: (untyped, **untyped) -> bool
+      private def self.valid_schema_object?: (singleton(SBOM::CycloneDX::SchemaObject), untyped, **untyped) -> bool
+      private def self.valid_union?: (untyped, klasses: Array[fieldType], **untyped) -> bool
+      private def self.valid_array?: (
+        untyped,
+        items: ^(untyped) -> bool | fieldType | [fieldType, Hash[Symbol, untyped]],
+        ?unique: bool,
+        **untyped
+      ) -> bool
+      private def self.valid_string?: (
+        untyped,
+        ?enum: nil | Array[String],
+        ?format: Symbol?,
+        ?max_length: Integer?,
+        ?min_length: Integer?,
+        ?pattern: Regexp?,
+        **untyped
+      ) -> bool
+    end
+  end
+end

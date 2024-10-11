@@ -1,0 +1,33 @@
+module SBOM
+  module CycloneDX
+    class ServiceData < ::Struct[untyped]
+      def self.new: (?flow: untyped, ?classification: untyped, ?name: untyped, ?description: untyped, ?governance: untyped, ?source: untyped, ?destination: untyped) -> instance
+
+      def self.[]: (?flow: untyped, ?classification: untyped, ?name: untyped, ?description: untyped, ?governance: untyped, ?source: untyped, ?destination: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :flow, :classification, :name, :description, :governance, :source, :destination ]
+
+      def members: () -> [ :flow, :classification, :name, :description, :governance, :source, :destination ]
+
+      attr_accessor flow: untyped
+
+      attr_accessor classification: untyped
+
+      attr_accessor name: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor governance: untyped
+
+      attr_accessor source: untyped
+
+      attr_accessor destination: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

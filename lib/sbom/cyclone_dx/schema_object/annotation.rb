@@ -1,43 +1,72 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "signature"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Annotations - A comment, note, explanation, or similar textual content which provides additional context to the object(s) being annotated.
 module SBOM
   module CycloneDX
-    Annotation = SchemaObject.build("Annotation") do
+    class Annotation < Struct.new(
+      "Annotation",
       # BOM Reference - An optional identifier which can be used to reference the annotation elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.
-      prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
-
+      :bom_ref,
       # Subjects - The object in the BOM identified by its bom-ref. This is often a component or service, but may be any object type supporting bom-refs.
-      prop :subjects,
-           Set[String],
-           required: true,
-           all: { pattern: Pattern::REF_LINK_OR_BOM_LINK_ELEMENT }
-
+      :subjects,
       # Annotator - The organization, person, component, or service which created the textual content of the annotation.
-      prop :annotator, Annotator, required: true
-
+      :annotator,
       # Timestamp - The date and time (timestamp) when the annotation was created.
-      prop :timestamp, DateTime, required: true
-
+      :timestamp,
       # Text - The textual content of the annotation.
-      prop :text, String, required: true
-
+      :text,
       # Signature - Enveloped signature in [JSON Signature Format (JSF)](https://cyberphone.github.io/doc/security/jsf.html).
-      prop :signature, Signature
+      :signature,
+      keyword_init: true
+    )
+      include SchemaObject
 
-      Annotator = SchemaObject.build("Annotator") do
-        # The organization that created the annotation
-        prop :organization, OrganizationalEntity, required: -> { individual.nil? && component.nil? && service.nil? }
+      json_name :bom_ref, "bom-ref"
 
-        # The person that created the annotation
-        prop :individual, OrganizationalContact, required: -> { organization.nil? && component.nil? && service.nil? }
+      def initialize(subjects:, annotator:, timestamp:, text:, signature: nil, bom_ref: nil) # rubocop:disable Metrics/ParameterLists
+        super
+      end
 
-        # The tool or component that created the annotation
-        prop :component, Component, required: -> { organization.nil? && individual.nil? && service.nil? }
+      def valid?
+        Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
+          Validator.valid?(
+            Array,
+            subjects,
+            unique: true,
+            items: [String, pattern: Pattern::REF_LINK_OR_BOM_LINK_ELEMENT]
+          ) &&
+          Validator.valid?(Annotator, annotator, required: true) &&
+          Validator.valid?(DateTime, timestamp, required: true) &&
+          Validator.valid?(String, text, required: true) &&
+          Signature.valid?(signature)
+      end
 
-        # The service that created the annotation
-        prop :service, Service, required: -> { organization.nil? && individual.nil? && component.nil? }
+      class Annotator < Struct.new(
+        "Annotator",
+        # Organization - The organization that created the annotation
+        :organization,
+        # Individual - The person that created the annotation
+        :individual,
+        # Component - The tool or component that created the annotation
+        :component,
+        # Service - The service that created the annotation
+        :service,
+        keyword_init: true
+      )
+        include SchemaObject
+
+        def valid?
+          return false if [organization, individual, component, service].all?(&:nil?)
+
+          Validator.valid?(OrganizationalEntity, organization) &&
+            Validator.valid?(OrganizationalContact, individual) &&
+            Validator.valid?(Component, component) &&
+            Validator.valid?(Service, service)
+        end
       end
     end
   end

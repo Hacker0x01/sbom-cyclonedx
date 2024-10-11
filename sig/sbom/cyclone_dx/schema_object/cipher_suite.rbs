@@ -1,0 +1,25 @@
+module SBOM
+  module CycloneDX
+    class CipherSuite < ::Struct[untyped]
+      def self.new: (?name: String?, ?algorithms: Array[String]?, ?identifiers: Array[String]?) -> instance
+
+      def self.[]: (?name: String?, ?algorithms: Array[String]?, ?identifiers: Array[String]?) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :name, :algorithms, :identifiers ]
+
+      def members: () -> [ :name, :algorithms, :identifiers ]
+
+      attr_accessor name: String?
+
+      attr_accessor algorithms: Array[String]?
+
+      attr_accessor identifiers: Array[String]?
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

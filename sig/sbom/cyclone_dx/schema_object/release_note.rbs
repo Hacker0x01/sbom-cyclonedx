@@ -1,0 +1,41 @@
+module SBOM
+  module CycloneDX
+    class ReleaseNote < ::Struct[untyped]
+      def self.new: (?type: untyped, ?title: untyped, ?featured_image: untyped, ?social_image: untyped, ?description: untyped, ?timestamp: untyped, ?aliases: untyped, ?tags: untyped, ?resolves: untyped, ?notes: untyped, ?properties: untyped) -> instance
+
+      def self.[]: (?type: untyped, ?title: untyped, ?featured_image: untyped, ?social_image: untyped, ?description: untyped, ?timestamp: untyped, ?aliases: untyped, ?tags: untyped, ?resolves: untyped, ?notes: untyped, ?properties: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :type, :title, :featured_image, :social_image, :description, :timestamp, :aliases, :tags, :resolves, :notes, :properties ]
+
+      def members: () -> [ :type, :title, :featured_image, :social_image, :description, :timestamp, :aliases, :tags, :resolves, :notes, :properties ]
+
+      attr_accessor type: untyped
+
+      attr_accessor title: untyped
+
+      attr_accessor featured_image: untyped
+
+      attr_accessor social_image: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor timestamp: untyped
+
+      attr_accessor aliases: untyped
+
+      attr_accessor tags: untyped
+
+      attr_accessor resolves: untyped
+
+      attr_accessor notes: untyped
+
+      attr_accessor properties: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

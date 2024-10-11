@@ -1,0 +1,35 @@
+module SBOM
+  module CycloneDX
+    class License < ::Struct[untyped]
+      def self.new: (?bom_ref: untyped, ?id: untyped, ?name: untyped, ?acknowledgement: untyped, ?text: untyped, ?url: untyped, ?licensing: untyped, ?properties: untyped) -> instance
+
+      def self.[]: (?bom_ref: untyped, ?id: untyped, ?name: untyped, ?acknowledgement: untyped, ?text: untyped, ?url: untyped, ?licensing: untyped, ?properties: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :bom_ref, :id, :name, :acknowledgement, :text, :url, :licensing, :properties ]
+
+      def members: () -> [ :bom_ref, :id, :name, :acknowledgement, :text, :url, :licensing, :properties ]
+
+      attr_accessor bom_ref: untyped
+
+      attr_accessor id: untyped
+
+      attr_accessor name: untyped
+
+      attr_accessor acknowledgement: untyped
+
+      attr_accessor text: untyped
+
+      attr_accessor url: untyped
+
+      attr_accessor licensing: untyped
+
+      attr_accessor properties: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

@@ -48,5 +48,7 @@ Style/AccessorGrouping:
   Enabled: false
 Style/CommentedKeyword:
   Enabled: false
+Style/HashAsLastArrayItem:
+  Enabled: false
 Style/StructInheritance:
   Enabled: false

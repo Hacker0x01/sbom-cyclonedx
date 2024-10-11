@@ -1,18 +1,29 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Identifiable Action - Specifies an individual commit
 module SBOM
   module CycloneDX
-    IdentifiableAction = SchemaObject.build("IdentifiableAction") do
+    class IdentifiableAction < Struct.new(
+      "IdentifiableAction",
       # Timestamp - The timestamp in which the action occurred
-      prop :timestamp, DateTime
-
+      :timestamp,
       # Name - The name of the individual who performed the action
-      prop :name, String
-
+      :name,
       # E-mail - The email address of the individual who performed the action
-      prop :email, EmailAddress
+      :email,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      def valid?
+        Validator.valid?(DateTime, timestamp) &&
+          Validator.valid?(String, name) &&
+          Validator.valid?(EmailAddress, email)
+      end
     end
   end
 end

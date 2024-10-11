@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
 
+require "active_support/core_ext/string"
 require_relative "cyclone_dx/version"
 
 # TODO: the following should be implemented
@@ -9,6 +9,25 @@ require_relative "cyclone_dx/version"
 module SBOM
   module CycloneDX
     class Error < StandardError; end
-    # Your code goes here...
+
+    module Boolean
+      def self.extended(_base)
+        raise NotImplementedError, "This is an internal placeholder module and should not be extended"
+      end
+
+      def self.included(_base)
+        raise NotImplementedError, "This is an internal placeholder module and should not be included"
+      end
+    end
+
+    module Union
+      def self.extended(_base)
+        raise NotImplementedError, "This is an internal placeholder module and should not be extended"
+      end
+
+      def self.included(_base)
+        raise NotImplementedError, "This is an internal placeholder module and should not be included"
+      end
+    end
   end
 end

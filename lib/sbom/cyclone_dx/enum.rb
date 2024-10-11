@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
 
 module SBOM
   module CycloneDX
@@ -2085,6 +2084,40 @@ module SBOM
         "high",
         # Critical severity
         "critical"
+      ].freeze
+
+      SIGNATURE_ALGORITHM = %w[
+        RS256
+        RS384
+        RS512
+        PS256
+        PS384
+        PS512
+        ES256
+        ES384
+        ES512
+        Ed25519
+        Ed448
+        HS256
+        HS384
+        HS512
+      ].freeze
+
+      SIGNATURE_KEY_TYPE = %w[
+        EC
+        OKP
+        RSA
+      ].freeze
+
+      SIGNATURE_EC_CRV = %w[
+        P-256
+        P-384
+        P-521
+      ].freeze
+
+      SIGNATURE_OKP_CRV = %w[
+        Ed25519
+        Ed448
       ].freeze
 
       # Anonymous class from TaskType

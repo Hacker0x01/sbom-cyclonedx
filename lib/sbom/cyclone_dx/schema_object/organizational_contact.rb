@@ -1,23 +1,36 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Organizational Contact
 module SBOM
   module CycloneDX
-    OrganizationalContact = SchemaObject.build("OrganizationalContact") do
+    class OrganizationalContact < Struct.new(
+      "OrganizationalContact",
       # BOM Reference - An optional identifier which can be used to reference the object elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.
-      prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
-
+      :bom_ref,
       # Name - The name of a contact
       # Example: "Contact name"
-      prop :name, String
-
+      :name,
       # Email Address - The email address of the contact.
-      prop :email, URI
-
+      :email,
       # Phone - The phone number of the contact.
       # Example: "800-555-1212"
-      prop :phone, String
+      :phone,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      json_name :bom_ref, "bom-ref"
+
+      def valid?
+        Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
+          Validator.valid?(String, name) &&
+          Validator.valid?(EmailAddress, email) &&
+          Validator.valid?(String, phone)
+      end
     end
   end
 end

@@ -1,0 +1,78 @@
+module SBOM
+  module CycloneDX
+    type signature = Signature::JSFSignature | Signature::SignatureChain | Signature::SignerList
+
+    # TODO: Add proper types
+
+    module Signature
+      def self.valid?: (untyped, ?required: bool) -> bool
+
+      class JSFSignature < ::Struct[untyped]
+        include SchemaObject
+        extend SchemaObject::ClassMethods
+
+        def self.new: (?algorithm: untyped, ?key_id: untyped, ?public_key: untyped, ?certificate_path: untyped, ?excludes: untyped, ?value: untyped) -> instance
+
+        def self.[]: (?algorithm: untyped, ?key_id: untyped, ?public_key: untyped, ?certificate_path: untyped, ?excludes: untyped, ?value: untyped) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :algorithm, :key_id, :public_key, :certificate_path, :excludes, :value ]
+
+        def members: () -> [ :algorithm, :key_id, :public_key, :certificate_path, :excludes, :value ]
+
+        attr_accessor algorithm: untyped
+
+        attr_accessor key_id: untyped
+
+        attr_accessor public_key: untyped
+
+        attr_accessor certificate_path: untyped
+
+        attr_accessor excludes: untyped
+
+        attr_accessor value: untyped
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+      end
+
+      class SignatureChain < ::Struct[untyped]
+        def self.new: (?signatures: untyped) -> instance
+
+        def self.[]: (?signatures: untyped) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :signatures ]
+
+        def members: () -> [ :signatures ]
+
+        attr_accessor signatures: untyped
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+      end
+
+      class SignerList < ::Struct[untyped]
+        def self.new: (?signers: untyped) -> instance
+
+        def self.[]: (?signers: untyped) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :signers ]
+
+        def members: () -> [ :signers ]
+
+        attr_accessor signers: untyped
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+      end
+    end
+  end
+end

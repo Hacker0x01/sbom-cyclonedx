@@ -1,0 +1,33 @@
+module SBOM
+  module CycloneDX
+    class SWID < ::Struct[untyped]
+      def self.new: (?tag_id: untyped, ?name: untyped, ?version: untyped, ?tag_version: untyped, ?patch: untyped, ?text: untyped, ?url: untyped) -> instance
+
+      def self.[]: (?tag_id: untyped, ?name: untyped, ?version: untyped, ?tag_version: untyped, ?patch: untyped, ?text: untyped, ?url: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :tag_id, :name, :version, :tag_version, :patch, :text, :url ]
+
+      def members: () -> [ :tag_id, :name, :version, :tag_version, :patch, :text, :url ]
+
+      attr_accessor tag_id: untyped
+
+      attr_accessor name: untyped
+
+      attr_accessor version: untyped
+
+      attr_accessor tag_version: untyped
+
+      attr_accessor patch: untyped
+
+      attr_accessor text: untyped
+
+      attr_accessor url: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

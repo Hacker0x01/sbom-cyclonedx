@@ -1,0 +1,19 @@
+module SBOM
+  module CycloneDX
+    type licenseChoice = LicenseChoice::LicenseExpression | LicenseChoice::WrappedLicense
+
+    module LicenseChoice
+      def self.valid?: (untyped, **untyped) -> bool
+
+      class LicenseExpression < ::Struct[untyped]
+        include SchemaObject
+        extend SchemaObject::ClassMethods
+      end
+
+      class WrappedLicense < ::Struct[untyped]
+        include SchemaObject
+        extend SchemaObject::ClassMethods
+      end
+    end
+  end
+end

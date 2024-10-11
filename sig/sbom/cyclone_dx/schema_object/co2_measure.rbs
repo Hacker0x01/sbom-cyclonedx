@@ -1,0 +1,25 @@
+module SBOM
+  module CycloneDX
+    class CO2Measure < ::Struct[untyped]
+      def self.new: (value: Float) -> instance
+
+      def self.[]: (value: Float) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :value, :unit ]
+
+      def members: () -> [ :value, :unit ]
+
+      def initialize: (value: Float) -> void
+
+      attr_accessor value: untyped
+
+      attr_accessor unit: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

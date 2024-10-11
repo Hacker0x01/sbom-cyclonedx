@@ -1,0 +1,23 @@
+module SBOM
+  module CycloneDX
+    class HashData < ::Struct[untyped]
+      def self.new: (?alg: untyped, ?content: untyped) -> instance
+
+      def self.[]: (?alg: untyped, ?content: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :alg, :content ]
+
+      def members: () -> [ :alg, :content ]
+
+      attr_accessor alg: untyped
+
+      attr_accessor content: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

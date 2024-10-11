@@ -1,15 +1,26 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Tools - The tool(s) used to identify, confirm, or score the vulnerability.
 module SBOM
   module CycloneDX
-    Tools = SchemaObject.build("Tools") do
+    class Tools < Struct.new(
+      "Tools",
       # Components - A list of software and hardware components used as tools.
-      prop :components, Set[Component]
-
+      :components,
       # Services - A list of services used as tools. This may include microservices, function-as-a-service, and other types of network or intra-process services.
-      prop :services, Set[Service]
+      :services,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      def valid?
+        Validator.valid?(Array, components, unique: true, items: Component) &&
+          Validator.valid?(Array, services, unique: true, items: Service)
+      end
     end
   end
 end

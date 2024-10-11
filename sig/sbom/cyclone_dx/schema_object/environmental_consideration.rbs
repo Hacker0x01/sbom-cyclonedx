@@ -1,0 +1,23 @@
+module SBOM
+  module CycloneDX
+    class EnvironmentalConsideration < ::Struct[untyped]
+      def self.new: (?energy_consumptions: untyped, ?properties: untyped) -> instance
+
+      def self.[]: (?energy_consumptions: untyped, ?properties: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :energy_consumptions, :properties ]
+
+      def members: () -> [ :energy_consumptions, :properties ]
+
+      attr_accessor energy_consumptions: untyped
+
+      attr_accessor properties: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

@@ -1,0 +1,43 @@
+module SBOM
+  module CycloneDX
+    class Trigger < ::Struct[untyped]
+      def self.new: (?bom_ref: untyped, ?uid: untyped, ?name: untyped, ?description: untyped, ?resource_references: untyped, ?type: untyped, ?event: untyped, ?conditions: untyped, ?time_activated: untyped, ?inputs: untyped, ?outputs: untyped, ?properties: untyped) -> instance
+
+      def self.[]: (?bom_ref: untyped, ?uid: untyped, ?name: untyped, ?description: untyped, ?resource_references: untyped, ?type: untyped, ?event: untyped, ?conditions: untyped, ?time_activated: untyped, ?inputs: untyped, ?outputs: untyped, ?properties: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :bom_ref, :uid, :name, :description, :resource_references, :type, :event, :conditions, :time_activated, :inputs, :outputs, :properties ]
+
+      def members: () -> [ :bom_ref, :uid, :name, :description, :resource_references, :type, :event, :conditions, :time_activated, :inputs, :outputs, :properties ]
+
+      attr_accessor bom_ref: untyped
+
+      attr_accessor uid: untyped
+
+      attr_accessor name: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor resource_references: untyped
+
+      attr_accessor type: untyped
+
+      attr_accessor event: untyped
+
+      attr_accessor conditions: untyped
+
+      attr_accessor time_activated: untyped
+
+      attr_accessor inputs: untyped
+
+      attr_accessor outputs: untyped
+
+      attr_accessor properties: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

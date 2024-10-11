@@ -1,0 +1,31 @@
+module SBOM
+  module CycloneDX
+    class EnergyConsumption < ::Struct[untyped]
+      def self.new: (?activity: untyped, ?energy_providers: untyped, ?activity_energy_cost: untyped, ?co2_cost_equivalent: untyped, ?co2_cost_offset: untyped, ?properties: untyped) -> instance
+
+      def self.[]: (?activity: untyped, ?energy_providers: untyped, ?activity_energy_cost: untyped, ?co2_cost_equivalent: untyped, ?co2_cost_offset: untyped, ?properties: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :activity, :energy_providers, :activity_energy_cost, :co2_cost_equivalent, :co2_cost_offset, :properties ]
+
+      def members: () -> [ :activity, :energy_providers, :activity_energy_cost, :co2_cost_equivalent, :co2_cost_offset, :properties ]
+
+      attr_accessor activity: untyped
+
+      attr_accessor energy_providers: untyped
+
+      attr_accessor activity_energy_cost: untyped
+
+      attr_accessor co2_cost_equivalent: untyped
+
+      attr_accessor co2_cost_offset: untyped
+
+      attr_accessor properties: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

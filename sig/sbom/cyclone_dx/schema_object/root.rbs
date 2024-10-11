@@ -1,0 +1,53 @@
+module SBOM
+  module CycloneDX
+    class Root < ::Struct[untyped]
+      def self.new: (?serial_number: untyped, ?version: untyped, ?metadata: untyped, ?components: untyped, ?services: untyped, ?external_references: untyped, ?dependencies: untyped, ?compositions: untyped, ?vulnerabilities: untyped, ?annotations: untyped, ?formulation: untyped, ?declarations: untyped, ?definitions: untyped, ?properties: untyped, ?signature: untyped, ?bom_format: untyped, ?spec_version: untyped) -> instance
+
+      def self.[]: (?serial_number: untyped, ?version: untyped, ?metadata: untyped, ?components: untyped, ?services: untyped, ?external_references: untyped, ?dependencies: untyped, ?compositions: untyped, ?vulnerabilities: untyped, ?annotations: untyped, ?formulation: untyped, ?declarations: untyped, ?definitions: untyped, ?properties: untyped, ?signature: untyped, ?bom_format: untyped, ?spec_version: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :serial_number, :version, :metadata, :components, :services, :external_references, :dependencies, :compositions, :vulnerabilities, :annotations, :formulation, :declarations, :definitions, :properties, :signature, :bom_format, :spec_version ]
+
+      def members: () -> [ :serial_number, :version, :metadata, :components, :services, :external_references, :dependencies, :compositions, :vulnerabilities, :annotations, :formulation, :declarations, :definitions, :properties, :signature, :bom_format, :spec_version ]
+
+      attr_accessor serial_number: untyped
+
+      attr_accessor version: untyped
+
+      attr_accessor metadata: untyped
+
+      attr_accessor components: untyped
+
+      attr_accessor services: untyped
+
+      attr_accessor external_references: untyped
+
+      attr_accessor dependencies: untyped
+
+      attr_accessor compositions: untyped
+
+      attr_accessor vulnerabilities: untyped
+
+      attr_accessor annotations: untyped
+
+      attr_accessor formulation: untyped
+
+      attr_accessor declarations: untyped
+
+      attr_accessor definitions: untyped
+
+      attr_accessor properties: untyped
+
+      attr_accessor signature: untyped
+
+      attr_accessor bom_format: untyped
+
+      attr_accessor spec_version: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

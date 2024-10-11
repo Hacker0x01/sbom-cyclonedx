@@ -1,15 +1,26 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Graphic
 module SBOM
   module CycloneDX
-    Graphic = SchemaObject.build("Graphic") do
+    class Graphic < Struct.new(
+      "Graphic",
       # Name - The name of the graphic.
-      prop :name, String
-
+      :name,
       # Graphic Image - The graphic (vector or raster). Base64 encoding must be specified for binary images.
-      prop :image, Attachment
+      :image,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      def valid?
+        Validator.valid?(String, name) &&
+          Validator.valid?(Attachment, image)
+      end
     end
   end
 end

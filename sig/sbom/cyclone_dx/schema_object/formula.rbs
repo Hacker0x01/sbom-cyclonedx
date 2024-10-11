@@ -1,0 +1,29 @@
+module SBOM
+  module CycloneDX
+    class Formula < ::Struct[untyped]
+      def self.new: (?bom_ref: untyped, ?components: untyped, ?services: untyped, ?workflows: untyped, ?properties: untyped) -> instance
+
+      def self.[]: (?bom_ref: untyped, ?components: untyped, ?services: untyped, ?workflows: untyped, ?properties: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :bom_ref, :components, :services, :workflows, :properties ]
+
+      def members: () -> [ :bom_ref, :components, :services, :workflows, :properties ]
+
+      attr_accessor bom_ref: untyped
+
+      attr_accessor components: untyped
+
+      attr_accessor services: untyped
+
+      attr_accessor workflows: untyped
+
+      attr_accessor properties: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

@@ -1,86 +1,139 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Model Card - A model card describes the intended uses of a machine learning model and potential limitations, including biases and ethical considerations. Model cards typically contain the training parameters, which datasets were used to train the model, performance metrics, and other relevant data useful for ML transparency. This object SHOULD be specified for any component of type `machine-learning-model` and must not be specified for other component types.
 module SBOM
   module CycloneDX
-    ModelCard = SchemaObject.build("ModelCard") do
+    class ModelCard < Struct.new(
+      "ModelCard",
       # BOM Reference - An optional identifier which can be used to reference the model card elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.
-      prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
-
+      :bom_ref,
       # Model Parameters - Hyper-parameters for construction of the model.
-      prop :model_parameters, ModelParameters
-
+      :model_parameters,
       # Quantitative Analysis - A quantitative analysis of the model
-      prop :quantitative_analysis, QuantitativeAnalysis
-
+      :quantitative_analysis,
       # Considerations - What considerations should be taken into account regarding the model's construction, training, and application?
-      prop :considerations, Consideration
-
+      :considerations,
       # Properties - Provides the ability to document properties in a name-value store. This provides flexibility to include data not officially supported in the standard without having to use additional namespaces or create extensions. Unlike key-value stores, properties support duplicate names, each potentially having different values. Property names of interest to the general public are encouraged to be registered in the [CycloneDX Property Taxonomy](https://github.com/CycloneDX/cyclonedx-property-taxonomy). Formal registration is optional.
-      prop :properties, [Property]
+      :properties,
+      keyword_init: true
+    )
+      include SchemaObject
 
-      Consideration = SchemaObject.build("Consideration") do
+      json_name :bom_ref, "bom-ref"
+
+      def valid?
+        Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
+          Validator.valid?(ModelParameters, model_parameters) &&
+          Validator.valid?(QuantitativeAnalysis, quantitative_analysis) &&
+          Validator.valid?(Consideration, considerations) &&
+          Validator.valid?(Array, properties, items: Property)
+      end
+
+      class Consideration < Struct.new(
+        "Consideration",
         # Users - Who are the intended users of the model?
-        prop :users, [String]
-
+        :users,
         # Use Cases - What are the intended use cases of the model?
-        prop :use_cases, [String]
-
+        :use_cases,
         # Technical Limitations - What are the known technical limitations of the model? E.g. What kind(s) of data should the model be expected not to perform well on? What are the factors that might degrade model performance?
-        prop :technical_limitations, [String]
-
+        :technical_limitations,
         # Performance Tradeoffs - What are the known tradeoffs in accuracy/performance of the model?
-        prop :performance_tradeoffs, [String]
-
+        :performance_tradeoffs,
         # Ethical Considerations - What are the ethical risks involved in the application of this model?
-        prop :ethical_considerations, [Risk]
-
+        :ethical_considerations,
         # Environmental Considerations - What are the various environmental impacts the corresponding machine learning model has exhibited across its lifecycle?
-        prop :environmental_considerations, EnvironmentalConsideration
-
+        :environmental_considerations,
         # Fairness Assessments - How does the model affect groups at risk of being systematically disadvantaged? What are the harms and benefits to the various affected groups?
-        prop :fairness_assessments, [FairnessAssessment]
+        :fairness_assessments,
+        keyword_init: true
+      )
+        include SchemaObject
+
+        def valid?
+          Validator.valid?(Array, users, items: String) &&
+            Validator.valid?(Array, use_cases, items: String) &&
+            Validator.valid?(Array, technical_limitations, items: String) &&
+            Validator.valid?(Array, performance_tradeoffs, items: String) &&
+            Validator.valid?(Array, ethical_considerations, items: Risk) &&
+            Validator.valid?(EnvironmentalConsideration, environmental_considerations) &&
+            Validator.valid?(Array, fairness_assessments, items: FairnessAssessment)
+        end
       end
 
-      ModelParameters = SchemaObject.build("ModelParameters") do
+      class ModelParameters < Struct.new(
+        "ModelParameters",
         # Approach - The overall approach to learning used by the model for problem solving.
-        prop :approach, Approach
-
+        :approach,
         # Task - Directly influences the input and/or output. Examples include classification, regression, clustering, etc.
-        prop :task, String
-
+        :task,
         # Architecture Family - The model architecture family such as transformer network, convolutional neural network, residual neural network, LSTM neural network, etc.
-        prop :architecture_family, String
-
+        :architecture_family,
         # Model Architecture - The specific architecture of the model such as GPT-1, ResNet-50, YOLOv3, etc.
-        prop :model_architecture, String
-
+        :model_architecture,
         # Datasets - The datasets used to train and evaluate the model.
-        prop :datasets, [one_of: [ComponentData, DataReference]]
-
+        :datasets,
         # Inputs - The input format(s) of the model
-        prop :inputs, [InputOutputMLParameter]
-
+        :inputs,
         # Outputs - The output format(s) from the model
-        prop :outputs, [InputOutputMLParameter]
+        :outputs,
+        keyword_init: true
+      )
+        include SchemaObject
 
-        Approach = SchemaObject.build("Approach") do
-          # Learning Type - Learning types describing the learning problem or hybrid learning problem.
-          prop :type, String, enum: Enum::LEARNING_TYPE
+        def valid?
+          Validator.valid?(Approach, approach) &&
+            Validator.valid?(String, task) &&
+            Validator.valid?(String, architecture_family) &&
+            Validator.valid?(String, model_architecture) &&
+            Validator.valid?(Array, datasets, items: [Union, klasses: [ComponentData, DataReference]]) &&
+            Validator.valid?(Array, inputs, items: InputOutputMLParameter) &&
+            Validator.valid?(Array, outputs, items: InputOutputMLParameter)
         end
 
-        DataReference = SchemaObject.build("DataReference") do
+        class Approach < Struct.new(
+          "Approach",
+          # Learning Type - Learning types describing the learning problem or hybrid learning problem.
+          :type,
+          keyword_init: true
+        )
+          include SchemaObject
+
+          def valid?
+            Validator.valid?(String, type, enum: Enum::LEARNING_TYPE)
+          end
+        end
+
+        class DataReference < Struct.new(
+          "DataReference",
           # Reference - References a data component by the components bom-ref attribute
-          prop :ref, String, pattern: Pattern::REF_LINK_OR_BOM_LINK_ELEMENT
+          :ref,
+          keyword_init: true
+        )
+          include SchemaObject
+
+          def valid?
+            Validator.valid?(String, ref, pattern: Pattern::REF_LINK_OR_BOM_LINK_ELEMENT)
+          end
         end
       end
 
-      QuantitativeAnalysis = SchemaObject.build("QuantitativeAnalysis") do
+      class QuantitativeAnalysis < Struct.new(
+        "QuantitativeAnalysis",
         # Performance Metrics - The model performance metrics being reported. Examples may include accuracy, F1 score, precision, top-3 error rates, MSC, etc.
-        prop :performance_metrics, [PerformanceMetric]
+        :performance_metrics,
+        :graphics,
+        keyword_init: true
+      )
+        include SchemaObject
 
-        prop :graphics, GraphicsCollection
+        def valid?
+          Validator.valid?(Array, performance_metrics, items: PerformanceMetric) &&
+            Validator.valid?(GraphicsCollection, graphics)
+        end
       end
     end
   end

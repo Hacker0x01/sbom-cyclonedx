@@ -1,14 +1,28 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Hash
 module SBOM
   module CycloneDX
-    HashData = SchemaObject.build("HashData") do
-      json_alias "hash"
+    class HashData < Struct.new(
+      "HashData",
+      :alg,
+      :content,
+      keyword_init: true
+    )
+      include SchemaObject
 
-      prop :alg, String, enum: Enum::HASH_ALG, required: true
-      prop :content, String, required: true, pattern: Pattern::HASH_VALUE
+      def initialize(alg:, content:)
+        super(alg: alg, content: content)
+      end
+
+      def valid?
+        Validator.valid?(String, alg, enum: Enum::HASH_ALG, required: true) &&
+          Validator.valid?(String, content, pattern: Pattern::HASH_VALUE, required: true)
+      end
     end
   end
 end

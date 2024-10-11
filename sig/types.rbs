@@ -21,8 +21,18 @@ type mabyeArray = Array[fieldValue] | Set[fieldValue]
 type castableSet = Set[fieldValue] | Array[fieldValue]
 type castableSchemaObject = SBOM::CycloneDX::SchemaObject | Hash[Symbol, fieldValue]
 
+type uriString = String | URI::HTTP
+type emailString = String | EmailAddress
+
 type jsonObject = Float | Integer | String | bool | Array[jsonObject] | Hash[String, jsonObject] | nil
 
 module URI
   def self.parse: (String) -> URI
+
+  class HTTP
+  end
+end
+
+class EmailAddress
+  def valid?: () -> bool
 end

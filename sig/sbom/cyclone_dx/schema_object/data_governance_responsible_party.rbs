@@ -1,0 +1,23 @@
+module SBOM
+  module CycloneDX
+    class DataGovernanceResponsibleParty < ::Struct[untyped]
+      def self.new: (?organization: untyped, ?contact: untyped) -> instance
+
+      def self.[]: (?organization: untyped, ?contact: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :organization, :contact ]
+
+      def members: () -> [ :organization, :contact ]
+
+      attr_accessor organization: untyped
+
+      attr_accessor contact: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

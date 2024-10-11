@@ -1,35 +1,48 @@
 # frozen_string_literal: true
-# rbs_inline: enabled
+
+require_relative "../enum"
+require_relative "../pattern"
+require_relative "../schema_object"
 
 # Postal address - An address used to identify a contactable location.
 module SBOM
   module CycloneDX
-    PostalAddress = SchemaObject.build("PostalAddress") do
+    class PostalAddress < Struct.new(
+      "PostalAddress",
       # BOM Reference - An optional identifier which can be used to reference the address elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts with BOM-Links.
-      prop :bom_ref, String, json_alias: "bom-ref", pattern: Pattern::REF_LINK
-
+      :bom_ref,
       # Country - The country name or the two-letter ISO 3166-1 country code.
-      prop :country, String
-
+      :country,
       # Region - The region or state in the country.
       # Example: "Texas"
-      prop :region, String
-
+      :region,
       # Locality - The locality or city within the country.
       # Example: "Austin"
-      prop :locality, String
-
+      :locality,
       # Post Office Box Number - The post office box number.
       # Example: 901
-      prop :post_office_box_number, String
-
+      :post_office_box_number,
       # Postal Code - The postal code.
       # Example: "78758"
-      prop :postal_code, String
-
+      :postal_code,
       # Street Address - The street address.
       # Example: "100 Main Street"
-      prop :street_address, String
+      :street_address,
+      keyword_init: true
+    )
+      include SchemaObject
+
+      json_name :bom_ref, "bom-ref"
+
+      def valid?
+        Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
+          Validator.valid?(String, country) &&
+          Validator.valid?(String, region) &&
+          Validator.valid?(String, locality) &&
+          Validator.valid?(String, post_office_box_number) &&
+          Validator.valid?(String, postal_code) &&
+          Validator.valid?(String, street_address)
+      end
     end
   end
 end

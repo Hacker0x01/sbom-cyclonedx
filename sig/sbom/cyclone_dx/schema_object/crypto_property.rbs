@@ -1,0 +1,31 @@
+module SBOM
+  module CycloneDX
+    class CryptoProperty < ::Struct[untyped]
+      def self.new: (?asset_type: untyped, ?algorithm_properties: untyped, ?certificate_properties: untyped, ?related_crypto_material_properties: untyped, ?protocol_properties: untyped, ?oid: untyped) -> instance
+
+      def self.[]: (?asset_type: untyped, ?algorithm_properties: untyped, ?certificate_properties: untyped, ?related_crypto_material_properties: untyped, ?protocol_properties: untyped, ?oid: untyped) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :asset_type, :algorithm_properties, :certificate_properties, :related_crypto_material_properties, :protocol_properties, :oid ]
+
+      def members: () -> [ :asset_type, :algorithm_properties, :certificate_properties, :related_crypto_material_properties, :protocol_properties, :oid ]
+
+      attr_accessor asset_type: untyped
+
+      attr_accessor algorithm_properties: untyped
+
+      attr_accessor certificate_properties: untyped
+
+      attr_accessor related_crypto_material_properties: untyped
+
+      attr_accessor protocol_properties: untyped
+
+      attr_accessor oid: untyped
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end
