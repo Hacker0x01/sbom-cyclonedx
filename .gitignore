@@ -9,7 +9,7 @@
 /tmp/
 
 # rspec failure tracking
-.rspec_status
+.rspec_state
 
 # MacOS
 .DS_Store

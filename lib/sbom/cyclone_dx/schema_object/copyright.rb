@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../enum"
-require_relative "../pattern"
 require_relative "../schema_object"
 
 # Copyright - A copyright notice informing users of the underlying claims to copyright ownership in a published work.
@@ -16,7 +14,7 @@ module SBOM
       include SchemaObject
 
       def initialize(text:)
-        super
+        super(text: text)
       end
 
       def valid?

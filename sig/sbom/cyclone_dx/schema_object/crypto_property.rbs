@@ -1,9 +1,23 @@
 module SBOM
   module CycloneDX
     class CryptoProperty < ::Struct[untyped]
-      def self.new: (?asset_type: untyped, ?algorithm_properties: untyped, ?certificate_properties: untyped, ?related_crypto_material_properties: untyped, ?protocol_properties: untyped, ?oid: untyped) -> instance
+      def self.new: (
+        asset_type: String,
+        ?algorithm_properties: AlgorithmProperties?,
+        ?certificate_properties: CertificateProperties?,
+        ?related_crypto_material_properties: RelatedCryptoMaterialProperties?,
+        ?protocol_properties: ProtocolProperties?,
+        ?oid: String?
+      ) -> instance
 
-      def self.[]: (?asset_type: untyped, ?algorithm_properties: untyped, ?certificate_properties: untyped, ?related_crypto_material_properties: untyped, ?protocol_properties: untyped, ?oid: untyped) -> instance
+      def self.[]: (
+        asset_type: String,
+        ?algorithm_properties: AlgorithmProperties?,
+        ?certificate_properties: CertificateProperties?,
+        ?related_crypto_material_properties: RelatedCryptoMaterialProperties?,
+        ?protocol_properties: ProtocolProperties?,
+        ?oid: String?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,21 +25,289 @@ module SBOM
 
       def members: () -> [ :asset_type, :algorithm_properties, :certificate_properties, :related_crypto_material_properties, :protocol_properties, :oid ]
 
-      attr_accessor asset_type: untyped
+      def initialize: (
+        asset_type: String,
+        ?algorithm_properties: AlgorithmProperties?,
+        ?certificate_properties: CertificateProperties?,
+        ?related_crypto_material_properties: RelatedCryptoMaterialProperties?,
+        ?protocol_properties: ProtocolProperties?,
+        ?oid: String?
+      ) -> void
 
-      attr_accessor algorithm_properties: untyped
+      attr_accessor asset_type: String
 
-      attr_accessor certificate_properties: untyped
+      attr_accessor algorithm_properties: AlgorithmProperties?
 
-      attr_accessor related_crypto_material_properties: untyped
+      attr_accessor certificate_properties: CertificateProperties?
 
-      attr_accessor protocol_properties: untyped
+      attr_accessor related_crypto_material_properties: RelatedCryptoMaterialProperties?
 
-      attr_accessor oid: untyped
+      attr_accessor protocol_properties: ProtocolProperties?
+
+      attr_accessor oid: String?
 
       include SBOM::CycloneDX::SchemaObject
 
       extend SBOM::CycloneDX::SchemaObject::ClassMethods
+
+      class AlgorithmProperties < ::Struct[untyped]
+        def self.new: (
+          ?primitive: String?,
+          ?parameter_set_identifier: String?,
+          ?curve: String?,
+          ?execution_environment: String?,
+          ?implementation_platform: String?,
+          ?certification_level: Array[String]?,
+          ?mode: String?,
+          ?padding: String?,
+          ?crypto_functions: Array[String]?,
+          ?classical_security_level: Integer?,
+          ?nist_quantum_security_level: Integer?
+        ) -> instance
+
+        def self.[]: (
+          ?primitive: String?,
+          ?parameter_set_identifier: String?,
+          ?curve: String?,
+          ?execution_environment: String?,
+          ?implementation_platform: String?,
+          ?certification_level: Array[String]?,
+          ?mode: String?,
+          ?padding: String?,
+          ?crypto_functions: Array[String]?,
+          ?classical_security_level: Integer?,
+          ?nist_quantum_security_level: Integer?
+        ) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :primitive, :parameter_set_identifier, :curve, :execution_environment, :implementation_platform, :certification_level, :mode, :padding, :crypto_functions, :classical_security_level, :nist_quantum_security_level ]
+
+        def members: () -> [ :primitive, :parameter_set_identifier, :curve, :execution_environment, :implementation_platform, :certification_level, :mode, :padding, :crypto_functions, :classical_security_level, :nist_quantum_security_level ]
+
+        attr_accessor primitive: String?
+
+        attr_accessor parameter_set_identifier: String?
+
+        attr_accessor curve: String?
+
+        attr_accessor execution_environment: String?
+
+        attr_accessor implementation_platform: String?
+
+        attr_accessor certification_level: Array[String]?
+
+        attr_accessor mode: String?
+
+        attr_accessor padding: String?
+
+        attr_accessor crypto_functions: Array[String]?
+
+        attr_accessor classical_security_level: Integer?
+
+        attr_accessor nist_quantum_security_level: Integer?
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+      end
+
+      class CertificateProperties < ::Struct[untyped]
+        def self.new: (
+          ?subject_name: String?,
+          ?issuer_name: String?,
+          ?not_valid_before: DateTime?,
+          ?not_valid_after: DateTime?,
+          ?signature_algorithm_ref: String?,
+          ?subject_public_key_ref: String?,
+          ?certificate_format: String?,
+          ?certificate_extension: String?
+        ) -> instance
+
+        def self.[]: (
+          ?subject_name: String?,
+          ?issuer_name: String?,
+          ?not_valid_before: DateTime?,
+          ?not_valid_after: DateTime?,
+          ?signature_algorithm_ref: String?,
+          ?subject_public_key_ref: String?,
+          ?certificate_format: String?,
+          ?certificate_extension: String?
+        ) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :subject_name, :issuer_name, :not_valid_before, :not_valid_after, :signature_algorithm_ref, :subject_public_key_ref, :certificate_format, :certificate_extension ]
+
+        def members: () -> [ :subject_name, :issuer_name, :not_valid_before, :not_valid_after, :signature_algorithm_ref, :subject_public_key_ref, :certificate_format, :certificate_extension ]
+
+        attr_accessor subject_name: String?
+
+        attr_accessor issuer_name: String?
+
+        attr_accessor not_valid_before: DateTime?
+
+        attr_accessor not_valid_after: DateTime?
+
+        attr_accessor signature_algorithm_ref: String?
+
+        attr_accessor subject_public_key_ref: String?
+
+        attr_accessor certificate_format: String?
+
+        attr_accessor certificate_extension: String?
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+      end
+
+      class ProtocolProperties < ::Struct[untyped]
+        def self.new: (
+          ?type: String?,
+          ?version: String?,
+          ?cipher_suites: Array[CipherSuite]?,
+          ?ikev2_transform_types: IKEv2TransformType?,
+          ?crypto_ref_array: Array[String]?
+        ) -> instance
+
+        def self.[]: (
+          ?type: String?,
+          ?version: String?,
+          ?cipher_suites: Array[CipherSuite]?,
+          ?ikev2_transform_types: IKEv2TransformType?,
+          ?crypto_ref_array: Array[String]?
+        ) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :type, :version, :cipher_suites, :ikev2_transform_types, :crypto_ref_array ]
+
+        def members: () -> [ :type, :version, :cipher_suites, :ikev2_transform_types, :crypto_ref_array ]
+
+        attr_accessor type: String?
+
+        attr_accessor version: String?
+
+        attr_accessor cipher_suites: Array[CipherSuite]?
+
+        attr_accessor ikev2_transform_types: IKEv2TransformType?
+
+        attr_accessor crypto_ref_array: Array[String]?
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+
+
+        class IKEv2TransformType < ::Struct[untyped]
+          def self.new: (
+            ?encr: Array[String]?,
+            ?prf: Array[String]?,
+            ?integ: Array[String]?,
+            ?ke: Array[String]?,
+            ?esn: bool?,
+            ?auth: Array[String]?
+          ) -> instance
+
+          def self.[]: (
+            ?encr: Array[String]?,
+            ?prf: Array[String]?,
+            ?integ: Array[String]?,
+            ?ke: Array[String]?,
+            ?esn: bool?,
+            ?auth: Array[String]?
+          ) -> instance
+
+          def self.keyword_init?: () -> true
+
+          def self.members: () -> [ :encr, :prf, :integ, :ke, :esn, :auth ]
+
+          def members: () -> [ :encr, :prf, :integ, :ke, :esn, :auth ]
+
+          attr_accessor encr: Array[String]?
+
+          attr_accessor prf: Array[String]?
+
+          attr_accessor integ: Array[String]?
+
+          attr_accessor ke: Array[String]?
+
+          attr_accessor esn: bool?
+
+          attr_accessor auth: Array[String]?
+
+          include SBOM::CycloneDX::SchemaObject
+
+          extend SBOM::CycloneDX::SchemaObject::ClassMethods
+        end
+      end
+
+      class RelatedCryptoMaterialProperties < ::Struct[untyped]
+        def self.new: (
+          ?type: String?,
+          ?id: String?,
+          ?state: String?,
+          ?algorithm_ref: String?,
+          ?creation_date: DateTime?,
+          ?activation_date: DateTime?,
+          ?update_date: DateTime?,
+          ?expiration_date: DateTime?,
+          ?value: String?,
+          ?asset_size: Integer?,
+          ?format: String?,
+          ?secured_by: SecuredBy?
+        ) -> instance
+
+        def self.[]: (
+          ?type: String?,
+          ?id: String?,
+          ?state: String?,
+          ?algorithm_ref: String?,
+          ?creation_date: DateTime?,
+          ?activation_date: DateTime?,
+          ?update_date: DateTime?,
+          ?expiration_date: DateTime?,
+          ?value: String?,
+          ?asset_size: Integer?,
+          ?format: String?,
+          ?secured_by: SecuredBy?
+        ) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :type, :id, :state, :algorithm_ref, :creation_date, :activation_date, :update_date, :expiration_date, :value, :asset_size, :format, :secured_by ]
+
+        def members: () -> [ :type, :id, :state, :algorithm_ref, :creation_date, :activation_date, :update_date, :expiration_date, :value, :asset_size, :format, :secured_by ]
+
+        attr_accessor type: String?
+
+        attr_accessor id: String?
+
+        attr_accessor state: String?
+
+        attr_accessor algorithm_ref: String?
+
+        attr_accessor creation_date: DateTime?
+
+        attr_accessor activation_date: DateTime?
+
+        attr_accessor update_date: DateTime?
+
+        attr_accessor expiration_date: DateTime?
+
+        attr_accessor value: String?
+
+        attr_accessor asset_size: Integer?
+
+        attr_accessor format: String?
+
+        attr_accessor secured_by: SecuredBy?
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+      end
     end
   end
 end

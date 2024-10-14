@@ -1,9 +1,23 @@
 module SBOM
   module CycloneDX
     class Rating < ::Struct[untyped]
-      def self.new: (?source: untyped, ?score: untyped, ?severity: untyped, ?score_method: untyped, ?vector: untyped, ?justification: untyped) -> instance
+      def self.new: (
+        ?source: VulnerabilitySource?,
+        ?score: Float?,
+        ?severity: String?,
+        ?score_method: String?,
+        ?vector: String?,
+        ?justification: String?
+      ) -> instance
 
-      def self.[]: (?source: untyped, ?score: untyped, ?severity: untyped, ?score_method: untyped, ?vector: untyped, ?justification: untyped) -> instance
+      def self.[]: (
+        ?source: VulnerabilitySource?,
+        ?score: Float?,
+        ?severity: String?,
+        ?score_method: String?,
+        ?vector: String?,
+        ?justification: String?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,17 +25,17 @@ module SBOM
 
       def members: () -> [ :source, :score, :severity, :score_method, :vector, :justification ]
 
-      attr_accessor source: untyped
+      attr_accessor source: VulnerabilitySource?
 
-      attr_accessor score: untyped
+      attr_accessor score: Float?
 
-      attr_accessor severity: untyped
+      attr_accessor severity: String?
 
-      attr_accessor score_method: untyped
+      attr_accessor score_method: String?
 
-      attr_accessor vector: untyped
+      attr_accessor vector: String?
 
-      attr_accessor justification: untyped
+      attr_accessor justification: String?
 
       include SBOM::CycloneDX::SchemaObject
 

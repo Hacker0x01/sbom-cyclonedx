@@ -46,9 +46,17 @@ module SBOM
       extend SBOM::CycloneDX::SchemaObject::ClassMethods
 
       class Method < ::Struct[untyped]
-        def self.new: (?technique: String, ?confidence: Float, ?value: String?) -> instance
+        def self.new: (
+          ?technique: String,
+          ?confidence: Float,
+          ?value: String?
+        ) -> instance
 
-        def self.[]: (?technique: String, ?confidence: Float, ?value: String?) -> instance
+        def self.[]: (
+          ?technique: String,
+          ?confidence: Float,
+          ?value: String?
+        ) -> instance
 
         def self.keyword_init?: () -> true
 

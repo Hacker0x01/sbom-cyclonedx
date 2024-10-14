@@ -1,9 +1,15 @@
 module SBOM
   module CycloneDX
     class Tools < ::Struct[untyped]
-      def self.new: (?components: untyped, ?services: untyped) -> instance
+      def self.new: (
+        ?components: Array[Component]?,
+        ?services: Array[Service]?
+      ) -> instance
 
-      def self.[]: (?components: untyped, ?services: untyped) -> instance
+      def self.[]: (
+        ?components: Array[Component]?,
+        ?services: Array[Service]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,9 +17,9 @@ module SBOM
 
       def members: () -> [ :components, :services ]
 
-      attr_accessor components: untyped
+      attr_accessor components: Array[Component]?
 
-      attr_accessor services: untyped
+      attr_accessor services: Array[Service]?
 
       include SBOM::CycloneDX::SchemaObject
 

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative "../enum"
-require_relative "../pattern"
 require_relative "../schema_object"
 
 # Volume - An identifiable, logical unit of data storage tied to a physical device.

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../enum"
-require_relative "../pattern"
 require_relative "../schema_object"
 
 # SWID Tag - Specifies metadata and content for ISO-IEC 19770-2 Software Identification (SWID) Tags.

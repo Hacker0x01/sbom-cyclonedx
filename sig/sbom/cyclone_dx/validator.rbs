@@ -7,7 +7,7 @@ module SBOM
                         bool |
                         DateTime |
                         URI |
-                        EmailAddress |
+                        EmailAddress::Address |
                         Array[fieldValue] |
                         SBOM::CycloneDX::SchemaObject |
                         nil
@@ -17,7 +17,7 @@ module SBOM
         singleton(String) |
         singleton(DateTime) |
         singleton(URI) |
-        singleton(EmailAddress) |
+        singleton(EmailAddress::Address) |
         singleton(Array) |
         singleton(SBOM::CycloneDX::Boolean) |
         singleton(SBOM::CycloneDX::Union) |

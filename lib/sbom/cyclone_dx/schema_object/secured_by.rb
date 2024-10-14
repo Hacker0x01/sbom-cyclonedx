@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
 
@@ -11,10 +10,8 @@ module SBOM
       "SecuredBy",
       # Mechanism - Specifies the mechanism by which the cryptographic asset is secured by.
       # Examples: "HSM", "TPM", "SGX", "Software", "None"
-      # prop :mechanism, String
       :mechanism,
       # Algorithm Reference - The bom-ref to the algorithm.
-      # prop :algorithm_ref, String, pattern: Pattern::REF_LINK
       :algorithm_ref,
       keyword_init: true
     )

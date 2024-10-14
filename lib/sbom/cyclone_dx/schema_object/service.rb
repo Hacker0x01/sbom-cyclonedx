@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
 
@@ -96,7 +95,7 @@ module SBOM
           ) &&
           Validator.valid?(Array, external_references, items: ExternalReference) &&
           Validator.valid?(Array, services, unique: true, items: Service) &&
-          Validator.valid?(ReleaseNote, release_notes) &&
+          Validator.valid?(ReleaseNotes, release_notes) &&
           Validator.valid?(Array, properties, items: Property) &&
           Validator.valid?(Array, tags, items: String) &&
           Signature.valid?(signature)

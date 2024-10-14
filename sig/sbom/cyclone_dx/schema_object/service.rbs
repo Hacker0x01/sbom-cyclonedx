@@ -1,9 +1,47 @@
 module SBOM
   module CycloneDX
     class Service < ::Struct[untyped]
-      def self.new: (?bom_ref: untyped, ?provider: untyped, ?group: untyped, ?name: untyped, ?version: untyped, ?description: untyped, ?endpoints: untyped, ?authenticated: untyped, ?x_trust_boundary: untyped, ?trust_zone: untyped, ?data: untyped, ?licenses: untyped, ?external_references: untyped, ?services: untyped, ?release_notes: untyped, ?properties: untyped, ?tags: untyped, ?signature: untyped) -> instance
+      def self.new: (
+        name: String,
+        ?bom_ref: String?,
+        ?provider: OrganizationalEntity?,
+        ?group: String?,
+        ?version: String?,
+        ?description: String?,
+        ?endpoints: Array[uriString]?,
+        ?authenticated: bool?,
+        ?x_trust_boundary: bool?,
+        ?trust_zone: String?,
+        ?data: Array[ServiceData]?,
+        ?licenses: Array[licenseChoice]?,
+        ?external_references: Array[ExternalReference]?,
+        ?services: Array[Service]?,
+        ?release_notes: ReleaseNotes?,
+        ?properties: Array[Property]?,
+        ?tags: Array[String]?,
+        ?signature: signature?
+      ) -> instance
 
-      def self.[]: (?bom_ref: untyped, ?provider: untyped, ?group: untyped, ?name: untyped, ?version: untyped, ?description: untyped, ?endpoints: untyped, ?authenticated: untyped, ?x_trust_boundary: untyped, ?trust_zone: untyped, ?data: untyped, ?licenses: untyped, ?external_references: untyped, ?services: untyped, ?release_notes: untyped, ?properties: untyped, ?tags: untyped, ?signature: untyped) -> instance
+      def self.[]: (
+        name: String,
+        ?bom_ref: String?,
+        ?provider: OrganizationalEntity?,
+        ?group: String?,
+        ?version: String?,
+        ?description: String?,
+        ?endpoints: Array[uriString]?,
+        ?authenticated: bool?,
+        ?x_trust_boundary: bool?,
+        ?trust_zone: String?,
+        ?data: Array[ServiceData]?,
+        ?licenses: Array[licenseChoice]?,
+        ?external_references: Array[ExternalReference]?,
+        ?services: Array[Service]?,
+        ?release_notes: ReleaseNotes?,
+        ?properties: Array[Property]?,
+        ?tags: Array[String]?,
+        ?signature: signature?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,41 +49,62 @@ module SBOM
 
       def members: () -> [ :bom_ref, :provider, :group, :name, :version, :description, :endpoints, :authenticated, :x_trust_boundary, :trust_zone, :data, :licenses, :external_references, :services, :release_notes, :properties, :tags, :signature ]
 
-      attr_accessor bom_ref: untyped
+      def initialize: (
+        name: String,
+        ?bom_ref: String?,
+        ?provider: OrganizationalEntity?,
+        ?group: String?,
+        ?version: String?,
+        ?description: String?,
+        ?endpoints: Array[uriString]?,
+        ?authenticated: bool?,
+        ?x_trust_boundary: bool?,
+        ?trust_zone: String?,
+        ?data: Array[ServiceData]?,
+        ?licenses: Array[licenseChoice]?,
+        ?external_references: Array[ExternalReference]?,
+        ?services: Array[Service]?,
+        ?release_notes: ReleaseNotes?,
+        ?properties: Array[Property]?,
+        ?tags: Array[String]?,
+        ?signature: signature?
+      ) -> void
 
-      attr_accessor provider: untyped
+      attr_accessor bom_ref: String?
 
-      attr_accessor group: untyped
+      attr_accessor provider: OrganizationalEntity?
 
-      attr_accessor name: untyped
+      attr_accessor group: String?
 
-      attr_accessor version: untyped
+      attr_accessor name: String
 
-      attr_accessor description: untyped
+      attr_accessor version: String?
 
-      attr_accessor endpoints: untyped
+      attr_accessor description: String?
 
-      attr_accessor authenticated: untyped
+      attr_accessor endpoints: Array[uriString]?
 
-      attr_accessor x_trust_boundary: untyped
+      attr_accessor authenticated: bool?
 
-      attr_accessor trust_zone: untyped
+      attr_accessor x_trust_boundary: bool?
 
-      attr_accessor data: untyped
+      attr_accessor trust_zone: String?
 
-      attr_accessor licenses: untyped
+      attr_accessor data: Array[ServiceData]?
 
-      attr_accessor external_references: untyped
+      attr_accessor licenses: Array[licenseChoice]?
 
-      attr_accessor services: untyped
+      attr_accessor external_references: Array[ExternalReference]?
 
-      attr_accessor release_notes: untyped
+      attr_accessor services: Array[Service]?
 
-      attr_accessor properties: untyped
+      attr_accessor release_notes: ReleaseNotes?
 
-      attr_accessor tags: untyped
+      attr_accessor properties: Array[Property]?
 
-      attr_accessor signature: untyped
+      attr_accessor tags: Array[String]?
+
+      attr_accessor signature: signature?
 
       include SBOM::CycloneDX::SchemaObject
 

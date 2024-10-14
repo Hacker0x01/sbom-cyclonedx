@@ -1,9 +1,17 @@
 module SBOM
   module CycloneDX
     class Dependency < ::Struct[untyped]
-      def self.new: (?ref: untyped, ?depends_on: untyped, ?provides: untyped) -> instance
+      def self.new: (
+        ref: String,
+        ?depends_on: Array[String]?,
+        ?provides: Array[String]?
+      ) -> instance
 
-      def self.[]: (?ref: untyped, ?depends_on: untyped, ?provides: untyped) -> instance
+      def self.[]: (
+        ref: String,
+        ?depends_on: Array[String]?,
+        ?provides: Array[String]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,11 +19,17 @@ module SBOM
 
       def members: () -> [ :ref, :depends_on, :provides ]
 
-      attr_accessor ref: untyped
+      def initialize: (
+        ref: String,
+        ?depends_on: Array[String]?,
+        ?provides: Array[String]?
+      ) -> void
 
-      attr_accessor depends_on: untyped
+      attr_accessor ref: String
 
-      attr_accessor provides: untyped
+      attr_accessor depends_on: Array[String]?
+
+      attr_accessor provides: Array[String]?
 
       include SBOM::CycloneDX::SchemaObject
 

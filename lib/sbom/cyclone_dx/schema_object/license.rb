@@ -81,7 +81,7 @@ module SBOM
       )
         include SchemaObject
 
-        def valid?
+        def valid? # rubocop:disable Metrics/CyclomaticComplexity
           Validator.valid?(Array, alt_ids, items: String) &&
             Validator.valid?(Licensor, licensor) &&
             Validator.valid?(Licensee, licensee) &&

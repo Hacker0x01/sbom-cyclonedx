@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../enum"
-require_relative "../pattern"
 require_relative "../schema_object"
 
 # Definitions - A collection of reusable objects that are defined and may be used elsewhere in the BOM.

@@ -1,9 +1,25 @@
 module SBOM
   module CycloneDX
     class SWID < ::Struct[untyped]
-      def self.new: (?tag_id: untyped, ?name: untyped, ?version: untyped, ?tag_version: untyped, ?patch: untyped, ?text: untyped, ?url: untyped) -> instance
+      def self.new: (
+        tag_id: String,
+        name: String,
+        ?version: String?,
+        ?tag_version: Integer?,
+        ?patch: bool?,
+        ?text: Attachment?,
+        ?url: uriString?
+      ) -> instance
 
-      def self.[]: (?tag_id: untyped, ?name: untyped, ?version: untyped, ?tag_version: untyped, ?patch: untyped, ?text: untyped, ?url: untyped) -> instance
+      def self.[]: (
+        tag_id: String,
+        name: String,
+        ?version: String?,
+        ?tag_version: Integer?,
+        ?patch: bool?,
+        ?text: Attachment?,
+        ?url: uriString?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,19 +27,29 @@ module SBOM
 
       def members: () -> [ :tag_id, :name, :version, :tag_version, :patch, :text, :url ]
 
-      attr_accessor tag_id: untyped
+      def initialize: (
+        tag_id: String,
+        name: String,
+        ?version: String?,
+        ?tag_version: Integer?,
+        ?patch: bool?,
+        ?text: Attachment?,
+        ?url: uriString?
+      ) -> void
 
-      attr_accessor name: untyped
+      attr_accessor tag_id: String
 
-      attr_accessor version: untyped
+      attr_accessor name: String
 
-      attr_accessor tag_version: untyped
+      attr_accessor version: String?
 
-      attr_accessor patch: untyped
+      attr_accessor tag_version: Integer?
 
-      attr_accessor text: untyped
+      attr_accessor patch: bool?
 
-      attr_accessor url: untyped
+      attr_accessor text: Attachment?
+
+      attr_accessor url: uriString?
 
       include SBOM::CycloneDX::SchemaObject
 

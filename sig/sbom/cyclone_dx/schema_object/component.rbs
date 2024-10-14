@@ -27,7 +27,7 @@ module SBOM
         ?external_references: Array[ExternalReference]?,
         ?components: Array[Component]?,
         ?evidence: ComponentEvidence?,
-        ?release_notes: ReleaseNote?,
+        ?release_notes: ReleaseNotes?,
         ?model_card: ModelCard?,
         ?data: Array[ComponentData]?,
         ?crypto_properties: CryptoProperty?,
@@ -62,7 +62,7 @@ module SBOM
         ?external_references: Array[ExternalReference]?,
         ?components: Array[Component]?,
         ?evidence: ComponentEvidence?,
-        ?release_notes: ReleaseNote?,
+        ?release_notes: ReleaseNotes?,
         ?model_card: ModelCard?,
         ?data: Array[ComponentData]?,
         ?crypto_properties: CryptoProperty?,
@@ -103,7 +103,7 @@ module SBOM
         ?external_references: Array[ExternalReference]?,
         ?components: Array[Component]?,
         ?evidence: ComponentEvidence?,
-        ?release_notes: ReleaseNote?,
+        ?release_notes: ReleaseNotes?,
         ?model_card: ModelCard?,
         ?data: Array[ComponentData]?,
         ?crypto_properties: CryptoProperty?,
@@ -162,7 +162,7 @@ module SBOM
 
       attr_accessor evidence: ComponentEvidence?
 
-      attr_accessor release_notes: ReleaseNote?
+      attr_accessor release_notes: ReleaseNotes?
 
       attr_accessor model_card: ModelCard?
 

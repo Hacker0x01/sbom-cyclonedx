@@ -1,9 +1,15 @@
 module SBOM
   module CycloneDX
     class Diff < ::Struct[untyped]
-      def self.new: (?text: untyped, ?url: untyped) -> instance
+      def self.new: (
+        ?text: Attachment?,
+        ?url: uriString?
+      ) -> instance
 
-      def self.[]: (?text: untyped, ?url: untyped) -> instance
+      def self.[]: (
+        ?text: Attachment?,
+        ?url: uriString?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,9 +17,9 @@ module SBOM
 
       def members: () -> [ :text, :url ]
 
-      attr_accessor text: untyped
+      attr_accessor text: Attachment?
 
-      attr_accessor url: untyped
+      attr_accessor url: uriString?
 
       include SBOM::CycloneDX::SchemaObject
 

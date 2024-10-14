@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
 
@@ -156,6 +155,22 @@ module SBOM
               Validator.valid?(Confidence, confidence)
           end
 
+          class Confidence < Struct.new(
+            "Confidence",
+            # Score - The confidence of the claim between and inclusive of 0 and 1, where 1 is 100% confidence.
+            :score,
+            # Rationale - The rationale for the confidence score.
+            :rationale,
+            keyword_init: true
+          )
+            include SchemaObject
+
+            def valid?
+              Validator.valid?(Float, score, minimum: 0, maximum: 1) &&
+                Validator.valid?(String, rationale)
+            end
+          end
+
           class Conformance < Struct.new(
             "Conformance",
             # Score - The conformance of the claim between and inclusive of 0 and 1, where 1 is 100% conformance.
@@ -176,22 +191,6 @@ module SBOM
                   mitigation_strategies,
                   items: [String, pattern: Pattern::REF_LINK]
                 )
-            end
-          end
-
-          class Confidence < Struct.new(
-            "Confidence",
-            # Score - The confidence of the claim between and inclusive of 0 and 1, where 1 is 100% confidence.
-            :score,
-            # Rationale - The rationale for the confidence score.
-            :rationale,
-            keyword_init: true
-          )
-            include SchemaObject
-
-            def valid?
-              Validator.valid?(Float, score, minimum: 0, maximum: 1) &&
-                Validator.valid?(String, rationale)
             end
           end
         end
@@ -223,7 +222,7 @@ module SBOM
 
         json_name :bom_ref, "bom-ref"
 
-        def valid?
+        def valid? # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
           Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
             Validator.valid?(String, target, pattern: Pattern::REF_LINK) &&
             Validator.valid?(String, predicate) &&
@@ -262,7 +261,7 @@ module SBOM
 
         json_name :bom_ref, "bom-ref"
 
-        def valid?
+        def valid? # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
           Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
             Validator.valid?(String, property_name) &&
             Validator.valid?(String, description) &&

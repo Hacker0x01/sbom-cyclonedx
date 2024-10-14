@@ -4,25 +4,13 @@ type fieldValue = String |
                   bool |
                   DateTime |
                   URI |
-                  EmailAddress |
+                  EmailAddress::Address |
                   Array[fieldValue] |
-                  Set[fieldValue] |
                   SBOM::CycloneDX::SchemaObject::ClassMethods |
                   nil
-type castableFieldValue = jsonObject | fieldValue
-
-type castableInteger = Integer | String
-type castableFloat = Float | String
-type mabyeBool = bool | String
-type castableDateTime = DateTime | String
-type castableURI = URI | String
-type castableEmailAddress = EmailAddress | String
-type mabyeArray = Array[fieldValue] | Set[fieldValue]
-type castableSet = Set[fieldValue] | Array[fieldValue]
-type castableSchemaObject = SBOM::CycloneDX::SchemaObject | Hash[Symbol, fieldValue]
 
 type uriString = String | URI::HTTP
-type emailString = String | EmailAddress
+type emailString = String | EmailAddress::Address
 
 type jsonObject = Float | Integer | String | bool | Array[jsonObject] | Hash[String, jsonObject] | nil
 
@@ -31,8 +19,4 @@ module URI
 
   class HTTP
   end
-end
-
-class EmailAddress
-  def valid?: () -> bool
 end

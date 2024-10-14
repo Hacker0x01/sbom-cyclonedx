@@ -1,9 +1,9 @@
 module SBOM
   module CycloneDX
     class Copyright < ::Struct[untyped]
-      def self.new: (?text: untyped) -> instance
+      def self.new: (text: String) -> instance
 
-      def self.[]: (?text: untyped) -> instance
+      def self.[]: (text: String) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,7 +11,9 @@ module SBOM
 
       def members: () -> [ :text ]
 
-      attr_accessor text: untyped
+      def initialize: (text: String) -> void
+
+      attr_accessor text: String
 
       include SBOM::CycloneDX::SchemaObject
 

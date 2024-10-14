@@ -15,6 +15,9 @@ gem "typeprof", "~> 0.21", ">= 0.21.11"
 
 gem "factory_bot", "~> 6.4", ">= 6.4.6"
 gem "rspec", "~> 3.13", ">= 3.13.0"
+gem "rspec-core", "~> 3.13", ">= 3.13.0"
+gem "rspec-expectations", "~> 3.13", ">= 3.13.0"
+gem "rspec-mocks", "~> 3.13", ">= 3.13.0"
 
 gem "rubocop", "~> 1.65", ">= 1.65.1"
 gem "rubocop-factory_bot", "~> 2.26", ">= 2.26.1"

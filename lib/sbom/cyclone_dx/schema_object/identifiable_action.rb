@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../enum"
-require_relative "../pattern"
 require_relative "../schema_object"
 
 # Identifiable Action - Specifies an individual commit
@@ -22,7 +20,7 @@ module SBOM
       def valid?
         Validator.valid?(DateTime, timestamp) &&
           Validator.valid?(String, name) &&
-          Validator.valid?(EmailAddress, email)
+          Validator.valid?(EmailAddress::Address, email)
       end
     end
   end

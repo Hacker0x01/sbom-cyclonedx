@@ -1,9 +1,23 @@
 module SBOM
   module CycloneDX
     class EnergyConsumption < ::Struct[untyped]
-      def self.new: (?activity: untyped, ?energy_providers: untyped, ?activity_energy_cost: untyped, ?co2_cost_equivalent: untyped, ?co2_cost_offset: untyped, ?properties: untyped) -> instance
+      def self.new: (
+        activity: String,
+        energy_providers: Array[EnergyProvider],
+        activity_energy_cost: EnergyMeasure,
+        ?co2_cost_equivalent: CO2Measure?,
+        ?co2_cost_offset: CO2Measure?,
+        ?properties: Array[Property]?
+      ) -> instance
 
-      def self.[]: (?activity: untyped, ?energy_providers: untyped, ?activity_energy_cost: untyped, ?co2_cost_equivalent: untyped, ?co2_cost_offset: untyped, ?properties: untyped) -> instance
+      def self.[]: (
+        activity: String,
+        energy_providers: Array[EnergyProvider],
+        activity_energy_cost: EnergyMeasure,
+        ?co2_cost_equivalent: CO2Measure?,
+        ?co2_cost_offset: CO2Measure?,
+        ?properties: Array[Property]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,17 +25,26 @@ module SBOM
 
       def members: () -> [ :activity, :energy_providers, :activity_energy_cost, :co2_cost_equivalent, :co2_cost_offset, :properties ]
 
-      attr_accessor activity: untyped
+      def initialize: (
+        activity: String,
+        energy_providers: Array[EnergyProvider],
+        activity_energy_cost: EnergyMeasure,
+        ?co2_cost_equivalent: CO2Measure?,
+        ?co2_cost_offset: CO2Measure?,
+        ?properties: Array[Property]?
+      ) -> void
 
-      attr_accessor energy_providers: untyped
+      attr_accessor activity: String
 
-      attr_accessor activity_energy_cost: untyped
+      attr_accessor energy_providers: Array[EnergyProvider]
 
-      attr_accessor co2_cost_equivalent: untyped
+      attr_accessor activity_energy_cost: EnergyMeasure
 
-      attr_accessor co2_cost_offset: untyped
+      attr_accessor co2_cost_equivalent: CO2Measure?
 
-      attr_accessor properties: untyped
+      attr_accessor co2_cost_offset: CO2Measure?
+
+      attr_accessor properties: Array[Property]?
 
       include SBOM::CycloneDX::SchemaObject
 

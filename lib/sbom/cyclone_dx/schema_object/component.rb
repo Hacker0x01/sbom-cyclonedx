@@ -158,7 +158,7 @@ module SBOM
           Validator.valid?(Array, external_references, items: ExternalReference) &&
           Validator.valid?(Array, components, unique: true, items: Component) &&
           Validator.valid?(ComponentEvidence, evidence) &&
-          Validator.valid?(ReleaseNote, release_notes) &&
+          Validator.valid?(ReleaseNotes, release_notes) &&
           Validator.valid?(ModelCard, model_card) &&
           Validator.valid?(Array, data, items: ComponentData) &&
           Validator.valid?(CryptoProperty, crypto_properties) &&

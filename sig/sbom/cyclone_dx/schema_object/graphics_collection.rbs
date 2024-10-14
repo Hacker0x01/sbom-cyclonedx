@@ -1,9 +1,15 @@
 module SBOM
   module CycloneDX
     class GraphicsCollection < ::Struct[untyped]
-      def self.new: (?description: untyped, ?collection: untyped) -> instance
+      def self.new: (
+        ?description: String?,
+        ?collection: Array[Graphic]?
+      ) -> instance
 
-      def self.[]: (?description: untyped, ?collection: untyped) -> instance
+      def self.[]: (
+        ?description: String?,
+        ?collection: Array[Graphic]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,9 +17,9 @@ module SBOM
 
       def members: () -> [ :description, :collection ]
 
-      attr_accessor description: untyped
+      attr_accessor description: String?
 
-      attr_accessor collection: untyped
+      attr_accessor collection: Array[Graphic]?
 
       include SBOM::CycloneDX::SchemaObject
 

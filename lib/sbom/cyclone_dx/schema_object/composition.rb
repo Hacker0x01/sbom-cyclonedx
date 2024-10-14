@@ -29,7 +29,7 @@ module SBOM
 
       json_name :bom_ref, "bom-ref"
 
-      def initialize(
+      def initialize( # rubocop:disable Metrics/ParameterLists
         aggregate: "not_specified",
         bom_ref: nil,
         assemblies: nil,

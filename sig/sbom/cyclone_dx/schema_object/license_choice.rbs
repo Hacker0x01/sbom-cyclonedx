@@ -6,13 +6,59 @@ module SBOM
       def self.valid?: (untyped, **untyped) -> bool
 
       class LicenseExpression < ::Struct[untyped]
-        include SchemaObject
-        extend SchemaObject::ClassMethods
+        def self.new: (
+          expression: String,
+          ?acknowledgement: String?,
+          ?bom_ref: String?
+        ) -> instance
+
+        def self.[]: (
+          expression: String,
+          ?acknowledgement: String?,
+          ?bom_ref: String?
+        ) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :expression, :acknowledgement, :bom_ref ]
+
+        def members: () -> [ :expression, :acknowledgement, :bom_ref ]
+
+        def initialize: (
+          expression: String,
+          ?acknowledgement: String?,
+          ?bom_ref: String?
+        ) -> void
+
+        attr_accessor expression: String
+
+        attr_accessor acknowledgement: String?
+
+        attr_accessor bom_ref: String?
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
       end
 
       class WrappedLicense < ::Struct[untyped]
-        include SchemaObject
-        extend SchemaObject::ClassMethods
+        def self.new: (license: License) -> instance
+
+        def self.[]: (license: License) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :license ]
+
+        def members: () -> [ :license ]
+
+        def initialize: (license: License) -> void
+
+        attr_accessor license: License
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
       end
     end
   end

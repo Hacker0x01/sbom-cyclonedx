@@ -1,9 +1,45 @@
 module SBOM
   module CycloneDX
     class License < ::Struct[untyped]
-      def self.new: (?bom_ref: untyped, ?id: untyped, ?name: untyped, ?acknowledgement: untyped, ?text: untyped, ?url: untyped, ?licensing: untyped, ?properties: untyped) -> instance
+      def self.new: (
+        id: String,
+        ?name: String?,
+        ?bom_ref: String?,
+        ?acknowledgement: String?,
+        ?text: Attachment?,
+        ?url: uriString?,
+        ?licensing: Licensing?,
+        ?properties: Array[Property]?
+      ) -> instance | (
+        name: String,
+        ?id: String?,
+        ?bom_ref: String?,
+        ?acknowledgement: String?,
+        ?text: Attachment?,
+        ?url: uriString?,
+        ?licensing: Licensing?,
+        ?properties: Array[Property]?
+      ) -> instance
 
-      def self.[]: (?bom_ref: untyped, ?id: untyped, ?name: untyped, ?acknowledgement: untyped, ?text: untyped, ?url: untyped, ?licensing: untyped, ?properties: untyped) -> instance
+      def self.[]: (
+        id: String,
+        ?name: String?,
+        ?bom_ref: String?,
+        ?acknowledgement: String?,
+        ?text: Attachment?,
+        ?url: uriString?,
+        ?licensing: Licensing?,
+        ?properties: Array[Property]?
+      ) -> instance | (
+        name: String,
+        ?id: String?,
+        ?bom_ref: String?,
+        ?acknowledgement: String?,
+        ?text: Attachment?,
+        ?url: uriString?,
+        ?licensing: Licensing?,
+        ?properties: Array[Property]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,25 +47,197 @@ module SBOM
 
       def members: () -> [ :bom_ref, :id, :name, :acknowledgement, :text, :url, :licensing, :properties ]
 
-      attr_accessor bom_ref: untyped
+      def initialize: (
+        id: String,
+        ?name: String?,
+        ?bom_ref: String?,
+        ?acknowledgement: String?,
+        ?text: Attachment?,
+        ?url: uriString?,
+        ?licensing: Licensing?,
+        ?properties: Array[Property]?
+      ) -> void | (
+        name: String,
+        ?id: String?,
+        ?bom_ref: String?,
+        ?acknowledgement: String?,
+        ?text: Attachment?,
+        ?url: uriString?,
+        ?licensing: Licensing?,
+        ?properties: Array[Property]?
+      ) -> void
 
-      attr_accessor id: untyped
+      attr_accessor bom_ref: String?
 
-      attr_accessor name: untyped
+      attr_accessor id: String?
 
-      attr_accessor acknowledgement: untyped
+      attr_accessor name: String?
 
-      attr_accessor text: untyped
+      attr_accessor acknowledgement: String?
 
-      attr_accessor url: untyped
+      attr_accessor text: Attachment?
 
-      attr_accessor licensing: untyped
+      attr_accessor url: uriString?
 
-      attr_accessor properties: untyped
+      attr_accessor licensing: Licensing?
+
+      attr_accessor properties: Array[Property]?
 
       include SBOM::CycloneDX::SchemaObject
 
       extend SBOM::CycloneDX::SchemaObject::ClassMethods
+
+      class Licensing < ::Struct[untyped]
+        def self.new: (
+          ?alt_ids: Array[String]?,
+          ?licensor: Licensor?,
+          ?licensee: Licensee?,
+          ?purchaser: Purchaser?,
+          ?purchase_order: String?,
+          ?license_types: Array[String]?,
+          ?last_renewal: DateTime?,
+          ?expiration: DateTime?
+        ) -> instance
+
+        def self.[]: (
+          ?alt_ids: Array[String]?,
+          ?licensor: Licensor?,
+          ?licensee: Licensee?,
+          ?purchaser: Purchaser?,
+          ?purchase_order: String?,
+          ?license_types: Array[String]?,
+          ?last_renewal: DateTime?,
+          ?expiration: DateTime?
+        ) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :alt_ids, :licensor, :licensee, :purchaser, :purchase_order, :license_types, :last_renewal, :expiration ]
+
+        def members: () -> [ :alt_ids, :licensor, :licensee, :purchaser, :purchase_order, :license_types, :last_renewal, :expiration ]
+
+        attr_accessor alt_ids: Array[String]?
+
+        attr_accessor licensor: Licensor?
+
+        attr_accessor licensee: Licensee?
+
+        attr_accessor purchaser: Purchaser?
+
+        attr_accessor purchase_order: String?
+
+        attr_accessor license_types: Array[String]?
+
+        attr_accessor last_renewal: DateTime?
+
+        attr_accessor expiration: DateTime?
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+
+        class Licensee < ::Struct[untyped]
+          def self.new: (
+            organization: OrganizationalEntity,
+            ?individual: OrganizationalContact?
+          ) -> instance | (
+            individual: OrganizationalContact,
+            ?organization: OrganizationalEntity?,
+          ) -> instance
+
+          def self.[]: (?organization: untyped, ?individual: untyped) -> instance
+
+          def self.keyword_init?: () -> true
+
+          def self.members: () -> [ :organization, :individual ]
+
+          def members: () -> [ :organization, :individual ]
+
+          def initialize: (
+            organization: OrganizationalEntity,
+            ?individual: OrganizationalContact?
+          ) -> void | (
+            individual: OrganizationalContact,
+            ?organization: OrganizationalEntity?,
+          ) -> void
+
+          attr_accessor organization: OrganizationalEntity?
+
+          attr_accessor individual: OrganizationalContact?
+
+          include SBOM::CycloneDX::SchemaObject
+
+          extend SBOM::CycloneDX::SchemaObject::ClassMethods
+        end
+
+        class Licensor < ::Struct[untyped]
+          def self.new: (
+            organization: OrganizationalEntity,
+            ?individual: OrganizationalContact?
+          ) -> instance | (
+            individual: OrganizationalContact,
+            ?organization: OrganizationalEntity?,
+          ) -> instance
+
+          def self.[]: (?organization: untyped, ?individual: untyped) -> instance
+
+          def self.keyword_init?: () -> true
+
+          def self.members: () -> [ :organization, :individual ]
+
+          def members: () -> [ :organization, :individual ]
+
+          def initialize: (
+            organization: OrganizationalEntity,
+            ?individual: OrganizationalContact?
+          ) -> void | (
+            individual: OrganizationalContact,
+            ?organization: OrganizationalEntity?,
+          ) -> void
+
+          attr_accessor organization: OrganizationalEntity?
+
+          attr_accessor individual: OrganizationalContact?
+
+          include SBOM::CycloneDX::SchemaObject
+
+          extend SBOM::CycloneDX::SchemaObject::ClassMethods
+        end
+
+        class Purchaser < ::Struct[untyped]
+          def self.new: (
+            organization: OrganizationalEntity,
+            ?individual: OrganizationalContact?
+          ) -> instance | (
+            individual: OrganizationalContact,
+            ?organization: OrganizationalEntity?,
+          ) -> instance
+
+          def self.[]: (?organization: untyped, ?individual: untyped) -> instance
+
+          def self.keyword_init?: () -> true
+
+          def self.members: () -> [ :organization, :individual ]
+
+          def members: () -> [ :organization, :individual ]
+
+          def initialize: (
+            organization: OrganizationalEntity,
+            ?individual: OrganizationalContact?
+          ) -> void | (
+            individual: OrganizationalContact,
+            ?organization: OrganizationalEntity?,
+          ) -> void
+
+          attr_accessor organization: OrganizationalEntity?
+
+          attr_accessor individual: OrganizationalContact?
+
+          include SBOM::CycloneDX::SchemaObject
+
+          extend SBOM::CycloneDX::SchemaObject::ClassMethods
+        end
+      end
     end
   end
 end

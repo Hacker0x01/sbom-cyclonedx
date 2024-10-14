@@ -1,9 +1,19 @@
 module SBOM
   module CycloneDX
     class Step < ::Struct[untyped]
-      def self.new: (?name: untyped, ?description: untyped, ?commands: untyped, ?properties: untyped) -> instance
+      def self.new: (
+        ?name: String?,
+        ?description: String?,
+        ?commands: Array[Command]?,
+        ?properties: Array[Property]?
+      ) -> instance
 
-      def self.[]: (?name: untyped, ?description: untyped, ?commands: untyped, ?properties: untyped) -> instance
+      def self.[]: (
+        ?name: String?,
+        ?description: String?,
+        ?commands: Array[Command]?,
+        ?properties: Array[Property]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,13 +21,13 @@ module SBOM
 
       def members: () -> [ :name, :description, :commands, :properties ]
 
-      attr_accessor name: untyped
+      attr_accessor name: String?
 
-      attr_accessor description: untyped
+      attr_accessor description: String?
 
-      attr_accessor commands: untyped
+      attr_accessor commands: Array[Command]?
 
-      attr_accessor properties: untyped
+      attr_accessor properties: Array[Property]?
 
       include SBOM::CycloneDX::SchemaObject
 

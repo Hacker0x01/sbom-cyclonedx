@@ -1,9 +1,35 @@
 module SBOM
   module CycloneDX
     class Trigger < ::Struct[untyped]
-      def self.new: (?bom_ref: untyped, ?uid: untyped, ?name: untyped, ?description: untyped, ?resource_references: untyped, ?type: untyped, ?event: untyped, ?conditions: untyped, ?time_activated: untyped, ?inputs: untyped, ?outputs: untyped, ?properties: untyped) -> instance
+      def self.new: (
+        bom_ref: String,
+        uid: String,
+        type: String,
+        ?name: String?,
+        ?description: String?,
+        ?resource_references: Array[ResourceReferenceChoice]?,
+        ?event: Event?,
+        ?conditions: Array[Condition]?,
+        ?time_activated: DateTime?,
+        ?inputs: Array[Input]?,
+        ?outputs: Array[Output]?,
+        ?properties: Array[Property]?
+      ) -> instance
 
-      def self.[]: (?bom_ref: untyped, ?uid: untyped, ?name: untyped, ?description: untyped, ?resource_references: untyped, ?type: untyped, ?event: untyped, ?conditions: untyped, ?time_activated: untyped, ?inputs: untyped, ?outputs: untyped, ?properties: untyped) -> instance
+      def self.[]: (
+        bom_ref: String,
+        uid: String,
+        type: String,
+        ?name: String?,
+        ?description: String?,
+        ?resource_references: Array[ResourceReferenceChoice]?,
+        ?event: Event?,
+        ?conditions: Array[Condition]?,
+        ?time_activated: DateTime?,
+        ?inputs: Array[Input]?,
+        ?outputs: Array[Output]?,
+        ?properties: Array[Property]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,29 +37,44 @@ module SBOM
 
       def members: () -> [ :bom_ref, :uid, :name, :description, :resource_references, :type, :event, :conditions, :time_activated, :inputs, :outputs, :properties ]
 
-      attr_accessor bom_ref: untyped
+      def initialize: (
+        bom_ref: String,
+        uid: String,
+        type: String,
+        ?name: String?,
+        ?description: String?,
+        ?resource_references: Array[ResourceReferenceChoice]?,
+        ?event: Event?,
+        ?conditions: Array[Condition]?,
+        ?time_activated: DateTime?,
+        ?inputs: Array[Input]?,
+        ?outputs: Array[Output]?,
+        ?properties: Array[Property]?
+      ) -> void
 
-      attr_accessor uid: untyped
+      attr_accessor bom_ref: String
 
-      attr_accessor name: untyped
+      attr_accessor uid: String
 
-      attr_accessor description: untyped
+      attr_accessor type: String
 
-      attr_accessor resource_references: untyped
+      attr_accessor name: String?
 
-      attr_accessor type: untyped
+      attr_accessor description: String?
 
-      attr_accessor event: untyped
+      attr_accessor resource_references: Array[ResourceReferenceChoice]?
 
-      attr_accessor conditions: untyped
+      attr_accessor event: Event?
 
-      attr_accessor time_activated: untyped
+      attr_accessor conditions: Array[Condition]?
 
-      attr_accessor inputs: untyped
+      attr_accessor time_activated: DateTime?
 
-      attr_accessor outputs: untyped
+      attr_accessor inputs: Array[Input]?
 
-      attr_accessor properties: untyped
+      attr_accessor outputs: Array[Output]?
+
+      attr_accessor properties: Array[Property]?
 
       include SBOM::CycloneDX::SchemaObject
 

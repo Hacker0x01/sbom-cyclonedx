@@ -1,9 +1,27 @@
 module SBOM
   module CycloneDX
     class Volume < ::Struct[untyped]
-      def self.new: (?uid: untyped, ?name: untyped, ?mode: untyped, ?path: untyped, ?size_allocated: untyped, ?persistent: untyped, ?remote: untyped, ?properties: untyped) -> instance
+      def self.new: (
+        ?uid: String?,
+        ?name: String?,
+        ?mode: String?,
+        ?path: String?,
+        ?size_allocated: String?,
+        ?persistent: bool?,
+        ?remote: bool?,
+        ?properties: Array[Property]?
+      ) -> instance
 
-      def self.[]: (?uid: untyped, ?name: untyped, ?mode: untyped, ?path: untyped, ?size_allocated: untyped, ?persistent: untyped, ?remote: untyped, ?properties: untyped) -> instance
+      def self.[]: (
+        ?uid: String?,
+        ?name: String?,
+        ?mode: String?,
+        ?path: String?,
+        ?size_allocated: String?,
+        ?persistent: bool?,
+        ?remote: bool?,
+        ?properties: Array[Property]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,21 +29,32 @@ module SBOM
 
       def members: () -> [ :uid, :name, :mode, :path, :size_allocated, :persistent, :remote, :properties ]
 
-      attr_accessor uid: untyped
+      def initialize: (
+        ?uid: String?,
+        ?name: String?,
+        ?mode: String?,
+        ?path: String?,
+        ?size_allocated: String?,
+        ?persistent: bool?,
+        ?remote: bool?,
+        ?properties: Array[Property]?
+      ) -> void
 
-      attr_accessor name: untyped
+      attr_accessor uid: String?
 
-      attr_accessor mode: untyped
+      attr_accessor name: String?
 
-      attr_accessor path: untyped
+      attr_accessor mode: String?
 
-      attr_accessor size_allocated: untyped
+      attr_accessor path: String?
 
-      attr_accessor persistent: untyped
+      attr_accessor size_allocated: String?
 
-      attr_accessor remote: untyped
+      attr_accessor persistent: bool?
 
-      attr_accessor properties: untyped
+      attr_accessor remote: bool?
+
+      attr_accessor properties: Array[Property]?
 
       include SBOM::CycloneDX::SchemaObject
 

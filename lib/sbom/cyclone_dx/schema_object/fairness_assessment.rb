@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../enum"
-require_relative "../pattern"
 require_relative "../schema_object"
 
 # Fairness Assessment - Information about the benefits and harms of the model to an identified at risk group.

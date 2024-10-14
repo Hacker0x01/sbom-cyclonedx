@@ -1,9 +1,25 @@
 module SBOM
   module CycloneDX
     class ServiceData < ::Struct[untyped]
-      def self.new: (?flow: untyped, ?classification: untyped, ?name: untyped, ?description: untyped, ?governance: untyped, ?source: untyped, ?destination: untyped) -> instance
+      def self.new: (
+        flow: String,
+        classification: String,
+        source: uriString | String,
+        destination: uriString | String,
+        ?name: String?,
+        ?description: String?,
+        ?governance: DataGovernance?
+      ) -> instance
 
-      def self.[]: (?flow: untyped, ?classification: untyped, ?name: untyped, ?description: untyped, ?governance: untyped, ?source: untyped, ?destination: untyped) -> instance
+      def self.[]: (
+        flow: String,
+        classification: String,
+        source: uriString | String,
+        destination: uriString | String,
+        ?name: String?,
+        ?description: String?,
+        ?governance: DataGovernance?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,19 +27,29 @@ module SBOM
 
       def members: () -> [ :flow, :classification, :name, :description, :governance, :source, :destination ]
 
-      attr_accessor flow: untyped
+      def initialize: (
+        flow: String,
+        classification: String,
+        source: uriString | String,
+        destination: uriString | String,
+        ?name: String?,
+        ?description: String?,
+        ?governance: DataGovernance?
+      ) -> void
 
-      attr_accessor classification: untyped
+      attr_accessor flow: String
 
-      attr_accessor name: untyped
+      attr_accessor classification: String
 
-      attr_accessor description: untyped
+      attr_accessor name: String?
 
-      attr_accessor governance: untyped
+      attr_accessor description: String?
 
-      attr_accessor source: untyped
+      attr_accessor governance: DataGovernance?
 
-      attr_accessor destination: untyped
+      attr_accessor source: uriString | String
+
+      attr_accessor destination: uriString | String
 
       include SBOM::CycloneDX::SchemaObject
 

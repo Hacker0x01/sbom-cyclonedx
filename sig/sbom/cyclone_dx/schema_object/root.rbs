@@ -1,9 +1,41 @@
 module SBOM
   module CycloneDX
     class Root < ::Struct[untyped]
-      def self.new: (?serial_number: untyped, ?version: untyped, ?metadata: untyped, ?components: untyped, ?services: untyped, ?external_references: untyped, ?dependencies: untyped, ?compositions: untyped, ?vulnerabilities: untyped, ?annotations: untyped, ?formulation: untyped, ?declarations: untyped, ?definitions: untyped, ?properties: untyped, ?signature: untyped, ?bom_format: untyped, ?spec_version: untyped) -> instance
+      def self.new: (
+        version: Integer,
+        ?serial_number: String?,
+        ?metadata: Metadata?,
+        ?components: Array[Component]?,
+        ?services: Array[Service]?,
+        ?external_references: Array[ExternalReference]?,
+        ?dependencies: Array[Dependency]?,
+        ?compositions: Array[Composition]?,
+        ?vulnerabilities: Array[Vulnerability]?,
+        ?annotations: Array[Annotation]?,
+        ?formulation: Array[Formula]?,
+        ?declarations: Declarations?,
+        ?definitions: Definitions?,
+        ?properties: Array[Property]?,
+        ?signature: signature?
+      ) -> instance
 
-      def self.[]: (?serial_number: untyped, ?version: untyped, ?metadata: untyped, ?components: untyped, ?services: untyped, ?external_references: untyped, ?dependencies: untyped, ?compositions: untyped, ?vulnerabilities: untyped, ?annotations: untyped, ?formulation: untyped, ?declarations: untyped, ?definitions: untyped, ?properties: untyped, ?signature: untyped, ?bom_format: untyped, ?spec_version: untyped) -> instance
+      def self.[]: (
+        version: Integer,
+        ?serial_number: String?,
+        ?metadata: Metadata?,
+        ?components: Array[Component]?,
+        ?services: Array[Service]?,
+        ?external_references: Array[ExternalReference]?,
+        ?dependencies: Array[Dependency]?,
+        ?compositions: Array[Composition]?,
+        ?vulnerabilities: Array[Vulnerability]?,
+        ?annotations: Array[Annotation]?,
+        ?formulation: Array[Formula]?,
+        ?declarations: Declarations?,
+        ?definitions: Definitions?,
+        ?properties: Array[Property]?,
+        ?signature: signature?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,39 +43,57 @@ module SBOM
 
       def members: () -> [ :serial_number, :version, :metadata, :components, :services, :external_references, :dependencies, :compositions, :vulnerabilities, :annotations, :formulation, :declarations, :definitions, :properties, :signature, :bom_format, :spec_version ]
 
-      attr_accessor serial_number: untyped
+      def initialize: (
+        version: Integer,
+        ?serial_number: String?,
+        ?metadata: Metadata?,
+        ?components: Array[Component]?,
+        ?services: Array[Service]?,
+        ?external_references: Array[ExternalReference]?,
+        ?dependencies: Array[Dependency]?,
+        ?compositions: Array[Composition]?,
+        ?vulnerabilities: Array[Vulnerability]?,
+        ?annotations: Array[Annotation]?,
+        ?formulation: Array[Formula]?,
+        ?declarations: Declarations?,
+        ?definitions: Definitions?,
+        ?properties: Array[Property]?,
+        ?signature: signature?
+      ) -> void
 
-      attr_accessor version: untyped
+      attr_accessor serial_number: String?
 
-      attr_accessor metadata: untyped
+      attr_accessor version: Integer
 
-      attr_accessor components: untyped
+      attr_accessor metadata: Metadata?
 
-      attr_accessor services: untyped
+      attr_accessor components: Array[Component]?
 
-      attr_accessor external_references: untyped
+      attr_accessor services: Array[Service]?
 
-      attr_accessor dependencies: untyped
+      attr_accessor external_references: Array[ExternalReference]?
 
-      attr_accessor compositions: untyped
+      attr_accessor dependencies: Array[Dependency]?
 
-      attr_accessor vulnerabilities: untyped
+      attr_accessor compositions: Array[Composition]?
 
-      attr_accessor annotations: untyped
+      attr_accessor vulnerabilities: Array[Vulnerability]?
 
-      attr_accessor formulation: untyped
+      attr_accessor annotations: Array[Annotation]?
 
-      attr_accessor declarations: untyped
+      attr_accessor formulation: Array[Formula]?
 
-      attr_accessor definitions: untyped
+      attr_accessor declarations: Declarations?
 
-      attr_accessor properties: untyped
+      attr_accessor definitions: Definitions?
 
-      attr_accessor signature: untyped
+      attr_accessor properties: Array[Property]?
 
-      attr_accessor bom_format: untyped
+      attr_accessor signature: signature?
 
-      attr_accessor spec_version: untyped
+      attr_reader bom_format: "CycloneDX"
+
+      attr_reader spec_version: "1.6"
 
       include SBOM::CycloneDX::SchemaObject
 

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
 

@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require "active_support/all"
+require_relative "../cyclone_dx"
+require_relative "validator"
+
 module SBOM
   module CycloneDX
     module SchemaObject
@@ -14,13 +18,24 @@ module SBOM
         raise NotImplementedError, "valid? must be implemented by the concrete class"
       end
 
+      def as_json(_args = nil)
+        raise SBOM::CycloneDX::Error, "Object is not valid" unless valid?
+
+        # Struct#to_h does not take a block, but returns a hash
+        to_h.to_h do |k, v|
+          v = v.to_s if v.is_a?(EmailAddress::Address)
+
+          [json_name_for(k), v.as_json]
+        end
+      end
+
       def to_json(*_args)
         raise SBOM::CycloneDX::Error, "Object is not valid" unless valid?
 
-        to_h
-          .transform_keys { |k| json_name_for(k) }
-          .to_json
+        as_json.to_json
       end
+
+      private
 
       def json_name_for(member_name)
         self.class.json_name_for(member_name)

@@ -1,9 +1,9 @@
 module SBOM
   module CycloneDX
     class Definitions < ::Struct[untyped]
-      def self.new: (?standards: untyped) -> instance
+      def self.new: (?standards: Array[Standard]?) -> instance
 
-      def self.[]: (?standards: untyped) -> instance
+      def self.[]: (?standards: Array[Standard]?) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,7 +11,7 @@ module SBOM
 
       def members: () -> [ :standards ]
 
-      attr_accessor standards: untyped
+      attr_accessor standards: Array[Standard]?
 
       include SBOM::CycloneDX::SchemaObject
 

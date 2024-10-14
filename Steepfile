@@ -22,10 +22,10 @@ target :lib do
   # end
 end
 
-target :test do
-  signature "sig", "sig-private"
+# target :test do
+#   signature "sig", "sig-private"
 
-  check "spec"
+#   check "spec"
 
-  # library "pathname"              # Standard libraries
-end
+#   library "rspec"
+# end

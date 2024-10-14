@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative "../enum"
-require_relative "../pattern"
 require_relative "../schema_object"
 
 # Issue - An individual issue that has been resolved.
@@ -25,7 +24,7 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize(
+      def initialize( # rubocop:disable Metrics/ParameterLists
         type:,
         id: nil,
         name: nil,

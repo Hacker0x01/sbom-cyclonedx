@@ -170,7 +170,7 @@ module SBOM
       include SchemaObject
       extend SchemaObject::ClassMethods
     end
-    class ReleaseNote < ::Struct[untyped]
+    class ReleaseNotes < ::Struct[untyped]
       include SchemaObject
       extend SchemaObject::ClassMethods
     end

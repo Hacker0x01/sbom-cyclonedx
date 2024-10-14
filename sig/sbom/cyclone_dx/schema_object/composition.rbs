@@ -26,7 +26,7 @@ module SBOM
       def members: () -> [ :bom_ref, :aggregate, :assemblies, :dependencies, :vulnerabilities, :signature ]
 
       def initialize: (
-        aggregate: String,
+        ?aggregate: String,
         ?bom_ref: String?,
         ?assemblies: Array[String]?,
         ?dependencies: Array[Component | Service]?,

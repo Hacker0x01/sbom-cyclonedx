@@ -1,106 +1,133 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "schema_object"
+require "sbom/cyclone_dx/schema_object"
+require "sbom/cyclone_dx/validator"
+require "uri"
+require "email_address"
+require "time"
 
 RSpec.describe SBOM::CycloneDX::SchemaObject do
-  let(:klass_name) { "LibraryBook" }
-  let(:klass_json_alias) { "libraryBook" }
-
-  it "creates a class with the correct name" do
-    klass = described_class.build(klass_name) {}
-    expect(klass.name).to eq(klass_name)
-  end
-
-  it "creates a class with the correct JSON name" do
-    klass = described_class.build(klass_name) {}
-    expect(klass::JSON_NAME).to eq(klass_json_alias)
-  end
-
-  it "creates a class with the correct JSON name when specified" do
-    klass = described_class.build(klass_name, json_alias: "library-book") {}
-    expect(klass::JSON_NAME).to eq("library-book")
-  end
-
-  describe "const" do
-    let(:const_values) do
-      {
-        const_integer: 1,
-        const_float: 2.5,
-        const_string: "constant_value",
-        const_boolean: true,
-        const_datetime: DateTime.new(2024, 10, 3, 17, 40, 32),
-        const_uri: URI("https://example.com/path#fragment"),
-        const_email_address: EmailAddress.new("test@example.com"),
-        const_array: [1, "2", 1, :a, true],
-        const_set: Set[2, "3", :a, true]
-        # const_schema_object: other_schema_object # Not yet supported
-      }
-    end
-
-    let(:klass) do
-      described_class.build(klass_name) do
-        const :const_integer, const_values[:const_integer]
-        const :const_float, const_values[:const_float]
-        const :const_string, const_values[:const_string]
-        const :const_boolean, const_values[:const_boolean]
-        const :const_datetime, const_values[:const_datetime]
-        const :const_uri, const_values[:const_uri]
-        const :const_email_address, const_values[:const_email_address]
-        const :const_array, const_values[:const_array]
-        const :const_set, const_values[:const_set]
-        # const :const_schema_object, const_values[:const_schema_object] # Not yet supported
-      end
-    end
-
-    it "creates a class with the correct constant properties" do
-      instance = klass.new
-      const_values.each do |name, value|
-        expect(instance.send(name)).to eq(value)
-        expect(instance[name]).to eq(value)
-      end
-    end
-
-    it "raises an error when trying to initialize a constant property" do
-      expect { klass.new(const_integer: 2) }.to raise_error(ArgumentError)
-    end
-
-    it "raises an error when trying to set a constant property" do
-      instance = klass.new
-      expect { instance.const_integer = 2 }.to raise_error(NoMethodError)
-      expect { instance[:const_float] = 3.5 }.to raise_error(NameError)
-    end
-  end
-
-  describe "prop" do
-    it "generates a property with the correct name"
-    it "generates a property with the correct type"
-    it "generates a property with the correct JSON name"
-    it "allows overriding the default JSON name"
-
-    context "when casting values"
-    context "when specifying a required property"
-    context "when specifying a property with a default value"
-
-    context "when specifying validators" do
-      it "validates properties during initialization"
-      it "validates properties when setting values"
-
-      context "when specifying a custom validator"
-      context "when validating numeric properties"
-      context "when validating string properties"
-    end
-
-    context "when specifying a constant value" do
-      it "raises an error if no default is provided" do
-        expect do
-          described_class.build(klass_name) do
-            prop :const_integer, Integer
+  let(:field_values) do
+    {
+      string_field: "string",
+      integer_field: 1,
+      float_field: 2.5,
+      boolean_field: true,
+      datetime_field: DateTime.new(2024, 10, 14, 17, 24, 33),
+      uri_field: URI("https://example.com"),
+      email_address_field: EmailAddress.new("test@example.com"),
+      array_field: ["value1", 2, true],
+      special_json_field: "value",
+      nested_value:
+        Class.new(Struct.new(:field)) do
+          include SBOM::CycloneDX::SchemaObject
+          def valid?
+            true
           end
-        end.to raise_error(ArgumentError)
+        end.new(field: "nested")
+    }
+  end
+  let(:expected_json_compatible_hash) do
+    {
+      "stringField" => "string",
+      "integerField" => 1,
+      "floatField" => 2.5,
+      "booleanField" => true,
+      "datetimeField" => "2024-10-14T17:24:33.000+00:00",
+      "uriField" => "https://example.com",
+      "emailAddressField" => "test@example.com",
+      "arrayField" => ["value1", 2, true],
+      "special-json-field" => "value",
+      "nestedValue" => { "field" => "nested" }
+    }
+  end
+  let(:expected_json) do
+    "{"\
+      '"stringField":"string",'\
+      '"integerField":1,'\
+      '"floatField":2.5,'\
+      '"booleanField":true,'\
+      '"datetimeField":"2024-10-14T17:24:33.000+00:00",'\
+      '"uriField":"https://example.com",'\
+      '"emailAddressField":"test@example.com",'\
+      '"arrayField":["value1",2,true],'\
+      '"special-json-field":"value",'\
+      '"nestedValue":{"field":"nested"}'\
+    "}"
+  end
+
+  let(:schema_object) do
+    Class.new(Struct.new(*field_values.keys)) do
+      include SBOM::CycloneDX::SchemaObject
+
+      json_name :special_json_field, "special-json-field"
+
+      def valid?
+        true
       end
+    end.new(**field_values)
+  end
+
+  describe "#as_json" do
+    subject(:json_hash) { schema_object.as_json }
+
+    it "transforms keys into lowerCamelCase by default" do
+      expect(json_hash.key?("stringField")).to be true
+    end
+
+    it "transforms keys as-specified when a json_name is provided" do
+      expect(json_hash.key?("special-json-field")).to be true
+    end
+
+    it "transforms values into JSON-compatible types" do
+      expect(json_hash).to include("datetimeField" => String, "uriField" => String, "emailAddressField" => String)
+    end
+
+    it "returns a JSON-compatible representation of the object" do
+      expect(json_hash).to eq(expected_json_compatible_hash)
     end
   end
 
-  describe "to_json"
+  describe "#to_json" do
+    it "returns a JSON representation of the object" do
+      expect(schema_object.to_json).to eq(expected_json)
+    end
+  end
+
+  describe "#valid?" do
+    # Check actual validation logic in validator tests
+    it "returns true" do
+      expect(schema_object.valid?).to be true
+    end
+  end
+
+  describe "::valid?" do
+    it "delegates to the Validator" do
+      allow(SBOM::CycloneDX::Validator).to receive(:valid?)
+      schema_object.class.valid?(schema_object)
+      expect(SBOM::CycloneDX::Validator)
+        .to have_received(:valid?).with(schema_object.class, schema_object, required: false)
+    end
+  end
+
+  context "when not used correctly" do
+    it "raises an error when included in a non-Struct class" do
+      expect do
+        Class.new { include SBOM::CycloneDX::SchemaObject }
+      end.to raise_error(ArgumentError, "SchemaObject must be included in a Struct")
+    end
+
+    it "raises an error when ClassMethods are extended by a non-SchemaObject class" do
+      expect do
+        Class.new(Struct.new(:field)) { extend SBOM::CycloneDX::SchemaObject::ClassMethods }
+      end.to raise_error(ArgumentError, "This module can only be extended by a SchemaObject")
+    end
+
+    it "raises an error when calling valid? on a class that did not override it" do
+      expect do
+        Class.new(Struct.new(:field)) { include SBOM::CycloneDX::SchemaObject }.new.valid?
+      end.to raise_error(NotImplementedError, "valid? must be implemented by the concrete class")
+    end
+  end
 end

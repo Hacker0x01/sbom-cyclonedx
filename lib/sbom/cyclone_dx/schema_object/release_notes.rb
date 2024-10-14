@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
-require_relative "../enum"
-require_relative "../pattern"
 require_relative "../schema_object"
 
 # Release notes
 module SBOM
   module CycloneDX
-    class ReleaseNote < Struct.new(
-      "ReleaseNote",
+    class ReleaseNotes < Struct.new(
+      "ReleaseNotes",
       # Type - The software versioning type. It is recommended that the release type use one of 'major', 'minor', 'patch', 'pre-release', or 'internal'. Representing all possible software release types is not practical, so standardizing on the recommended values, whenever possible, is strongly encouraged.
       # * major = A major release may contain significant changes or may introduce breaking changes.
       # * minor = A minor release, also known as an update, may contain a smaller number of changes than major releases.

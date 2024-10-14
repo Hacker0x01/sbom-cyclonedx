@@ -1,9 +1,31 @@
 module SBOM
   module CycloneDX
     class Metadata < ::Struct[untyped]
-      def self.new: (?timestamp: untyped, ?lifecycles: untyped, ?tools: untyped, ?manufacturer: untyped, ?authors: untyped, ?component: untyped, ?manufacture: untyped, ?supplier: untyped, ?licenses: untyped, ?properties: untyped) -> instance
+      def self.new: (
+        ?timestamp: DateTime?,
+        ?lifecycles: Array[PreDefinedPhase | CustomPhase]?,
+        ?tools: Tools?,
+        ?manufacturer: OrganizationalEntity?,
+        ?authors: Array[OrganizationalContact]?,
+        ?component: Component?,
+        ?manufacture: OrganizationalEntity?,
+        ?supplier: OrganizationalEntity?,
+        ?licenses: Array[licenseChoice]?,
+        ?properties: Array[Property]?
+      ) -> instance
 
-      def self.[]: (?timestamp: untyped, ?lifecycles: untyped, ?tools: untyped, ?manufacturer: untyped, ?authors: untyped, ?component: untyped, ?manufacture: untyped, ?supplier: untyped, ?licenses: untyped, ?properties: untyped) -> instance
+      def self.[]: (
+        ?timestamp: DateTime?,
+        ?lifecycles: Array[PreDefinedPhase | CustomPhase]?,
+        ?tools: Tools?,
+        ?manufacturer: OrganizationalEntity?,
+        ?authors: Array[OrganizationalContact]?,
+        ?component: Component?,
+        ?manufacture: OrganizationalEntity?,
+        ?supplier: OrganizationalEntity?,
+        ?licenses: Array[licenseChoice]?,
+        ?properties: Array[Property]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,29 +33,80 @@ module SBOM
 
       def members: () -> [ :timestamp, :lifecycles, :tools, :manufacturer, :authors, :component, :manufacture, :supplier, :licenses, :properties ]
 
-      attr_accessor timestamp: untyped
+      attr_accessor timestamp: DateTime?
 
-      attr_accessor lifecycles: untyped
+      attr_accessor lifecycles: Array[PreDefinedPhase | CustomPhase]?
 
-      attr_accessor tools: untyped
+      attr_accessor tools: Tools?
 
-      attr_accessor manufacturer: untyped
+      attr_accessor manufacturer: OrganizationalEntity?
 
-      attr_accessor authors: untyped
+      attr_accessor authors: Array[OrganizationalContact]?
 
-      attr_accessor component: untyped
+      attr_accessor component: Component?
 
-      attr_accessor manufacture: untyped
+      attr_accessor manufacture: OrganizationalEntity?
 
-      attr_accessor supplier: untyped
+      attr_accessor supplier: OrganizationalEntity?
 
-      attr_accessor licenses: untyped
+      attr_accessor licenses: Array[licenseChoice]?
 
-      attr_accessor properties: untyped
+      attr_accessor properties: Array[Property]?
 
       include SBOM::CycloneDX::SchemaObject
 
       extend SBOM::CycloneDX::SchemaObject::ClassMethods
+
+      class CustomPhase < ::Struct[untyped]
+        def self.new: (
+          name: String,
+          ?description: String?
+        ) -> instance
+
+        def self.[]: (
+          name: String,
+          ?description: String?
+        ) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :name, :description ]
+
+        def members: () -> [ :name, :description ]
+
+        def initialize: (
+          name: String,
+          ?description: String?
+        ) -> void
+
+        attr_accessor name: String
+
+        attr_accessor description: String?
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+      end
+
+      class PreDefinedPhase < ::Struct[untyped]
+        def self.new: (phase: String) -> instance
+
+        def self.[]: (phase: String) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :phase ]
+
+        def members: () -> [ :phase ]
+
+        def initialize: (phase: String) -> void
+
+        attr_accessor phase: String
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+      end
     end
   end
 end

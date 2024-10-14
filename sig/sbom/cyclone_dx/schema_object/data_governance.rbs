@@ -1,9 +1,17 @@
 module SBOM
   module CycloneDX
     class DataGovernance < ::Struct[untyped]
-      def self.new: (?custodians: untyped, ?stewards: untyped, ?owners: untyped) -> instance
+      def self.new: (
+        ?custodians: DataGovernanceResponsibleParty?,
+        ?stewards: DataGovernanceResponsibleParty?,
+        ?owners: DataGovernanceResponsibleParty?
+      ) -> instance
 
-      def self.[]: (?custodians: untyped, ?stewards: untyped, ?owners: untyped) -> instance
+      def self.[]: (
+        ?custodians: DataGovernanceResponsibleParty?,
+        ?stewards: DataGovernanceResponsibleParty?,
+        ?owners: DataGovernanceResponsibleParty?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,11 +19,11 @@ module SBOM
 
       def members: () -> [ :custodians, :stewards, :owners ]
 
-      attr_accessor custodians: untyped
+      attr_accessor custodians: DataGovernanceResponsibleParty?
 
-      attr_accessor stewards: untyped
+      attr_accessor stewards: DataGovernanceResponsibleParty?
 
-      attr_accessor owners: untyped
+      attr_accessor owners: DataGovernanceResponsibleParty?
 
       include SBOM::CycloneDX::SchemaObject
 

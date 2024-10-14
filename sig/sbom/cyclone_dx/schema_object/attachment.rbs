@@ -1,9 +1,15 @@
 module SBOM
   module CycloneDX
     class Attachment < ::Struct[untyped]
-      def self.new: (content: String, ?content_type: String, ?encoding: nil | "base64") -> instance
+      def self.new: (
+        content: String,
+        ?content_type: String,
+        ?encoding: nil | "base64") -> instance
 
-      def self.[]: (content: String, ?content_type: String, ?encoding: nil | "base64") -> instance
+      def self.[]: (
+        content: String,
+        ?content_type: String,
+        ?encoding: nil | "base64") -> instance
 
       def self.keyword_init?: () -> true
 

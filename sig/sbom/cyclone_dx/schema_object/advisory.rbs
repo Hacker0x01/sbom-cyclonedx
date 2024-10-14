@@ -1,9 +1,15 @@
 module SBOM
   module CycloneDX
     class Advisory < ::Struct[untyped]
-      def self.new: (url: uriString, ?title: String?) -> instance
+      def self.new: (
+        url: uriString,
+        ?title: String?
+      ) -> instance
 
-      def self.[]: (url: uriString, ?title: String?) -> instance
+      def self.[]: (
+        url: uriString,
+        ?title: String?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 

@@ -1,9 +1,21 @@
 module SBOM
   module CycloneDX
     class ModelCard < ::Struct[untyped]
-      def self.new: (?bom_ref: untyped, ?model_parameters: untyped, ?quantitative_analysis: untyped, ?considerations: untyped, ?properties: untyped) -> instance
+      def self.new: (
+        ?bom_ref: String?,
+        ?model_parameters: ModelParameters?,
+        ?quantitative_analysis: QuantitativeAnalysis?,
+        ?considerations: Consideration?,
+        ?properties: Array[Property]?
+      ) -> instance
 
-      def self.[]: (?bom_ref: untyped, ?model_parameters: untyped, ?quantitative_analysis: untyped, ?considerations: untyped, ?properties: untyped) -> instance
+      def self.[]: (
+        ?bom_ref: String?,
+        ?model_parameters: ModelParameters?,
+        ?quantitative_analysis: QuantitativeAnalysis?,
+        ?considerations: Consideration?,
+        ?properties: Array[Property]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,19 +23,173 @@ module SBOM
 
       def members: () -> [ :bom_ref, :model_parameters, :quantitative_analysis, :considerations, :properties ]
 
-      attr_accessor bom_ref: untyped
+      attr_accessor bom_ref: String?
 
-      attr_accessor model_parameters: untyped
+      attr_accessor model_parameters: ModelParameters?
 
-      attr_accessor quantitative_analysis: untyped
+      attr_accessor quantitative_analysis: QuantitativeAnalysis?
 
-      attr_accessor considerations: untyped
+      attr_accessor considerations: Consideration?
 
-      attr_accessor properties: untyped
+      attr_accessor properties: Array[Property]?
 
       include SBOM::CycloneDX::SchemaObject
 
       extend SBOM::CycloneDX::SchemaObject::ClassMethods
+
+      class Consideration < ::Struct[untyped]
+        def self.new: (
+          ?users: Array[String]?,
+          ?use_cases: Array[String]?,
+          ?technical_limitations: Array[String]?,
+          ?performance_tradeoffs: Array[String]?,
+          ?ethical_considerations: Array[Risk]?,
+          ?environmental_considerations: EnvironmentalConsideration?,
+          ?fairness_assessments: Array[FairnessAssessment]?
+        ) -> instance
+
+        def self.[]: (
+          ?users: Array[String]?,
+          ?use_cases: Array[String]?,
+          ?technical_limitations: Array[String]?,
+          ?performance_tradeoffs: Array[String]?,
+          ?ethical_considerations: Array[Risk]?,
+          ?environmental_considerations: EnvironmentalConsideration?,
+          ?fairness_assessments: Array[FairnessAssessment]?
+        ) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :users, :use_cases, :technical_limitations, :performance_tradeoffs, :ethical_considerations, :environmental_considerations, :fairness_assessments ]
+
+        def members: () -> [ :users, :use_cases, :technical_limitations, :performance_tradeoffs, :ethical_considerations, :environmental_considerations, :fairness_assessments ]
+
+        attr_accessor users: Array[String]?
+
+        attr_accessor use_cases: Array[String]?
+
+        attr_accessor technical_limitations: Array[String]?
+
+        attr_accessor performance_tradeoffs: Array[String]?
+
+        attr_accessor ethical_considerations: Array[Risk]?
+
+        attr_accessor environmental_considerations: EnvironmentalConsideration?
+
+        attr_accessor fairness_assessments: Array[FairnessAssessment]?
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+      end
+
+      class ModelParameters < ::Struct[untyped]
+        def self.new: (
+          ?approach: Approach?,
+          ?task: String?,
+          ?architecture_family: String?,
+          ?model_architecture: String?,
+          ?datasets: Array[ComponentData | DataReference]?,
+          ?inputs: Array[InputOutputMLParameter]?,
+          ?outputs: Array[InputOutputMLParameter]?
+        ) -> instance
+
+        def self.[]: (
+          ?approach: Approach?,
+          ?task: String?,
+          ?architecture_family: String?,
+          ?model_architecture: String?,
+          ?datasets: Array[ComponentData | DataReference]?,
+          ?inputs: Array[InputOutputMLParameter]?,
+          ?outputs: Array[InputOutputMLParameter]?
+        ) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :approach, :task, :architecture_family, :model_architecture, :datasets, :inputs, :outputs ]
+
+        def members: () -> [ :approach, :task, :architecture_family, :model_architecture, :datasets, :inputs, :outputs ]
+
+        attr_accessor approach: Approach?
+
+        attr_accessor task: String?
+
+        attr_accessor architecture_family: String?
+
+        attr_accessor model_architecture: String?
+
+        attr_accessor datasets: Array[ComponentData | DataReference]?
+
+        attr_accessor inputs: Array[InputOutputMLParameter]?
+
+        attr_accessor outputs: Array[InputOutputMLParameter]?
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+
+        class Approach < ::Struct[untyped]
+          def self.new: (?type: String?) -> instance
+
+          def self.[]: (?type: String?) -> instance
+
+          def self.keyword_init?: () -> true
+
+          def self.members: () -> [ :type ]
+
+          def members: () -> [ :type ]
+
+          attr_accessor type: String?
+
+          include SBOM::CycloneDX::SchemaObject
+
+          extend SBOM::CycloneDX::SchemaObject::ClassMethods
+        end
+
+        class DataReference < ::Struct[untyped]
+          def self.new: (?ref: String?) -> instance
+
+          def self.[]: (?ref: String?) -> instance
+
+          def self.keyword_init?: () -> true
+
+          def self.members: () -> [ :ref ]
+
+          def members: () -> [ :ref ]
+
+          attr_accessor ref: String?
+
+          include SBOM::CycloneDX::SchemaObject
+
+          extend SBOM::CycloneDX::SchemaObject::ClassMethods
+        end
+      end
+
+      class QuantitativeAnalysis < ::Struct[untyped]
+        def self.new: (
+          ?performance_metrics: Array[PerformanceMetric]?,
+          ?graphics: GraphicsCollection?
+        ) -> instance
+
+        def self.[]: (
+          ?performance_metrics: Array[PerformanceMetric]?,
+          ?graphics: GraphicsCollection?
+        ) -> instance
+
+        def self.keyword_init?: () -> true
+
+        def self.members: () -> [ :performance_metrics, :graphics ]
+
+        def members: () -> [ :performance_metrics, :graphics ]
+
+        attr_accessor performance_metrics: Array[PerformanceMetric]?
+
+        attr_accessor graphics: GraphicsCollection?
+
+        include SBOM::CycloneDX::SchemaObject
+
+        extend SBOM::CycloneDX::SchemaObject::ClassMethods
+      end
     end
   end
 end

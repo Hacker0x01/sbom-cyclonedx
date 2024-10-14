@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative "../enum"
-require_relative "../pattern"
 require_relative "../schema_object"
 
 # Anonymous class from Output
@@ -27,7 +26,7 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize(type:, source: nil, target: nil, resource: nil, data: nil, environment_vars: nil, properties: nil)
+      def initialize(type:, source: nil, target: nil, resource: nil, data: nil, environment_vars: nil, properties: nil) # rubocop:disable Metrics/ParameterLists
         if [resource, data, environment_vars].none?
           raise ArgumentError, "At least one of `resource`, `data`, or `environment_vars` must be provided"
         end
@@ -36,7 +35,7 @@ module SBOM
       end
 
       def valid? # rubocop:disable Metrics/AbcSize
-        Validator.valid?(String, type, enum: Enum::OUTPUT_TYPE) &&
+        Validator.valid?(String, type, enum: Enum::OUTPUT_TYPE, required: true) &&
           Validator.valid?(ResourceReferenceChoice, source) &&
           Validator.valid?(ResourceReferenceChoice, target) &&
           Validator.valid?(ResourceReferenceChoice, resource, required: [data, environment_vars].none?) &&

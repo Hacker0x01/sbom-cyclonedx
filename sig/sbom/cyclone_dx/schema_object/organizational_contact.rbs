@@ -1,9 +1,19 @@
 module SBOM
   module CycloneDX
     class OrganizationalContact < ::Struct[untyped]
-      def self.new: (?bom_ref: untyped, ?name: untyped, ?email: untyped, ?phone: untyped) -> instance
+      def self.new: (
+        ?bom_ref: String?,
+        ?name: String?,
+        ?email: emailString?,
+        ?phone: String?
+      ) -> instance
 
-      def self.[]: (?bom_ref: untyped, ?name: untyped, ?email: untyped, ?phone: untyped) -> instance
+      def self.[]: (
+        ?bom_ref: String?,
+        ?name: String?,
+        ?email: emailString?,
+        ?phone: String?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,13 +21,13 @@ module SBOM
 
       def members: () -> [ :bom_ref, :name, :email, :phone ]
 
-      attr_accessor bom_ref: untyped
+      attr_accessor bom_ref: String?
 
-      attr_accessor name: untyped
+      attr_accessor name: String?
 
-      attr_accessor email: untyped
+      attr_accessor email: emailString?
 
-      attr_accessor phone: untyped
+      attr_accessor phone: String?
 
       include SBOM::CycloneDX::SchemaObject
 

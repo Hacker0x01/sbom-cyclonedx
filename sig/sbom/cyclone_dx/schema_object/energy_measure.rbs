@@ -1,9 +1,15 @@
 module SBOM
   module CycloneDX
     class EnergyMeasure < ::Struct[untyped]
-      def self.new: (?value: untyped, ?unit: untyped) -> instance
+      def self.new: (
+        value: Float,
+        unit: "kWh"
+      ) -> instance
 
-      def self.[]: (?value: untyped, ?unit: untyped) -> instance
+      def self.[]: (
+        value: Float,
+        unit: "kWh"
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,9 +17,11 @@ module SBOM
 
       def members: () -> [ :value, :unit ]
 
-      attr_accessor value: untyped
+      def initialize: (value: Float) -> void
 
-      attr_accessor unit: untyped
+      attr_accessor value: Float
+
+      attr_accessor unit: "kWh"
 
       include SBOM::CycloneDX::SchemaObject
 

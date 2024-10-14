@@ -1,9 +1,19 @@
 module SBOM
   module CycloneDX
     class FairnessAssessment < ::Struct[untyped]
-      def self.new: (?group_at_risk: untyped, ?benefits: untyped, ?harms: untyped, ?mitigation_strategy: untyped) -> instance
+      def self.new: (
+        ?group_at_risk: String?,
+        ?benefits: String?,
+        ?harms: String?,
+        ?mitigation_strategy: String?
+      ) -> instance
 
-      def self.[]: (?group_at_risk: untyped, ?benefits: untyped, ?harms: untyped, ?mitigation_strategy: untyped) -> instance
+      def self.[]: (
+        ?group_at_risk: String?,
+        ?benefits: String?,
+        ?harms: String?,
+        ?mitigation_strategy: String?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,13 +21,13 @@ module SBOM
 
       def members: () -> [ :group_at_risk, :benefits, :harms, :mitigation_strategy ]
 
-      attr_accessor group_at_risk: untyped
+      attr_accessor group_at_risk: String?
 
-      attr_accessor benefits: untyped
+      attr_accessor benefits: String?
 
-      attr_accessor harms: untyped
+      attr_accessor harms: String?
 
-      attr_accessor mitigation_strategy: untyped
+      attr_accessor mitigation_strategy: String?
 
       include SBOM::CycloneDX::SchemaObject
 

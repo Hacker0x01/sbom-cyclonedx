@@ -1,9 +1,21 @@
 module SBOM
   module CycloneDX
     class ResourceReferenceChoice < ::Struct[untyped]
-      def self.new: (?ref: untyped, ?external_reference: untyped) -> instance
+      def self.new: (
+        ref: String,
+        ?external_reference: ExternalReference?
+      ) -> instance | (
+        external_reference: ExternalReference,
+        ?ref: String?
+      ) -> instance
 
-      def self.[]: (?ref: untyped, ?external_reference: untyped) -> instance
+      def self.[]: (
+        ref: String,
+        ?external_reference: ExternalReference?
+      ) -> instance | (
+        external_reference: ExternalReference,
+        ?ref: String?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,9 +23,17 @@ module SBOM
 
       def members: () -> [ :ref, :external_reference ]
 
-      attr_accessor ref: untyped
+      def initialize: (
+        ref: String,
+        ?external_reference: ExternalReference?
+      ) -> void | (
+        external_reference: ExternalReference,
+        ?ref: String?
+      ) -> void
 
-      attr_accessor external_reference: untyped
+      attr_accessor ref: String?
+
+      attr_accessor external_reference: ExternalReference?
 
       include SBOM::CycloneDX::SchemaObject
 

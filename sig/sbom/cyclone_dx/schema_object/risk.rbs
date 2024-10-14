@@ -1,9 +1,15 @@
 module SBOM
   module CycloneDX
     class Risk < ::Struct[untyped]
-      def self.new: (?name: untyped, ?mitigation_strategy: untyped) -> instance
+      def self.new: (
+        ?name: String?,
+        ?mitigation_strategy: String?
+      ) -> instance
 
-      def self.[]: (?name: untyped, ?mitigation_strategy: untyped) -> instance
+      def self.[]: (
+        ?name: String?,
+        ?mitigation_strategy: String?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,9 +17,9 @@ module SBOM
 
       def members: () -> [ :name, :mitigation_strategy ]
 
-      attr_accessor name: untyped
+      attr_accessor name: String?
 
-      attr_accessor mitigation_strategy: untyped
+      attr_accessor mitigation_strategy: String?
 
       include SBOM::CycloneDX::SchemaObject
 

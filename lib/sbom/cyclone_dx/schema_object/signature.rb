@@ -39,14 +39,25 @@ module SBOM
         end
 
         module PublicKey
-          def self.new(kty:, **kwargs)
+          def self.new(kty:, crv: nil, x: nil, y: nil, n: nil, e: nil) # rubocop:disable Metrics/ParameterLists,Naming/MethodParameterName
             case kty
             when "EC"
-              EC.new(**kwargs)
+              raise "`n` and `e` must be nil when kty == \"EC\"" unless n.nil? && e.nil?
+              if crv.nil? || x.nil? || y.nil?
+                raise ArgumentError, "`crv`, `x`, and `y` must not be nil when kty == \"EC\""
+              end
+
+              EC.new(crv: crv, x: x, y: y)
             when "OKP"
-              OKP.new(**kwargs)
+              raise "`y`, `n` and `e` must be nil when kty == \"OKP\"" unless y.nil? && n.nil? && e.nil?
+              raise ArgumentError, "`crv` and `x` must not be nil when kty == \"OKP\"" if crv.nil? || x.nil?
+
+              OKP.new(crv: crv, x: x)
             when "RSA"
-              RSA.new(**kwargs)
+              raise "`crv`, `x`, and `y` must be nil when kty == \"RSA\"" unless crv.nil? && x.nil? && y.nil?
+              raise ArgumentError, "`n` and `e` must not be nil when kty == \"RSA\"" if n.nil? || e.nil?
+
+              RSA.new(n: n, e: e)
             else
               raise ArgumentError, "Invalid value for `kty`"
             end

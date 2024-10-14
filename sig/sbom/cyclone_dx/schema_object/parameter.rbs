@@ -1,9 +1,17 @@
 module SBOM
   module CycloneDX
     class Parameter < ::Struct[untyped]
-      def self.new: (?name: untyped, ?value: untyped, ?data_type: untyped) -> instance
+      def self.new: (
+        ?name: String?,
+        ?value: String?,
+        ?data_type: String?
+      ) -> instance
 
-      def self.[]: (?name: untyped, ?value: untyped, ?data_type: untyped) -> instance
+      def self.[]: (
+        ?name: String?,
+        ?value: String?,
+        ?data_type: String?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,11 +19,11 @@ module SBOM
 
       def members: () -> [ :name, :value, :data_type ]
 
-      attr_accessor name: untyped
+      attr_accessor name: String?
 
-      attr_accessor value: untyped
+      attr_accessor value: String?
 
-      attr_accessor data_type: untyped
+      attr_accessor data_type: String?
 
       include SBOM::CycloneDX::SchemaObject
 

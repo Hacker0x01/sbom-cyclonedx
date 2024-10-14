@@ -30,8 +30,8 @@ module SBOM
             return valid_union?(object, klasses: type_specific_args.delete(:klasses), **type_specific_args)
           end
 
-          if klass == EmailAddress
-            return (object.is_a?(EmailAddress) && object.valid?) || valid_string?(object, format: :email)
+          if klass == EmailAddress::Address
+            return (object.is_a?(EmailAddress::Address) && object.valid?) || valid_string?(object, format: :email)
           end
 
           raise ArgumentError, "Unsupported type: #{klass}"

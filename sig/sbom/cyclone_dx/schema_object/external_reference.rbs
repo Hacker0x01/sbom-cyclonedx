@@ -1,9 +1,19 @@
 module SBOM
   module CycloneDX
     class ExternalReference < ::Struct[untyped]
-      def self.new: (?url: untyped, ?comment: untyped, ?type: untyped, ?hashes: untyped) -> instance
+      def self.new: (
+        url: uriString,
+        type: String,
+        ?comment: String?,
+        ?hashes: Array[HashData]?
+      ) -> instance
 
-      def self.[]: (?url: untyped, ?comment: untyped, ?type: untyped, ?hashes: untyped) -> instance
+      def self.[]: (
+        url: uriString,
+        type: String,
+        ?comment: String?,
+        ?hashes: Array[HashData]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,13 +21,20 @@ module SBOM
 
       def members: () -> [ :url, :comment, :type, :hashes ]
 
-      attr_accessor url: untyped
+      def initialize: (
+        url: uriString,
+        type: String,
+        ?comment: String?,
+        ?hashes: Array[HashData]?
+      ) -> void
 
-      attr_accessor comment: untyped
+      attr_accessor url: uriString
 
-      attr_accessor type: untyped
+      attr_accessor comment: String?
 
-      attr_accessor hashes: untyped
+      attr_accessor type: String
+
+      attr_accessor hashes: Array[HashData]?
 
       include SBOM::CycloneDX::SchemaObject
 

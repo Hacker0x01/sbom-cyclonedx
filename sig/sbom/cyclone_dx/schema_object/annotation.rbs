@@ -2,20 +2,20 @@ module SBOM
   module CycloneDX
     class Annotation < ::Struct[untyped]
       def self.new: (
-        subjects: Set[String],
+        subjects: Array[String],
         annotator: Annotator,
         timestamp: DateTime,
         text: String,
-        signature: SBOM::CycloneDX::signature,
+        ?signature: signature?,
         ?bom_ref: String?
       ) -> instance
 
       def self.[]: (
-        subjects: Set[String],
+        subjects: Array[String],
         annotator: Annotator,
         timestamp: DateTime,
         text: String,
-        signature: SBOM::CycloneDX::signature,
+        ?signature: signature?,
         ?bom_ref: String?
       ) -> instance
 
@@ -26,17 +26,17 @@ module SBOM
       def members: () -> [ :bom_ref, :subjects, :annotator, :timestamp, :text, :signature ]
 
       def initialize: (
-        subjects: Set[String],
+        subjects: Array[String],
         annotator: Annotator,
         timestamp: DateTime,
         text: String,
-        signature: SBOM::CycloneDX::signature,
+        ?signature: signature?,
         ?bom_ref: String?
       ) -> void
 
       attr_accessor bom_ref: String?
 
-      attr_accessor subjects: Set[String]
+      attr_accessor subjects: Array[String]
 
       attr_accessor annotator: Annotator
 

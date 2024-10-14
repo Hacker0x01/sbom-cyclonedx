@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../enum"
-require_relative "../pattern"
 require_relative "../schema_object"
 
 # Anonymous class from DataGovernanceResponsibleParty
@@ -10,10 +8,8 @@ module SBOM
     class DataGovernanceResponsibleParty < Struct.new(
       "DataGovernanceResponsibleParty",
       # Organization - The organization that is responsible for specific data governance role(s).
-      # prop :organization, OrganizationalEntity, required: -> { contact.nil? }
       :organization,
       # Individual - The individual that is responsible for specific data governance role(s).
-      # prop :contact, OrganizationalContact, required: -> { organization.nil? }
       :contact,
       keyword_init: true
     )

@@ -50,10 +50,10 @@ module SBOM
       def initialize( # rubocop:disable Metrics/ParameterLists
         bom_ref:,
         uid:,
-        task_types:,
         name: nil,
         description: nil,
         resource_references: nil,
+        task_types: nil,
         trigger: nil,
         steps: nil,
         inputs: nil,

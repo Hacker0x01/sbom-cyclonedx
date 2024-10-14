@@ -1,9 +1,35 @@
 module SBOM
   module CycloneDX
     class Workspace < ::Struct[untyped]
-      def self.new: (?bom_ref: untyped, ?uid: untyped, ?name: untyped, ?aliases: untyped, ?description: untyped, ?resource_references: untyped, ?access_mode: untyped, ?mount_path: untyped, ?managed_data_type: untyped, ?volume_request: untyped, ?volume: untyped, ?properties: untyped) -> instance
+      def self.new: (
+        bom_ref: String,
+        uid: String,
+        ?name: String?,
+        ?aliases: Array[String]?,
+        ?description: String?,
+        ?resource_references: Array[ResourceReferenceChoice]?,
+        ?access_mode: String?,
+        ?mount_path: String?,
+        ?managed_data_type: String?,
+        ?volume_request: String?,
+        ?volume: Volume?,
+        ?properties: Array[Property]?
+      ) -> instance
 
-      def self.[]: (?bom_ref: untyped, ?uid: untyped, ?name: untyped, ?aliases: untyped, ?description: untyped, ?resource_references: untyped, ?access_mode: untyped, ?mount_path: untyped, ?managed_data_type: untyped, ?volume_request: untyped, ?volume: untyped, ?properties: untyped) -> instance
+      def self.[]: (
+        bom_ref: String,
+        uid: String,
+        ?name: String?,
+        ?aliases: Array[String]?,
+        ?description: String?,
+        ?resource_references: Array[ResourceReferenceChoice]?,
+        ?access_mode: String?,
+        ?mount_path: String?,
+        ?managed_data_type: String?,
+        ?volume_request: String?,
+        ?volume: Volume?,
+        ?properties: Array[Property]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,29 +37,44 @@ module SBOM
 
       def members: () -> [ :bom_ref, :uid, :name, :aliases, :description, :resource_references, :access_mode, :mount_path, :managed_data_type, :volume_request, :volume, :properties ]
 
-      attr_accessor bom_ref: untyped
+      def initialize: (
+        bom_ref: String,
+        uid: String,
+        ?name: String?,
+        ?aliases: Array[String]?,
+        ?description: String?,
+        ?resource_references: Array[ResourceReferenceChoice]?,
+        ?access_mode: String?,
+        ?mount_path: String?,
+        ?managed_data_type: String?,
+        ?volume_request: String?,
+        ?volume: Volume?,
+        ?properties: Array[Property]?
+      ) -> void
 
-      attr_accessor uid: untyped
+      attr_accessor bom_ref: String
 
-      attr_accessor name: untyped
+      attr_accessor uid: String
 
-      attr_accessor aliases: untyped
+      attr_accessor name: String?
 
-      attr_accessor description: untyped
+      attr_accessor aliases: Array[String]?
 
-      attr_accessor resource_references: untyped
+      attr_accessor description: String?
 
-      attr_accessor access_mode: untyped
+      attr_accessor resource_references: Array[ResourceReferenceChoice]?
 
-      attr_accessor mount_path: untyped
+      attr_accessor access_mode: String?
 
-      attr_accessor managed_data_type: untyped
+      attr_accessor mount_path: String?
 
-      attr_accessor volume_request: untyped
+      attr_accessor managed_data_type: String?
 
-      attr_accessor volume: untyped
+      attr_accessor volume_request: String?
 
-      attr_accessor properties: untyped
+      attr_accessor volume: Volume?
+
+      attr_accessor properties: Array[Property]?
 
       include SBOM::CycloneDX::SchemaObject
 

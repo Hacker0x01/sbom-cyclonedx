@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../enum"
-require_relative "../pattern"
 require_relative "../schema_object"
 
 # Input type - Type that represents various input data types and formats.
@@ -18,8 +16,6 @@ module SBOM
       # Parameters - Inputs that have the form of parameters with names and values.
       :parameters,
       # Environment variables - Inputs that have the form of parameters with names and values.
-      #  Set[one_of: [Property, String]],
-      #  required: -> { resource.nil? && parameters.nil? && data.nil? }
       :environment_vars,
       # Data - Inputs that have the form of data.
       :data,
@@ -29,7 +25,7 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize(
+      def initialize( # rubocop:disable Metrics/ParameterLists
         source: nil,
         target: nil,
         resource: nil,
@@ -45,7 +41,7 @@ module SBOM
         super
       end
 
-      def valid?
+      def valid? # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
         Validator.valid?(ResourceReferenceChoice, source) &&
           Validator.valid?(ResourceReferenceChoice, target) &&
           Validator.valid?(ResourceReferenceChoice, resource, required: [parameters, environment_vars, data].none?) &&

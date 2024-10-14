@@ -1,9 +1,15 @@
 module SBOM
   module CycloneDX
     class Note < ::Struct[untyped]
-      def self.new: (?locale: untyped, ?text: untyped) -> instance
+      def self.new: (
+        text: Attachment,
+        ?locale: String?
+      ) -> instance
 
-      def self.[]: (?locale: untyped, ?text: untyped) -> instance
+      def self.[]: (
+        text: Attachment,
+        ?locale: String?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,9 +17,14 @@ module SBOM
 
       def members: () -> [ :locale, :text ]
 
-      attr_accessor locale: untyped
+      def initialize: (
+        text: Attachment,
+        ?locale: String?
+      ) -> void
 
-      attr_accessor text: untyped
+      attr_accessor locale: String?
+
+      attr_accessor text: Attachment
 
       include SBOM::CycloneDX::SchemaObject
 

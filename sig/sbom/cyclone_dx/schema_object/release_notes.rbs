@@ -1,0 +1,79 @@
+module SBOM
+  module CycloneDX
+    class ReleaseNotes < ::Struct[untyped]
+      def self.new: (
+        type: String,
+        ?title: String?,
+        ?featured_image: uriString?,
+        ?social_image: uriString?,
+        ?description: String?,
+        ?timestamp: DateTime?,
+        ?aliases: Array[String]?,
+        ?tags: Array[String]?,
+        ?resolves: Array[Issue]?,
+        ?notes: Array[Note]?,
+        ?properties: Array[Property]?
+      ) -> instance
+
+      def self.[]: (
+        type: String,
+        ?title: String?,
+        ?featured_image: uriString?,
+        ?social_image: uriString?,
+        ?description: String?,
+        ?timestamp: DateTime?,
+        ?aliases: Array[String]?,
+        ?tags: Array[String]?,
+        ?resolves: Array[Issue]?,
+        ?notes: Array[Note]?,
+        ?properties: Array[Property]?
+      ) -> instance
+
+      def self.keyword_init?: () -> true
+
+      def self.members: () -> [ :type, :title, :featured_image, :social_image, :description, :timestamp, :aliases, :tags, :resolves, :notes, :properties ]
+
+      def members: () -> [ :type, :title, :featured_image, :social_image, :description, :timestamp, :aliases, :tags, :resolves, :notes, :properties ]
+
+      def initialize: (
+        type: String,
+        ?title: String?,
+        ?featured_image: uriString?,
+        ?social_image: uriString?,
+        ?description: String?,
+        ?timestamp: DateTime?,
+        ?aliases: Array[String]?,
+        ?tags: Array[String]?,
+        ?resolves: Array[Issue]?,
+        ?notes: Array[Note]?,
+        ?properties: Array[Property]?
+      ) -> void
+
+      attr_accessor type: String
+
+      attr_accessor title: String?
+
+      attr_accessor featured_image: uriString?
+
+      attr_accessor social_image: uriString?
+
+      attr_accessor description: String?
+
+      attr_accessor timestamp: DateTime?
+
+      attr_accessor aliases: Array[String]?
+
+      attr_accessor tags: Array[String]?
+
+      attr_accessor resolves: Array[Issue]?
+
+      attr_accessor notes: Array[Note]?
+
+      attr_accessor properties: Array[Property]?
+
+      include SBOM::CycloneDX::SchemaObject
+
+      extend SBOM::CycloneDX::SchemaObject::ClassMethods
+    end
+  end
+end

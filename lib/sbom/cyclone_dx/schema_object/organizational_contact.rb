@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
 
@@ -28,7 +27,7 @@ module SBOM
       def valid?
         Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
           Validator.valid?(String, name) &&
-          Validator.valid?(EmailAddress, email) &&
+          Validator.valid?(EmailAddress::Address, email) &&
           Validator.valid?(String, phone)
       end
     end

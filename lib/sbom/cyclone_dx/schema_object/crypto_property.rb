@@ -164,102 +164,102 @@ module SBOM
               items: [String, pattern: Pattern::REF_LINK]
             )
         end
+
+        class IKEv2TransformType < Struct.new(
+          "IKEv2TransformType",
+          # Encryption Algorithm (ENCR) - Transform Type 1: encryption algorithms
+          :encr,
+          # Pseudorandom Function (PRF) - Transform Type 2: pseudorandom functions
+          :prf,
+          # Integrity Algorithm (INTEG) - Transform Type 3: integrity algorithms
+          :integ,
+          # Key Exchange Method (KE) - Transform Type 4: Key Exchange Method (KE) per [RFC 9370](https://www.ietf.org/rfc/rfc9370.html), formerly called Diffie-Hellman Group (D-H).
+          :ke,
+          # Extended Sequence Numbers (ESN) - Specifies if an Extended Sequence Number (ESN) is used.
+          :esn,
+          # IKEv2 Authentication method - IKEv2 Authentication method
+          :auth,
+          keyword_init: true
+        )
+          include SchemaObject
+
+          def valid? # rubocop:disable Metrics/MethodLength
+            Validator.valid?(
+              Array,
+              encr,
+              items: [String, pattern: Pattern::REF_LINK]
+            ) &&
+              Validator.valid?(
+                Array,
+                prf,
+                items: [String, pattern: Pattern::REF_LINK]
+              ) &&
+              Validator.valid?(
+                Array,
+                integ,
+                items: [String, pattern: Pattern::REF_LINK]
+              ) &&
+              Validator.valid?(
+                Array,
+                ke,
+                items: [String, pattern: Pattern::REF_LINK]
+              ) &&
+              Validator.valid?(Boolean, esn) &&
+              Validator.valid?(
+                Array,
+                auth,
+                items: [String, pattern: Pattern::REF_LINK]
+              )
+          end
+        end
       end
 
-      class IKEv2TransformType < Struct.new(
-        "IKEv2TransformType",
-        # Encryption Algorithm (ENCR) - Transform Type 1: encryption algorithms
-        :encr,
-        # Pseudorandom Function (PRF) - Transform Type 2: pseudorandom functions
-        :prf,
-        # Integrity Algorithm (INTEG) - Transform Type 3: integrity algorithms
-        :integ,
-        # Key Exchange Method (KE) - Transform Type 4: Key Exchange Method (KE) per [RFC 9370](https://www.ietf.org/rfc/rfc9370.html), formerly called Diffie-Hellman Group (D-H).
-        :ke,
-        # Extended Sequence Numbers (ESN) - Specifies if an Extended Sequence Number (ESN) is used.
-        :esn,
-        # IKEv2 Authentication method - IKEv2 Authentication method
-        :auth,
+      class RelatedCryptoMaterialProperties < Struct.new(
+        "RelatedCryptoMaterialProperties",
+        # relatedCryptoMaterialType - The type for the related cryptographic material
+        :type,
+        # ID - The optional unique identifier for the related cryptographic material.
+        :id,
+        # State - The key state as defined by NIST SP 800-57.
+        :state,
+        # Algorithm Reference - The bom-ref to the algorithm used to generate the related cryptographic material.
+        :algorithm_ref,
+        # Creation Date - The date and time (timestamp) when the related cryptographic material was created.
+        :creation_date,
+        # Activation Date - The date and time (timestamp) when the related cryptographic material was activated.
+        :activation_date,
+        # Update Date - The date and time (timestamp) when the related cryptographic material was updated.
+        :update_date,
+        # Expiration Date - The date and time (timestamp) when the related cryptographic material expires.
+        :expiration_date,
+        # Value - The associated value of the cryptographic material.
+        :value,
+        # Size - The size of the cryptographic asset (in bits).
+        :asset_size,
+        # Format - The format of the related cryptographic material (e.g. P8, PEM, DER).
+        :format,
+        # Secured By - The mechanism by which the cryptographic asset is secured by.
+        :secured_by,
         keyword_init: true
       )
         include SchemaObject
 
-        def valid?
-          Validator.valid?(
-            Array,
-            encr,
-            items: [String, pattern: Pattern::REF_LINK]
-          ) &&
-            Validator.valid?(
-              Array,
-              prf,
-              items: [String, pattern: Pattern::REF_LINK]
-            ) &&
-            Validator.valid?(
-              Array,
-              integ,
-              items: [String, pattern: Pattern::REF_LINK]
-            ) &&
-            Validator.valid?(
-              Array,
-              ke,
-              items: [String, pattern: Pattern::REF_LINK]
-            ) &&
-            Validator.valid?(Boolean, esn) &&
-            Validator.valid?(
-              Array,
-              auth,
-              items: [String, pattern: Pattern::REF_LINK]
-            )
+        json_name :asset_size, "size"
+
+        def valid? # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+          Validator.valid?(String, type, enum: Enum::RELATED_CRYPTO_MATERIAL_TYPE) &&
+            Validator.valid?(String, id) &&
+            Validator.valid?(String, state, enum: Enum::RELATED_CRYPTO_MATERIAL_STATE) &&
+            Validator.valid?(String, algorithm_ref, pattern: Pattern::REF_LINK) &&
+            Validator.valid?(DateTime, creation_date) &&
+            Validator.valid?(DateTime, activation_date) &&
+            Validator.valid?(DateTime, update_date) &&
+            Validator.valid?(DateTime, expiration_date) &&
+            Validator.valid?(String, value) &&
+            Validator.valid?(Integer, asset_size) &&
+            Validator.valid?(String, format) &&
+            Validator.valid?(SecuredBy, secured_by)
         end
-      end
-    end
-
-    class RelatedCryptoMaterialProperties < Struct.new(
-      "RelatedCryptoMaterialProperties",
-      # relatedCryptoMaterialType - The type for the related cryptographic material
-      :type,
-      # ID - The optional unique identifier for the related cryptographic material.
-      :id,
-      # State - The key state as defined by NIST SP 800-57.
-      :state,
-      # Algorithm Reference - The bom-ref to the algorithm used to generate the related cryptographic material.
-      :algorithm_ref,
-      # Creation Date - The date and time (timestamp) when the related cryptographic material was created.
-      :creation_date,
-      # Activation Date - The date and time (timestamp) when the related cryptographic material was activated.
-      :activation_date,
-      # Update Date - The date and time (timestamp) when the related cryptographic material was updated.
-      :update_date,
-      # Expiration Date - The date and time (timestamp) when the related cryptographic material expires.
-      :expiration_date,
-      # Value - The associated value of the cryptographic material.
-      :value,
-      # Size - The size of the cryptographic asset (in bits).
-      :asset_size,
-      # Format - The format of the related cryptographic material (e.g. P8, PEM, DER).
-      :format,
-      # Secured By - The mechanism by which the cryptographic asset is secured by.
-      :secured_by,
-      keyword_init: true
-    )
-      include SchemaObject
-
-      json_name :asset_size, "size"
-
-      def valid?
-        Validator.valid?(String, type, enum: Enum::RELATED_CRYPTO_MATERIAL_TYPE) &&
-          Validator.valid?(String, id) &&
-          Validator.valid?(String, state, enum: Enum::RELATED_CRYPTO_MATERIAL_STATE) &&
-          Validator.valid?(String, algorithm_ref, pattern: Pattern::REF_LINK) &&
-          Validator.valid?(DateTime, creation_date) &&
-          Validator.valid?(DateTime, activation_date) &&
-          Validator.valid?(DateTime, update_date) &&
-          Validator.valid?(DateTime, expiration_date) &&
-          Validator.valid?(String, value) &&
-          Validator.valid?(Integer, asset_size) &&
-          Validator.valid?(String, format) &&
-          Validator.valid?(SecuredBy, secured_by)
       end
     end
   end

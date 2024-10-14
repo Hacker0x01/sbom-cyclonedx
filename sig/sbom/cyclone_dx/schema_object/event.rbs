@@ -1,9 +1,25 @@
 module SBOM
   module CycloneDX
     class Event < ::Struct[untyped]
-      def self.new: (?uid: untyped, ?description: untyped, ?time_received: untyped, ?data: untyped, ?source: untyped, ?target: untyped, ?properties: untyped) -> instance
+      def self.new: (
+        ?uid: String?,
+        ?description: String?,
+        ?time_received: DateTime?,
+        ?data: Attachment?,
+        ?source: ResourceReferenceChoice?,
+        ?target: ResourceReferenceChoice?,
+        ?properties: Array[Property]?
+      ) -> instance
 
-      def self.[]: (?uid: untyped, ?description: untyped, ?time_received: untyped, ?data: untyped, ?source: untyped, ?target: untyped, ?properties: untyped) -> instance
+      def self.[]: (
+        ?uid: String?,
+        ?description: String?,
+        ?time_received: DateTime?,
+        ?data: Attachment?,
+        ?source: ResourceReferenceChoice?,
+        ?target: ResourceReferenceChoice?,
+        ?properties: Array[Property]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,19 +27,19 @@ module SBOM
 
       def members: () -> [ :uid, :description, :time_received, :data, :source, :target, :properties ]
 
-      attr_accessor uid: untyped
+      attr_accessor uid: String?
 
-      attr_accessor description: untyped
+      attr_accessor description: String?
 
-      attr_accessor time_received: untyped
+      attr_accessor time_received: DateTime?
 
-      attr_accessor data: untyped
+      attr_accessor data: Attachment?
 
-      attr_accessor source: untyped
+      attr_accessor source: ResourceReferenceChoice?
 
-      attr_accessor target: untyped
+      attr_accessor target: ResourceReferenceChoice?
 
-      attr_accessor properties: untyped
+      attr_accessor properties: Array[Property]?
 
       include SBOM::CycloneDX::SchemaObject
 

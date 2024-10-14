@@ -1,9 +1,13 @@
 module SBOM
   module CycloneDX
     class Command < ::Struct[untyped]
-      def self.new: (?executed: String?, ?properties: Array[Property]?) -> instance
+      def self.new: (
+        ?executed: String?,
+        ?properties: Array[Property]?) -> instance
 
-      def self.[]: (?executed: String?, ?properties: Array[Property]?) -> instance
+      def self.[]: (
+        ?executed: String?,
+        ?properties: Array[Property]?) -> instance
 
       def self.keyword_init?: () -> true
 

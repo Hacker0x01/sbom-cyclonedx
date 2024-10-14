@@ -1,9 +1,23 @@
 module SBOM
   module CycloneDX
     class EnergyProvider < ::Struct[untyped]
-      def self.new: (?bom_ref: untyped, ?description: untyped, ?organization: untyped, ?energy_source: untyped, ?energy_provided: untyped, ?external_references: untyped) -> instance
+      def self.new: (
+        organization: OrganizationalEntity,
+        energy_source: String,
+        energy_provided: EnergyMeasure,
+        ?bom_ref: String?,
+        ?description: String?,
+        ?external_references: Array[ExternalReference]?
+      ) -> instance
 
-      def self.[]: (?bom_ref: untyped, ?description: untyped, ?organization: untyped, ?energy_source: untyped, ?energy_provided: untyped, ?external_references: untyped) -> instance
+      def self.[]: (
+        organization: OrganizationalEntity,
+        energy_source: String,
+        energy_provided: EnergyMeasure,
+        ?bom_ref: String?,
+        ?description: String?,
+        ?external_references: Array[ExternalReference]?
+      ) -> instance
 
       def self.keyword_init?: () -> true
 
@@ -11,17 +25,26 @@ module SBOM
 
       def members: () -> [ :bom_ref, :description, :organization, :energy_source, :energy_provided, :external_references ]
 
-      attr_accessor bom_ref: untyped
+      def initialize: (
+        organization: OrganizationalEntity,
+        energy_source: String,
+        energy_provided: EnergyMeasure,
+        ?bom_ref: String?,
+        ?description: String?,
+        ?external_references: Array[ExternalReference]?
+      ) -> void
 
-      attr_accessor description: untyped
+      attr_accessor bom_ref: String?
 
-      attr_accessor organization: untyped
+      attr_accessor description: String?
 
-      attr_accessor energy_source: untyped
+      attr_accessor organization: OrganizationalEntity
 
-      attr_accessor energy_provided: untyped
+      attr_accessor energy_source: String
 
-      attr_accessor external_references: untyped
+      attr_accessor energy_provided: EnergyMeasure
+
+      attr_accessor external_references: Array[ExternalReference]?
 
       include SBOM::CycloneDX::SchemaObject
 

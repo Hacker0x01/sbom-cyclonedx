@@ -21,7 +21,6 @@ module SBOM
       :classification,
       # Sensitive Data - A description of any sensitive data in a dataset.
       :sensitive_data,
-      # prop :graphics, GraphicsCollection
       :graphics,
       # Dataset Description - A description of the dataset. Can describe size of dataset, whether it's used for source code, training, testing, or validation, etc.
       :description,
