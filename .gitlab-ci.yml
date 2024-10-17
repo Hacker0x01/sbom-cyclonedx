@@ -7,9 +7,10 @@ default:
       - vendor/ruby
   before_script:
     - gem install bundler -v 2.5.17
+    - gem install rbs steep
+    - rbs collection install
     - bundle config set --local deployment
     - bundle install -j $(nproc)
-    - rbs collection install
 steep:
   stage: test
   script:
