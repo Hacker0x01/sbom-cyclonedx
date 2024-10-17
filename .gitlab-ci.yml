@@ -1,28 +1,57 @@
-default:
-  tags:
-    - runner-small
-  image: ruby:3.3.4
+.ruby-base:
+  image: $RUBY_IMAGE
   cache:
+    key:
+      files:
+        - Gemfile.lock
     paths:
-      - vendor/ruby
+      - sbom-cyclonedx/vendor/ruby
   before_script:
-    - rbs collection install
-    - gem install rbs steep
-    - gem install bundler -v 2.5.17
-    - bundle config set --local deployment
-    - bundle install -j $(nproc)
-steep:
+    - ruby -v
+    - cd sbom-cyclonedx
+    - bundle config set path vendor
+    - bundle install --jobs=$(nproc) --retry=3
+    - bundle exec rbs collection install
+  variables:
+    RUBY_IMAGE: 3.3
+lint:
+  extends: .ruby-base
   stage: test
+  cache:
+    - key:
+        files:
+          - Gemfile.lock
+      paths:
+        - sbom-cyclonedx/vendor/ruby
+    - key: ${CI_PROJECT_PATH_SLUG}-${RUBY_IMAGE}-rubocop-cache
+      paths:
+        - $CI_PROJECT_DIR/rubocop-cache
   script:
-    - steep check
-rubocop:
-  stage: test
-  script:
-    - rubocop
+    - bundle exec rubocop
 rspec:
+  extends: .ruby-base
   stage: test
   variables:
     RBS_TEST_TARGET: "SBOM::CycloneDX::*"
     RUBYOPT: "-rrbs/test/setup"
   script:
-    - rspec spec
+    - bundle exec rspec
+    - |
+      echo "Adjusting junit report based on project_path..."
+      sed -i 's|file="\./\([^"]*\)"|file="\./sbom-cyclonedx/\1"|g' "rspec.xml" || true
+      cp "rspec.xml" "$CI_PROJECT_DIR/${CI_JOB_ID}_junit.xml" || true
+      echo "Adjusting coverage report based on project_path..."
+      sed -i "s|$PWD|$CI_PROJECT_DIR|g" "coverage/coverage.xml" || true
+      sed -i 's|filename="\([^"]*\)"|filename="sbom-cyclonedx/\1"|g' "coverage/coverage.xml" || true
+      cp "coverage/coverage.xml" "$CI_PROJECT_DIR/${CI_JOB_ID}_cobertura.xml" || true
+  coverage: '/LOC\s\(\d+\.\d+%\)\scovered/'
+  artifacts:
+    when: always
+    paths:
+      - ${CI_JOB_ID}_junit.xml
+      - ${CI_JOB_ID}_cobertura.xml
+    reports:
+      junit: ${CI_JOB_ID}_junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: ${CI_JOB_ID}_cobertura.xml
