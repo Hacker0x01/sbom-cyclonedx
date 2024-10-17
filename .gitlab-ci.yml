@@ -1,4 +1,6 @@
 default:
+  tags:
+    - runner-small
   image: ruby:3.3.4
   cache:
     paths:
