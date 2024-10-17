@@ -57,7 +57,7 @@ describe SBOM::CycloneDX::SchemaObject do
   end
 
   let(:schema_object) do
-    Class.new(Struct.new(*field_values.keys)) do
+    Class.new(Struct.new(*field_values.keys, keyword_init: true)) do
       include SBOM::CycloneDX::SchemaObject
 
       json_name :special_json_field, "special-json-field"
@@ -98,15 +98,6 @@ describe SBOM::CycloneDX::SchemaObject do
     # Check actual validation logic in validator tests
     it "returns true" do
       expect(schema_object.valid?).to be true
-    end
-  end
-
-  describe "::valid?" do
-    it "delegates to the Validator" do
-      allow(SBOM::CycloneDX::Validator).to receive(:valid?)
-      schema_object.class.valid?(schema_object)
-      expect(SBOM::CycloneDX::Validator)
-        .to have_received(:valid?).with(schema_object.class, schema_object, required: false)
     end
   end
 

@@ -19,4 +19,4 @@ path: .gem_rbs_collection
 #     ignore: true
 gems:
   - name: email_address
-    ignore: true
+    ignore: false

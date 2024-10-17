@@ -20,10 +20,9 @@ module SBOM
       end
 
       def initialize(**args)
-        # Type-checking complains about the use of `super` here, but it is safe to use
-        # since we ensure this module is included in a Struct
-        super_method = method(__method__ || :initialize).super_method
-        super_method&.call(**args) if super_method&.owner == ::Struct
+        # There are corner-cases where we can not access the original subclass initializer, and type-checking does not
+        # know that we are currently in a struct.
+        args.each { |k, v| send(:[]=, k, v) }
 
         valid?
       end
