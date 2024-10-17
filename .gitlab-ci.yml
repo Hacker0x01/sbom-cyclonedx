@@ -15,7 +15,7 @@
     - bundle install --jobs=$(nproc) --retry=3
     - bundle exec rbs collection install
   variables:
-    RUBY_IMAGE: 3.3
+    RUBY_IMAGE: ruby:3.3-alpine
 lint:
   extends: .ruby-base
   stage: test
