@@ -26,6 +26,7 @@ rspec:
   extends: .ruby-base
   stage: test
   script:
+    - bundle exec rbs collection install
     - RUBYOPT="-rrbs/test/setup" RBS_TEST_TARGET="SBOM::CycloneDX::*" bundle exec rspec
   coverage: '/LOC\s\(\d+\.\d+%\)\scovered/'
   artifacts:
