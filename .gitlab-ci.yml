@@ -1,8 +1,24 @@
 default:
   image: ruby:3.3.4
-  # before_script:
-  #   - gem install bundler -v 2.5.17
-  #   - bundle install
-# example_job:
-#   script:
-#     - bundle exec rake
+  cache:
+    paths:
+      - vendor/ruby
+  before_script:
+    - gem install bundler -v 2.5.17
+    - bundle config set --local deployment
+    - bundle install -j $(nproc)
+steep:
+  stage: test
+  script:
+    - steep check
+rubocop:
+  stage: test
+  script:
+    - rubocop
+rspec:
+  stage: test
+  variables:
+    RBS_TEST_TARGET: "SBOM::CycloneDX::*"
+    RUBYOPT: "-rrbs/test/setup"
+  script:
+    - rspec spec

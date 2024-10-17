@@ -10,16 +10,16 @@ FactoryBot.define do
     trait :all_fields do
       mime_type { generate(:mime_type) }
       bom_ref { generate(:ref_link) }
-      supplier { association(:organizational_entity, :all_fields) }
-      manufacturer { association(:organizational_entity, :all_fields) }
-      authors { Array.new(rand(1..4)) { association(:organizational_contact, :all_fields) } }
+      supplier factory: :organizational_entity
+      manufacturer factory: :organizational_entity
+      authors { association_list(:organizational_contact, rand(1..3)) }
       publisher { Faker::Lorem.word }
       group { Faker::Lorem.word }
       version { Faker::App.semantic_version }
       description { Faker::Lorem.sentence }
       scope { SBOM::CycloneDX::Enum::SCOPE.sample }
-      hashes { association(:hash_data, :all_fields) }
-      licenses { Array.new(rand(1..4)) { association(%i[license_expression wrapped_license].sample, :all_fields) } }
+      hashes factory: :hash_data
+      licenses { license_choice_list(rand(1..3)) }
       copyright { Faker::Company.name }
       cpe do
         # cpe:2.3:part:vendor:product:version:update:edition:language:sw_edition:target_sw:target_hw:other
@@ -65,19 +65,19 @@ FactoryBot.define do
             "#{Faker::Crypto.sha1}"
         end
       end
-      swid { association(:swid, :all_fields) }
+      swid
       modified { Faker::Boolean.boolean }
-      pedigree { association(:pedigree, :all_fields) }
-      external_references { Array.new(rand(1..4)) { association(:external_reference, :all_fields) } }
+      pedigree
+      external_references { association_list(:external_reference, rand(1..3)) }
       components { [] }
-      evidence { association(:component_evidence, :all_fields) }
-      release_notes { association(:release_notes, :all_fields) }
-      model_card { association(:model_card, :all_fields) }
-      data { Array.new(rand(1..4)) { association(:component_data, :all_fields) } }
-      crypto_properties { association(:crypto_properties, :all_fields) }
-      properties { Array.new(rand(1..4)) { association(:property, :all_fields) } }
+      evidence factory: :component_evidence
+      release_notes
+      model_card
+      data { association_list(:component_data, rand(1..3)) }
+      crypto_properties
+      properties { association_list(:property, rand(1..3)) }
       tags { Array.new(rand(1..4)) { Faker::Lorem.word } }
-      signature { association(:signature, :all_fields) }
+      signature { generate_signature }
     end
 
     after(:build) do |component|
@@ -94,8 +94,8 @@ FactoryBot.define do
       ancestors { [] }
       descendants { [] }
       variants { [] }
-      commits { Array.new(rand(1..4)) { association(:commit, :all_fields) } }
-      patches { Array.new(rand(1..4)) { association(:patch, :all_fields) } }
+      commits { association_list(:commit, rand(1..3)) }
+      patches { association_list(:patch, rand(1..3)) }
       notes { Faker::Lorem.sentence }
     end
   end

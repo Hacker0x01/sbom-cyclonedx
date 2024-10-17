@@ -5,8 +5,8 @@ FactoryBot.define do
     trait :all_fields do
       uid { Faker::Crypto.sha1 }
       url { generate(:url) }
-      author { association(:identifiable_action, :all_fields) }
-      committer { association(:identifiable_action, :all_fields) }
+      author factory: :identifiable_action
+      committer factory: :identifiable_action
       message { Faker::Lorem.sentence }
     end
   end

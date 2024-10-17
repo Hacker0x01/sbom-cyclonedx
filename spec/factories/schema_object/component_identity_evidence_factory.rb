@@ -9,7 +9,7 @@ FactoryBot.define do
     trait :all_fields do
       confidence { rand(0.0..1.0) }
       concluded_value { %w[cpe purl omnibor_id swhid swid].sample }
-      methods_used { Array.new(rand(1..4)) { association :method, :all_fields } }
+      methods_used { association_list(:method, rand(1..3)) }
       tools { Array.new(rand(1..4)) { generate(:ref_or_cdx_urn) } }
     end
   end
@@ -17,6 +17,9 @@ FactoryBot.define do
   factory :method, parent: :schema_object, class: "SBOM::CycloneDX::ComponentIdentityEvidence::Method" do
     technique { Faker::Lorem.word }
     confidence { rand(0.0..1.0) }
-    value { Faker::Lorem.sentence }
+
+    trait :all_fields do
+      value { Faker::Lorem.sentence }
+    end
   end
 end

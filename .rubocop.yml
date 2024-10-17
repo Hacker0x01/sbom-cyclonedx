@@ -50,12 +50,15 @@ Metrics/MethodLength:
     - valid?
 Metrics/ParameterLists:
   CountKeywordArgs: false
-RSPec/ExampleLength:
+RSpec/ExampleLength:
   Max: 16
 RSpec/MultipleExpectations:
   Max: 4
 RSpec/MultipleMemoizedHelpers:
   Max: 12
+RSpec/SpecFilePathFormat:
+  Exclude:
+    - "spec/sbom/cyclone_dx/schema_object/*_spec.rb"
 Style/AccessorGrouping:
   Enabled: false
 Style/CommentedKeyword:

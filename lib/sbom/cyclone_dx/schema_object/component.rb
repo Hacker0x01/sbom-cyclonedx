@@ -3,6 +3,7 @@
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "commit"
 require_relative "component_data"
 require_relative "component_evidence"
 require_relative "crypto_properties"

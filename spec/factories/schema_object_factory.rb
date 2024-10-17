@@ -125,8 +125,6 @@ module SBOM
 end
 
 FactoryBot.define do
-  FactoryHelper.create_generators_on(self)
-
   factory :schema_object, class: "SBOM::CycloneDX::SchemaObject" do
     initialize_with { new(**attributes) }
 

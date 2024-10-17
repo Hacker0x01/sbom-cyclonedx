@@ -9,20 +9,20 @@ FactoryBot.define do
     trait :all_fields do
       bom_ref { generate(:ref_link) }
       name { Faker::Lorem.word }
-      contents { association(:content, :all_fields) }
+      contents factory: :content
       classification { Faker::Lorem.word }
       sensitive_data { Array.new(rand(1..4)) { Faker::Lorem.word } }
-      graphics { association(:graphics_collection, :all_fields) }
+      graphics factory: :graphics_collection
       description { Faker::Lorem.sentence }
-      governance { association(:data_governance, :all_fields) }
+      governance factory: :data_governance
     end
   end
 
   factory :content, parent: :schema_object, class: "SBOM::CycloneDX::ComponentData::Content" do
     trait :all_fields do
-      attachment { association(:attachment, :all_fields) }
+      attachment
       url { generate(:url) }
-      properties { Array.new(rand(1..4)) { association(:property, :all_fields) } }
+      properties { association_list(:property, rand(1..3)) }
     end
   end
 end

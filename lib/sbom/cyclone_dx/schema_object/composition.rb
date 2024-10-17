@@ -3,6 +3,9 @@
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "component"
+require_relative "service"
+require_relative "vulnerability"
 
 # Compositions
 module SBOM

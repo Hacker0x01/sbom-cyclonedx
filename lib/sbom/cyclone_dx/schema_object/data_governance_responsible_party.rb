@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative "../schema_object"
+require_relative "organizational_entity"
+require_relative "organizational_contact"
 
 # Anonymous class from DataGovernanceResponsibleParty
 module SBOM

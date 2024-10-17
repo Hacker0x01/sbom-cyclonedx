@@ -11,4 +11,21 @@ describe SBOM::CycloneDX::Annotation do
   it "can be initialized with all attributes" do
     expect { build(:annotation, :all_fields) }.not_to raise_error
   end
+
+  describe SBOM::CycloneDX::Annotation::Annotator do
+    it "can be initialized with minimum required attributes" do
+      expect { build(:annotator) }.not_to raise_error
+    end
+
+    it "can be initialized with all attributes" do
+      expect { build(:annotator, :all_fields) }.not_to raise_error
+    end
+
+    it "is valid with organization, contact, component, or service" do
+      expect { build(:annotator, :organization) }.not_to raise_error
+      expect { build(:annotator, :contact) }.not_to raise_error
+      expect { build(:annotator, :component) }.not_to raise_error
+      expect { build(:annotator, :service) }.not_to raise_error
+    end
+  end
 end

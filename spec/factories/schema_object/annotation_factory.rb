@@ -9,31 +9,55 @@ FactoryBot.define do
 
     trait :all_fields do
       bom_ref { generate(:ref_link) }
-      annotator { association(:annotator, :all_fields) }
-      signature { association(:signature, :all_fields) }
+      annotator
+      signature { generate_signature }
     end
   end
 
   factory :annotator, parent: :schema_object, class: "SBOM::CycloneDX::Annotation::Annotator" do
-    organization { association(:organizational_entity) }
-
-    trait :organization do
-      organization { association(:organizational_entity) }
+    transient do
+      annotator_type do
+        %i[
+          organization
+          individual
+          component
+          service
+        ].sample
+      end
     end
 
-    trait :individual do
-      organization { nil }
-      individual { association(:organizational_contact) }
+    trait :all_fields
+
+    trait :organization do
+      transient { annotator_type { :organization } }
+    end
+
+    trait :contact do
+      transient { annotator_type { :contact } }
     end
 
     trait :component do
-      organization { nil }
-      component
+      transient { annotator_type { :component } }
     end
 
     trait :service do
-      organization { nil }
-      service
+      transient { annotator_type { :service } }
+    end
+
+    organization do
+      annotator_type == :organization ? association(:organizational_entity) : nil
+    end
+
+    individual do
+      annotator_type == :individual ? association(:organizational_contact) : nil
+    end
+
+    component do
+      annotator_type == :component ? association(:component) : nil
+    end
+
+    service do
+      annotator_type == :service ? association(:service) : nil
     end
   end
 end

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :copyright, parent: :schema_object, class: "SBOM::CycloneDX::Copyright" do
-    text { Faker::Lorem.sentence }
+    text { "©#{rand(1979..2024)} #{Faker::Company.name}" }
 
     trait :all_fields
   end

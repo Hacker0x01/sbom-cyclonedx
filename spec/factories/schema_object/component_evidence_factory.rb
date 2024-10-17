@@ -3,17 +3,17 @@
 FactoryBot.define do
   factory :component_evidence, parent: :schema_object, class: "SBOM::CycloneDX::ComponentEvidence" do
     trait :all_fields do
-      identity { Array.new(rand(1..4)) { association(:component_identity_evidence, :all_fields) } }
-      occurrences { Array.new(rand(1..4)) { association(:occurrence, :all_fields) } }
-      callstack { association(:callstack, :all_fields) }
-      licenses { Array.new(rand(1..4)) { association(%i[license_expression wrapped_license].sample, :all_fields) } }
-      copyright { Array.new(rand(1..4)) { association(:copyright, :all_fields) } }
+      identity { association_list(:component_identity_evidence, rand(1..3)) }
+      occurrences { association_list(:occurrence, rand(1..3)) }
+      callstack
+      licenses { license_choice_list(rand(1..3)) }
+      copyright { association_list(:copyright, rand(1..3)) }
     end
   end
 
   factory :callstack, parent: :schema_object, class: "SBOM::CycloneDX::ComponentEvidence::Callstack" do
     trait :all_fields do
-      frames { Array.new(rand(1..4)) { association(:frame, :all_fields) } }
+      frames { association_list(:frame, rand(1..3)) }
     end
   end
 
