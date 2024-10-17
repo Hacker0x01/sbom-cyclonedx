@@ -32,11 +32,8 @@ lint:
 rspec:
   extends: .ruby-base
   stage: test
-  variables:
-    RBS_TEST_TARGET: "SBOM::CycloneDX::*"
-    RUBYOPT: "-rrbs/test/setup"
   script:
-    - bundle exec rspec
+    - RUBYOPT="-rrbs/test/setup" RBS_TEST_TARGET="SBOM::CycloneDX::*" bundle exec rspec
   coverage: '/LOC\s\(\d+\.\d+%\)\scovered/'
   artifacts:
     when: always
