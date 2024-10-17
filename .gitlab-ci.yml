@@ -6,8 +6,8 @@ default:
     paths:
       - vendor/ruby
   before_script:
-    - gem install rbs steep
     - rbs collection install
+    - gem install rbs steep
     - gem install bundler -v 2.5.17
     - bundle config set --local deployment
     - bundle install -j $(nproc)
