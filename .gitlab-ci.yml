@@ -1,4 +1,6 @@
 .ruby-base:
+  tags:
+    - runner-small
   image: $RUBY_IMAGE
   cache:
     key:
