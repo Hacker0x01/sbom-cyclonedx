@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "organizational_contact"
+require_relative "postal_address"
 require_relative "../pattern"
 require_relative "../schema_object"
 

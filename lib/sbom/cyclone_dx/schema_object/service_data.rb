@@ -28,7 +28,7 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize( # rubocop:disable Metrics/ParameterLists
+      def initialize(
         flow:,
         classification:,
         source:,
@@ -46,8 +46,20 @@ module SBOM
           Validator.valid?(String, name) &&
           Validator.valid?(String, description) &&
           Validator.valid?(DataGovernance, governance) &&
-          Validator.valid?(Union, source, klasses: [URI, String], pattern: Pattern::BOM_LINK, required: true) &&
-          Validator.valid?(Union, destination, klasses: [URI, String], pattern: Pattern::BOM_LINK, required: true)
+          Validator.valid?(
+            SBOM::CycloneDX::Type::Union,
+            source,
+            klasses: [URI, String],
+            pattern: Pattern::CDX_URN,
+            required: true
+          ) &&
+          Validator.valid?(
+            SBOM::CycloneDX::Type::Union,
+            destination,
+            klasses: [URI, String],
+            pattern: Pattern::CDX_URN,
+            required: true
+          )
       end
     end
   end

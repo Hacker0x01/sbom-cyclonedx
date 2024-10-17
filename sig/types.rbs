@@ -4,13 +4,13 @@ type fieldValue = String |
                   bool |
                   DateTime |
                   URI |
-                  EmailAddress::Address |
+                  SBOM::CycloneDX::EmailAddress |
                   Array[fieldValue] |
                   SBOM::CycloneDX::SchemaObject::ClassMethods |
                   nil
 
 type uriString = String | URI::HTTP
-type emailString = String | EmailAddress::Address
+type emailString = String | SBOM::CycloneDX::EmailAddress
 
 type jsonObject = Float | Integer | String | bool | Array[jsonObject] | Hash[String, jsonObject] | nil
 
@@ -19,4 +19,8 @@ module URI
 
   class HTTP
   end
+end
+
+# Steep can't find this for some raeason
+class Date::Error < Exception
 end

@@ -20,7 +20,7 @@ module SBOM
       def valid?
         Validator.valid?(DateTime, timestamp) &&
           Validator.valid?(String, name) &&
-          Validator.valid?(EmailAddress::Address, email)
+          Validator.valid?(SBOM::CycloneDX::EmailAddress, email)
       end
     end
   end

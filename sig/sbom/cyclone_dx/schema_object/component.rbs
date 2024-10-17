@@ -30,7 +30,7 @@ module SBOM
         ?release_notes: ReleaseNotes?,
         ?model_card: ModelCard?,
         ?data: Array[ComponentData]?,
-        ?crypto_properties: CryptoProperty?,
+        ?crypto_properties: CryptoProperties?,
         ?properties: Array[Property]?,
         ?tags: Array[String]?,
         ?signature: Signature?
@@ -65,7 +65,7 @@ module SBOM
         ?release_notes: ReleaseNotes?,
         ?model_card: ModelCard?,
         ?data: Array[ComponentData]?,
-        ?crypto_properties: CryptoProperty?,
+        ?crypto_properties: CryptoProperties?,
         ?properties: Array[Property]?,
         ?tags: Array[String]?,
         ?signature: Signature?
@@ -106,7 +106,7 @@ module SBOM
         ?release_notes: ReleaseNotes?,
         ?model_card: ModelCard?,
         ?data: Array[ComponentData]?,
-        ?crypto_properties: CryptoProperty?,
+        ?crypto_properties: CryptoProperties?,
         ?properties: Array[Property]?,
         ?tags: Array[String]?,
         ?signature: Signature?
@@ -168,7 +168,7 @@ module SBOM
 
       attr_accessor data: Array[ComponentData]?
 
-      attr_accessor crypto_properties: CryptoProperty?
+      attr_accessor crypto_properties: CryptoProperties?
 
       attr_accessor properties: Array[Property]?
 

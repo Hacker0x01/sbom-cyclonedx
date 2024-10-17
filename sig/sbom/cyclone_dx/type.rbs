@@ -1,0 +1,11 @@
+module SBOM
+  module CycloneDX
+    module Type
+      module Boolean
+      end
+
+      module Union
+      end
+    end
+  end
+end

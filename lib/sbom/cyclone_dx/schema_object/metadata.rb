@@ -32,9 +32,10 @@ module SBOM
     )
       include SchemaObject
 
-      def valid?
+      def valid? # rubocop:disable Metrics/PerceivedComplexity
         Validator.valid?(DateTime, timestamp) &&
-          Validator.valid?(Array, lifecycles, items: [Union, klasses: [PreDefinedPhase, CustomPhase]]) &&
+          Validator.valid?(Array, lifecycles,
+                           items: [SBOM::CycloneDX::Type::Union, klasses: [PreDefinedPhase, CustomPhase]]) &&
           Validator.valid?(Tools, tools) &&
           Validator.valid?(OrganizationalEntity, manufacturer) &&
           Validator.valid?(Array, authors, items: OrganizationalContact) &&
@@ -56,7 +57,7 @@ module SBOM
         include SchemaObject
 
         def initialize(name:, description: nil)
-          super(name: name, description: description)
+          super
         end
 
         def valid?
@@ -73,8 +74,8 @@ module SBOM
       )
         include SchemaObject
 
-        def initialize(phase:)
-          super(phase: phase)
+        def initialize(phase:) # rubocop:disable Lint/UselessMethodDefinition
+          super
         end
 
         def valid?

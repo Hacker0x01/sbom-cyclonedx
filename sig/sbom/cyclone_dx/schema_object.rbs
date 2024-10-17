@@ -12,11 +12,11 @@ module SBOM
 
       # Inherited from elsewhere
       def to_h: () -> Hash[Symbol, untyped]
+      def members: () -> Array[Symbol]
 
       module ClassMethods
         @json_name_map: Hash[Symbol, String]
 
-        def valid?: (untyped, ?required: bool) -> bool
         def json_name_for: (Symbol) -> String
         def json_name: (Symbol, String) -> void
 

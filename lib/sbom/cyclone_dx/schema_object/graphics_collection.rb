@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../schema_object"
+require_relative "graphic"
 
 # Graphics Collection - A collection of graphics that represent various measurements.
 module SBOM

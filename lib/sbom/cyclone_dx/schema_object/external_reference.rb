@@ -31,7 +31,8 @@ module SBOM
       end
 
       def valid?
-        Validator.valid?(Union, url, klasses: [URI, String], pattern: Pattern::BOM_LINK, required: true) &&
+        Validator.valid?(SBOM::CycloneDX::Type::Union, url, klasses: [URI, String], pattern: Pattern::CDX_URN,
+                                                            required: true) &&
           Validator.valid?(String, comment) &&
           Validator.valid?(String, type, enum: Enum::EXTERNAL_REFERENCE_TYPE, required: true) &&
           Validator.valid?(Array, hashes, items: HashData)

@@ -57,7 +57,7 @@ module SBOM
         class Frame < ::Struct[untyped]
           def self.new: (
             ?package: String?,
-            ?module: String?,
+            ?source_module: String?,
             ?function: String?,
             ?parameters: Array[String]?,
             ?line: Integer?,
@@ -67,7 +67,7 @@ module SBOM
 
           def self.[]: (
             ?package: String?,
-            ?module: String?,
+            ?source_module: String?,
             ?function: String?,
             ?parameters: Array[String]?,
             ?line: Integer?,
@@ -77,13 +77,13 @@ module SBOM
 
           def self.keyword_init?: () -> true
 
-          def self.members: () -> [ :package, :module, :function, :parameters, :line, :column, :full_filename ]
+          def self.members: () -> [ :package, :source_module, :function, :parameters, :line, :column, :full_filename ]
 
-          def members: () -> [ :package, :module, :function, :parameters, :line, :column, :full_filename ]
+          def members: () -> [ :package, :source_module, :function, :parameters, :line, :column, :full_filename ]
 
           attr_accessor package: String?
 
-          attr_accessor module: String?
+          attr_accessor source_module: String?
 
           attr_accessor function: String?
 

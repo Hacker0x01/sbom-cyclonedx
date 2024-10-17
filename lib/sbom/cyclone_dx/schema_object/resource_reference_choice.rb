@@ -25,7 +25,7 @@ module SBOM
       def valid?
         Validator.valid?(
           String, ref,
-          pattern: Pattern::REF_LINK_OR_BOM_LINK_ELEMENT,
+          pattern: Pattern::REF_OR_CDX_URN,
           required: external_reference.nil?
         ) &&
           Validator.valid?(ExternalReference, external_reference, required: ref.nil?)

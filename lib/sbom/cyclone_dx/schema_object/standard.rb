@@ -32,7 +32,7 @@ module SBOM
 
       json_name :bom_ref, "bom-ref"
 
-      def valid? # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+      def valid? # rubocop:disable Metrics/PerceivedComplexity
         Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
           Validator.valid?(String, name) &&
           Validator.valid?(String, version) &&
@@ -98,7 +98,7 @@ module SBOM
 
         json_name :bom_ref, "bom-ref"
 
-        def valid? # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+        def valid? # rubocop:disable Metrics/PerceivedComplexity
           Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
             Validator.valid?(String, identifier) &&
             Validator.valid?(String, title) &&

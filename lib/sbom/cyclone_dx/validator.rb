@@ -1,65 +1,94 @@
 # frozen_string_literal: true
 
+require "active_support/all"
+require "date"
+require "uri"
 require_relative "schema_object"
 require_relative "../cyclone_dx"
 
 module SBOM
   module CycloneDX
+    # TODO: Add helpful errors
     module Validator
-      # TODO: Add helpful errors
       class << self
-        # NOTE: Some "types" are more-strict than others. For example, the `URI` and `EmailAddress` types
-        #       allow both strings and their respective classes. When a string is provided, it is validated
-        #       by the class, but kept as a String. This is to allow for better usability of this gem.
-        #       DateTime _must_ be a DateTime object, and not a string.
-        def valid?(klass, object, required: false, **type_specific_args) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity,Metrics/MethodLength
-          return false if object.nil? && required
-          return true if type_specific_args[:const] == object && object.is_a?(klass)
-
-          return valid_string?(object, **type_specific_args) if klass == String
-          return valid_integer?(object, **type_specific_args) if klass == Integer
-          return valid_float?(object, **type_specific_args) if klass == Float
-          return valid_boolean?(object, **type_specific_args) if klass == Boolean
-          return valid_schema_object?(klass, object, **type_specific_args) if klass < SchemaObject
-          return valid_array?(object, items: type_specific_args.delete(:items), **type_specific_args) if klass == Array
-
-          return object.is_a?(DateTime) if klass == DateTime
-          return object.is_a?(URI::HTTP) || valid_string?(object, format: :uri) if klass == URI
-
-          if klass == Union
-            return valid_union?(object, klasses: type_specific_args.delete(:klasses), **type_specific_args)
+        # NOTE: Some "types" are more-strict than others. For example, the `DateTime`, `URI` and `EmailAddress` types
+        #       allow both strings and their respective classes. When a string is provided, it is validated by the
+        #       class, but kept as a String. This is to allow for better usability of this gem.
+        def valid?(klass, object, required: false, **kwargs) # rubocop:disable Metrics/PerceivedComplexity
+          if kwargs.key?(:const)
+            return valid_const?(klass, object, const: kwargs.delete(:const), required: required, **kwargs)
           end
+          return !required if object.nil?
 
-          if klass == EmailAddress::Address
-            return (object.is_a?(EmailAddress::Address) && object.valid?) || valid_string?(object, format: :email)
+          # It is not possible to do a case/switch on a class, so we have to do it on the class name
+          case klass.to_s
+          when "Array"
+            raise ArgumentError, ":items must be provided for array validation" unless kwargs.key?(:items)
+
+            valid_array?(object, items: kwargs.delete(:items), **kwargs)
+          when "DateTime" then valid_datetime?(object)
+          when "Float" then valid_float?(object, **kwargs)
+          when "Integer" then valid_integer?(object, **kwargs)
+          when "String" then valid_string?(object, **kwargs)
+          when "URI" then valid_uri?(object)
+          when "SBOM::CycloneDX::Type::Boolean" then valid_boolean?(object, **kwargs)
+          when "SBOM::CycloneDX::EmailAddress" then valid_email?(object)
+          when "SBOM::CycloneDX::Type::Union"
+            raise ArgumentError, ":klasses must be provided for union validation" unless kwargs.key?(:klasses)
+
+            valid_union?(object, klasses: kwargs.delete(:klasses), **kwargs)
+          when /\ASBOM::CycloneDX::/
+            raise ArgumentError, "Unsupported type: #{klass}" unless klass < SchemaObject
+
+            valid_schema_object?(klass, object, **kwargs)
+          else raise ArgumentError, "Unsupported type: #{klass}"
           end
-
-          raise ArgumentError, "Unsupported type: #{klass}"
         end
 
         private
 
-        def valid_string?(object, enum: nil, format: nil, max_length: nil, min_length: nil, pattern: nil, **_extra_args) # rubocop:disable Metrics/ParameterLists,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+        def valid_const?(klass, object, const:, required:, **kwargs)
+          # Really, this should be checked only once, but it's not worth the complexity right now
+          unless const.is_a?(klass) || valid?(klass, const, required: required, **kwargs)
+            raise ArgumentError, "const value has wrong type: #{const.class}"
+          end
+
+          const == object
+        end
+
+        def valid_string?(object, enum: nil, max_length: nil, min_length: nil, pattern: nil, **_kwargs) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
           return false unless object.is_a?(String)
 
-          valid_format = case format
-                         when :uri then URI.parse(object).is_a?(URI::HTTP)
-                         when :email then EmailAddress.valid?(object)
-                         else true
-                         end
-
           (enum.nil? || enum.include?(object)) &&
-            valid_format &&
             (max_length.nil? || object.length <= max_length) &&
             (min_length.nil? || object.length >= min_length) &&
             (pattern.nil? || object.match?(pattern))
         end
 
-        def valid_integer?(object, maximum: nil, minimum: nil, **_extra_args)
+        def valid_datetime?(object)
+          return true if object.is_a?(DateTime) || object.is_a?(Time)
+          return false unless valid_string?(object)
+
+          parsed = DateTime.parse(object)
+          parsed.is_a?(DateTime) && parsed.iso8601 == object
+        rescue Date::Error
+          false
+        end
+
+        def valid_uri?(object)
+          object.is_a?(URI::HTTP) || (valid_string?(object) && URI.parse(object).is_a?(URI::HTTP))
+        end
+
+        def valid_email?(object)
+          (object.is_a?(SBOM::CycloneDX::EmailAddress) && object.valid?) ||
+            (valid_string?(object) && SBOM::CycloneDX::EmailAddress.valid?(object))
+        end
+
+        def valid_integer?(object, maximum: nil, minimum: nil, **_kwargs)
           object.is_a?(Integer) && valid_numeric?(object, maximum: maximum, minimum: minimum)
         end
 
-        def valid_float?(object, maximum: nil, minimum: nil, **_extra_args)
+        def valid_float?(object, maximum: nil, minimum: nil, **_kwargs)
           object.is_a?(Float) && valid_numeric?(object, maximum: maximum, minimum: minimum)
         end
 
@@ -67,19 +96,19 @@ module SBOM
           (maximum.nil? || object <= maximum) && (minimum.nil? || object >= minimum)
         end
 
-        def valid_boolean?(object, **_extra_args)
+        def valid_boolean?(object, **_kwargs)
           object.is_a?(TrueClass) || object.is_a?(FalseClass)
         end
 
         # TODO: Avoid circular references
-        def valid_schema_object?(klass, object, **_extra_args)
+        def valid_schema_object?(klass, object, **_kwargs)
           object.is_a?(klass) && object.valid?
         end
 
         # NOTE: Items in arrays are _required_ (not nilable) by default
         #       This can be overridden by setting the `required` key in the items args
         #       Empty arrays are allowed by default
-        def valid_array?(object, items:, unique: false, **_extra_args) # rubocop:disable Metrics/CyclomaticComplexity
+        def valid_array?(object, items:, unique: false, **_kwargs) # rubocop:disable Metrics/CyclomaticComplexity
           object.is_a?(Array) &&
             (!unique || object.uniq.length == object.length) &&
             object.all? do |item|
@@ -93,8 +122,13 @@ module SBOM
             end
         end
 
-        def valid_union?(object, klasses:, **type_specific_args)
-          klasses.any? { |klass| valid?(klass, object, **type_specific_args) }
+        def valid_union?(object, klasses:, **kwargs)
+          if klasses.blank?
+            raise ArgumentError,
+                  "Union type requires klasses, but received object: #{object}, klasses: #{klasses.inspect}"
+          end
+
+          klasses.any? { |klass| valid?(klass, object, **kwargs) }
         end
       end
     end

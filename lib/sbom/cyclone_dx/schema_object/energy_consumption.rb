@@ -24,7 +24,7 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize( # rubocop:disable Metrics/ParameterLists
+      def initialize(
         activity:,
         energy_providers:,
         activity_energy_cost:,

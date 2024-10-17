@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
-require_relative "signature"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "component"
+require_relative "organizational_contact"
+require_relative "organizational_entity"
+require_relative "service"
+require_relative "signature"
 
 # Annotations - A comment, note, explanation, or similar textual content which provides additional context to the object(s) being annotated.
 module SBOM
@@ -27,7 +31,7 @@ module SBOM
 
       json_name :bom_ref, "bom-ref"
 
-      def initialize(subjects:, annotator:, timestamp:, text:, signature: nil, bom_ref: nil) # rubocop:disable Metrics/ParameterLists
+      def initialize(subjects:, annotator:, timestamp:, text:, signature: nil, bom_ref: nil)
         super
       end
 
@@ -37,7 +41,8 @@ module SBOM
             Array,
             subjects,
             unique: true,
-            items: [String, pattern: Pattern::REF_LINK_OR_BOM_LINK_ELEMENT]
+            required: true,
+            items: [String, pattern: Pattern::REF_OR_CDX_URN, requried: true]
           ) &&
           Validator.valid?(Annotator, annotator, required: true) &&
           Validator.valid?(DateTime, timestamp, required: true) &&

@@ -6,6 +6,7 @@ require:
 AllCops:
   TargetRubyVersion: 3.0
   SuggestExtensions: false
+  NewCops: enable
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -39,11 +40,22 @@ Layout/LeadingCommentSpace:
 Layout/EmptyLineAfterMagicComment:
   Enabled: false
 Metrics/AbcSize:
-  Max: 20
+  AllowedMethods:
+    - valid?
+Metrics/CyclomaticComplexity:
+  AllowedMethods:
+    - valid?
 Metrics/MethodLength:
+  AllowedMethods:
+    - valid?
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+RSPec/ExampleLength:
   Max: 16
 RSpec/MultipleExpectations:
   Max: 4
+RSpec/MultipleMemoizedHelpers:
+  Max: 12
 Style/AccessorGrouping:
   Enabled: false
 Style/CommentedKeyword:

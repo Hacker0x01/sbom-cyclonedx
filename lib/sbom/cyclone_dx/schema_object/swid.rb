@@ -25,7 +25,7 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize( # rubocop:disable Metrics/ParameterLists
+      def initialize(
         tag_id:,
         name:,
         version: "0.0",
@@ -42,7 +42,7 @@ module SBOM
           Validator.valid?(String, name, required: true) &&
           Validator.valid?(String, version) &&
           Validator.valid?(Integer, tag_version) &&
-          Validator.valid?(Boolean, patch) &&
+          Validator.valid?(SBOM::CycloneDX::Type::Boolean, patch) &&
           Validator.valid?(Attachment, text) &&
           Validator.valid?(URI, url)
       end

@@ -1,0 +1,12 @@
+module SBOM
+  module CycloneDX
+    class EmailAddress < ::EmailAddress::Address
+      def initialize: (String, ?Hash[Symbol, untyped], ?String) -> void
+
+      alias as_json to_s
+      alias to_json to_s
+
+      def self.valid?: (untyped) -> bool
+    end
+  end
+end

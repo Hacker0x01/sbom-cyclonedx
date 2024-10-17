@@ -44,7 +44,7 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize( # rubocop:disable Metrics/ParameterLists,Metrics/MethodLength
+      def initialize( # rubocop:disable Metrics/MethodLength
         serial_number: nil,
         version: 1,
         metadata: nil,
@@ -84,8 +84,8 @@ module SBOM
         )
       end
 
-      def valid? # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
-        Validator.valid?(String, serial_number, pattern: Pattern::URN_UUID) &&
+      def valid? # rubocop:disable Metrics/PerceivedComplexity
+        Validator.valid?(String, serial_number, pattern: Pattern::BOM_SERIAL_NUMBER) &&
           Validator.valid?(Integer, version, minimum: 1, required: true) &&
           Validator.valid?(Metadata, metadata) &&
           Validator.valid?(Array, components, unique: true, items: Component) &&

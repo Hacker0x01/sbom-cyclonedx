@@ -41,7 +41,7 @@ module SBOM
 
       json_name :bom_ref, "bom-ref"
 
-      def initialize( # rubocop:disable Metrics/ParameterLists
+      def initialize(
         bom_ref:,
         uid:,
         type:,
@@ -58,7 +58,7 @@ module SBOM
         super
       end
 
-      def valid? # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+      def valid? # rubocop:disable Metrics/PerceivedComplexity
         Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK, required: true) &&
           Validator.valid?(String, uid, required: true) &&
           Validator.valid?(String, name) &&

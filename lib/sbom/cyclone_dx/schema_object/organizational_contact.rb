@@ -27,7 +27,7 @@ module SBOM
       def valid?
         Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
           Validator.valid?(String, name) &&
-          Validator.valid?(EmailAddress::Address, email) &&
+          Validator.valid?(SBOM::CycloneDX::EmailAddress, email) &&
           Validator.valid?(String, phone)
       end
     end

@@ -7,8 +7,8 @@ require_relative "../schema_object"
 # Cryptographic Properties - Cryptographic assets have properties that uniquely define them and that make them actionable for further reasoning. As an example, it makes a difference if one knows the algorithm family (e.g. AES) or the specific variant or instantiation (e.g. AES-128-GCM). This is because the security level and the algorithm primitive (authenticated encryption) are only defined by the definition of the algorithm variant. The presence of a weak cryptographic algorithm like SHA1 vs. HMAC-SHA1 also makes a difference.
 module SBOM
   module CycloneDX
-    class CryptoProperty < Struct.new(
-      "CryptoProperty",
+    class CryptoProperties < Struct.new(
+      "CryptoProperties",
       # Asset Type - Cryptographic assets occur in several forms. Algorithms and protocols are most commonly implemented in specialized cryptographic libraries. They may, however, also be 'hardcoded' in software components. Certificates and related cryptographic material like keys, tokens, secrets or passwords are other cryptographic assets to be modelled.
       :asset_type,
       # Algorithm Properties - Additional properties specific to a cryptographic algorithm.
@@ -25,7 +25,7 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize( # rubocop:disable Metrics/ParameterLists
+      def initialize(
         asset_type:,
         algorithm_properties: nil,
         certificate_properties: nil,
@@ -73,7 +73,7 @@ module SBOM
       )
         include SchemaObject
 
-        def valid? # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
+        def valid? # rubocop:disable Metrics/PerceivedComplexity
           Validator.valid?(String, primitive, enum: Enum::PRIMITIVE) &&
             Validator.valid?(String, parameter_set_identifier) &&
             Validator.valid?(String, curve) &&
@@ -120,7 +120,7 @@ module SBOM
       )
         include SchemaObject
 
-        def valid? # rubocop:disable Metrics/CyclomaticComplexity
+        def valid?
           Validator.valid?(String, subject_name) &&
             Validator.valid?(String, issuer_name) &&
             Validator.valid?(DateTime, not_valid_before) &&
@@ -183,7 +183,7 @@ module SBOM
         )
           include SchemaObject
 
-          def valid? # rubocop:disable Metrics/MethodLength
+          def valid?
             Validator.valid?(
               Array,
               encr,
@@ -204,7 +204,7 @@ module SBOM
                 ke,
                 items: [String, pattern: Pattern::REF_LINK]
               ) &&
-              Validator.valid?(Boolean, esn) &&
+              Validator.valid?(SBOM::CycloneDX::Type::Boolean, esn) &&
               Validator.valid?(
                 Array,
                 auth,
@@ -246,7 +246,7 @@ module SBOM
 
         json_name :asset_size, "size"
 
-        def valid? # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+        def valid? # rubocop:disable Metrics/PerceivedComplexity
           Validator.valid?(String, type, enum: Enum::RELATED_CRYPTO_MATERIAL_TYPE) &&
             Validator.valid?(String, id) &&
             Validator.valid?(String, state, enum: Enum::RELATED_CRYPTO_MATERIAL_STATE) &&

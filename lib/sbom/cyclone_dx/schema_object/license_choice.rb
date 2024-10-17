@@ -3,12 +3,14 @@
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "license"
 
 module SBOM
   module CycloneDX
     module LicenseChoice
       def self.valid?(object, **type_specific_args)
-        Validator.valid?(Union, object, klasses: [LicenseExpression, WrappedLicense], **type_specific_args)
+        Validator.valid?(SBOM::CycloneDX::Type::Union, object, klasses: [LicenseExpression, WrappedLicense],
+                                                               **type_specific_args)
       end
 
       class LicenseExpression < Struct.new(
@@ -51,8 +53,8 @@ module SBOM
       )
         include SchemaObject
 
-        def initialize(license:)
-          super(license: license)
+        def initialize(license:) # rubocop:disable Lint/UselessMethodDefinition
+          super
         end
 
         def valid?

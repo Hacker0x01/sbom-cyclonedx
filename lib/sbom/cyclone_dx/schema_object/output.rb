@@ -26,7 +26,7 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize(type:, source: nil, target: nil, resource: nil, data: nil, environment_vars: nil, properties: nil) # rubocop:disable Metrics/ParameterLists
+      def initialize(type:, source: nil, target: nil, resource: nil, data: nil, environment_vars: nil, properties: nil)
         if [resource, data, environment_vars].none?
           raise ArgumentError, "At least one of `resource`, `data`, or `environment_vars` must be provided"
         end
@@ -34,7 +34,7 @@ module SBOM
         super
       end
 
-      def valid? # rubocop:disable Metrics/AbcSize
+      def valid?
         Validator.valid?(String, type, enum: Enum::OUTPUT_TYPE, required: true) &&
           Validator.valid?(ResourceReferenceChoice, source) &&
           Validator.valid?(ResourceReferenceChoice, target) &&
@@ -44,7 +44,7 @@ module SBOM
             Array,
             environment_vars,
             unique: true,
-            items: [Union, klasses: [Property, String]],
+            items: [SBOM::CycloneDX::Type::Union, klasses: [Property, String]],
             required: [resource, data].none?
           ) &&
           Validator.valid?(Array, properties, items: Property)

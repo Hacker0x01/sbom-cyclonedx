@@ -455,7 +455,7 @@ module SBOM
       ].freeze
 
       # License ID (SPDX) - A valid SPDX license identifier. If specified, this value must be one of the enumeration of valid SPDX license identifiers defined in the spdx.schema.json (or spdx.xml) subschema which is synchronized with the official SPDX license list.
-      LICENSE_ID = [
+      LICENSE_ID = [ # rubocop:disable Metrics/CollectionLiteralLength
         # Attribution Assurance License
         "AAL",
         # Abstyles License

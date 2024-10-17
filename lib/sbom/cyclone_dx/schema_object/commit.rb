@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../schema_object"
+require_relative "identifiable_action"
 
 # Commit - Specifies an individual commit
 module SBOM

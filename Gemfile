@@ -14,6 +14,7 @@ gem "steep", "~> 1.8", ">= 1.8.1"
 gem "typeprof", "~> 0.21", ">= 0.21.11"
 
 gem "factory_bot", "~> 6.4", ">= 6.4.6"
+gem "faker", "~> 3.4", ">= 3.4.2"
 gem "rspec", "~> 3.13", ">= 3.13.0"
 gem "rspec-core", "~> 3.13", ">= 3.13.0"
 gem "rspec-expectations", "~> 3.13", ">= 3.13.0"

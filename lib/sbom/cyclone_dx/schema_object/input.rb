@@ -25,7 +25,7 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize( # rubocop:disable Metrics/ParameterLists
+      def initialize(
         source: nil,
         target: nil,
         resource: nil,
@@ -41,7 +41,7 @@ module SBOM
         super
       end
 
-      def valid? # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+      def valid?
         Validator.valid?(ResourceReferenceChoice, source) &&
           Validator.valid?(ResourceReferenceChoice, target) &&
           Validator.valid?(ResourceReferenceChoice, resource, required: [parameters, environment_vars, data].none?) &&
@@ -56,7 +56,7 @@ module SBOM
             Array,
             environment_vars,
             unique: true,
-            items: [Union, klasses: [Property, String]],
+            items: [SBOM::CycloneDX::Type::Union, klasses: [Property, String]],
             required: [resource, parameters, data].none?
           ) &&
           Validator.valid?(Attachment, data, required: [resource, parameters, environment_vars].none?) &&

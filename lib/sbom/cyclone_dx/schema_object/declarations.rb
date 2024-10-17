@@ -103,7 +103,7 @@ module SBOM
 
         def valid?
           Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
-            Validator.valid?(Boolean, third_party) &&
+            Validator.valid?(SBOM::CycloneDX::Type::Boolean, third_party) &&
             Validator.valid?(OrganizationalEntity, organization)
         end
       end
@@ -222,7 +222,7 @@ module SBOM
 
         json_name :bom_ref, "bom-ref"
 
-        def valid? # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+        def valid? # rubocop:disable Metrics/PerceivedComplexity
           Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
             Validator.valid?(String, target, pattern: Pattern::REF_LINK) &&
             Validator.valid?(String, predicate) &&
@@ -261,7 +261,7 @@ module SBOM
 
         json_name :bom_ref, "bom-ref"
 
-        def valid? # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+        def valid? # rubocop:disable Metrics/PerceivedComplexity
           Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
             Validator.valid?(String, property_name) &&
             Validator.valid?(String, description) &&

@@ -29,7 +29,7 @@ module SBOM
 
       json_name :bom_ref, "bom-ref"
 
-      def initialize( # rubocop:disable Metrics/ParameterLists
+      def initialize(
         aggregate: "not_specified",
         bom_ref: nil,
         assemblies: nil,
@@ -40,20 +40,20 @@ module SBOM
         super
       end
 
-      def valid? # rubocop:disable Metrics/MethodLength
+      def valid?
         Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
           Validator.valid?(String, aggregate, enum: Enum::AGGREGATE_TYPE, required: true) &&
           Validator.valid?(
             Array,
             assemblies,
             unique: true,
-            items: [String, pattern: Pattern::REF_LINK_OR_BOM_LINK_ELEMENT]
+            items: [String, pattern: Pattern::REF_OR_CDX_URN]
           ) &&
           Validator.valid?(
             Array,
             dependencies,
             unique: true,
-            items: [Union, klasses: [Component, Service]]
+            items: [SBOM::CycloneDX::Type::Union, klasses: [Component, Service]]
           ) &&
           Validator.valid?(
             Array,

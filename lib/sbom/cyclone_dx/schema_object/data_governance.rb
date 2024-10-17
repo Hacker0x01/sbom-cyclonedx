@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../schema_object"
+require_relative "data_governance_responsible_party"
 
 # Data Governance - Data governance captures information regarding data ownership, stewardship, and custodianship, providing insights into the individuals or entities responsible for managing, overseeing, and safeguarding the data throughout its lifecycle.
 module SBOM

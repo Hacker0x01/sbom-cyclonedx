@@ -29,7 +29,7 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize( # rubocop:disable Metrics/ParameterLists
+      def initialize(
         uid: nil,
         name: nil,
         mode: "filesystem",
@@ -42,14 +42,14 @@ module SBOM
         super
       end
 
-      def valid? # rubocop:disable Metrics/CyclomaticComplexity
+      def valid?
         Validator.valid?(String, uid) &&
           Validator.valid?(String, name) &&
           Validator.valid?(String, mode, enum: Enum::VOLUME_MODE) &&
           Validator.valid?(String, path) &&
           Validator.valid?(String, size_allocated) &&
-          Validator.valid?(Boolean, persistent) &&
-          Validator.valid?(Boolean, remote) &&
+          Validator.valid?(SBOM::CycloneDX::Type::Boolean, persistent) &&
+          Validator.valid?(SBOM::CycloneDX::Type::Boolean, remote) &&
           Validator.valid?(Array, properties, of: Property)
       end
     end

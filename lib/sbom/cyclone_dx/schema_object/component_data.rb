@@ -3,6 +3,9 @@
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "attachment"
+require_relative "graphics_collection"
+require_relative "data_governance"
 
 # Anonymous class from ComponentData
 module SBOM
@@ -32,7 +35,7 @@ module SBOM
 
       json_name :bom_ref, "bom-ref"
 
-      def initialize( # rubocop:disable Metrics/ParameterLists
+      def initialize(
         type:,
         bom_ref: nil,
         name: nil,
@@ -46,7 +49,7 @@ module SBOM
         super
       end
 
-      def valid? # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+      def valid? # rubocop:disable Metrics/PerceivedComplexity
         Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
           Validator.valid?(String, type, enum: Enum::COMPONENT_DATA_TYPE, required: true) &&
           Validator.valid?(String, name) &&

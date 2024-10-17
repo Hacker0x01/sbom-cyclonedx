@@ -7,7 +7,7 @@ module SBOM
                         bool |
                         DateTime |
                         URI |
-                        EmailAddress::Address |
+                        SBOM::CycloneDX::EmailAddress |
                         Array[fieldValue] |
                         SBOM::CycloneDX::SchemaObject |
                         nil
@@ -17,20 +17,24 @@ module SBOM
         singleton(String) |
         singleton(DateTime) |
         singleton(URI) |
-        singleton(EmailAddress::Address) |
+        singleton(SBOM::CycloneDX::EmailAddress) |
         singleton(Array) |
-        singleton(SBOM::CycloneDX::Boolean) |
-        singleton(SBOM::CycloneDX::Union) |
+        singleton(SBOM::CycloneDX::Type::Boolean) |
+        singleton(SBOM::CycloneDX::Type::Union) |
         Class
 
       def self.valid?: (fieldType, untyped, ?required: bool, **untyped) -> bool
 
+      private def self.valid_const?: (fieldType, untyped, const: untyped, required: bool, **untyped) -> bool
       private def self.valid_integer?: (untyped, ?maximum: Integer?, ?minimum: Integer?, **untyped) -> bool
       private def self.valid_float?: (untyped, ?maximum: Integer?, ?minimum: Integer?, **untyped) -> bool
       private def self.valid_numeric?: (Numeric, ?maximum: Integer?, ?minimum: Integer?) -> bool
       private def self.valid_boolean?: (untyped, **untyped) -> bool
       private def self.valid_schema_object?: (singleton(SBOM::CycloneDX::SchemaObject), untyped, **untyped) -> bool
       private def self.valid_union?: (untyped, klasses: Array[fieldType], **untyped) -> bool
+      private def self.valid_datetime?: (untyped) -> bool
+      private def self.valid_uri?: (untyped) -> bool
+      private def self.valid_email?: (untyped) -> bool
       private def self.valid_array?: (
         untyped,
         items: ^(untyped) -> bool | fieldType | [fieldType, Hash[Symbol, untyped]],
@@ -40,7 +44,6 @@ module SBOM
       private def self.valid_string?: (
         untyped,
         ?enum: nil | Array[String],
-        ?format: Symbol?,
         ?max_length: Integer?,
         ?min_length: Integer?,
         ?pattern: Regexp?,

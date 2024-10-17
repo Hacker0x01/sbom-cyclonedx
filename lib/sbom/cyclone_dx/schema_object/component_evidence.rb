@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
+require_relative "../pattern"
+require_relative "../schema_object"
 require_relative "component_identity_evidence"
 require_relative "copyright"
 require_relative "license_choice"
-require_relative "../pattern"
-require_relative "../schema_object"
 
 # Evidence - Provides the ability to document evidence collected through various forms of extraction or analysis.
 module SBOM
@@ -33,7 +33,8 @@ module SBOM
           Validator.valid?(
             Array,
             licenses,
-            items: [Union, klasses: [LicenseChoice::LicenseExpression, LicenseChoice::WrappedLicense]]
+            items: [SBOM::CycloneDX::Type::Union,
+                    klasses: [LicenseChoice::LicenseExpression, LicenseChoice::WrappedLicense]]
           )
       end
 
@@ -54,7 +55,7 @@ module SBOM
           # Package - A package organizes modules into namespaces, providing a unique namespace for each type it contains.
           :package,
           # Module - A module or class that encloses functions/methods and other code.
-          :module,
+          :source_module,
           # Function - A block of code designed to perform a particular task.
           :function,
           # Parameters - Optional arguments that are passed to the module or function.
@@ -69,9 +70,11 @@ module SBOM
         )
           include SchemaObject
 
+          json_name :source_module, "module"
+
           def valid?
             Validator.valid?(String, package) &&
-              Validator.valid?(String, self[:module], required: true, required: true) &&
+              Validator.valid?(String, source_module, required: true) &&
               Validator.valid?(String, function) &&
               Validator.valid?(Array, parameters, items: String) &&
               Validator.valid?(Integer, line) &&
@@ -101,13 +104,13 @@ module SBOM
 
         json_name :bom_ref, "bom-ref"
 
-        def initialize(location:, bom_ref: nil, line: nil, offset: nil, symbol: nil, additional_context: nil) # rubocop:disable Metrics/ParameterLists
+        def initialize(location:, bom_ref: nil, line: nil, offset: nil, symbol: nil, additional_context: nil)
           super
         end
 
         def valid?
           Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
-            Validator.valid?(String, location, required: true, required: true) &&
+            Validator.valid?(String, location, required: true) &&
             Validator.valid?(Integer, line, minimum: 0) &&
             Validator.valid?(Integer, offset, minimum: 0) &&
             Validator.valid?(String, symbol) &&

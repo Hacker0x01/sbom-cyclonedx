@@ -38,7 +38,7 @@ module SBOM
             Array,
             tools,
             unique: true,
-            items: [String, pattern: Pattern::REF_LINK_OR_BOM_LINK_ELEMENT]
+            items: [String, pattern: Pattern::REF_OR_CDX_URN]
           )
       end
 

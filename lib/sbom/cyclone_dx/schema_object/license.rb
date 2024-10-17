@@ -48,7 +48,7 @@ module SBOM
         super
       end
 
-      def valid? # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity
+      def valid?
         Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
           Validator.valid?(String, id, enum: Enum::LICENSE_ID, required: name.nil?) &&
           Validator.valid?(String, name, required: id.nil?) &&
@@ -81,7 +81,7 @@ module SBOM
       )
         include SchemaObject
 
-        def valid? # rubocop:disable Metrics/CyclomaticComplexity
+        def valid?
           Validator.valid?(Array, alt_ids, items: String) &&
             Validator.valid?(Licensor, licensor) &&
             Validator.valid?(Licensee, licensee) &&

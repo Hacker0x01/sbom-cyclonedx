@@ -89,7 +89,8 @@ module SBOM
             Validator.valid?(String, task) &&
             Validator.valid?(String, architecture_family) &&
             Validator.valid?(String, model_architecture) &&
-            Validator.valid?(Array, datasets, items: [Union, klasses: [ComponentData, DataReference]]) &&
+            Validator.valid?(Array, datasets,
+                             items: [SBOM::CycloneDX::Type::Union, klasses: [ComponentData, DataReference]]) &&
             Validator.valid?(Array, inputs, items: InputOutputMLParameter) &&
             Validator.valid?(Array, outputs, items: InputOutputMLParameter)
         end
@@ -116,7 +117,7 @@ module SBOM
           include SchemaObject
 
           def valid?
-            Validator.valid?(String, ref, pattern: Pattern::REF_LINK_OR_BOM_LINK_ELEMENT)
+            Validator.valid?(String, ref, pattern: Pattern::REF_OR_CDX_URN)
           end
         end
       end

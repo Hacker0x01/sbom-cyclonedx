@@ -34,6 +34,8 @@ GEM
       simpleidn
     factory_bot (6.5.0)
       activesupport (>= 5.0.0)
+    faker (3.4.2)
+      i18n (>= 1.8.11, < 2)
     ffi (1.17.0)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-aarch64-linux-musl)
@@ -158,6 +160,7 @@ PLATFORMS
 DEPENDENCIES
   debug (~> 1.9, >= 1.9.2)
   factory_bot (~> 6.4, >= 6.4.6)
+  faker (~> 3.4, >= 3.4.2)
   rake (~> 13.0)
   rbs (~> 3.5, >= 3.5.2)
   rbs-inline (~> 0.6, >= 0.6.0)

@@ -18,8 +18,8 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize(content:, content_type: "text/plain", encoding: "base64")
-        super
+      def initialize(content:, content_type: "text/plain")
+        super(content: content, content_type: content_type, encoding: "base64")
       end
 
       def valid?

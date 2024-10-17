@@ -1,6 +1,6 @@
 module SBOM
   module CycloneDX
-    class CryptoProperty < ::Struct[untyped]
+    class CryptoProperties < ::Struct[untyped]
       def self.new: (
         asset_type: String,
         ?algorithm_properties: AlgorithmProperties?,

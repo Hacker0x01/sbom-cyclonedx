@@ -25,12 +25,13 @@ module SBOM
       )
         include SchemaObject
 
-        def initialize(algorithm:, value:, key_id: nil, public_key: nil, certificate_path: nil, excludes: nil) # rubocop:disable Metrics/ParameterLists
+        def initialize(algorithm:, value:, key_id: nil, public_key: nil, certificate_path: nil, excludes: nil)
           super
         end
 
         def valid?
-          Validator.valid?(Union, algorithm, klasses: [URI, String], enum: Enum::SIGNATURE_ALGORITHM, required: true) &&
+          Validator.valid?(SBOM::CycloneDX::Type::Union, algorithm, klasses: [URI, String],
+                                                                    enum: Enum::SIGNATURE_ALGORITHM, required: true) &&
             Validator.valid?(String, key_id) &&
             PublicKey.valid?(public_key) &&
             Validator.valid?(Array, certificate_path, items: String) &&
@@ -39,7 +40,7 @@ module SBOM
         end
 
         module PublicKey
-          def self.new(kty:, crv: nil, x: nil, y: nil, n: nil, e: nil) # rubocop:disable Metrics/ParameterLists,Naming/MethodParameterName
+          def self.new(kty:, crv: nil, x: nil, y: nil, n: nil, e: nil) # rubocop:disable Naming/MethodParameterName,Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
             case kty
             when "EC"
               raise "`n` and `e` must be nil when kty == \"EC\"" unless n.nil? && e.nil?
@@ -64,7 +65,7 @@ module SBOM
           end
 
           def self.valid?(object, **type_specific_args)
-            Validator.valid?(Union, object, klasses: [EC, OKP, RSA], **type_specific_args)
+            Validator.valid?(SBOM::CycloneDX::Type::Union, object, klasses: [EC, OKP, RSA], **type_specific_args)
           end
 
           class EC < Struct.new("ECPublicKey", :kty, :crv, :x, :y, keyword_init: true)

@@ -2,6 +2,7 @@
 
 require "sbom/cyclone_dx"
 require "factory_bot"
+require "faker"
 require "rspec"
 
 RSpec.configure do |config|

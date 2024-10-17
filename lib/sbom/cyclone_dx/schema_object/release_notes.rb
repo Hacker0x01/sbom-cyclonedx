@@ -38,7 +38,7 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize( # rubocop:disable Metrics/ParameterLists
+      def initialize(
         type:,
         title: nil,
         featured_image: nil,
@@ -54,7 +54,7 @@ module SBOM
         super
       end
 
-      def valid? # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+      def valid? # rubocop:disable Metrics/PerceivedComplexity
         Validator.valid?(String, type, required: true) &&
           Validator.valid?(String, title) &&
           Validator.valid?(URI, featured_image) &&

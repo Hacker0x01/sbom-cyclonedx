@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require "debug"
 require "active_support/all"
-require_relative "../cyclone_dx"
+require_relative "email_address"
+require_relative "enum"
+require_relative "pattern"
+require_relative "type"
 require_relative "validator"
 
 module SBOM
@@ -11,7 +15,17 @@ module SBOM
         raise ArgumentError, "SchemaObject must be included in a Struct" unless base < Struct
 
         super
+
         base.extend(ClassMethods)
+      end
+
+      def initialize(**args)
+        # Type-checking complains about the use of `super` here, but it is safe to use
+        # since we ensure this module is included in a Struct
+        super_method = method(__method__ || :initialize).super_method
+        super_method&.call(**args) if super_method&.owner == ::Struct
+
+        valid?
       end
 
       def valid?
@@ -23,8 +37,6 @@ module SBOM
 
         # Struct#to_h does not take a block, but returns a hash
         to_h.to_h do |k, v|
-          v = v.to_s if v.is_a?(EmailAddress::Address)
-
           [json_name_for(k), v.as_json]
         end
       end
@@ -45,13 +57,6 @@ module SBOM
         def self.extended(base)
           super
           raise ArgumentError, "This module can only be extended by a SchemaObject" unless base < SchemaObject
-
-          define_method(:concrete_klass) { base }
-          private :concrete_klass
-        end
-
-        def valid?(object, required: false)
-          Validator.valid?(concrete_klass, object, required: required)
         end
 
         def json_name_for(member_name)

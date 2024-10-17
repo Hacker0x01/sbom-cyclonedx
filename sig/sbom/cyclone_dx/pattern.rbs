@@ -1,11 +1,19 @@
 module SBOM
   module CycloneDX
     module Pattern
-      BOM_LINK: ::Regexp
+      BOM_SERIAL_NUMBER: ::Regexp
 
-      BOM_LINK_DOCUMENT: ::Regexp
+      CDX_BOM_VERSION: ::Regexp
 
-      BOM_LINK_ELEMENT: ::Regexp
+      CDX_URN_ASSIGNED_NAME: ::Regexp
+
+      CDX_URN_FRAGMENT: ::Regexp
+
+      CDX_URN_NSS: ::Regexp
+
+      CDX_URN_WITH_FRAGMENT: ::Regexp
+
+      CDX_URN: ::Regexp
 
       CONTENT_TYPE: ::Regexp
 
@@ -19,9 +27,7 @@ module SBOM
 
       REF_LINK: ::Regexp
 
-      REF_LINK_OR_BOM_LINK_ELEMENT: ::Regexp
-
-      URN_UUID: ::Regexp
+      REF_OR_CDX_URN: ::Regexp
 
       UUID: ::Regexp
     end

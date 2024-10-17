@@ -53,7 +53,7 @@ module SBOM
       json_name :bom_ref, "bom-ref"
       json_name :x_trust_boundary, "x-trust-boundary"
 
-      def initialize( # rubocop:disable Metrics/ParameterLists
+      def initialize(
         name:,
         bom_ref: nil,
         provider: nil,
@@ -76,7 +76,7 @@ module SBOM
         super
       end
 
-      def valid? # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
+      def valid? # rubocop:disable Metrics/PerceivedComplexity
         Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
           Validator.valid?(OrganizationalEntity, provider) &&
           Validator.valid?(String, group) &&
@@ -84,8 +84,8 @@ module SBOM
           Validator.valid?(String, version) &&
           Validator.valid?(String, description) &&
           Validator.valid?(Array, endpoints, items: URI) &&
-          Validator.valid?(Boolean, authenticated) &&
-          Validator.valid?(Boolean, x_trust_boundary) &&
+          Validator.valid?(SBOM::CycloneDX::Type::Boolean, authenticated) &&
+          Validator.valid?(SBOM::CycloneDX::Type::Boolean, x_trust_boundary) &&
           Validator.valid?(String, trust_zone) &&
           Validator.valid?(Array, data, items: ServiceData) &&
           Validator.valid?(

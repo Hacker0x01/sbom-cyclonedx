@@ -4,10 +4,9 @@ require "spec_helper"
 require "sbom/cyclone_dx/schema_object"
 require "sbom/cyclone_dx/validator"
 require "uri"
-require "email_address"
 require "time"
 
-RSpec.describe SBOM::CycloneDX::SchemaObject do
+describe SBOM::CycloneDX::SchemaObject do
   let(:field_values) do
     {
       string_field: "string",
@@ -16,7 +15,7 @@ RSpec.describe SBOM::CycloneDX::SchemaObject do
       boolean_field: true,
       datetime_field: DateTime.new(2024, 10, 14, 17, 24, 33),
       uri_field: URI("https://example.com"),
-      email_address_field: EmailAddress.new("test@example.com"),
+      email_address_field: SBOM::CycloneDX::EmailAddress.new("test@example.com"),
       array_field: ["value1", 2, true],
       special_json_field: "value",
       nested_value:
@@ -43,18 +42,18 @@ RSpec.describe SBOM::CycloneDX::SchemaObject do
     }
   end
   let(:expected_json) do
-    "{"\
-      '"stringField":"string",'\
-      '"integerField":1,'\
-      '"floatField":2.5,'\
-      '"booleanField":true,'\
-      '"datetimeField":"2024-10-14T17:24:33.000+00:00",'\
-      '"uriField":"https://example.com",'\
-      '"emailAddressField":"test@example.com",'\
-      '"arrayField":["value1",2,true],'\
-      '"special-json-field":"value",'\
-      '"nestedValue":{"field":"nested"}'\
-    "}"
+    "{" \
+      '"stringField":"string",' \
+      '"integerField":1,' \
+      '"floatField":2.5,' \
+      '"booleanField":true,' \
+      '"datetimeField":"2024-10-14T17:24:33.000+00:00",' \
+      '"uriField":"https://example.com",' \
+      '"emailAddressField":"test@example.com",' \
+      '"arrayField":["value1",2,true],' \
+      '"special-json-field":"value",' \
+      '"nestedValue":{"field":"nested"}' \
+      "}"
   end
 
   let(:schema_object) do

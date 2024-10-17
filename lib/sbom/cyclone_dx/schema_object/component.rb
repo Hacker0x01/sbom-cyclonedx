@@ -3,6 +3,20 @@
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "component_data"
+require_relative "component_evidence"
+require_relative "crypto_properties"
+require_relative "external_reference"
+require_relative "hash_data"
+require_relative "license_choice"
+require_relative "model_card"
+require_relative "organizational_contact"
+require_relative "organizational_entity"
+require_relative "patch"
+require_relative "property"
+require_relative "release_notes"
+require_relative "signature"
+require_relative "swid"
 
 # Component
 module SBOM
@@ -95,7 +109,7 @@ module SBOM
       json_name :bom_ref, "bom-ref"
       json_name :mime_type, "mime-type"
 
-      def initialize( # rubocop:disable Metrics/ParameterLists
+      def initialize(
         type:,
         name:,
         scope: "required",
@@ -132,7 +146,7 @@ module SBOM
         super
       end
 
-      def valid? # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
+      def valid? # rubocop:disable Metrics/PerceivedComplexity
         Validator.valid?(String, type, enum: Enum::COMPONENT_TYPE, required: true) &&
           Validator.valid?(String, mime_type, pattern: Pattern::MIME_TYPE) &&
           Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
@@ -153,7 +167,7 @@ module SBOM
           Validator.valid?(Array, omnibor_id, items: String) &&
           Validator.valid?(Array, swhid, items: String) &&
           Validator.valid?(SWID, swid) &&
-          Validator.valid?(Boolean, modified) &&
+          Validator.valid?(SBOM::CycloneDX::Type::Boolean, modified) &&
           Validator.valid?(Pedigree, pedigree) &&
           Validator.valid?(Array, external_references, items: ExternalReference) &&
           Validator.valid?(Array, components, unique: true, items: Component) &&
@@ -161,7 +175,7 @@ module SBOM
           Validator.valid?(ReleaseNotes, release_notes) &&
           Validator.valid?(ModelCard, model_card) &&
           Validator.valid?(Array, data, items: ComponentData) &&
-          Validator.valid?(CryptoProperty, crypto_properties) &&
+          Validator.valid?(CryptoProperties, crypto_properties) &&
           Validator.valid?(Array, properties, items: Property) &&
           Validator.valid?(Array, tags, items: String) &&
           Signature.valid?(signature)

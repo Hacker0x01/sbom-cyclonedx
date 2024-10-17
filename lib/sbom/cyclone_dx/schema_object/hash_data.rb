@@ -15,8 +15,8 @@ module SBOM
     )
       include SchemaObject
 
-      def initialize(alg:, content:)
-        super(alg: alg, content: content)
+      def initialize(alg:, content:) # rubocop:disable Lint/UselessMethodDefinition
+        super
       end
 
       def valid?
