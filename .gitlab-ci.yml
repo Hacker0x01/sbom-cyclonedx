@@ -10,6 +10,7 @@
       - ./vendor/ruby
   before_script:
     - ruby -v
+    - apk update && apk --no-cache add --virtual bash curl curl-dev ruby-dev build-base ruby ruby-io-console ruby-irb ruby-json ruby-etc ruby-bigdecimal ruby-rdoc libffi-dev zlib-dev yaml-dev
     - bundle config set path vendor
     - bundle install --jobs=$(nproc) --retry=3
     - bundle exec rbs collection install
