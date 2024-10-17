@@ -234,47 +234,6 @@ FactoryBot.define do
           xor_required_b { Faker::Lorem.word }
         end
       end
-
-      # The following logic can be used if we'd like to be more dynamic about generating these factories. However, it is
-      # unnecessarily complex for the current needs of this gem.
-      ####################################################################################################################
-
-      # validators { members.transform_values { |data| data[:validator] } }
-      # initializer do
-      #   required_members = members.select { |_, data| data.dig(:required, false) }.keys
-      #   next if required_members.empty?
-
-      #   optional_members = members.except(*required_members).transform_values { |data| data[:default] }
-
-      #   required_member_args = required_members.map { |m| "#{m}:" }.join(", ").presence
-      #   optional_member_args = optional_members.map { |m, v| "#{m}: #{v.inspect}" }.join(", ").presence
-      #   all_args = [required_member_args, optional_member_args].compact.join(", ")
-      #   super_args = members.keys.map { |m| "#{m}: #{m}" }.join(", ")
-
-      #   <<~RUBY
-      #     def initialize(#{all_args})
-      #       super(#{super_args})
-      #     end
-      #   RUBY
-      # end
-
-      # initialize_with do
-      #   klass = Class.new(Struct.new(name, *members.keys, keyword_init: true)) do
-      #     include SBOM::CycloneDX::SchemaObject
-      #   end
-
-      #   # This only happens in factories, where we need to generate validators
-      #   klass.const_set(:VALIDATORS, validators.freeze)
-      #   klass.instance_eval(initializer) if initializer.present?
-
-      #   klass.define_method(:valid?) do
-      #     VALIDATORS.all? do |member, args|
-      #       Validator.valid?(args.shift, send(member), **args.first)
-      #     end
-      #   end
-
-      #   klass.new(name: name, **members.transform_values { |data| data[:generator].call })
-      # end
     end
   end
 end
