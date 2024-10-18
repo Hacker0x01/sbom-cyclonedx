@@ -28,6 +28,14 @@ rspec:
   script:
     - bundle exec rbs collection update
     - RUBYOPT="-rrbs/test/setup" RBS_TEST_TARGET="SBOM::CycloneDX::*" bundle exec rspec
+    - |
+      echo "Adjusting junit report based on project_path..."
+      sed -i 's|file="\./\([^"]*\)"|file="\./\1"|g' "rspec.xml" || true
+      cp "rspec.xml" "$CI_PROJECT_DIR/${CI_JOB_ID}_junit.xml" || true
+      echo "Adjusting coverage report based on project_path..."
+      sed -i "s|$PWD|$CI_PROJECT_DIR|g" "coverage/coverage.xml" || true
+      sed -i 's|filename="\([^"]*\)"|filename="\./\1"|g' "coverage/coverage.xml" || true
+      cp "coverage/coverage.xml" "$CI_PROJECT_DIR/${CI_JOB_ID}_cobertura.xml" || true
   coverage: '/LOC\s\(\d+\.\d+%\)\scovered/'
   artifacts:
     when: always
