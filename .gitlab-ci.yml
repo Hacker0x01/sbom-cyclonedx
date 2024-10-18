@@ -7,14 +7,14 @@
       files:
         - Gemfile.lock
     paths:
-      - ./vendor
-      - ./.gem_rbs_collection
+      # - ./vendor
+      # - ./.gem_rbs_collection
   before_script:
     - ruby -v
     - apk update && apk --no-cache add --virtual bash git curl curl-dev ruby-dev build-base ruby ruby-io-console ruby-irb ruby-json ruby-etc ruby-bigdecimal ruby-rdoc libffi-dev zlib-dev yaml-dev
-    - bundle config set path ./vendor
+    # - bundle config set path ./vendor
     - bundle install --jobs=$(nproc) --retry=3
-    - bundle exec rbs collection install --frozen
+    - bundle exec rbs collection install
   variables:
     RUBY_IMAGE: ruby:3.3-alpine
 lint:
@@ -26,7 +26,7 @@ rspec:
   extends: .ruby-base
   stage: test
   script:
-    - bundle exec rbs collection install --frozen
+    - bundle exec rbs collection update
     - RUBYOPT="-rrbs/test/setup" RBS_TEST_TARGET="SBOM::CycloneDX::*" bundle exec rspec
   coverage: '/LOC\s\(\d+\.\d+%\)\scovered/'
   artifacts:
