@@ -14,6 +14,9 @@ target :lib do
   # library "strong_json"           # Gems
   library "email_address"
 
+  repo_path "vendor/rbs"
+  repo_path "vendor/ruby"
+
   # configure_code_diagnostics(D::Ruby.default)      # `default` diagnostics setting (applies by default)
   # configure_code_diagnostics(D::Ruby.strict)       # `strict` diagnostics setting
   # configure_code_diagnostics(D::Ruby.lenient)      # `lenient` diagnostics setting
