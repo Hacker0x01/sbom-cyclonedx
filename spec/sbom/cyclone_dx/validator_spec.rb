@@ -50,8 +50,7 @@ describe SBOM::CycloneDX::Validator do
           Integer,
           Float,
           SBOM::CycloneDX::Type::Boolean,
-          Array,
-          DateTime
+          Array
         ] - extra_args.fetch(:klasses, [klass])
         other_klass_value = sample_data[other_klasses.sample].sample
 
@@ -118,8 +117,7 @@ describe SBOM::CycloneDX::Validator do
             Integer,
             Float,
             SBOM::CycloneDX::Type::Boolean,
-            Array,
-            DateTime
+            Array
           ] - extra_args.fetch(:klasses, [klass])
           other_klass_value = sample_data[other_klasses.sample].sample
           expect do
@@ -201,9 +199,53 @@ describe SBOM::CycloneDX::Validator do
     end
 
     context "when klass is a subclass of SchemaObject" do
-      # include_examples "typed", SchemaObject
-      # include_examples "required", SchemaObject
-      # include_examples "const", SchemaObject
+      let(:inner_value) { Faker::Lorem.sentence }
+      let(:schema_object) { build(:basic_schema_object, string_value: inner_value) }
+      let(:klass) { schema_object.class }
+
+      it "returns true when object is of the correct type" do
+        expect(described_class).to be_valid(schema_object.class, schema_object)
+      end
+
+      it "returns false when object is not of the correct type" do
+        expect(described_class).not_to be_valid(klass, "Not a schema object!")
+      end
+
+      context "when object is required" do # rubocop:disable RSpec/NestedGroups
+        it "returns true when object is valid and not nil" do
+          expect(described_class).to be_valid(klass, schema_object, required: true)
+        end
+
+        it "returns false when object is nil" do
+          expect(described_class).not_to be_valid(klass, nil, required: true)
+        end
+      end
+
+      context "when object is not required" do # rubocop:disable RSpec/NestedGroups
+        it "returns true when object is valid and not nil" do
+          expect(described_class).to be_valid(klass, schema_object)
+        end
+
+        it "returns true when object is nil" do
+          expect(described_class).to be_valid(klass, nil)
+        end
+      end
+
+      it "returns true when object is a SchemaObject with the correct value" do
+        const_schema_object = build(:basic_schema_object, string_value: inner_value)
+        expect(described_class).to be_valid(klass, schema_object, const: const_schema_object)
+      end
+
+      it "returns false when object is a SchemaObject with a different value" do
+        const_schema_object = build(:basic_schema_object, string_value: "not #{inner_value}")
+        expect(described_class).not_to be_valid(klass, schema_object, const: const_schema_object)
+      end
+
+      it "raises an exception when given const value is not a SchemaObject" do
+        expect do
+          described_class.valid?(klass, "not a schema object!", const: "not a schema object!")
+        end.to raise_error(ArgumentError, "const value has wrong type: String")
+      end
     end
 
     context "when klass is Array" do
