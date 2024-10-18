@@ -4,7 +4,7 @@ module SBOM
       def self.new: (
         subjects: Array[String],
         annotator: Annotator,
-        timestamp: DateTime,
+        timestamp: dateTimeString,
         text: String,
         ?signature: signature?,
         ?bom_ref: String?
@@ -13,7 +13,7 @@ module SBOM
       def self.[]: (
         subjects: Array[String],
         annotator: Annotator,
-        timestamp: DateTime,
+        timestamp: dateTimeString,
         text: String,
         ?signature: signature?,
         ?bom_ref: String?
@@ -28,7 +28,7 @@ module SBOM
       def initialize: (
         subjects: Array[String],
         annotator: Annotator,
-        timestamp: DateTime,
+        timestamp: dateTimeString,
         text: String,
         ?signature: signature?,
         ?bom_ref: String?
@@ -40,7 +40,7 @@ module SBOM
 
       attr_accessor annotator: Annotator
 
-      attr_accessor timestamp: DateTime
+      attr_accessor timestamp: dateTimeString
 
       attr_accessor text: String
 

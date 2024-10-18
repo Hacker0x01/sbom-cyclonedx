@@ -7,7 +7,7 @@ module SBOM
         ?featured_image: uriString?,
         ?social_image: uriString?,
         ?description: String?,
-        ?timestamp: DateTime?,
+        ?timestamp: dateTimeString?,
         ?aliases: Array[String]?,
         ?tags: Array[String]?,
         ?resolves: Array[Issue]?,
@@ -21,7 +21,7 @@ module SBOM
         ?featured_image: uriString?,
         ?social_image: uriString?,
         ?description: String?,
-        ?timestamp: DateTime?,
+        ?timestamp: dateTimeString?,
         ?aliases: Array[String]?,
         ?tags: Array[String]?,
         ?resolves: Array[Issue]?,
@@ -41,7 +41,7 @@ module SBOM
         ?featured_image: uriString?,
         ?social_image: uriString?,
         ?description: String?,
-        ?timestamp: DateTime?,
+        ?timestamp: dateTimeString?,
         ?aliases: Array[String]?,
         ?tags: Array[String]?,
         ?resolves: Array[Issue]?,
@@ -59,7 +59,7 @@ module SBOM
 
       attr_accessor description: String?
 
-      attr_accessor timestamp: DateTime?
+      attr_accessor timestamp: dateTimeString?
 
       attr_accessor aliases: Array[String]?
 

@@ -351,8 +351,8 @@ module SBOM
           ?property_name: String?,
           ?description: String?,
           ?data: Array[EvidenceData]?,
-          ?created: DateTime?,
-          ?expires: DateTime?,
+          ?created: dateTimeString?,
+          ?expires: dateTimeString?,
           ?author: OrganizationalContact?,
           ?reviewer: OrganizationalContact?,
           ?signature: signature?
@@ -363,8 +363,8 @@ module SBOM
           ?property_name: String?,
           ?description: String?,
           ?data: Array[EvidenceData]?,
-          ?created: DateTime?,
-          ?expires: DateTime?,
+          ?created: dateTimeString?,
+          ?expires: dateTimeString?,
           ?author: OrganizationalContact?,
           ?reviewer: OrganizationalContact?,
           ?signature: signature?
@@ -384,9 +384,9 @@ module SBOM
 
         attr_accessor data: Array[EvidenceData]?
 
-        attr_accessor created: DateTime?
+        attr_accessor created: dateTimeString?
 
-        attr_accessor expires: DateTime?
+        attr_accessor expires: dateTimeString?
 
         attr_accessor author: OrganizationalContact?
 

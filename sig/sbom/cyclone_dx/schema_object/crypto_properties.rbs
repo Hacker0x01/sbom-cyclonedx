@@ -116,8 +116,8 @@ module SBOM
         def self.new: (
           ?subject_name: String?,
           ?issuer_name: String?,
-          ?not_valid_before: DateTime?,
-          ?not_valid_after: DateTime?,
+          ?not_valid_before: dateTimeString?,
+          ?not_valid_after: dateTimeString?,
           ?signature_algorithm_ref: String?,
           ?subject_public_key_ref: String?,
           ?certificate_format: String?,
@@ -127,8 +127,8 @@ module SBOM
         def self.[]: (
           ?subject_name: String?,
           ?issuer_name: String?,
-          ?not_valid_before: DateTime?,
-          ?not_valid_after: DateTime?,
+          ?not_valid_before: dateTimeString?,
+          ?not_valid_after: dateTimeString?,
           ?signature_algorithm_ref: String?,
           ?subject_public_key_ref: String?,
           ?certificate_format: String?,
@@ -145,9 +145,9 @@ module SBOM
 
         attr_accessor issuer_name: String?
 
-        attr_accessor not_valid_before: DateTime?
+        attr_accessor not_valid_before: dateTimeString?
 
-        attr_accessor not_valid_after: DateTime?
+        attr_accessor not_valid_after: dateTimeString?
 
         attr_accessor signature_algorithm_ref: String?
 
@@ -249,10 +249,10 @@ module SBOM
           ?id: String?,
           ?state: String?,
           ?algorithm_ref: String?,
-          ?creation_date: DateTime?,
-          ?activation_date: DateTime?,
-          ?update_date: DateTime?,
-          ?expiration_date: DateTime?,
+          ?creation_date: dateTimeString?,
+          ?activation_date: dateTimeString?,
+          ?update_date: dateTimeString?,
+          ?expiration_date: dateTimeString?,
           ?value: String?,
           ?asset_size: Integer?,
           ?format: String?,
@@ -264,10 +264,10 @@ module SBOM
           ?id: String?,
           ?state: String?,
           ?algorithm_ref: String?,
-          ?creation_date: DateTime?,
-          ?activation_date: DateTime?,
-          ?update_date: DateTime?,
-          ?expiration_date: DateTime?,
+          ?creation_date: dateTimeString?,
+          ?activation_date: dateTimeString?,
+          ?update_date: dateTimeString?,
+          ?expiration_date: dateTimeString?,
           ?value: String?,
           ?asset_size: Integer?,
           ?format: String?,
@@ -288,13 +288,13 @@ module SBOM
 
         attr_accessor algorithm_ref: String?
 
-        attr_accessor creation_date: DateTime?
+        attr_accessor creation_date: dateTimeString?
 
-        attr_accessor activation_date: DateTime?
+        attr_accessor activation_date: dateTimeString?
 
-        attr_accessor update_date: DateTime?
+        attr_accessor update_date: dateTimeString?
 
-        attr_accessor expiration_date: DateTime?
+        attr_accessor expiration_date: dateTimeString?
 
         attr_accessor value: String?
 

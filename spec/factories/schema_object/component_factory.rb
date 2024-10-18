@@ -18,7 +18,7 @@ FactoryBot.define do
       version { Faker::App.semantic_version }
       description { Faker::Lorem.sentence }
       scope { SBOM::CycloneDX::Enum::SCOPE.sample }
-      hashes factory: :hash_data
+      hashes { association_list(:hash_data, rand(1..3)) }
       licenses { license_choice_list(rand(1..3)) }
       copyright { Faker::Company.name }
       cpe do

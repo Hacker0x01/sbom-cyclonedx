@@ -2,7 +2,7 @@ module SBOM
   module CycloneDX
     class Metadata < ::Struct[untyped]
       def self.new: (
-        ?timestamp: DateTime?,
+        ?timestamp: dateTimeString?,
         ?lifecycles: Array[PreDefinedPhase | CustomPhase]?,
         ?tools: Tools?,
         ?manufacturer: OrganizationalEntity?,
@@ -15,7 +15,7 @@ module SBOM
       ) -> instance
 
       def self.[]: (
-        ?timestamp: DateTime?,
+        ?timestamp: dateTimeString?,
         ?lifecycles: Array[PreDefinedPhase | CustomPhase]?,
         ?tools: Tools?,
         ?manufacturer: OrganizationalEntity?,
@@ -33,7 +33,7 @@ module SBOM
 
       def members: () -> [ :timestamp, :lifecycles, :tools, :manufacturer, :authors, :component, :manufacture, :supplier, :licenses, :properties ]
 
-      attr_accessor timestamp: DateTime?
+      attr_accessor timestamp: dateTimeString?
 
       attr_accessor lifecycles: Array[PreDefinedPhase | CustomPhase]?
 

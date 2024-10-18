@@ -2,7 +2,7 @@ module SBOM
   module CycloneDX
     class Composition < ::Struct[untyped]
       def self.new: (
-        aggregate: String,
+        ?aggregate: String,
         ?bom_ref: String?,
         ?assemblies: Array[String]?,
         ?dependencies: Array[Component | Service]?,
@@ -11,7 +11,7 @@ module SBOM
       ) -> instance
 
       def self.[]: (
-        aggregate: String,
+        ?aggregate: String,
         ?bom_ref: String?,
         ?assemblies: Array[String]?,
         ?dependencies: Array[Component | Service]?,

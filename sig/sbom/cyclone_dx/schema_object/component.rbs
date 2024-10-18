@@ -7,15 +7,15 @@ module SBOM
         ?scope: String,
         ?mime_type: String?,
         ?bom_ref: String?,
-        ?supplier: Array[OrganizationalEntity]?,
-        ?manufacturer: Array[OrganizationalEntity]?,
+        ?supplier: OrganizationalEntity?,
+        ?manufacturer: OrganizationalEntity?,
         ?authors: Array[OrganizationalContact]?,
         ?publisher: String?,
         ?group: String?,
         ?version: String?,
         ?description: String?,
         ?hashes: Array[HashData]?,
-        ?licenses: Array[LicenseChoice]?,
+        ?licenses: Array[licenseChoice]?,
         ?copyright: String?,
         ?cpe: String?,
         ?purl: String?,
@@ -33,7 +33,7 @@ module SBOM
         ?crypto_properties: CryptoProperties?,
         ?properties: Array[Property]?,
         ?tags: Array[String]?,
-        ?signature: Signature?
+        ?signature: signature?
       ) -> instance
 
       def self.[]: (
@@ -42,15 +42,15 @@ module SBOM
         ?scope: String,
         ?mime_type: String?,
         ?bom_ref: String?,
-        ?supplier: Array[OrganizationalEntity]?,
-        ?manufacturer: Array[OrganizationalEntity]?,
+        ?supplier: OrganizationalEntity?,
+        ?manufacturer: OrganizationalEntity?,
         ?authors: Array[OrganizationalContact]?,
         ?publisher: String?,
         ?group: String?,
         ?version: String?,
         ?description: String?,
         ?hashes: Array[HashData]?,
-        ?licenses: Array[LicenseChoice]?,
+        ?licenses: Array[licenseChoice]?,
         ?copyright: String?,
         ?cpe: String?,
         ?purl: String?,
@@ -68,7 +68,7 @@ module SBOM
         ?crypto_properties: CryptoProperties?,
         ?properties: Array[Property]?,
         ?tags: Array[String]?,
-        ?signature: Signature?
+        ?signature: signature?
       ) -> instance
 
       def self.keyword_init?: () -> true
@@ -83,15 +83,15 @@ module SBOM
         ?scope: String,
         ?mime_type: String?,
         ?bom_ref: String?,
-        ?supplier: Array[OrganizationalEntity]?,
-        ?manufacturer: Array[OrganizationalEntity]?,
+        ?supplier: OrganizationalEntity?,
+        ?manufacturer: OrganizationalEntity?,
         ?authors: Array[OrganizationalContact]?,
         ?publisher: String?,
         ?group: String?,
         ?version: String?,
         ?description: String?,
         ?hashes: Array[HashData]?,
-        ?licenses: Array[LicenseChoice]?,
+        ?licenses: Array[licenseChoice]?,
         ?copyright: String?,
         ?cpe: String?,
         ?purl: String?,
@@ -109,7 +109,7 @@ module SBOM
         ?crypto_properties: CryptoProperties?,
         ?properties: Array[Property]?,
         ?tags: Array[String]?,
-        ?signature: Signature?
+        ?signature: signature?
       ) -> void
 
       attr_accessor type: String
@@ -174,7 +174,7 @@ module SBOM
 
       attr_accessor tags: Array[String]?
 
-      attr_accessor signature: Signature?
+      attr_accessor signature: signature?
 
       include SBOM::CycloneDX::SchemaObject
 

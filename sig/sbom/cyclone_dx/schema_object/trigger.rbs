@@ -10,7 +10,7 @@ module SBOM
         ?resource_references: Array[ResourceReferenceChoice]?,
         ?event: Event?,
         ?conditions: Array[Condition]?,
-        ?time_activated: DateTime?,
+        ?time_activated: dateTimeString?,
         ?inputs: Array[Input]?,
         ?outputs: Array[Output]?,
         ?properties: Array[Property]?
@@ -25,7 +25,7 @@ module SBOM
         ?resource_references: Array[ResourceReferenceChoice]?,
         ?event: Event?,
         ?conditions: Array[Condition]?,
-        ?time_activated: DateTime?,
+        ?time_activated: dateTimeString?,
         ?inputs: Array[Input]?,
         ?outputs: Array[Output]?,
         ?properties: Array[Property]?
@@ -46,7 +46,7 @@ module SBOM
         ?resource_references: Array[ResourceReferenceChoice]?,
         ?event: Event?,
         ?conditions: Array[Condition]?,
-        ?time_activated: DateTime?,
+        ?time_activated: dateTimeString?,
         ?inputs: Array[Input]?,
         ?outputs: Array[Output]?,
         ?properties: Array[Property]?
@@ -68,7 +68,7 @@ module SBOM
 
       attr_accessor conditions: Array[Condition]?
 
-      attr_accessor time_activated: DateTime?
+      attr_accessor time_activated: dateTimeString?
 
       attr_accessor inputs: Array[Input]?
 

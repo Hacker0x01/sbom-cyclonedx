@@ -11,6 +11,7 @@ type fieldValue = String |
 
 type uriString = String | URI::HTTP
 type emailString = String | SBOM::CycloneDX::EmailAddress
+type dateTimeString = String | DateTime | Time
 
 type jsonObject = Float | Integer | String | bool | Array[jsonObject] | Hash[String, jsonObject] | nil
 

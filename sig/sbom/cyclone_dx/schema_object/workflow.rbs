@@ -14,8 +14,8 @@ module SBOM
         ?steps: Array[Step]?,
         ?inputs: Array[Input]?,
         ?outputs: Array[Output]?,
-        ?time_start: DateTime?,
-        ?time_end: DateTime?,
+        ?time_start: dateTimeString?,
+        ?time_end: dateTimeString?,
         ?workspaces: Array[Workspace]?,
         ?runtime_topology: Array[Dependency]?,
         ?properties: Array[Property]?
@@ -34,8 +34,8 @@ module SBOM
         ?steps: Array[Step]?,
         ?inputs: Array[Input]?,
         ?outputs: Array[Output]?,
-        ?time_start: DateTime?,
-        ?time_end: DateTime?,
+        ?time_start: dateTimeString?,
+        ?time_end: dateTimeString?,
         ?workspaces: Array[Workspace]?,
         ?runtime_topology: Array[Dependency]?,
         ?properties: Array[Property]?
@@ -60,8 +60,8 @@ module SBOM
         ?steps: Array[Step]?,
         ?inputs: Array[Input]?,
         ?outputs: Array[Output]?,
-        ?time_start: DateTime?,
-        ?time_end: DateTime?,
+        ?time_start: dateTimeString?,
+        ?time_end: dateTimeString?,
         ?workspaces: Array[Workspace]?,
         ?runtime_topology: Array[Dependency]?,
         ?properties: Array[Property]?
@@ -91,9 +91,9 @@ module SBOM
 
       attr_accessor outputs: Array[Output]?
 
-      attr_accessor time_start: DateTime?
+      attr_accessor time_start: dateTimeString?
 
-      attr_accessor time_end: DateTime?
+      attr_accessor time_end: dateTimeString?
 
       attr_accessor workspaces: Array[Workspace]?
 

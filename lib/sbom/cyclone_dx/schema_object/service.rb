@@ -2,6 +2,7 @@
 
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "service_data"
 
 # Service
 module SBOM

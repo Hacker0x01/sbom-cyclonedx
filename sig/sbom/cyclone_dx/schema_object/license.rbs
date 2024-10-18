@@ -95,8 +95,8 @@ module SBOM
           ?purchaser: Purchaser?,
           ?purchase_order: String?,
           ?license_types: Array[String]?,
-          ?last_renewal: DateTime?,
-          ?expiration: DateTime?
+          ?last_renewal: dateTimeString?,
+          ?expiration: dateTimeString?
         ) -> instance
 
         def self.[]: (
@@ -106,8 +106,8 @@ module SBOM
           ?purchaser: Purchaser?,
           ?purchase_order: String?,
           ?license_types: Array[String]?,
-          ?last_renewal: DateTime?,
-          ?expiration: DateTime?
+          ?last_renewal: dateTimeString?,
+          ?expiration: dateTimeString?
         ) -> instance
 
         def self.keyword_init?: () -> true
@@ -128,9 +128,9 @@ module SBOM
 
         attr_accessor license_types: Array[String]?
 
-        attr_accessor last_renewal: DateTime?
+        attr_accessor last_renewal: dateTimeString?
 
-        attr_accessor expiration: DateTime?
+        attr_accessor expiration: dateTimeString?
 
         include SBOM::CycloneDX::SchemaObject
 

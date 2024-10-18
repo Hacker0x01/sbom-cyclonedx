@@ -2,13 +2,13 @@ module SBOM
   module CycloneDX
     class IdentifiableAction < ::Struct[untyped]
       def self.new: (
-        ?timestamp: DateTime?,
+        ?timestamp: dateTimeString?,
         ?name: String?,
         ?email: emailString?
       ) -> instance
 
       def self.[]: (
-        ?timestamp: DateTime?,
+        ?timestamp: dateTimeString?,
         ?name: String?,
         ?email: emailString?
       ) -> instance
@@ -19,7 +19,7 @@ module SBOM
 
       def members: () -> [ :timestamp, :name, :email ]
 
-      attr_accessor timestamp: DateTime
+      attr_accessor timestamp: dateTimeString
 
       attr_accessor name: String?
 

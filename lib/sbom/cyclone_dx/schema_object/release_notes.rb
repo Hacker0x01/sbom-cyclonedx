@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require_relative "../schema_object"
+require_relative "issue"
+require_relative "note"
+require_relative "property"
 
 # Release notes
 module SBOM
