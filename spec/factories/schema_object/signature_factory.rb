@@ -16,13 +16,13 @@ FactoryBot.define do
 
   factory :signature_chain, parent: :schema_object, class: "SBOM::CycloneDX::Signature::SignatureChain" do
     trait :all_fields do
-      signatures { association_list(:jsf_signature, rand(1..3)) }
+      signatures { association_list(:jsf_signature) }
     end
   end
 
   factory :signer_list, parent: :schema_object, class: "SBOM::CycloneDX::Signature::SignerList" do
     trait :all_fields do
-      signers { association_list(:jsf_signature, rand(1..3)) }
+      signers { association_list(:jsf_signature) }
     end
   end
 

@@ -19,6 +19,7 @@ gem "rspec", "~> 3.13", ">= 3.13.0"
 gem "rspec-core", "~> 3.13", ">= 3.13.0"
 gem "rspec-expectations", "~> 3.13", ">= 3.13.0"
 gem "rspec-mocks", "~> 3.13", ">= 3.13.0"
+gem "ruby-lsp-rspec", require: false
 
 gem "rubocop", "~> 1.65", ">= 1.65.1"
 gem "rubocop-factory_bot", "~> 2.26", ">= 2.26.1"

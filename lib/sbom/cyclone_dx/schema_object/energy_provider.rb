@@ -3,6 +3,9 @@
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "external_reference"
+require_relative "energy_measure"
+require_relative "organizational_entity"
 
 # Energy Provider - Describes the physical provider of energy used for model development or operations.
 module SBOM

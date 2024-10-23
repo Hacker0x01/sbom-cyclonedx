@@ -3,6 +3,15 @@
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "dependency"
+require_relative "input"
+require_relative "output"
+require_relative "property"
+require_relative "resource_reference_choice"
+require_relative "step"
+require_relative "task"
+require_relative "trigger"
+require_relative "workspace"
 
 # Workflow - A specialized orchestration task.
 module SBOM

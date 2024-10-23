@@ -2,6 +2,10 @@
 
 require_relative "../enum"
 require_relative "../schema_object"
+require_relative "energy_provider"
+require_relative "energy_measure"
+require_relative "co2_measure"
+require_relative "property"
 
 # Energy consumption - Describes energy consumption information incurred for the specified lifecycle activity.
 module SBOM

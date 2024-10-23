@@ -51,8 +51,8 @@ module FactoryHelper
     association(factories.sample, *args, **kwargs)
   end
 
-  def association_list(factory, count, *args, **kwargs)
-    Array.new(count) { generate_association(Array(factory), *args, **kwargs) }
+  def association_list(factory, count = nil, *args, **kwargs)
+    Array.new(count || rand(1..2)) { generate_association(Array(factory), *args, **kwargs) }
   end
 
   def generate_license_choice(*args, **kwargs)

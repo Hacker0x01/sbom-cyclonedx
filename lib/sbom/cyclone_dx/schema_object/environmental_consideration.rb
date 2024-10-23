@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative "../schema_object"
+require_relative "energy_consumption"
+require_relative "property"
 
 # Environmental Considerations - Describes various environmental impact metrics.
 module SBOM

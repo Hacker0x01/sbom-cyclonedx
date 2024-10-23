@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require_relative "../schema_object"
+require_relative "attachment"
+require_relative "property"
+require_relative "resource_reference_choice"
 
 # Event - Represents something that happened that may trigger a response.
 module SBOM

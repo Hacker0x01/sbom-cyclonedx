@@ -2,6 +2,7 @@
 
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "external_reference"
 
 # Resource reference choice - A reference to a locally defined resource (e.g., a bom-ref) or an externally accessible resource.
 module SBOM

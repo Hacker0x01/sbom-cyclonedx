@@ -22,7 +22,7 @@ FactoryBot.define do
     trait :all_fields do
       attachment
       url { generate(:url) }
-      properties { association_list(:property, rand(1..3)) }
+      properties { association_list(:property) }
     end
   end
 end

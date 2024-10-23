@@ -9,7 +9,7 @@ FactoryBot.define do
     trait :all_fields do
       confidence { rand(0.0..1.0) }
       concluded_value { %w[cpe purl omnibor_id swhid swid].sample }
-      methods_used { association_list(:method, rand(1..3)) }
+      methods_used { association_list(:method) }
       tools { Array.new(rand(1..4)) { generate(:ref_or_cdx_urn) } }
     end
   end

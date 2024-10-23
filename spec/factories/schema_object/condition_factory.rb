@@ -5,7 +5,7 @@ FactoryBot.define do
     trait :all_fields do
       description { Faker::Lorem.sentence }
       expression { Faker::Lorem.words(number: 4).zip(Array.new(3) { %w[AND OR XOR].sample }).flatten.join(" ") }
-      properties { association_list(:property, rand(1..4)).sample }
+      properties { association_list(:property).sample }
     end
   end
 end

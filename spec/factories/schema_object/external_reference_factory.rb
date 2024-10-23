@@ -5,6 +5,9 @@ FactoryBot.define do
     url { generate(:url) }
     type { SBOM::CycloneDX::Enum::EXTERNAL_REFERENCE_TYPE.sample }
 
-    trait :all_fields
+    trait :all_fields do
+      comment { Faker::Lorem.sentence }
+      hashes { association_list(:hash_data) }
+    end
   end
 end

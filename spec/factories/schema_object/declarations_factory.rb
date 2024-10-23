@@ -3,11 +3,11 @@
 FactoryBot.define do
   factory :declarations, parent: :schema_object, class: "SBOM::CycloneDX::Declarations" do
     trait :all_fields do
-      assessors { association_list(:assessor, rand(1..2)) }
-      attestations { association_list(:attestation, rand(1..2)) }
-      claims { association_list(:claim, rand(1..2)) }
-      evidence { association_list(:evidence, rand(1..2)) }
-      targets { association_list(:target, rand(1..2)) }
+      assessors { association_list(:assessor) }
+      attestations { association_list(:attestation) }
+      claims { association_list(:claim) }
+      evidence { association_list(:evidence) }
+      targets { association_list(:target) }
       affirmation
       signature { generate_signature }
     end
@@ -16,7 +16,7 @@ FactoryBot.define do
   factory :affirmation, parent: :schema_object, class: "SBOM::CycloneDX::Declarations::Affirmation" do
     trait :all_fields do
       statement { Faker::Lorem.sentence }
-      signatories { association_list(:signatory, rand(1..2)) }
+      signatories { association_list(:signatory) }
       signature { generate_signature }
     end
   end
@@ -51,7 +51,7 @@ FactoryBot.define do
     trait :all_fields do
       summary { Faker::Lorem.sentence }
       assessor { generate(:ref_link) }
-      requirements_map { association_list(:map, rand(1..2)) }
+      requirements_map { association_list(:map) }
       signature { generate_signature }
     end
   end
@@ -100,7 +100,7 @@ FactoryBot.define do
       # This will definitely not be valid, but isn't checked currently
       property_name { Faker::Lorem.words(number: 2).join(":").downcase }
       description { Faker::Lorem.sentence }
-      data { association_list(:evidence_data, rand(1..2)) }
+      data { association_list(:evidence_data) }
       created { Faker::Time.backward(days: 367) }
       expires { Faker::Time.between(from: 6.months.ago, to: 18.months.from_now) }
       author factory: :organizational_contact
@@ -136,9 +136,9 @@ FactoryBot.define do
 
   factory :target, parent: :schema_object, class: "SBOM::CycloneDX::Declarations::Target" do
     trait :all_fields do
-      organizations { association_list(:organizational_entity, rand(1..2)) }
-      components { association_list(:component, rand(1..2)) }
-      services { association_list(:service, rand(1..2)) }
+      organizations { association_list(:organizational_entity) }
+      components { association_list(:component) }
+      services { association_list(:service) }
     end
   end
 end

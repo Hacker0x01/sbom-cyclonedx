@@ -149,7 +149,7 @@ FactoryBot.define do
     trait :all_fields do
       type { SBOM::CycloneDX::Enum::PROTOCOL_TYPE.sample }
       version { Faker::App.version }
-      cipher_suites { association_list(:cipher_suite, rand(1..3)) }
+      cipher_suites { association_list(:cipher_suite) }
       ikev2_transform_types { association :ikev2_transform_type }
       crypto_ref_array { Array.new(rand(1..3)) { generate(:ref_link) } }
     end
@@ -185,7 +185,7 @@ FactoryBot.define do
       value { Faker::Crypto.md5 }
       asset_size { rand(1..(2**16)) }
       format { %w[P8 PEM DER CVC].sample }
-      secured_by { association_list(:secured_by, rand(1..3)) }
+      secured_by { association_list(:secured_by) }
     end
   end
 end

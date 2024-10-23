@@ -13,7 +13,7 @@ FactoryBot.define do
           association(:service)
         end
       end
-      vulnerabilities { association_list(:vulnerability, rand(1..3)) }
+      vulnerabilities { association_list(:vulnerability) }
       signature { generate_signature }
     end
   end

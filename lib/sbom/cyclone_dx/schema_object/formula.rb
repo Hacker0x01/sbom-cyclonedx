@@ -2,6 +2,10 @@
 
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "component"
+require_relative "property"
+require_relative "service"
+require_relative "workflow"
 
 # Formula - Describes workflows and resources that captures rules and other aspects of how the associated BOM component or service was formed.
 module SBOM

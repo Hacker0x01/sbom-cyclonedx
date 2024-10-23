@@ -12,13 +12,13 @@ FactoryBot.define do
       bom_ref { generate(:ref_link) }
       supplier factory: :organizational_entity
       manufacturer factory: :organizational_entity
-      authors { association_list(:organizational_contact, rand(1..3)) }
+      authors { association_list(:organizational_contact) }
       publisher { Faker::Lorem.word }
       group { Faker::Lorem.word }
       version { Faker::App.semantic_version }
       description { Faker::Lorem.sentence }
       scope { SBOM::CycloneDX::Enum::SCOPE.sample }
-      hashes { association_list(:hash_data, rand(1..3)) }
+      hashes { association_list(:hash_data) }
       licenses { license_choice_list(rand(1..3)) }
       copyright { Faker::Company.name }
       cpe do
@@ -68,14 +68,14 @@ FactoryBot.define do
       swid
       modified { Faker::Boolean.boolean }
       pedigree
-      external_references { association_list(:external_reference, rand(1..3)) }
+      external_references { association_list(:external_reference) }
       components { [] }
       evidence factory: :component_evidence
       release_notes
       model_card
-      data { association_list(:component_data, rand(1..3)) }
+      data { association_list(:component_data) }
       crypto_properties
-      properties { association_list(:property, rand(1..3)) }
+      properties { association_list(:property) }
       tags { Array.new(rand(1..4)) { Faker::Lorem.word } }
       signature { generate_signature }
     end
@@ -94,8 +94,8 @@ FactoryBot.define do
       ancestors { [] }
       descendants { [] }
       variants { [] }
-      commits { association_list(:commit, rand(1..3)) }
-      patches { association_list(:patch, rand(1..3)) }
+      commits { association_list(:commit) }
+      patches { association_list(:patch) }
       notes { Faker::Lorem.sentence }
     end
   end
