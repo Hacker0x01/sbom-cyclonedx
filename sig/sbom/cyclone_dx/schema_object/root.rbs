@@ -2,7 +2,7 @@ module SBOM
   module CycloneDX
     class Root < ::Struct[untyped]
       def self.new: (
-        version: Integer,
+        ?version: Integer,
         ?serial_number: String?,
         ?metadata: Metadata?,
         ?components: Array[Component]?,
@@ -20,7 +20,7 @@ module SBOM
       ) -> instance
 
       def self.[]: (
-        version: Integer,
+        ?version: Integer,
         ?serial_number: String?,
         ?metadata: Metadata?,
         ?components: Array[Component]?,
@@ -44,7 +44,7 @@ module SBOM
       def members: () -> [ :serial_number, :version, :metadata, :components, :services, :external_references, :dependencies, :compositions, :vulnerabilities, :annotations, :formulation, :declarations, :definitions, :properties, :signature, :bom_format, :spec_version ]
 
       def initialize: (
-        version: Integer,
+        ?version: Integer,
         ?serial_number: String?,
         ?metadata: Metadata?,
         ?components: Array[Component]?,

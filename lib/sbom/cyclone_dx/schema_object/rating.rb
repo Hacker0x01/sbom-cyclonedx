@@ -2,6 +2,7 @@
 
 require_relative "../enum"
 require_relative "../schema_object"
+require_relative "vulnerability_source"
 
 # Rating - Defines the severity or risk ratings of a vulnerability.
 module SBOM

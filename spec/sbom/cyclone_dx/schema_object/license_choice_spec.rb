@@ -4,11 +4,23 @@ require "spec_helper"
 require "sbom/cyclone_dx/schema_object/license_choice"
 
 describe SBOM::CycloneDX::LicenseChoice do
-  it "can be initialized with minimum required attributes", skip: "factory updates" do
-    expect { build(:license_choice) }.not_to raise_error
+  describe SBOM::CycloneDX::LicenseChoice::LicenseExpression do
+    it "can be initialized with minimum required attributes" do
+      expect { build(:license_expression) }.not_to raise_error
+    end
+
+    it "can be initialized with all attributes" do
+      expect { build(:license_expression, :all_fields) }.not_to raise_error
+    end
   end
 
-  it "can be initialized with all attributes", skip: "factory updates" do
-    expect { build(:license_choice, :all_fields) }.not_to raise_error
+  describe SBOM::CycloneDX::LicenseChoice::WrappedLicense do
+    it "can be initialized with minimum required attributes" do
+      expect { build(:wrapped_license) }.not_to raise_error
+    end
+
+    it "can be initialized with all attributes" do
+      expect { build(:wrapped_license, :all_fields) }.not_to raise_error
+    end
   end
 end

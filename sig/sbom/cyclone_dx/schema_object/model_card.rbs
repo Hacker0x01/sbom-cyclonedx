@@ -5,7 +5,7 @@ module SBOM
         ?bom_ref: String?,
         ?model_parameters: ModelParameters?,
         ?quantitative_analysis: QuantitativeAnalysis?,
-        ?considerations: Consideration?,
+        ?considerations: Considerations?,
         ?properties: Array[Property]?
       ) -> instance
 
@@ -13,7 +13,7 @@ module SBOM
         ?bom_ref: String?,
         ?model_parameters: ModelParameters?,
         ?quantitative_analysis: QuantitativeAnalysis?,
-        ?considerations: Consideration?,
+        ?considerations: Considerations?,
         ?properties: Array[Property]?
       ) -> instance
 
@@ -29,7 +29,7 @@ module SBOM
 
       attr_accessor quantitative_analysis: QuantitativeAnalysis?
 
-      attr_accessor considerations: Consideration?
+      attr_accessor considerations: Considerations?
 
       attr_accessor properties: Array[Property]?
 
@@ -37,7 +37,7 @@ module SBOM
 
       extend SBOM::CycloneDX::SchemaObject::ClassMethods
 
-      class Consideration < ::Struct[untyped]
+      class Considerations < ::Struct[untyped]
         def self.new: (
           ?users: Array[String]?,
           ?use_cases: Array[String]?,

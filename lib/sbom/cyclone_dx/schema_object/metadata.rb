@@ -2,6 +2,12 @@
 
 require_relative "../enum"
 require_relative "../schema_object"
+require_relative "component"
+require_relative "license_choice"
+require_relative "organizational_contact"
+require_relative "organizational_entity"
+require_relative "property"
+require_relative "tools"
 
 # BOM Metadata
 module SBOM

@@ -18,8 +18,6 @@ FactoryBot.define do
   factory :wrapped_license, parent: :schema_object, class: "SBOM::CycloneDX::LicenseChoice::WrappedLicense" do
     license
 
-    trait :all_fields do
-      license
-    end
+    trait :all_fields
   end
 end

@@ -2,6 +2,19 @@
 
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "metadata"
+require_relative "component"
+require_relative "service"
+require_relative "external_reference"
+require_relative "dependency"
+require_relative "composition"
+require_relative "vulnerability"
+require_relative "annotation"
+require_relative "formula"
+require_relative "declarations"
+require_relative "definitions"
+require_relative "signature"
+require_relative "property"
 
 # CycloneDX Bill of Materials Standard
 module SBOM

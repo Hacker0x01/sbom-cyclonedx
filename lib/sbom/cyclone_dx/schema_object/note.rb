@@ -2,6 +2,7 @@
 
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "attachment"
 
 # Note - A note containing the locale and content.
 module SBOM

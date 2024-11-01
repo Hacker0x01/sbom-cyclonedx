@@ -6,8 +6,6 @@ FactoryBot.define do
       reference_type { %i[ref external_reference].sample }
     end
 
-    trait :all_fields
-
     trait :ref do
       transient { reference_type { :ref } }
     end
@@ -23,5 +21,7 @@ FactoryBot.define do
     external_reference do
       reference_type == :external_reference ? association(:external_reference) : nil
     end
+
+    trait :all_fields
   end
 end

@@ -92,7 +92,7 @@ module SBOM
           Validator.valid?(
             Array,
             licenses,
-            items: [LicenseChoice, ->(i) { LicenseChoice.valid?(i, required: true) }]
+            items: ->(item) { LicenseChoice.valid?(item, required: true) }
           ) &&
           Validator.valid?(Array, external_references, items: ExternalReference) &&
           Validator.valid?(Array, services, unique: true, items: Service) &&

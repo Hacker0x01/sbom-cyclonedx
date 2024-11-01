@@ -3,6 +3,8 @@
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "../type"
+require_relative "data_governance"
 
 module SBOM
   module CycloneDX

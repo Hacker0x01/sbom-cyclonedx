@@ -3,6 +3,10 @@
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "attachment"
+require_relative "property"
+require_relative "organizational_contact"
+require_relative "organizational_entity"
 
 # License - Specifies the details and attributes related to a software license. It can either include a valid SPDX license identifier or a named license, along with additional properties such as license acknowledgment, comprehensive commercial licensing information, and the full text of the license.
 module SBOM

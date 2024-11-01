@@ -2,6 +2,8 @@
 
 require_relative "../enum"
 require_relative "../schema_object"
+require_relative "diff"
+require_relative "issue"
 
 # Patch - Specifies an individual patch
 module SBOM

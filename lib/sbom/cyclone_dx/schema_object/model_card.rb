@@ -3,6 +3,14 @@
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "property"
+require_relative "risk"
+require_relative "fairness_assessment"
+require_relative "input_output_ml_parameter"
+require_relative "performance_metric"
+require_relative "graphics_collection"
+require_relative "environmental_consideration"
+require_relative "component_data"
 
 # Model Card - A model card describes the intended uses of a machine learning model and potential limitations, including biases and ethical considerations. Model cards typically contain the training parameters, which datasets were used to train the model, performance metrics, and other relevant data useful for ML transparency. This object SHOULD be specified for any component of type `machine-learning-model` and must not be specified for other component types.
 module SBOM
@@ -29,12 +37,12 @@ module SBOM
         Validator.valid?(String, bom_ref, pattern: Pattern::REF_LINK) &&
           Validator.valid?(ModelParameters, model_parameters) &&
           Validator.valid?(QuantitativeAnalysis, quantitative_analysis) &&
-          Validator.valid?(Consideration, considerations) &&
+          Validator.valid?(Considerations, considerations) &&
           Validator.valid?(Array, properties, items: Property)
       end
 
-      class Consideration < Struct.new(
-        "Consideration",
+      class Considerations < Struct.new(
+        "Considerations",
         # Users - Who are the intended users of the model?
         :users,
         # Use Cases - What are the intended use cases of the model?

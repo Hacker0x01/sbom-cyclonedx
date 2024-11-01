@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 require_relative "../schema_object"
+require_relative "../type"
+require_relative "resource_reference_choice"
+require_relative "parameter"
+require_relative "property"
+require_relative "attachment"
 
 # Input type - Type that represents various input data types and formats.
 module SBOM

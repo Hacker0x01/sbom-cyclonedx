@@ -33,9 +33,16 @@ module FactoryHelper
       "#{mime_type}; #{Faker::Lorem.word.downcase}=#{Faker::Lorem.word.downcase}-#{n}"
     end,
     url: lambda do |_|
-      next Faker::Internet.url if Faker::Boolean.boolean
+      gen_url = Faker::Internet.url
+      next gen_url if Faker::Boolean.boolean
 
-      URI.parse(Faker::Internet.url)
+      URI.parse(gen_url)
+    end,
+    email: lambda do |_|
+      gen_email = Faker::Internet.email
+      next gen_email if Faker::Boolean.boolean
+
+      SBOM::CycloneDX::EmailAddress.new(gen_email)
     end
   }.freeze
 
@@ -59,7 +66,7 @@ module FactoryHelper
     generate_association(%i[license_expression wrapped_license], *args, **kwargs)
   end
 
-  def license_choice_list(count, *args, **kwargs)
+  def license_choice_list(count = nil, *args, **kwargs)
     association_list(%i[license_expression wrapped_license], count, *args, **kwargs)
   end
 

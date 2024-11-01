@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative "../schema_object"
+require_relative "component"
+require_relative "service"
 
 # Tools - The tool(s) used to identify, confirm, or score the vulnerability.
 module SBOM

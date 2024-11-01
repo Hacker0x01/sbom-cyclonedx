@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative "../schema_object"
+require_relative "command"
+require_relative "property"
 
 # Executes specific commands or tools in order to accomplish its owning task as part of a sequence.
 module SBOM

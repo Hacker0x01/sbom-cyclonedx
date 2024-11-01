@@ -2,6 +2,13 @@
 
 FactoryBot.define do
   factory :rating, parent: :schema_object, class: "SBOM::CycloneDX::Rating" do
-    trait :all_fields
+    trait :all_fields do
+      source { association(:vulnerability_source) }
+      score { rand(0.0..10.0) }
+      severity { SBOM::CycloneDX::Enum::SEVERITY.sample }
+      score_method { SBOM::CycloneDX::Enum::SCORE_METHOD.sample }
+      vector { Faker::Lorem.sentence }
+      justification { Faker::Lorem.sentence }
+    end
   end
 end

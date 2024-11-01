@@ -2,6 +2,9 @@
 
 require_relative "../enum"
 require_relative "../schema_object"
+require_relative "resource_reference_choice"
+require_relative "attachment"
+require_relative "property"
 
 # Anonymous class from Output
 module SBOM
