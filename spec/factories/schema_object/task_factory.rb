@@ -17,7 +17,7 @@ FactoryBot.define do
       time_start { Faker::Time.backward(days: 367) }
       time_end { time_start + rand(1..100).hours }
       workspaces { association_list(:workspace) }
-      runtime_topology { association(:dependency) }
+      runtime_topology { association_list(:dependency) }
       properties { association_list(:property) }
     end
   end
