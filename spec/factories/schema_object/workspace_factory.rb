@@ -2,6 +2,20 @@
 
 FactoryBot.define do
   factory :workspace, parent: :schema_object, class: "SBOM::CycloneDX::Workspace" do
-    trait :all_fields
+    bom_ref { generate(:ref_link) }
+    uid { Faker::Lorem.characters(number: 16) }
+
+    trait :all_fields do
+      name { Faker::Lorem.word }
+      aliases { Faker::Lorem.words(number: rand(1..3)) }
+      description { Faker::Lorem.sentence }
+      resource_references { association_list(:resource_reference_choice) }
+      access_mode { SBOM::CycloneDX::Enum::ACCESS_MODE.sample }
+      mount_path { Faker::File.dir }
+      managed_data_type { Faker::Lorem.word }
+      volume_request { Faker::Lorem.word }
+      volume { association(:volume) }
+      properties { association_list(:property) }
+    end
   end
 end

@@ -15,7 +15,7 @@ FactoryBot.define do
     end
   end
 
-  factory :level, class: "SBOM::CycloneDX::Standard::Level" do
+  factory :level, parent: :schema_object, class: "SBOM::CycloneDX::Standard::Level" do
     bom_ref { generate(:ref_link) }
     identifier { Faker::Lorem.word }
     title { Faker::Lorem.word }
@@ -23,7 +23,7 @@ FactoryBot.define do
     requirements { Array.new(rand(0..2)) { generate(:ref_link) } }
   end
 
-  factory :requirement, class: "SBOM::CycloneDX::Standard::Requirement" do
+  factory :requirement, parent: :schema_object, class: "SBOM::CycloneDX::Standard::Requirement" do
     bom_ref { generate(:ref_link) }
     identifier { Faker::Lorem.word }
     title { Faker::Lorem.word }

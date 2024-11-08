@@ -3,6 +3,12 @@
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "condition"
+require_relative "event"
+require_relative "input"
+require_relative "output"
+require_relative "property"
+require_relative "resource_reference_choice"
 
 # Trigger - Represents a resource that can conditionally activate (or fire) tasks based upon associated events and their data.
 module SBOM

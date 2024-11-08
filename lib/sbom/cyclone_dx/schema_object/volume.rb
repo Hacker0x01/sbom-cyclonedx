@@ -2,6 +2,7 @@
 
 require_relative "../enum"
 require_relative "../schema_object"
+require_relative "property"
 
 # Volume - An identifiable, logical unit of data storage tied to a physical device.
 module SBOM
@@ -50,7 +51,7 @@ module SBOM
           Validator.valid?(String, size_allocated) &&
           Validator.valid?(SBOM::CycloneDX::Type::Boolean, persistent) &&
           Validator.valid?(SBOM::CycloneDX::Type::Boolean, remote) &&
-          Validator.valid?(Array, properties, of: Property)
+          Validator.valid?(Array, properties, items: Property)
       end
     end
   end

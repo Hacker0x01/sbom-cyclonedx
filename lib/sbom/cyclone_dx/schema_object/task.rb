@@ -3,6 +3,14 @@
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "dependency"
+require_relative "input"
+require_relative "output"
+require_relative "property"
+require_relative "resource_reference_choice"
+require_relative "step"
+require_relative "trigger"
+require_relative "workspace"
 
 # Task - Describes the inputs, sequence of steps and resources used to accomplish a task and its output.
 module SBOM
@@ -50,10 +58,10 @@ module SBOM
       def initialize(
         bom_ref:,
         uid:,
+        task_types: [],
         name: nil,
         description: nil,
         resource_references: nil,
-        task_types: nil,
         trigger: nil,
         steps: nil,
         inputs: nil,

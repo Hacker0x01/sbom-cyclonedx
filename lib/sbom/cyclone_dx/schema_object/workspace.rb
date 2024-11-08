@@ -3,6 +3,9 @@
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../schema_object"
+require_relative "resource_reference_choice"
+require_relative "property"
+require_relative "volume"
 
 # Workspace - A named filesystem or data resource shareable by workflow tasks.
 module SBOM

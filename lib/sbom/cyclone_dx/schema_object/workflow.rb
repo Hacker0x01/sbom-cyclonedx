@@ -64,7 +64,7 @@ module SBOM
         name: nil,
         description: nil,
         resource_references: nil,
-        task_types: nil,
+        task_types: [],
         tasks: nil,
         task_dependencies: nil,
         trigger: nil,
