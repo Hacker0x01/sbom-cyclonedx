@@ -1,0 +1,15 @@
+module SBOM
+  module CycloneDX
+    module Field
+      class Boolean < Base[bool]
+        def initialize: (
+          name: Symbol,
+          ?required: bool,
+          ?const: bool | NotSet,
+          ?default: fieldDefault[bool] | NotSet,
+          ?json_name: ::String?
+        ) -> void
+      end
+    end
+  end
+end

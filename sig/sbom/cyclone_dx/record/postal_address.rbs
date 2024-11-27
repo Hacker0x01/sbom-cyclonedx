@@ -1,0 +1,51 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class PostalAddress < Base
+        def initialize: (?bom_ref: String?, ?country: String?, ?region: String?, ?locality: String?, ?post_office_box_number: String?, ?postal_code: String?, ?street_address: String?) -> void
+
+        @bom_ref: String?
+        def bom_ref: () -> String?
+        def bom_ref=: (String?) -> String?
+        def bom_ref?: () -> bool
+        def bom_ref_valid?: () -> bool
+
+        @country: String?
+        def country: () -> String?
+        def country=: (String?) -> String?
+        def country?: () -> bool
+        def country_valid?: () -> bool
+
+        @region: String?
+        def region: () -> String?
+        def region=: (String?) -> String?
+        def region?: () -> bool
+        def region_valid?: () -> bool
+
+        @locality: String?
+        def locality: () -> String?
+        def locality=: (String?) -> String?
+        def locality?: () -> bool
+        def locality_valid?: () -> bool
+
+        @post_office_box_number: String?
+        def post_office_box_number: () -> String?
+        def post_office_box_number=: (String?) -> String?
+        def post_office_box_number?: () -> bool
+        def post_office_box_number_valid?: () -> bool
+
+        @postal_code: String?
+        def postal_code: () -> String?
+        def postal_code=: (String?) -> String?
+        def postal_code?: () -> bool
+        def postal_code_valid?: () -> bool
+
+        @street_address: String?
+        def street_address: () -> String?
+        def street_address=: (String?) -> String?
+        def street_address?: () -> bool
+        def street_address_valid?: () -> bool
+      end
+    end
+  end
+end

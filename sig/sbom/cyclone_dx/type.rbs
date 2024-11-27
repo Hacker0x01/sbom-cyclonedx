@@ -4,7 +4,12 @@ module SBOM
       module Boolean
       end
 
-      module Union
+      class Union
+        @types: Array[fieldTypeLabel]
+
+        def self.[]: [T < fieldTypeLabel] (*T) -> instance
+
+        private def initialize: [T < fieldTypeLabel] (*T) -> void
       end
     end
   end

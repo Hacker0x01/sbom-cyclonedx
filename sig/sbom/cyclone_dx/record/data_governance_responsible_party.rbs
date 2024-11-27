@@ -1,0 +1,21 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class DataGovernanceResponsibleParty < Base
+        def initialize: (?organization: OrganizationalEntity?, ?contact: OrganizationalContact?) -> void
+
+        @organization: OrganizationalEntity?
+        def organization: () -> OrganizationalEntity?
+        def organization=: (OrganizationalEntity?) -> OrganizationalEntity?
+        def organization?: () -> bool
+        def organization_valid?: () -> bool
+
+        @contact: OrganizationalContact?
+        def contact: () -> OrganizationalContact?
+        def contact=: (OrganizationalContact?) -> OrganizationalContact?
+        def contact?: () -> bool
+        def contact_valid?: () -> bool
+      end
+    end
+  end
+end

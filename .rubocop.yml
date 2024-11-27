@@ -21,6 +21,7 @@ Layout/LineLength:
   Max: 120
   AllowedPatterns:
     - '\s*#:?\s.*'
+    - '\s*#\$?\s.*'
 
 Style/CommentAnnotation:
   Enabled: true
@@ -34,11 +35,10 @@ Style/CommentAnnotation:
     - NOTE FOR REVIEWER
     - NOTE FOR AUTHOR
 
-# TODO: Remove these and customize cop to allow rbs-inline syntax
 Layout/LeadingCommentSpace:
-  Enabled: false
-Layout/EmptyLineAfterMagicComment:
-  Enabled: false
+  AllowSteepAnnotation: true
+  AllowRBSInlineAnnotation: true
+
 Metrics/AbcSize:
   AllowedMethods:
     - valid?
@@ -47,6 +47,7 @@ Metrics/CyclomaticComplexity:
     - valid?
 Metrics/MethodLength:
   AllowedMethods:
+    - initialize
     - valid?
 Metrics/ParameterLists:
   CountKeywordArgs: false
@@ -58,7 +59,7 @@ RSpec/MultipleMemoizedHelpers:
   Max: 12
 RSpec/SpecFilePathFormat:
   Exclude:
-    - "spec/sbom/cyclone_dx/schema_object/*_spec.rb"
+    - "spec/sbom/cyclone_dx/record/*_spec.rb"
 Style/AccessorGrouping:
   Enabled: false
 Style/CommentedKeyword:

@@ -1,0 +1,15 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Copyright < Base
+        def initialize: (text: String) -> void
+
+        @text: String
+        def text: () -> String
+        def text=: (String) -> String
+        def text?: () -> bool
+        def text_valid?: () -> bool
+      end
+    end
+  end
+end

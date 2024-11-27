@@ -1,0 +1,21 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Graphic < Base
+        def initialize: (?name: String?, ?image: Attachment?) -> void
+
+        @name: String?
+        def name: () -> String?
+        def name=: (String?) -> String?
+        def name?: () -> bool
+        def name_valid?: () -> bool
+
+        @image: Attachment?
+        def image: () -> Attachment?
+        def image=: (Attachment?) -> Attachment?
+        def image?: () -> bool
+        def image_valid?: () -> bool
+      end
+    end
+  end
+end

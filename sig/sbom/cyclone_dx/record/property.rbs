@@ -1,0 +1,21 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Property < Base
+        def initialize: (name: String, ?value: String?) -> void
+
+        @name: String
+        def name: () -> String
+        def name=: (String) -> String
+        def name?: () -> bool
+        def name_valid?: () -> bool
+
+        @value: String?
+        def value: () -> String?
+        def value=: (String?) -> String?
+        def value?: () -> bool
+        def value_valid?: () -> bool
+      end
+    end
+  end
+end

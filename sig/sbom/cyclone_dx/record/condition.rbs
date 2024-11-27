@@ -1,0 +1,27 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Condition < Base
+        def initialize: (?description: String?, ?expression: String?, ?properties: Array[Property]?) -> void
+
+        @description: String?
+        def description: () -> String?
+        def description=: (String?) -> String?
+        def description?: () -> bool
+        def description_valid?: () -> bool
+
+        @expression: String?
+        def expression: () -> String?
+        def expression=: (String?) -> String?
+        def expression?: () -> bool
+        def expression_valid?: () -> bool
+
+        @properties: Array[Property]?
+        def properties: () -> Array[Property]?
+        def properties=: (Array[Property]?) -> Array[Property]?
+        def properties?: () -> bool
+        def properties_valid?: () -> bool
+      end
+    end
+  end
+end

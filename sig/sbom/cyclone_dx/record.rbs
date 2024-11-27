@@ -1,0 +1,33 @@
+module SBOM
+  module CycloneDX
+    module Record
+      type presenceCheck = :all | :any | :one
+
+      interface _Instance
+        def initialize: (**untyped) -> void
+        def valid?: () -> bool
+        def as_json: (?Hash[Symbol, untyped]?) -> Hash[String, jsonObject]
+        def to_json: (?::JSON::State?) -> ::String
+        def formatted_errors: () -> String
+        def errors: () -> Hash[Symbol | String, Array[String]]
+      end
+
+      interface _Klass
+        def create: (**untyped) -> SBOM::CycloneDX::Record::Base
+        def create!: (**untyped) -> SBOM::CycloneDX::Record::Base
+        def json_name: (Symbol, String) -> void | (Symbol) -> String
+        def prop: (Symbol, fieldTypeLabel, ?required: bool, **untyped) -> void
+        def const: (Symbol, fieldTypeLabel, fieldValue, ?required: bool, **untyped) -> void
+        def validate:
+          (*Symbol, presence: :one | :all | :any, ?message: String?) -> void
+        | (*Symbol, ?message: String?) { (*fieldValue?) -> (bool? | String | Array[String]) } -> void
+        | (*Symbol, presence: :one | :all | :any | nil, ?message: String?) ?{ (*fieldValue?) -> (bool? | String | Array[String]) } -> void
+        def prop_names: (?include_const: bool) -> Array[Symbol]
+        def const_names: () -> Array[Symbol]
+        def fields: [T < SBOM::CycloneDX::Field::Base] () -> Hash[Symbol, T]
+        def custom_validators: () -> Array[[Array[Symbol], String?, ^(*fieldValue?) -> (bool? | String | Array[String])]]
+      end
+
+    end
+  end
+end

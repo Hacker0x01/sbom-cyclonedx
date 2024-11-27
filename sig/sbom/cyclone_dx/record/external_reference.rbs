@@ -1,0 +1,33 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class ExternalReference < Base
+        def initialize: (url: uri | String, ?comment: String?, type: String, ?hashes: Array[HashData]?) -> void
+
+        @url: uri | String
+        def url: () -> (uri | String)
+        def url=: (uri | String) -> (uri | String)
+        def url?: () -> bool
+        def url_valid?: () -> bool
+
+        @comment: String?
+        def comment: () -> String?
+        def comment=: (String?) -> String?
+        def comment?: () -> bool
+        def comment_valid?: () -> bool
+
+        @type: String
+        def type: () -> String
+        def type=: (String) -> String
+        def type?: () -> bool
+        def type_valid?: () -> bool
+
+        @hashes: Array[HashData]?
+        def hashes: () -> Array[HashData]?
+        def hashes=: (Array[HashData]?) -> Array[HashData]?
+        def hashes?: () -> bool
+        def hashes_valid?: () -> bool
+      end
+    end
+  end
+end

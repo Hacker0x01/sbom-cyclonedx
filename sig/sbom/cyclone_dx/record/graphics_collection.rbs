@@ -1,0 +1,21 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class GraphicsCollection < Base
+        def initialize: (?description: String?, ?collection: Array[Graphic]?) -> void
+
+        @description: String?
+        def description: () -> String?
+        def description=: (String?) -> String?
+        def description?: () -> bool
+        def description_valid?: () -> bool
+
+        @collection: Array[Graphic]?
+        def collection: () -> Array[Graphic]?
+        def collection=: (Array[Graphic]?) -> Array[Graphic]?
+        def collection?: () -> bool
+        def collection_valid?: () -> bool
+      end
+    end
+  end
+end

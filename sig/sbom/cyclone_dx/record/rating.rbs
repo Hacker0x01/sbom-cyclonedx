@@ -1,0 +1,45 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Rating < Base
+        def initialize: (?source: VulnerabilitySource?, ?score: Float?, ?severity: String?, ?score_method: String?, ?vector: String?, ?justification: String?) -> void
+
+        @source: VulnerabilitySource?
+        def source: () -> VulnerabilitySource?
+        def source=: (VulnerabilitySource?) -> VulnerabilitySource?
+        def source?: () -> bool
+        def source_valid?: () -> bool
+
+        @score: Float?
+        def score: () -> Float?
+        def score=: (Float?) -> Float?
+        def score?: () -> bool
+        def score_valid?: () -> bool
+
+        @severity: String?
+        def severity: () -> String?
+        def severity=: (String?) -> String?
+        def severity?: () -> bool
+        def severity_valid?: () -> bool
+
+        @score_method: String?
+        def score_method: () -> String?
+        def score_method=: (String?) -> String?
+        def score_method?: () -> bool
+        def score_method_valid?: () -> bool
+
+        @vector: String?
+        def vector: () -> String?
+        def vector=: (String?) -> String?
+        def vector?: () -> bool
+        def vector_valid?: () -> bool
+
+        @justification: String?
+        def justification: () -> String?
+        def justification=: (String?) -> String?
+        def justification?: () -> bool
+        def justification_valid?: () -> bool
+      end
+    end
+  end
+end

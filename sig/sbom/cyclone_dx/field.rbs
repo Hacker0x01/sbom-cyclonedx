@@ -1,0 +1,27 @@
+module SBOM
+  module CycloneDX
+    module Field
+      type fieldDefault [T < fieldValue] = (T | ^() -> T)?
+
+      class NotSet < ::Data
+        def self.new: () -> NotSet
+        def self.[]: () -> NotSet
+      end
+
+      NOT_SET: NotSet
+
+      def self.for:
+        (:array type, Symbol name, **untyped) -> Field::Array
+      | (:boolean type, Symbol name, **untyped) -> Field::Boolean
+      | (:date_time type, Symbol name, **untyped) -> Field::DateTime
+      | (:email_address type, Symbol name, **untyped) -> Field::EmailAddress
+      | (:float type, Symbol name, **untyped) -> Field::Float
+      | (:integer type, Symbol name, **untyped) -> Field::Integer
+      | (::Class & ::SBOM::CycloneDX::Record::_Klass type, Symbol name, **untyped) -> Field::Record[untyped]
+      | (:string type, Symbol name, **untyped) -> Field::String
+      | (:union type, Symbol name, **untyped) ->Field::Union[untyped]
+      | (:uri type, Symbol name, **untyped) -> Field::URI
+      | (fieldTypeLabel type, Symbol name, **untyped) -> Field::Base[untyped]
+    end
+  end
+end

@@ -1,0 +1,27 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class DataGovernance < Base
+        def initialize: (?custodians: Array[DataGovernanceResponsibleParty]?, ?stewards: Array[DataGovernanceResponsibleParty]?, ?owners: Array[DataGovernanceResponsibleParty]?) -> void
+
+        @custodians: Array[DataGovernanceResponsibleParty]?
+        def custodians: () -> Array[DataGovernanceResponsibleParty]?
+        def custodians=: (Array[DataGovernanceResponsibleParty]?) -> Array[DataGovernanceResponsibleParty]?
+        def custodians?: () -> bool
+        def custodians_valid?: () -> bool
+
+        @stewards: Array[DataGovernanceResponsibleParty]?
+        def stewards: () -> Array[DataGovernanceResponsibleParty]?
+        def stewards=: (Array[DataGovernanceResponsibleParty]?) -> Array[DataGovernanceResponsibleParty]?
+        def stewards?: () -> bool
+        def stewards_valid?: () -> bool
+
+        @owners: Array[DataGovernanceResponsibleParty]?
+        def owners: () -> Array[DataGovernanceResponsibleParty]?
+        def owners=: (Array[DataGovernanceResponsibleParty]?) -> Array[DataGovernanceResponsibleParty]?
+        def owners?: () -> bool
+        def owners_valid?: () -> bool
+      end
+    end
+  end
+end

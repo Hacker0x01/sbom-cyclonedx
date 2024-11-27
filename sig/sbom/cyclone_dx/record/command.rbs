@@ -1,0 +1,21 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Command < Base
+        def initialize: (?executed: String?, ?properties: Array[Property]?) -> void
+
+        @executed: String?
+        def executed: () -> String?
+        def executed=: (String?) -> String?
+        def executed?: () -> bool
+        def executed_valid?: () -> bool
+
+        @properties: Array[Property]?
+        def properties: () -> Array[Property]?
+        def properties=: (Array[Property]?) -> Array[Property]?
+        def properties?: () -> bool
+        def properties_valid?: () -> bool
+      end
+    end
+  end
+end

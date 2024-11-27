@@ -1,0 +1,30 @@
+module SBOM
+  module CycloneDX
+    module Validator
+      class ArrayValidator < BaseValidator[::Array[fieldValue]]
+        type itemsValidator = ^(untyped) -> bool
+        type validSingleTypeLabel =
+          :boolean
+        | :date_time
+        | :email_address
+        | :float
+        | :integer
+        | Class & SBOM::CycloneDX::Record::_Klass
+        | :string
+        | :uri
+
+        @items_validator: itemsValidator
+        @unique: bool
+
+        def initialize: (
+            items: itemsValidator | validSingleTypeLabel | Validator::arrayItemValidatorParams,
+            ?unique: bool,
+            ?required: bool,
+            **untyped
+          ) -> void
+
+        def valid?: (untyped) -> bool
+      end
+    end
+  end
+end

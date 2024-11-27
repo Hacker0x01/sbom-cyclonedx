@@ -1,0 +1,21 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class SecuredBy < Base
+        def initialize: (?mechanism: String?, ?algorithm_ref: String?) -> void
+
+        @mechanism: String?
+        def mechanism: () -> String?
+        def mechanism=: (String?) -> String?
+        def mechanism?: () -> bool
+        def mechanism_valid?: () -> bool
+
+        @algorithm_ref: String?
+        def algorithm_ref: () -> String?
+        def algorithm_ref=: (String?) -> String?
+        def algorithm_ref?: () -> bool
+        def algorithm_ref_valid?: () -> bool
+      end
+    end
+  end
+end

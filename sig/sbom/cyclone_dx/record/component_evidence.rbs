@@ -1,0 +1,134 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class ComponentEvidence < Base
+        class Callstack < Base
+          class Frame < Base
+            def initialize: (?package: String?, source_module: String, ?function: String?, ?parameters: Array[String]?, ?line: Integer?, ?column: Integer?, ?full_filename: String?) -> void
+
+            @package: String?
+            def package: () -> String?
+            def package=: (String?) -> String?
+            def package?: () -> bool
+            def package_valid?: () -> bool
+
+            @source_module: String
+            def source_module: () -> String
+            def source_module=: (String) -> String
+            def source_module?: () -> bool
+            def source_module_valid?: () -> bool
+
+            @function: String?
+            def function: () -> String?
+            def function=: (String?) -> String?
+            def function?: () -> bool
+            def function_valid?: () -> bool
+
+            @parameters: Array[String]?
+            def parameters: () -> Array[String]?
+            def parameters=: (Array[String]?) -> Array[String]?
+            def parameters?: () -> bool
+            def parameters_valid?: () -> bool
+
+            @line: Integer?
+            def line: () -> Integer?
+            def line=: (Integer?) -> Integer?
+            def line?: () -> bool
+            def line_valid?: () -> bool
+
+            @column: Integer?
+            def column: () -> Integer?
+            def column=: (Integer?) -> Integer?
+            def column?: () -> bool
+            def column_valid?: () -> bool
+
+            @full_filename: String?
+            def full_filename: () -> String?
+            def full_filename=: (String?) -> String?
+            def full_filename?: () -> bool
+            def full_filename_valid?: () -> bool
+          end
+          def initialize: (?frames: Array[Frame]?) -> void
+
+          @frames: Array[Frame]?
+          def frames: () -> Array[Frame]?
+          def frames=: (Array[Frame]?) -> Array[Frame]?
+          def frames?: () -> bool
+          def frames_valid?: () -> bool
+        end
+
+        class Occurrence < Base
+          def initialize: (?bom_ref: String?, location: String, ?line: Integer?, ?offset: Integer?, ?symbol: String?, ?additional_context: String?) -> void
+
+          @bom_ref: String?
+          def bom_ref: () -> String?
+          def bom_ref=: (String?) -> String?
+          def bom_ref?: () -> bool
+          def bom_ref_valid?: () -> bool
+
+          @location: String
+          def location: () -> String
+          def location=: (String) -> String
+          def location?: () -> bool
+          def location_valid?: () -> bool
+
+          @line: Integer?
+          def line: () -> Integer?
+          def line=: (Integer?) -> Integer?
+          def line?: () -> bool
+          def line_valid?: () -> bool
+
+          @offset: Integer?
+          def offset: () -> Integer?
+          def offset=: (Integer?) -> Integer?
+          def offset?: () -> bool
+          def offset_valid?: () -> bool
+
+          @symbol: String?
+          def symbol: () -> String?
+          def symbol=: (String?) -> String?
+          def symbol?: () -> bool
+          def symbol_valid?: () -> bool
+
+          @additional_context: String?
+          def additional_context: () -> String?
+          def additional_context=: (String?) -> String?
+          def additional_context?: () -> bool
+          def additional_context_valid?: () -> bool
+        end
+
+        def initialize: (?identity: Array[ComponentIdentityEvidence]?, ?occurrences: Array[Occurrence]?, ?callstack: Callstack?, ?licenses: Array[LicenseChoice::licenseChoice]?, ?copyright: Array[Copyright]?) -> void
+
+        @identity: Array[ComponentIdentityEvidence]?
+        def identity: () -> Array[ComponentIdentityEvidence]?
+        def identity=: (Array[ComponentIdentityEvidence]?) -> Array[ComponentIdentityEvidence]?
+        def identity?: () -> bool
+        def identity_valid?: () -> bool
+
+        @occurrences: Array[Occurrence]?
+        def occurrences: () -> Array[Occurrence]?
+        def occurrences=: (Array[Occurrence]?) -> Array[Occurrence]?
+        def occurrences?: () -> bool
+        def occurrences_valid?: () -> bool
+
+        @callstack: Callstack?
+        def callstack: () -> Callstack?
+        def callstack=: (Callstack?) -> Callstack?
+        def callstack?: () -> bool
+        def callstack_valid?: () -> bool
+
+        @licenses: Array[LicenseChoice::licenseChoice]?
+        def licenses: () -> Array[LicenseChoice::licenseChoice]?
+        def licenses=: (Array[LicenseChoice::licenseChoice]?) -> Array[LicenseChoice::licenseChoice]?
+        def licenses?: () -> bool
+        def licenses_valid?: () -> bool
+
+        @copyright: Array[Copyright]?
+        def copyright: () -> Array[Copyright]?
+        def copyright=: (Array[Copyright]?) -> Array[Copyright]?
+        def copyright?: () -> bool
+        def copyright_valid?: () -> bool
+      end
+    end
+  end
+end

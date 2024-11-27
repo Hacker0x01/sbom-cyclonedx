@@ -1,0 +1,412 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Declarations < Base
+        class Affirmation < Base
+          class Signatory < Base
+            def initialize: (?name: String?, ?role: String?, ?signature: Signature::signatureChoice?, ?organization: OrganizationalEntity?, ?external_reference: ExternalReference?) -> void
+
+            @name: String?
+            def name: () -> String?
+            def name=: (String?) -> String?
+            def name?: () -> bool
+            def name_valid?: () -> bool
+
+            @role: String?
+            def role: () -> String?
+            def role=: (String?) -> String?
+            def role?: () -> bool
+            def role_valid?: () -> bool
+
+            @signature: Signature::signatureChoice?
+            def signature: () -> Signature::signatureChoice?
+            def signature=: (Signature::signatureChoice?) -> Signature::signatureChoice?
+            def signature?: () -> bool
+            def signature_valid?: () -> bool
+
+            @organization: OrganizationalEntity?
+            def organization: () -> OrganizationalEntity?
+            def organization=: (OrganizationalEntity?) -> OrganizationalEntity?
+            def organization?: () -> bool
+            def organization_valid?: () -> bool
+
+            @external_reference: ExternalReference?
+            def external_reference: () -> ExternalReference?
+            def external_reference=: (ExternalReference?) -> ExternalReference?
+            def external_reference?: () -> bool
+            def external_reference_valid?: () -> bool
+          end
+          def initialize: (?statement: String?, ?signatories: Array[Signatory]?, ?signature: Signature::signatureChoice?) -> void
+
+          @statement: String?
+          def statement: () -> String?
+          def statement=: (String?) -> String?
+          def statement?: () -> bool
+          def statement_valid?: () -> bool
+
+          @signatories: Array[Signatory]?
+          def signatories: () -> Array[Signatory]?
+          def signatories=: (Array[Signatory]?) -> Array[Signatory]?
+          def signatories?: () -> bool
+          def signatories_valid?: () -> bool
+
+          @signature: Signature::signatureChoice?
+          def signature: () -> Signature::signatureChoice?
+          def signature=: (Signature::signatureChoice?) -> Signature::signatureChoice?
+          def signature?: () -> bool
+          def signature_valid?: () -> bool
+        end
+
+        class Assessor < Base
+          def initialize: (?bom_ref: String?, ?third_party: bool?, ?organization: OrganizationalEntity?) -> void
+
+          @bom_ref: String?
+          def bom_ref: () -> String?
+          def bom_ref=: (String?) -> String?
+          def bom_ref?: () -> bool
+          def bom_ref_valid?: () -> bool
+
+          @third_party: bool?
+          def third_party: () -> bool?
+          def third_party=: (bool?) -> bool?
+          def third_party?: () -> bool
+          def third_party_valid?: () -> bool
+
+          @organization: OrganizationalEntity?
+          def organization: () -> OrganizationalEntity?
+          def organization=: (OrganizationalEntity?) -> OrganizationalEntity?
+          def organization?: () -> bool
+          def organization_valid?: () -> bool
+        end
+
+        class Attestation < Base
+          class Map < Base
+            class Confidence < Base
+              def initialize: (?score: Float?, ?rationale: String?) -> void
+
+              @score: Float?
+              def score: () -> Float?
+              def score=: (Float?) -> Float?
+              def score?: () -> bool
+              def score_valid?: () -> bool
+
+              @rationale: String?
+              def rationale: () -> String?
+              def rationale=: (String?) -> String?
+              def rationale?: () -> bool
+              def rationale_valid?: () -> bool
+            end
+
+            class Conformance < Base
+              def initialize: (?score: Float?, ?rationale: String?, ?mitigation_strategies: Array[String]?) -> void
+
+              @score: Float?
+              def score: () -> Float?
+              def score=: (Float?) -> Float?
+              def score?: () -> bool
+              def score_valid?: () -> bool
+
+              @rationale: String?
+              def rationale: () -> String?
+              def rationale=: (String?) -> String?
+              def rationale?: () -> bool
+              def rationale_valid?: () -> bool
+
+              @mitigation_strategies: Array[String]?
+              def mitigation_strategies: () -> Array[String]?
+              def mitigation_strategies=: (Array[String]?) -> Array[String]?
+              def mitigation_strategies?: () -> bool
+              def mitigation_strategies_valid?: () -> bool
+            end
+            def initialize: (?requirement: String?, ?claims: Array[String]?, ?counter_claims: Array[String]?, ?conformance: Conformance?, ?confidence: Confidence?) -> void
+
+            @requirement: String?
+            def requirement: () -> String?
+            def requirement=: (String?) -> String?
+            def requirement?: () -> bool
+            def requirement_valid?: () -> bool
+
+            @claims: Array[String]?
+            def claims: () -> Array[String]?
+            def claims=: (Array[String]?) -> Array[String]?
+            def claims?: () -> bool
+            def claims_valid?: () -> bool
+
+            @counter_claims: Array[String]?
+            def counter_claims: () -> Array[String]?
+            def counter_claims=: (Array[String]?) -> Array[String]?
+            def counter_claims?: () -> bool
+            def counter_claims_valid?: () -> bool
+
+            @conformance: Conformance?
+            def conformance: () -> Conformance?
+            def conformance=: (Conformance?) -> Conformance?
+            def conformance?: () -> bool
+            def conformance_valid?: () -> bool
+
+            @confidence: Confidence?
+            def confidence: () -> Confidence?
+            def confidence=: (Confidence?) -> Confidence?
+            def confidence?: () -> bool
+            def confidence_valid?: () -> bool
+          end
+          def initialize: (?summary: String?, ?assessor: String?, ?requirements_map: Array[Map]?, ?signature: Signature::signatureChoice?) -> void
+
+          @summary: String?
+          def summary: () -> String?
+          def summary=: (String?) -> String?
+          def summary?: () -> bool
+          def summary_valid?: () -> bool
+
+          @assessor: String?
+          def assessor: () -> String?
+          def assessor=: (String?) -> String?
+          def assessor?: () -> bool
+          def assessor_valid?: () -> bool
+
+          @requirements_map: Array[Map]?
+          def requirements_map: () -> Array[Map]?
+          def requirements_map=: (Array[Map]?) -> Array[Map]?
+          def requirements_map?: () -> bool
+          def requirements_map_valid?: () -> bool
+
+          @signature: Signature::signatureChoice?
+          def signature: () -> Signature::signatureChoice?
+          def signature=: (Signature::signatureChoice?) -> Signature::signatureChoice?
+          def signature?: () -> bool
+          def signature_valid?: () -> bool
+        end
+
+        class Claim < Base
+          def initialize: (?bom_ref: String?, ?target: String?, ?predicate: String?, ?mitigation_strategies: Array[String]?, ?reasoning: String?, ?evidence: Array[String]?, ?counter_evidence: Array[String]?, ?external_references: Array[ExternalReference]?, ?signature: Signature::signatureChoice?) -> void
+
+          @bom_ref: String?
+          def bom_ref: () -> String?
+          def bom_ref=: (String?) -> String?
+          def bom_ref?: () -> bool
+          def bom_ref_valid?: () -> bool
+
+          @target: String?
+          def target: () -> String?
+          def target=: (String?) -> String?
+          def target?: () -> bool
+          def target_valid?: () -> bool
+
+          @predicate: String?
+          def predicate: () -> String?
+          def predicate=: (String?) -> String?
+          def predicate?: () -> bool
+          def predicate_valid?: () -> bool
+
+          @mitigation_strategies: Array[String]?
+          def mitigation_strategies: () -> Array[String]?
+          def mitigation_strategies=: (Array[String]?) -> Array[String]?
+          def mitigation_strategies?: () -> bool
+          def mitigation_strategies_valid?: () -> bool
+
+          @reasoning: String?
+          def reasoning: () -> String?
+          def reasoning=: (String?) -> String?
+          def reasoning?: () -> bool
+          def reasoning_valid?: () -> bool
+
+          @evidence: Array[String]?
+          def evidence: () -> Array[String]?
+          def evidence=: (Array[String]?) -> Array[String]?
+          def evidence?: () -> bool
+          def evidence_valid?: () -> bool
+
+          @counter_evidence: Array[String]?
+          def counter_evidence: () -> Array[String]?
+          def counter_evidence=: (Array[String]?) -> Array[String]?
+          def counter_evidence?: () -> bool
+          def counter_evidence_valid?: () -> bool
+
+          @external_references: Array[ExternalReference]?
+          def external_references: () -> Array[ExternalReference]?
+          def external_references=: (Array[ExternalReference]?) -> Array[ExternalReference]?
+          def external_references?: () -> bool
+          def external_references_valid?: () -> bool
+
+          @signature: Signature::signatureChoice?
+          def signature: () -> Signature::signatureChoice?
+          def signature=: (Signature::signatureChoice?) -> Signature::signatureChoice?
+          def signature?: () -> bool
+          def signature_valid?: () -> bool
+        end
+
+        class Evidence < Base
+          class EvidenceData < Base
+            class Contents < Base
+              def initialize: (?attachment: Attachment?, ?url: uri?) -> void
+
+              @attachment: Attachment?
+              def attachment: () -> Attachment?
+              def attachment=: (Attachment?) -> Attachment?
+              def attachment?: () -> bool
+              def attachment_valid?: () -> bool
+
+              @url: uri?
+              def url: () -> uri?
+              def url=: (uri?) -> uri?
+              def url?: () -> bool
+              def url_valid?: () -> bool
+            end
+            def initialize: (?name: String?, ?contents: Contents?, ?classification: String?, ?sensitive_data: Array[String]?, ?governance: DataGovernance?) -> void
+
+            @name: String?
+            def name: () -> String?
+            def name=: (String?) -> String?
+            def name?: () -> bool
+            def name_valid?: () -> bool
+
+            @contents: Contents?
+            def contents: () -> Contents?
+            def contents=: (Contents?) -> Contents?
+            def contents?: () -> bool
+            def contents_valid?: () -> bool
+
+            @classification: String?
+            def classification: () -> String?
+            def classification=: (String?) -> String?
+            def classification?: () -> bool
+            def classification_valid?: () -> bool
+
+            @sensitive_data: Array[String]?
+            def sensitive_data: () -> Array[String]?
+            def sensitive_data=: (Array[String]?) -> Array[String]?
+            def sensitive_data?: () -> bool
+            def sensitive_data_valid?: () -> bool
+
+            @governance: DataGovernance?
+            def governance: () -> DataGovernance?
+            def governance=: (DataGovernance?) -> DataGovernance?
+            def governance?: () -> bool
+            def governance_valid?: () -> bool
+          end
+          def initialize: (?bom_ref: String?, ?property_name: String?, ?description: String?, ?data: Array[EvidenceData]?, ?created: dateTime?, ?expires: dateTime?, ?author: OrganizationalContact?, ?reviewer: OrganizationalContact?, ?signature: Signature::signatureChoice?) -> void
+
+          @bom_ref: String?
+          def bom_ref: () -> String?
+          def bom_ref=: (String?) -> String?
+          def bom_ref?: () -> bool
+          def bom_ref_valid?: () -> bool
+
+          @property_name: String?
+          def property_name: () -> String?
+          def property_name=: (String?) -> String?
+          def property_name?: () -> bool
+          def property_name_valid?: () -> bool
+
+          @description: String?
+          def description: () -> String?
+          def description=: (String?) -> String?
+          def description?: () -> bool
+          def description_valid?: () -> bool
+
+          @data: Array[EvidenceData]?
+          def data: () -> Array[EvidenceData]?
+          def data=: (Array[EvidenceData]?) -> Array[EvidenceData]?
+          def data?: () -> bool
+          def data_valid?: () -> bool
+
+          @created: dateTime?
+          def created: () -> dateTime?
+          def created=: (dateTime?) -> dateTime?
+          def created?: () -> bool
+          def created_valid?: () -> bool
+
+          @expires: dateTime?
+          def expires: () -> dateTime?
+          def expires=: (dateTime?) -> dateTime?
+          def expires?: () -> bool
+          def expires_valid?: () -> bool
+
+          @author: OrganizationalContact?
+          def author: () -> OrganizationalContact?
+          def author=: (OrganizationalContact?) -> OrganizationalContact?
+          def author?: () -> bool
+          def author_valid?: () -> bool
+
+          @reviewer: OrganizationalContact?
+          def reviewer: () -> OrganizationalContact?
+          def reviewer=: (OrganizationalContact?) -> OrganizationalContact?
+          def reviewer?: () -> bool
+          def reviewer_valid?: () -> bool
+
+          @signature: Signature::signatureChoice?
+          def signature: () -> Signature::signatureChoice?
+          def signature=: (Signature::signatureChoice?) -> Signature::signatureChoice?
+          def signature?: () -> bool
+          def signature_valid?: () -> bool
+        end
+
+        class Target < Base
+          def initialize: (?organizations: Array[OrganizationalEntity]?, ?components: Array[Component]?, ?services: Array[Service]?) -> void
+
+          @organizations: Array[OrganizationalEntity]?
+          def organizations: () -> Array[OrganizationalEntity]?
+          def organizations=: (Array[OrganizationalEntity]?) -> Array[OrganizationalEntity]?
+          def organizations?: () -> bool
+          def organizations_valid?: () -> bool
+
+          @components: Array[Component]?
+          def components: () -> Array[Component]?
+          def components=: (Array[Component]?) -> Array[Component]?
+          def components?: () -> bool
+          def components_valid?: () -> bool
+
+          @services: Array[Service]?
+          def services: () -> Array[Service]?
+          def services=: (Array[Service]?) -> Array[Service]?
+          def services?: () -> bool
+          def services_valid?: () -> bool
+        end
+
+        def initialize: (?assessors: Array[Assessor]?, ?attestations: Array[Attestation]?, ?claims: Array[Claim]?, ?evidence: Array[Evidence]?, ?targets: Array[Target]?, ?affirmation: Affirmation?, ?signature: Signature::signatureChoice?) -> void
+
+        @assessors: Array[Assessor]?
+        def assessors: () -> Array[Assessor]?
+        def assessors=: (Array[Assessor]?) -> Array[Assessor]?
+        def assessors?: () -> bool
+        def assessors_valid?: () -> bool
+
+        @attestations: Array[Attestation]?
+        def attestations: () -> Array[Attestation]?
+        def attestations=: (Array[Attestation]?) -> Array[Attestation]?
+        def attestations?: () -> bool
+        def attestations_valid?: () -> bool
+
+        @claims: Array[Claim]?
+        def claims: () -> Array[Claim]?
+        def claims=: (Array[Claim]?) -> Array[Claim]?
+        def claims?: () -> bool
+        def claims_valid?: () -> bool
+
+        @evidence: Array[Evidence]?
+        def evidence: () -> Array[Evidence]?
+        def evidence=: (Array[Evidence]?) -> Array[Evidence]?
+        def evidence?: () -> bool
+        def evidence_valid?: () -> bool
+
+        @targets: Array[Target]?
+        def targets: () -> Array[Target]?
+        def targets=: (Array[Target]?) -> Array[Target]?
+        def targets?: () -> bool
+        def targets_valid?: () -> bool
+
+        @affirmation: Affirmation?
+        def affirmation: () -> Affirmation?
+        def affirmation=: (Affirmation?) -> Affirmation?
+        def affirmation?: () -> bool
+        def affirmation_valid?: () -> bool
+
+        @signature: Signature::signatureChoice?
+        def signature: () -> Signature::signatureChoice?
+        def signature=: (Signature::signatureChoice?) -> Signature::signatureChoice?
+        def signature?: () -> bool
+        def signature_valid?: () -> bool
+      end
+    end
+  end
+end

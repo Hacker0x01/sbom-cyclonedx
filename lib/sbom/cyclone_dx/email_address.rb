@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "email_address/address"
+require "email_address"
 
 module SBOM
   module CycloneDX

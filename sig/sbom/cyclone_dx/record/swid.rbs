@@ -1,0 +1,51 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class SWID < Base
+        def initialize: (tag_id: String, name: String, ?version: String?, ?tag_version: Integer?, ?patch: bool?, ?text: Attachment?, ?url: uri?) -> void
+
+        @tag_id: String
+        def tag_id: () -> String
+        def tag_id=: (String) -> String
+        def tag_id?: () -> bool
+        def tag_id_valid?: () -> bool
+
+        @name: String
+        def name: () -> String
+        def name=: (String) -> String
+        def name?: () -> bool
+        def name_valid?: () -> bool
+
+        @version: String?
+        def version: () -> String?
+        def version=: (String?) -> String?
+        def version?: () -> bool
+        def version_valid?: () -> bool
+
+        @tag_version: Integer?
+        def tag_version: () -> Integer?
+        def tag_version=: (Integer?) -> Integer?
+        def tag_version?: () -> bool
+        def tag_version_valid?: () -> bool
+
+        @patch: bool?
+        def patch: () -> bool?
+        def patch=: (bool?) -> bool?
+        def patch?: () -> bool
+        def patch_valid?: () -> bool
+
+        @text: Attachment?
+        def text: () -> Attachment?
+        def text=: (Attachment?) -> Attachment?
+        def text?: () -> bool
+        def text_valid?: () -> bool
+
+        @url: uri?
+        def url: () -> uri?
+        def url=: (uri?) -> uri?
+        def url?: () -> bool
+        def url_valid?: () -> bool
+      end
+    end
+  end
+end

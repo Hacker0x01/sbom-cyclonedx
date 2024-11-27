@@ -1,0 +1,49 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class PerformanceMetric < Base
+        class ConfidenceInterval < Base
+          def initialize: (?lower_bound: String?, ?upper_bound: String?) -> void
+
+          @lower_bound: String?
+          def lower_bound: () -> String?
+          def lower_bound=: (String?) -> String?
+          def lower_bound?: () -> bool
+          def lower_bound_valid?: () -> bool
+
+          @upper_bound: String?
+          def upper_bound: () -> String?
+          def upper_bound=: (String?) -> String?
+          def upper_bound?: () -> bool
+          def upper_bound_valid?: () -> bool
+        end
+
+        def initialize: (?type: String?, ?value: String?, ?slice: String?, ?confidence_interval: ConfidenceInterval?) -> void
+
+        @type: String?
+        def type: () -> String?
+        def type=: (String?) -> String?
+        def type?: () -> bool
+        def type_valid?: () -> bool
+
+        @value: String?
+        def value: () -> String?
+        def value=: (String?) -> String?
+        def value?: () -> bool
+        def value_valid?: () -> bool
+
+        @slice: String?
+        def slice: () -> String?
+        def slice=: (String?) -> String?
+        def slice?: () -> bool
+        def slice_valid?: () -> bool
+
+        @confidence_interval: ConfidenceInterval?
+        def confidence_interval: () -> ConfidenceInterval?
+        def confidence_interval=: (ConfidenceInterval?) -> ConfidenceInterval?
+        def confidence_interval?: () -> bool
+        def confidence_interval_valid?: () -> bool
+      end
+    end
+  end
+end

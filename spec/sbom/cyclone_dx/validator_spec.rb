@@ -3,7 +3,7 @@
 require "spec_helper"
 require "active_support/all"
 require "sbom/cyclone_dx"
-require "sbom/cyclone_dx/schema_object"
+require "sbom/cyclone_dx/record"
 require "sbom/cyclone_dx/validator"
 
 describe SBOM::CycloneDX::Validator do
@@ -12,13 +12,13 @@ describe SBOM::CycloneDX::Validator do
       String => Faker::Lorem.words(number: 4),
       Integer => Array.new(4) { rand(-100..100) },
       Float => Array.new(4) { rand(-100..100) + rand(0.01..0.99) },
-      SBOM::CycloneDX::Type::Boolean => [true, false],
-      SBOM::CycloneDX::SchemaObject => [build(:basic_schema_object), build(:basic_schema_object)],
+      :boolean => [true, false],
+      SBOM::CycloneDX::Record => [build(:basic_record), build(:basic_record)],
       Array => [[1, 2, 3], [4, 5, 6]],
       # DateTime supports Time and DateTime objects, but not Date objects (per JSON schema)
       DateTime => [1.day.ago, DateTime.now, Time.current.iso8601],
       URI => [URI.parse(Faker::Internet.url), Faker::Internet.url],
-      SBOM::CycloneDX::Type::Union => Faker::Lorem.words(number: 4) + Array.new(4) { rand(1..100) },
+      :union => Faker::Lorem.words(number: 4) + Array.new(4) { rand(1..100) },
       SBOM::CycloneDX::EmailAddress => [
         SBOM::CycloneDX::EmailAddress.new(Faker::Internet.email),
         Faker::Internet.email
@@ -33,9 +33,7 @@ describe SBOM::CycloneDX::Validator do
   describe "#valid?" do
     shared_examples "typed" do |klass|
       let(:extra_args) do
-        if klass == SBOM::CycloneDX::Type::Union
-          next { klasses: sample_data[SBOM::CycloneDX::Type::Union].map(&:class).uniq }
-        end
+        next { klasses: sample_data[:union].map(&:class).uniq } if klass == :union
         next { items: sample_data.dig(Array, 0, 0).class } if klass == Array
 
         {}
@@ -49,7 +47,7 @@ describe SBOM::CycloneDX::Validator do
         other_klasses = [
           Integer,
           Float,
-          SBOM::CycloneDX::Type::Boolean,
+          :boolean,
           Array
         ] - extra_args.fetch(:klasses, [klass])
         other_klass_value = sample_data[other_klasses.sample].sample
@@ -60,9 +58,7 @@ describe SBOM::CycloneDX::Validator do
 
     shared_examples "required" do |klass|
       let(:extra_args) do
-        if klass == SBOM::CycloneDX::Type::Union
-          next { klasses: sample_data[SBOM::CycloneDX::Type::Union].map(&:class).uniq }
-        end
+        next { klasses: sample_data[:union].map(&:class).uniq } if klass == :union
         next { items: sample_data.dig(Array, 0, 0).class } if klass == Array
 
         {}
@@ -95,9 +91,7 @@ describe SBOM::CycloneDX::Validator do
         let(:other_value) { (sample_data[klass] - [const_value]).sample }
 
         let(:extra_args) do
-          if klass == SBOM::CycloneDX::Type::Union
-            next { klasses: sample_data[SBOM::CycloneDX::Type::Union].map(&:class).uniq }
-          end
+          next { klasses: sample_data[:union].map(&:class).uniq } if klass == :union
           next { items: sample_data.dig(Array, 0, 0).class } if klass == Array
 
           {}
@@ -116,7 +110,7 @@ describe SBOM::CycloneDX::Validator do
           other_klasses = [
             Integer,
             Float,
-            SBOM::CycloneDX::Type::Boolean,
+            :boolean,
             Array
           ] - extra_args.fetch(:klasses, [klass])
           other_klass_value = sample_data[other_klasses.sample].sample
@@ -193,27 +187,27 @@ describe SBOM::CycloneDX::Validator do
     end
 
     context "when klass is Boolean" do
-      include_examples "typed", SBOM::CycloneDX::Type::Boolean
-      include_examples "required", SBOM::CycloneDX::Type::Boolean
-      include_examples "const", SBOM::CycloneDX::Type::Boolean
+      include_examples "typed", :boolean
+      include_examples "required", :boolean
+      include_examples "const", :boolean
     end
 
-    context "when klass is a subclass of SchemaObject" do
+    context "when klass is a subclass of Record" do
       let(:inner_value) { Faker::Lorem.sentence }
-      let(:schema_object) { build(:basic_schema_object, string_value: inner_value) }
-      let(:klass) { schema_object.class }
+      let(:record) { build(:basic_record, string_value: inner_value) }
+      let(:klass) { record.class }
 
       it "returns true when object is of the correct type" do
-        expect(described_class).to be_valid(schema_object.class, schema_object)
+        expect(described_class).to be_valid(record.class, record)
       end
 
       it "returns false when object is not of the correct type" do
-        expect(described_class).not_to be_valid(klass, "Not a schema object!")
+        expect(described_class).not_to be_valid(klass, "Not a record!")
       end
 
       context "when object is required" do # rubocop:disable RSpec/NestedGroups
         it "returns true when object is valid and not nil" do
-          expect(described_class).to be_valid(klass, schema_object, required: true)
+          expect(described_class).to be_valid(klass, record, required: true)
         end
 
         it "returns false when object is nil" do
@@ -223,7 +217,7 @@ describe SBOM::CycloneDX::Validator do
 
       context "when object is not required" do # rubocop:disable RSpec/NestedGroups
         it "returns true when object is valid and not nil" do
-          expect(described_class).to be_valid(klass, schema_object)
+          expect(described_class).to be_valid(klass, record)
         end
 
         it "returns true when object is nil" do
@@ -231,19 +225,19 @@ describe SBOM::CycloneDX::Validator do
         end
       end
 
-      it "returns true when object is a SchemaObject with the correct value" do
-        const_schema_object = build(:basic_schema_object, string_value: inner_value)
-        expect(described_class).to be_valid(klass, schema_object, const: const_schema_object)
+      it "returns true when object is a Record with the correct value" do
+        const_record = build(:basic_record, string_value: inner_value)
+        expect(described_class).to be_valid(klass, record, const: const_record)
       end
 
-      it "returns false when object is a SchemaObject with a different value" do
-        const_schema_object = build(:basic_schema_object, string_value: "not #{inner_value}")
-        expect(described_class).not_to be_valid(klass, schema_object, const: const_schema_object)
+      it "returns false when object is a Record with a different value" do
+        const_record = build(:basic_record, string_value: "not #{inner_value}")
+        expect(described_class).not_to be_valid(klass, record, const: const_record)
       end
 
-      it "raises an exception when given const value is not a SchemaObject" do
+      it "raises an exception when given const value is not a Record" do
         expect do
-          described_class.valid?(klass, "not a schema object!", const: "not a schema object!")
+          described_class.valid?(klass, "not a record!", const: "not a record!")
         end.to raise_error(ArgumentError, "const value has wrong type: String")
       end
     end
@@ -300,13 +294,13 @@ describe SBOM::CycloneDX::Validator do
     end
 
     context "when klass is Union" do
-      include_examples "typed", SBOM::CycloneDX::Type::Union
-      include_examples "required", SBOM::CycloneDX::Type::Union
-      include_examples "const", SBOM::CycloneDX::Type::Union
+      include_examples "typed", :union
+      include_examples "required", :union
+      include_examples "const", :union
 
       it "raises an error if :klasses is not provided" do
         expect do
-          described_class.valid?(SBOM::CycloneDX::Type::Union, sample_data[SBOM::CycloneDX::Type::Union].sample)
+          described_class.valid?(:union, sample_data[:union].sample)
         end.to raise_error(ArgumentError, ":klasses must be provided for union validation")
       end
     end

@@ -1,0 +1,81 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Workspace < Base
+        def initialize: (bom_ref: String, uid: String, ?name: String?, ?aliases: Array[String]?, ?description: String?, ?resource_references: Array[ResourceReferenceChoice]?, ?access_mode: String?, ?mount_path: String?, ?managed_data_type: String?, ?volume_request: String?, ?volume: Volume?, ?properties: Array[Property]?) -> void
+
+        @bom_ref: String
+        def bom_ref: () -> String
+        def bom_ref=: (String) -> String
+        def bom_ref?: () -> bool
+        def bom_ref_valid?: () -> bool
+
+        @uid: String
+        def uid: () -> String
+        def uid=: (String) -> String
+        def uid?: () -> bool
+        def uid_valid?: () -> bool
+
+        @name: String?
+        def name: () -> String?
+        def name=: (String?) -> String?
+        def name?: () -> bool
+        def name_valid?: () -> bool
+
+        @aliases: Array[String]?
+        def aliases: () -> Array[String]?
+        def aliases=: (Array[String]?) -> Array[String]?
+        def aliases?: () -> bool
+        def aliases_valid?: () -> bool
+
+        @description: String?
+        def description: () -> String?
+        def description=: (String?) -> String?
+        def description?: () -> bool
+        def description_valid?: () -> bool
+
+        @resource_references: Array[ResourceReferenceChoice]?
+        def resource_references: () -> Array[ResourceReferenceChoice]?
+        def resource_references=: (Array[ResourceReferenceChoice]?) -> Array[ResourceReferenceChoice]?
+        def resource_references?: () -> bool
+        def resource_references_valid?: () -> bool
+
+        @access_mode: String?
+        def access_mode: () -> String?
+        def access_mode=: (String?) -> String?
+        def access_mode?: () -> bool
+        def access_mode_valid?: () -> bool
+
+        @mount_path: String?
+        def mount_path: () -> String?
+        def mount_path=: (String?) -> String?
+        def mount_path?: () -> bool
+        def mount_path_valid?: () -> bool
+
+        @managed_data_type: String?
+        def managed_data_type: () -> String?
+        def managed_data_type=: (String?) -> String?
+        def managed_data_type?: () -> bool
+        def managed_data_type_valid?: () -> bool
+
+        @volume_request: String?
+        def volume_request: () -> String?
+        def volume_request=: (String?) -> String?
+        def volume_request?: () -> bool
+        def volume_request_valid?: () -> bool
+
+        @volume: Volume?
+        def volume: () -> Volume?
+        def volume=: (Volume?) -> Volume?
+        def volume?: () -> bool
+        def volume_valid?: () -> bool
+
+        @properties: Array[Property]?
+        def properties: () -> Array[Property]?
+        def properties=: (Array[Property]?) -> Array[Property]?
+        def properties?: () -> bool
+        def properties_valid?: () -> bool
+      end
+    end
+  end
+end

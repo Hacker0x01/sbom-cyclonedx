@@ -1,0 +1,27 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class CipherSuite < Base
+        def initialize: (?name: String?, ?algorithms: Array[String]?, ?identifiers: Array[String]?) -> void
+
+        @name: String?
+        def name: () -> String?
+        def name=: (String?) -> String?
+        def name?: () -> bool
+        def name_valid?: () -> bool
+
+        @algorithms: Array[String]?
+        def algorithms: () -> Array[String]?
+        def algorithms=: (Array[String]?) -> Array[String]?
+        def algorithms?: () -> bool
+        def algorithms_valid?: () -> bool
+
+        @identifiers: Array[String]?
+        def identifiers: () -> Array[String]?
+        def identifiers=: (Array[String]?) -> Array[String]?
+        def identifiers?: () -> bool
+        def identifiers_valid?: () -> bool
+      end
+    end
+  end
+end

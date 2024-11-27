@@ -1,0 +1,9 @@
+module SBOM
+  module CycloneDX
+    module Validator
+      class URIValidator < BaseValidator[uri]
+        def valid?: (untyped) -> bool
+      end
+    end
+  end
+end

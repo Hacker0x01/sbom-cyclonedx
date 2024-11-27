@@ -1,0 +1,45 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class EnergyConsumption < Base
+        def initialize: (activity: String, energy_providers: Array[EnergyProvider], activity_energy_cost: EnergyMeasure, ?co2_cost_equivalent: CO2Measure?, ?co2_cost_offset: CO2Measure?, ?properties: Array[Property]?) -> void
+
+        @activity: String
+        def activity: () -> String
+        def activity=: (String) -> String
+        def activity?: () -> bool
+        def activity_valid?: () -> bool
+
+        @energy_providers: Array[EnergyProvider]
+        def energy_providers: () -> Array[EnergyProvider]
+        def energy_providers=: (Array[EnergyProvider]) -> Array[EnergyProvider]
+        def energy_providers?: () -> bool
+        def energy_providers_valid?: () -> bool
+
+        @activity_energy_cost: EnergyMeasure
+        def activity_energy_cost: () -> EnergyMeasure
+        def activity_energy_cost=: (EnergyMeasure) -> EnergyMeasure
+        def activity_energy_cost?: () -> bool
+        def activity_energy_cost_valid?: () -> bool
+
+        @co2_cost_equivalent: CO2Measure?
+        def co2_cost_equivalent: () -> CO2Measure?
+        def co2_cost_equivalent=: (CO2Measure?) -> CO2Measure?
+        def co2_cost_equivalent?: () -> bool
+        def co2_cost_equivalent_valid?: () -> bool
+
+        @co2_cost_offset: CO2Measure?
+        def co2_cost_offset: () -> CO2Measure?
+        def co2_cost_offset=: (CO2Measure?) -> CO2Measure?
+        def co2_cost_offset?: () -> bool
+        def co2_cost_offset_valid?: () -> bool
+
+        @properties: Array[Property]?
+        def properties: () -> Array[Property]?
+        def properties=: (Array[Property]?) -> Array[Property]?
+        def properties?: () -> bool
+        def properties_valid?: () -> bool
+      end
+    end
+  end
+end

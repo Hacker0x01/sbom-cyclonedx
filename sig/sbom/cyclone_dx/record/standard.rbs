@@ -1,0 +1,155 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Standard < Base
+        class Level < Base
+          def initialize: (?bom_ref: String?, ?identifier: String?, ?title: String?, ?description: String?, ?requirements: Array[String]?) -> void
+
+          @bom_ref: String?
+          def bom_ref: () -> String?
+          def bom_ref=: (String?) -> String?
+          def bom_ref?: () -> bool
+          def bom_ref_valid?: () -> bool
+
+          @identifier: String?
+          def identifier: () -> String?
+          def identifier=: (String?) -> String?
+          def identifier?: () -> bool
+          def identifier_valid?: () -> bool
+
+          @title: String?
+          def title: () -> String?
+          def title=: (String?) -> String?
+          def title?: () -> bool
+          def title_valid?: () -> bool
+
+          @description: String?
+          def description: () -> String?
+          def description=: (String?) -> String?
+          def description?: () -> bool
+          def description_valid?: () -> bool
+
+          @requirements: Array[String]?
+          def requirements: () -> Array[String]?
+          def requirements=: (Array[String]?) -> Array[String]?
+          def requirements?: () -> bool
+          def requirements_valid?: () -> bool
+        end
+
+        class Requirement < Base
+          def initialize: (?bom_ref: String?, ?identifier: String?, ?title: String?, ?text: String?, ?descriptions: Array[String]?, ?open_cre: Array[String]?, ?parent: String?, ?properties: Array[Property]?, ?external_references: Array[ExternalReference]?) -> void
+
+          @bom_ref: String?
+          def bom_ref: () -> String?
+          def bom_ref=: (String?) -> String?
+          def bom_ref?: () -> bool
+          def bom_ref_valid?: () -> bool
+
+          @identifier: String?
+          def identifier: () -> String?
+          def identifier=: (String?) -> String?
+          def identifier?: () -> bool
+          def identifier_valid?: () -> bool
+
+          @title: String?
+          def title: () -> String?
+          def title=: (String?) -> String?
+          def title?: () -> bool
+          def title_valid?: () -> bool
+
+          @text: String?
+          def text: () -> String?
+          def text=: (String?) -> String?
+          def text?: () -> bool
+          def text_valid?: () -> bool
+
+          @descriptions: Array[String]?
+          def descriptions: () -> Array[String]?
+          def descriptions=: (Array[String]?) -> Array[String]?
+          def descriptions?: () -> bool
+          def descriptions_valid?: () -> bool
+
+          @open_cre: Array[String]?
+          def open_cre: () -> Array[String]?
+          def open_cre=: (Array[String]?) -> Array[String]?
+          def open_cre?: () -> bool
+          def open_cre_valid?: () -> bool
+
+          @parent: String?
+          def parent: () -> String?
+          def parent=: (String?) -> String?
+          def parent?: () -> bool
+          def parent_valid?: () -> bool
+
+          @properties: Array[Property]?
+          def properties: () -> Array[Property]?
+          def properties=: (Array[Property]?) -> Array[Property]?
+          def properties?: () -> bool
+          def properties_valid?: () -> bool
+
+          @external_references: Array[ExternalReference]?
+          def external_references: () -> Array[ExternalReference]?
+          def external_references=: (Array[ExternalReference]?) -> Array[ExternalReference]?
+          def external_references?: () -> bool
+          def external_references_valid?: () -> bool
+        end
+
+        def initialize: (?bom_ref: String?, ?name: String?, ?version: String?, ?description: String?, ?owner: String?, ?requirements: Array[Requirement]?, ?levels: Array[Level]?, ?external_references: Array[ExternalReference]?, ?signature: Signature::signatureChoice?) -> void
+
+        @bom_ref: String?
+        def bom_ref: () -> String?
+        def bom_ref=: (String?) -> String?
+        def bom_ref?: () -> bool
+        def bom_ref_valid?: () -> bool
+
+        @name: String?
+        def name: () -> String?
+        def name=: (String?) -> String?
+        def name?: () -> bool
+        def name_valid?: () -> bool
+
+        @version: String?
+        def version: () -> String?
+        def version=: (String?) -> String?
+        def version?: () -> bool
+        def version_valid?: () -> bool
+
+        @description: String?
+        def description: () -> String?
+        def description=: (String?) -> String?
+        def description?: () -> bool
+        def description_valid?: () -> bool
+
+        @owner: String?
+        def owner: () -> String?
+        def owner=: (String?) -> String?
+        def owner?: () -> bool
+        def owner_valid?: () -> bool
+
+        @requirements: Array[Requirement]?
+        def requirements: () -> Array[Requirement]?
+        def requirements=: (Array[Requirement]?) -> Array[Requirement]?
+        def requirements?: () -> bool
+        def requirements_valid?: () -> bool
+
+        @levels: Array[Level]?
+        def levels: () -> Array[Level]?
+        def levels=: (Array[Level]?) -> Array[Level]?
+        def levels?: () -> bool
+        def levels_valid?: () -> bool
+
+        @external_references: Array[ExternalReference]?
+        def external_references: () -> Array[ExternalReference]?
+        def external_references=: (Array[ExternalReference]?) -> Array[ExternalReference]?
+        def external_references?: () -> bool
+        def external_references_valid?: () -> bool
+
+        @signature: Signature::signatureChoice?
+        def signature: () -> Signature::signatureChoice?
+        def signature=: (Signature::signatureChoice?) -> Signature::signatureChoice?
+        def signature?: () -> bool
+        def signature_valid?: () -> bool
+      end
+    end
+  end
+end

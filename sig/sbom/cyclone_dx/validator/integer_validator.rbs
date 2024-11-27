@@ -1,0 +1,12 @@
+module SBOM
+  module CycloneDX
+    module Validator
+      class IntegerValidator < BaseValidator[Integer]
+        @range: Range[number?]
+
+        def initialize: (?maximum: number?, ?minimum: number?, ?required: bool, **untyped) -> void
+        def valid?: (untyped) -> bool
+      end
+    end
+  end
+end

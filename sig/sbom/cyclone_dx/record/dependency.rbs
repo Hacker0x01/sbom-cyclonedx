@@ -1,0 +1,27 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Dependency < Base
+        def initialize: (ref: String, ?depends_on: Array[String]?, ?provides: Array[String]?) -> void
+
+        @ref: String
+        def ref: () -> String
+        def ref=: (String) -> String
+        def ref?: () -> bool
+        def ref_valid?: () -> bool
+
+        @depends_on: Array[String]?
+        def depends_on: () -> Array[String]?
+        def depends_on=: (Array[String]?) -> Array[String]?
+        def depends_on?: () -> bool
+        def depends_on_valid?: () -> bool
+
+        @provides: Array[String]?
+        def provides: () -> Array[String]?
+        def provides=: (Array[String]?) -> Array[String]?
+        def provides?: () -> bool
+        def provides_valid?: () -> bool
+      end
+    end
+  end
+end

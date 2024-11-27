@@ -1,0 +1,15 @@
+module SBOM
+  module CycloneDX
+    module Field
+      class DateTime < Base[dateTime]
+        def initialize: (
+          name: Symbol,
+          ?required: bool,
+          ?const: dateTime | NotSet,
+          ?default: fieldDefault[dateTime] | NotSet,
+          ?json_name: ::String?
+        ) -> void
+      end
+    end
+  end
+end

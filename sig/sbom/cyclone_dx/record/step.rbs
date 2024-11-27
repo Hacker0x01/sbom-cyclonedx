@@ -1,0 +1,33 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Step < Base
+        def initialize: (?name: String?, ?description: String?, ?commands: Array[Command]?, ?properties: Array[Property]?) -> void
+
+        @name: String?
+        def name: () -> String?
+        def name=: (String?) -> String?
+        def name?: () -> bool
+        def name_valid?: () -> bool
+
+        @description: String?
+        def description: () -> String?
+        def description=: (String?) -> String?
+        def description?: () -> bool
+        def description_valid?: () -> bool
+
+        @commands: Array[Command]?
+        def commands: () -> Array[Command]?
+        def commands=: (Array[Command]?) -> Array[Command]?
+        def commands?: () -> bool
+        def commands_valid?: () -> bool
+
+        @properties: Array[Property]?
+        def properties: () -> Array[Property]?
+        def properties=: (Array[Property]?) -> Array[Property]?
+        def properties?: () -> bool
+        def properties_valid?: () -> bool
+      end
+    end
+  end
+end

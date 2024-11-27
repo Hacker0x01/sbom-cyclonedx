@@ -1,0 +1,39 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Formula < Base
+        def initialize: (?bom_ref: String?, ?components: Array[Component]?, ?services: Array[Service]?, ?workflows: Array[Workflow]?, ?properties: Array[Property]?) -> void
+
+        @bom_ref: String?
+        def bom_ref: () -> String?
+        def bom_ref=: (String?) -> String?
+        def bom_ref?: () -> bool
+        def bom_ref_valid?: () -> bool
+
+        @components: Array[Component]?
+        def components: () -> Array[Component]?
+        def components=: (Array[Component]?) -> Array[Component]?
+        def components?: () -> bool
+        def components_valid?: () -> bool
+
+        @services: Array[Service]?
+        def services: () -> Array[Service]?
+        def services=: (Array[Service]?) -> Array[Service]?
+        def services?: () -> bool
+        def services_valid?: () -> bool
+
+        @workflows: Array[Workflow]?
+        def workflows: () -> Array[Workflow]?
+        def workflows=: (Array[Workflow]?) -> Array[Workflow]?
+        def workflows?: () -> bool
+        def workflows_valid?: () -> bool
+
+        @properties: Array[Property]?
+        def properties: () -> Array[Property]?
+        def properties=: (Array[Property]?) -> Array[Property]?
+        def properties?: () -> bool
+        def properties_valid?: () -> bool
+      end
+    end
+  end
+end

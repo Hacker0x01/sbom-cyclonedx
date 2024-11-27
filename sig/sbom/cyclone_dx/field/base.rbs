@@ -1,0 +1,36 @@
+module SBOM
+  module CycloneDX
+    module Field
+      class Base[T < fieldValue]
+        attr_reader name: Symbol
+        attr_reader required: bool
+        attr_reader type: fieldTypeLabel
+        attr_reader const: T?
+        attr_reader default: fieldDefault[T]
+        attr_reader validator: SBOM::CycloneDX::Validator::BaseValidator[T]
+        attr_reader json_name: ::String
+
+        @use_const: bool
+        @use_default: bool
+
+        def initialize: (
+          type: fieldTypeLabel,
+          name: Symbol,
+          validator: SBOM::CycloneDX::Validator::BaseValidator[T],
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: T? | NotSet,
+          ?default: fieldDefault[T] | NotSet
+        ) -> void
+
+        def const?: () -> bool
+        def default?: () -> bool
+
+        private def validate_types: (fieldTypeLabel, untyped, untyped, untyped) -> void
+        private def resolve_optional:
+          (:const, T? | NotSet) -> T?
+        | (:default, fieldDefault[T] | NotSet) -> fieldDefault[T]
+      end
+    end
+  end
+end

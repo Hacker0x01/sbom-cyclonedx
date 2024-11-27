@@ -1,0 +1,45 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Composition < Base
+        def initialize: (?bom_ref: String?, ?aggregate: String?, ?assemblies: Array[String]?, ?dependencies: Array[Component | Service]?, ?vulnerabilities: Array[Vulnerability]?, ?signature: Signature::signatureChoice?) -> void
+
+        @bom_ref: String?
+        def bom_ref: () -> String?
+        def bom_ref=: (String?) -> String?
+        def bom_ref?: () -> bool
+        def bom_ref_valid?: () -> bool
+
+        @aggregate: String?
+        def aggregate: () -> String?
+        def aggregate=: (String?) -> String?
+        def aggregate?: () -> bool
+        def aggregate_valid?: () -> bool
+
+        @assemblies: Array[String]?
+        def assemblies: () -> Array[String]?
+        def assemblies=: (Array[String]?) -> Array[String]?
+        def assemblies?: () -> bool
+        def assemblies_valid?: () -> bool
+
+        @dependencies: Array[Component | Service]?
+        def dependencies: () -> (Array[Component | Service])?
+        def dependencies=: (Array[Component | Service]?) -> (Array[Component | Service])?
+        def dependencies?: () -> bool
+        def dependencies_valid?: () -> bool
+
+        @vulnerabilities: Array[Vulnerability]?
+        def vulnerabilities: () -> Array[Vulnerability]?
+        def vulnerabilities=: (Array[Vulnerability]?) -> Array[Vulnerability]?
+        def vulnerabilities?: () -> bool
+        def vulnerabilities_valid?: () -> bool
+
+        @signature: Signature::signatureChoice?
+        def signature: () -> Signature::signatureChoice?
+        def signature=: (Signature::signatureChoice?) -> Signature::signatureChoice?
+        def signature?: () -> bool
+        def signature_valid?: () -> bool
+      end
+    end
+  end
+end

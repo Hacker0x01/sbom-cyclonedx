@@ -1,0 +1,21 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Diff < Base
+        def initialize: (?text: Attachment?, ?url: uri?) -> void
+
+        @text: Attachment?
+        def text: () -> Attachment?
+        def text=: (Attachment?) -> Attachment?
+        def text?: () -> bool
+        def text_valid?: () -> bool
+
+        @url: uri?
+        def url: () -> uri?
+        def url=: (uri?) -> uri?
+        def url?: () -> bool
+        def url_valid?: () -> bool
+      end
+    end
+  end
+end

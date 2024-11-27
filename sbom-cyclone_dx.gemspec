@@ -3,7 +3,7 @@
 require_relative "lib/sbom/cyclone_dx/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "sbom-cyclone_dx"
+  spec.name = "sbom-cyclonedx"
   spec.version = SBOM::CycloneDX::VERSION
   spec.authors = ["Rob Trame"]
   spec.email = ["rtrame@hackerone.com"]

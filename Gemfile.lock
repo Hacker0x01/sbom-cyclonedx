@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sbom-cyclone_dx (0.1.0)
+    sbom-cyclonedx (0.1.0)
       activesupport (~> 7.2, >= 7.2.1)
       email_address (~> 0.2, >= 0.2.4)
 
@@ -97,7 +97,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.1)
-    rubocop (1.66.1)
+    rubocop (1.68.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -176,12 +176,12 @@ DEPENDENCIES
   rspec-core (~> 3.13, >= 3.13.0)
   rspec-expectations (~> 3.13, >= 3.13.0)
   rspec-mocks (~> 3.13, >= 3.13.0)
-  rubocop (~> 1.65, >= 1.65.1)
+  rubocop (~> 1.68, >= 1.68.0)
   rubocop-factory_bot (~> 2.26, >= 2.26.1)
   rubocop-performance (~> 1.21, >= 1.21.1)
   rubocop-rspec (~> 3.0, >= 3.0.4)
   ruby-lsp-rspec
-  sbom-cyclone_dx!
+  sbom-cyclonedx!
   steep (~> 1.8, >= 1.8.1)
   typeprof (~> 0.21, >= 0.21.11)
 

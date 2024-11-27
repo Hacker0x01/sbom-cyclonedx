@@ -1,0 +1,24 @@
+module SBOM
+  module CycloneDX
+    module Validator
+      class UnionValidator < BaseValidator[fieldValue]
+        type unionableValidatorParams =
+          fieldTypeLabel
+        | [:array, arrayValidatorParams]
+        | [:boolean, booleanValidatorParams]
+        | [:date_time, dateTimeValidatorParams]
+        | [:email_address, emailAddressValidatorParams]
+        | [:float, floatValidatorParams]
+        | [:integer, integerValidatorParams]
+        | [Class & Record::_Klass, recordValidatorParams]
+        | [:string, stringValidatorParams]
+        | [:uri, uriValidatorParams]
+
+        @nested_validators: Array[BaseValidator[untyped]]
+
+        def initialize: (of: Array[unionableValidatorParams], ?required: bool, **untyped) -> void
+        def valid?: (untyped) -> bool
+      end
+    end
+  end
+end

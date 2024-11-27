@@ -1,0 +1,241 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Component < Base
+        class Pedigree < Base
+          def initialize: (?ancestors: Array[Component]?, ?descendants: Array[Component]?, ?variants: Array[Component]?, ?commits: Array[Commit]?, ?patches: Array[Patch]?, ?notes: String?) -> void
+
+          @ancestors: Array[Component]?
+          def ancestors: () -> Array[Component]?
+          def ancestors=: (Array[Component]?) -> Array[Component]?
+          def ancestors?: () -> bool
+          def ancestors_valid?: () -> bool
+
+          @descendants: Array[Component]?
+          def descendants: () -> Array[Component]?
+          def descendants=: (Array[Component]?) -> Array[Component]?
+          def descendants?: () -> bool
+          def descendants_valid?: () -> bool
+
+          @variants: Array[Component]?
+          def variants: () -> Array[Component]?
+          def variants=: (Array[Component]?) -> Array[Component]?
+          def variants?: () -> bool
+          def variants_valid?: () -> bool
+
+          @commits: Array[Commit]?
+          def commits: () -> Array[Commit]?
+          def commits=: (Array[Commit]?) -> Array[Commit]?
+          def commits?: () -> bool
+          def commits_valid?: () -> bool
+
+          @patches: Array[Patch]?
+          def patches: () -> Array[Patch]?
+          def patches=: (Array[Patch]?) -> Array[Patch]?
+          def patches?: () -> bool
+          def patches_valid?: () -> bool
+
+          @notes: String?
+          def notes: () -> String?
+          def notes=: (String?) -> String?
+          def notes?: () -> bool
+          def notes_valid?: () -> bool
+        end
+
+        def initialize: (type: String, ?mime_type: String?, ?bom_ref: String?, ?supplier: OrganizationalEntity?, ?manufacturer: OrganizationalEntity?, ?authors: Array[OrganizationalContact]?, ?publisher: String?, ?group: String?, name: String, ?version: String?, ?description: String?, ?scope: String?, ?hashes: Array[HashData]?, ?licenses: Array[LicenseChoice::licenseChoice]?, ?copyright: String?, ?cpe: String?, ?purl: String?, ?omnibor_id: Array[String]?, ?swhid: Array[String]?, ?swid: SWID?, ?modified: bool?, ?pedigree: Pedigree?, ?external_references: Array[ExternalReference]?, ?components: Array[Component]?, ?evidence: ComponentEvidence?, ?release_notes: ReleaseNotes?, ?model_card: ModelCard?, ?data: Array[ComponentData]?, ?crypto_properties: CryptoProperties?, ?properties: Array[Property]?, ?tags: Array[String]?, ?signature: Signature::signatureChoice?) -> void
+
+        @type: String
+        def type: () -> String
+        def type=: (String) -> String
+        def type?: () -> bool
+        def type_valid?: () -> bool
+
+        @mime_type: String?
+        def mime_type: () -> String?
+        def mime_type=: (String?) -> String?
+        def mime_type?: () -> bool
+        def mime_type_valid?: () -> bool
+
+        @bom_ref: String?
+        def bom_ref: () -> String?
+        def bom_ref=: (String?) -> String?
+        def bom_ref?: () -> bool
+        def bom_ref_valid?: () -> bool
+
+        @supplier: OrganizationalEntity?
+        def supplier: () -> OrganizationalEntity?
+        def supplier=: (OrganizationalEntity?) -> OrganizationalEntity?
+        def supplier?: () -> bool
+        def supplier_valid?: () -> bool
+
+        @manufacturer: OrganizationalEntity?
+        def manufacturer: () -> OrganizationalEntity?
+        def manufacturer=: (OrganizationalEntity?) -> OrganizationalEntity?
+        def manufacturer?: () -> bool
+        def manufacturer_valid?: () -> bool
+
+        @authors: Array[OrganizationalContact]?
+        def authors: () -> Array[OrganizationalContact]?
+        def authors=: (Array[OrganizationalContact]?) -> Array[OrganizationalContact]?
+        def authors?: () -> bool
+        def authors_valid?: () -> bool
+
+        @publisher: String?
+        def publisher: () -> String?
+        def publisher=: (String?) -> String?
+        def publisher?: () -> bool
+        def publisher_valid?: () -> bool
+
+        @group: String?
+        def group: () -> String?
+        def group=: (String?) -> String?
+        def group?: () -> bool
+        def group_valid?: () -> bool
+
+        @name: String
+        def name: () -> String
+        def name=: (String) -> String
+        def name?: () -> bool
+        def name_valid?: () -> bool
+
+        @version: String?
+        def version: () -> String?
+        def version=: (String?) -> String?
+        def version?: () -> bool
+        def version_valid?: () -> bool
+
+        @description: String?
+        def description: () -> String?
+        def description=: (String?) -> String?
+        def description?: () -> bool
+        def description_valid?: () -> bool
+
+        @scope: String?
+        def scope: () -> String?
+        def scope=: (String?) -> String?
+        def scope?: () -> bool
+        def scope_valid?: () -> bool
+
+        @hashes: Array[HashData]?
+        def hashes: () -> Array[HashData]?
+        def hashes=: (Array[HashData]?) -> Array[HashData]?
+        def hashes?: () -> bool
+        def hashes_valid?: () -> bool
+
+        @licenses: Array[LicenseChoice::licenseChoice]?
+        def licenses: () -> Array[LicenseChoice::licenseChoice]?
+        def licenses=: (Array[LicenseChoice::licenseChoice]?) -> Array[LicenseChoice::licenseChoice]?
+        def licenses?: () -> bool
+        def licenses_valid?: () -> bool
+
+        @copyright: String?
+        def copyright: () -> String?
+        def copyright=: (String?) -> String?
+        def copyright?: () -> bool
+        def copyright_valid?: () -> bool
+
+        @cpe: String?
+        def cpe: () -> String?
+        def cpe=: (String?) -> String?
+        def cpe?: () -> bool
+        def cpe_valid?: () -> bool
+
+        @purl: String?
+        def purl: () -> String?
+        def purl=: (String?) -> String?
+        def purl?: () -> bool
+        def purl_valid?: () -> bool
+
+        @omnibor_id: Array[String]?
+        def omnibor_id: () -> Array[String]?
+        def omnibor_id=: (Array[String]?) -> Array[String]?
+        def omnibor_id?: () -> bool
+        def omnibor_id_valid?: () -> bool
+
+        @swhid: Array[String]?
+        def swhid: () -> Array[String]?
+        def swhid=: (Array[String]?) -> Array[String]?
+        def swhid?: () -> bool
+        def swhid_valid?: () -> bool
+
+        @swid: SWID?
+        def swid: () -> SWID?
+        def swid=: (SWID?) -> SWID?
+        def swid?: () -> bool
+        def swid_valid?: () -> bool
+
+        @modified: bool?
+        def modified: () -> bool?
+        def modified=: (bool?) -> bool?
+        def modified?: () -> bool
+        def modified_valid?: () -> bool
+
+        @pedigree: Pedigree?
+        def pedigree: () -> Pedigree?
+        def pedigree=: (Pedigree?) -> Pedigree?
+        def pedigree?: () -> bool
+        def pedigree_valid?: () -> bool
+
+        @external_references: Array[ExternalReference]?
+        def external_references: () -> Array[ExternalReference]?
+        def external_references=: (Array[ExternalReference]?) -> Array[ExternalReference]?
+        def external_references?: () -> bool
+        def external_references_valid?: () -> bool
+
+        @components: Array[Component]?
+        def components: () -> Array[Component]?
+        def components=: (Array[Component]?) -> Array[Component]?
+        def components?: () -> bool
+        def components_valid?: () -> bool
+
+        @evidence: ComponentEvidence?
+        def evidence: () -> ComponentEvidence?
+        def evidence=: (ComponentEvidence?) -> ComponentEvidence?
+        def evidence?: () -> bool
+        def evidence_valid?: () -> bool
+
+        @release_notes: ReleaseNotes?
+        def release_notes: () -> ReleaseNotes?
+        def release_notes=: (ReleaseNotes?) -> ReleaseNotes?
+        def release_notes?: () -> bool
+        def release_notes_valid?: () -> bool
+
+        @model_card: ModelCard?
+        def model_card: () -> ModelCard?
+        def model_card=: (ModelCard?) -> ModelCard?
+        def model_card?: () -> bool
+        def model_card_valid?: () -> bool
+
+        @data: Array[ComponentData]?
+        def data: () -> Array[ComponentData]?
+        def data=: (Array[ComponentData]?) -> Array[ComponentData]?
+        def data?: () -> bool
+        def data_valid?: () -> bool
+
+        @crypto_properties: CryptoProperties?
+        def crypto_properties: () -> CryptoProperties?
+        def crypto_properties=: (CryptoProperties?) -> CryptoProperties?
+        def crypto_properties?: () -> bool
+        def crypto_properties_valid?: () -> bool
+
+        @properties: Array[Property]?
+        def properties: () -> Array[Property]?
+        def properties=: (Array[Property]?) -> Array[Property]?
+        def properties?: () -> bool
+        def properties_valid?: () -> bool
+
+        @tags: Array[String]?
+        def tags: () -> Array[String]?
+        def tags=: (Array[String]?) -> Array[String]?
+        def tags?: () -> bool
+        def tags_valid?: () -> bool
+
+        @signature: Signature::signatureChoice?
+        def signature: () -> Signature::signatureChoice?
+        def signature=: (Signature::signatureChoice?) -> Signature::signatureChoice?
+        def signature?: () -> bool
+        def signature_valid?: () -> bool
+      end
+    end
+  end
+end

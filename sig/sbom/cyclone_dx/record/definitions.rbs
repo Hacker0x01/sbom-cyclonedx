@@ -1,0 +1,15 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Definitions < Base
+        def initialize: (?standards: Array[Standard]?) -> void
+
+        @standards: Array[Standard]?
+        def standards: () -> Array[Standard]?
+        def standards=: (Array[Standard]?) -> Array[Standard]?
+        def standards?: () -> bool
+        def standards_valid?: () -> bool
+      end
+    end
+  end
+end

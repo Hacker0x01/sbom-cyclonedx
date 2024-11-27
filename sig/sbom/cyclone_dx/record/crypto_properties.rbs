@@ -1,0 +1,316 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class CryptoProperties < Base
+        class AlgorithmProperties < Base
+          def initialize: (?primitive: String?, ?parameter_set_identifier: String?, ?curve: String?, ?execution_environment: String?, ?implementation_platform: String?, ?certification_level: Array[String]?, ?mode: String?, ?padding: String?, ?crypto_functions: Array[String]?, ?classical_security_level: Integer?, ?nist_quantum_security_level: Integer?) -> void
+
+          @primitive: String?
+          def primitive: () -> String?
+          def primitive=: (String?) -> String?
+          def primitive?: () -> bool
+          def primitive_valid?: () -> bool
+
+          @parameter_set_identifier: String?
+          def parameter_set_identifier: () -> String?
+          def parameter_set_identifier=: (String?) -> String?
+          def parameter_set_identifier?: () -> bool
+          def parameter_set_identifier_valid?: () -> bool
+
+          @curve: String?
+          def curve: () -> String?
+          def curve=: (String?) -> String?
+          def curve?: () -> bool
+          def curve_valid?: () -> bool
+
+          @execution_environment: String?
+          def execution_environment: () -> String?
+          def execution_environment=: (String?) -> String?
+          def execution_environment?: () -> bool
+          def execution_environment_valid?: () -> bool
+
+          @implementation_platform: String?
+          def implementation_platform: () -> String?
+          def implementation_platform=: (String?) -> String?
+          def implementation_platform?: () -> bool
+          def implementation_platform_valid?: () -> bool
+
+          @certification_level: Array[String]?
+          def certification_level: () -> Array[String]?
+          def certification_level=: (Array[String]?) -> Array[String]?
+          def certification_level?: () -> bool
+          def certification_level_valid?: () -> bool
+
+          @mode: String?
+          def mode: () -> String?
+          def mode=: (String?) -> String?
+          def mode?: () -> bool
+          def mode_valid?: () -> bool
+
+          @padding: String?
+          def padding: () -> String?
+          def padding=: (String?) -> String?
+          def padding?: () -> bool
+          def padding_valid?: () -> bool
+
+          @crypto_functions: Array[String]?
+          def crypto_functions: () -> Array[String]?
+          def crypto_functions=: (Array[String]?) -> Array[String]?
+          def crypto_functions?: () -> bool
+          def crypto_functions_valid?: () -> bool
+
+          @classical_security_level: Integer?
+          def classical_security_level: () -> Integer?
+          def classical_security_level=: (Integer?) -> Integer?
+          def classical_security_level?: () -> bool
+          def classical_security_level_valid?: () -> bool
+
+          @nist_quantum_security_level: Integer?
+          def nist_quantum_security_level: () -> Integer?
+          def nist_quantum_security_level=: (Integer?) -> Integer?
+          def nist_quantum_security_level?: () -> bool
+          def nist_quantum_security_level_valid?: () -> bool
+        end
+
+        class CertificateProperties < Base
+          def initialize: (?subject_name: String?, ?issuer_name: String?, ?not_valid_before: dateTime?, ?not_valid_after: dateTime?, ?signature_algorithm_ref: String?, ?subject_public_key_ref: String?, ?certificate_format: String?, ?certificate_extension: String?) -> void
+
+          @subject_name: String?
+          def subject_name: () -> String?
+          def subject_name=: (String?) -> String?
+          def subject_name?: () -> bool
+          def subject_name_valid?: () -> bool
+
+          @issuer_name: String?
+          def issuer_name: () -> String?
+          def issuer_name=: (String?) -> String?
+          def issuer_name?: () -> bool
+          def issuer_name_valid?: () -> bool
+
+          @not_valid_before: dateTime?
+          def not_valid_before: () -> dateTime?
+          def not_valid_before=: (dateTime?) -> dateTime?
+          def not_valid_before?: () -> bool
+          def not_valid_before_valid?: () -> bool
+
+          @not_valid_after: dateTime?
+          def not_valid_after: () -> dateTime?
+          def not_valid_after=: (dateTime?) -> dateTime?
+          def not_valid_after?: () -> bool
+          def not_valid_after_valid?: () -> bool
+
+          @signature_algorithm_ref: String?
+          def signature_algorithm_ref: () -> String?
+          def signature_algorithm_ref=: (String?) -> String?
+          def signature_algorithm_ref?: () -> bool
+          def signature_algorithm_ref_valid?: () -> bool
+
+          @subject_public_key_ref: String?
+          def subject_public_key_ref: () -> String?
+          def subject_public_key_ref=: (String?) -> String?
+          def subject_public_key_ref?: () -> bool
+          def subject_public_key_ref_valid?: () -> bool
+
+          @certificate_format: String?
+          def certificate_format: () -> String?
+          def certificate_format=: (String?) -> String?
+          def certificate_format?: () -> bool
+          def certificate_format_valid?: () -> bool
+
+          @certificate_extension: String?
+          def certificate_extension: () -> String?
+          def certificate_extension=: (String?) -> String?
+          def certificate_extension?: () -> bool
+          def certificate_extension_valid?: () -> bool
+        end
+
+        class ProtocolProperties < Base
+          class IKEv2TransformType < Base
+            def initialize: (?encr: Array[String]?, ?prf: Array[String]?, ?integ: Array[String]?, ?ke: Array[String]?, ?esn: bool?, ?auth: Array[String]?) -> void
+
+            @encr: Array[String]?
+            def encr: () -> Array[String]?
+            def encr=: (Array[String]?) -> Array[String]?
+            def encr?: () -> bool
+            def encr_valid?: () -> bool
+
+            @prf: Array[String]?
+            def prf: () -> Array[String]?
+            def prf=: (Array[String]?) -> Array[String]?
+            def prf?: () -> bool
+            def prf_valid?: () -> bool
+
+            @integ: Array[String]?
+            def integ: () -> Array[String]?
+            def integ=: (Array[String]?) -> Array[String]?
+            def integ?: () -> bool
+            def integ_valid?: () -> bool
+
+            @ke: Array[String]?
+            def ke: () -> Array[String]?
+            def ke=: (Array[String]?) -> Array[String]?
+            def ke?: () -> bool
+            def ke_valid?: () -> bool
+
+            @esn: bool?
+            def esn: () -> bool?
+            def esn=: (bool?) -> bool?
+            def esn?: () -> bool
+            def esn_valid?: () -> bool
+
+            @auth: Array[String]?
+            def auth: () -> Array[String]?
+            def auth=: (Array[String]?) -> Array[String]?
+            def auth?: () -> bool
+            def auth_valid?: () -> bool
+          end
+          def initialize: (?type: String?, ?version: String?, ?cipher_suites: Array[CipherSuite]?, ?ikev2_transform_types: IKEv2TransformType?, ?crypto_ref_array: Array[String]?) -> void
+
+          @type: String?
+          def type: () -> String?
+          def type=: (String?) -> String?
+          def type?: () -> bool
+          def type_valid?: () -> bool
+
+          @version: String?
+          def version: () -> String?
+          def version=: (String?) -> String?
+          def version?: () -> bool
+          def version_valid?: () -> bool
+
+          @cipher_suites: Array[CipherSuite]?
+          def cipher_suites: () -> Array[CipherSuite]?
+          def cipher_suites=: (Array[CipherSuite]?) -> Array[CipherSuite]?
+          def cipher_suites?: () -> bool
+          def cipher_suites_valid?: () -> bool
+
+          @ikev2_transform_types: IKEv2TransformType?
+          def ikev2_transform_types: () -> IKEv2TransformType?
+          def ikev2_transform_types=: (IKEv2TransformType?) -> IKEv2TransformType?
+          def ikev2_transform_types?: () -> bool
+          def ikev2_transform_types_valid?: () -> bool
+
+          @crypto_ref_array: Array[String]?
+          def crypto_ref_array: () -> Array[String]?
+          def crypto_ref_array=: (Array[String]?) -> Array[String]?
+          def crypto_ref_array?: () -> bool
+          def crypto_ref_array_valid?: () -> bool
+        end
+
+        class RelatedCryptoMaterialProperties < Base
+          def initialize: (?type: String?, ?id: String?, ?state: String?, ?algorithm_ref: String?, ?creation_date: dateTime?, ?activation_date: dateTime?, ?update_date: dateTime?, ?expiration_date: dateTime?, ?value: String?, ?asset_size: Integer?, ?format: String?, ?secured_by: SecuredBy?) -> void
+
+          @type: String?
+          def type: () -> String?
+          def type=: (String?) -> String?
+          def type?: () -> bool
+          def type_valid?: () -> bool
+
+          @id: String?
+          def id: () -> String?
+          def id=: (String?) -> String?
+          def id?: () -> bool
+          def id_valid?: () -> bool
+
+          @state: String?
+          def state: () -> String?
+          def state=: (String?) -> String?
+          def state?: () -> bool
+          def state_valid?: () -> bool
+
+          @algorithm_ref: String?
+          def algorithm_ref: () -> String?
+          def algorithm_ref=: (String?) -> String?
+          def algorithm_ref?: () -> bool
+          def algorithm_ref_valid?: () -> bool
+
+          @creation_date: dateTime?
+          def creation_date: () -> dateTime?
+          def creation_date=: (dateTime?) -> dateTime?
+          def creation_date?: () -> bool
+          def creation_date_valid?: () -> bool
+
+          @activation_date: dateTime?
+          def activation_date: () -> dateTime?
+          def activation_date=: (dateTime?) -> dateTime?
+          def activation_date?: () -> bool
+          def activation_date_valid?: () -> bool
+
+          @update_date: dateTime?
+          def update_date: () -> dateTime?
+          def update_date=: (dateTime?) -> dateTime?
+          def update_date?: () -> bool
+          def update_date_valid?: () -> bool
+
+          @expiration_date: dateTime?
+          def expiration_date: () -> dateTime?
+          def expiration_date=: (dateTime?) -> dateTime?
+          def expiration_date?: () -> bool
+          def expiration_date_valid?: () -> bool
+
+          @value: String?
+          def value: () -> String?
+          def value=: (String?) -> String?
+          def value?: () -> bool
+          def value_valid?: () -> bool
+
+          @asset_size: Integer?
+          def asset_size: () -> Integer?
+          def asset_size=: (Integer?) -> Integer?
+          def asset_size?: () -> bool
+          def asset_size_valid?: () -> bool
+
+          @format: String?
+          def format: () -> String?
+          def format=: (String?) -> String?
+          def format?: () -> bool
+          def format_valid?: () -> bool
+
+          @secured_by: SecuredBy?
+          def secured_by: () -> SecuredBy?
+          def secured_by=: (SecuredBy?) -> SecuredBy?
+          def secured_by?: () -> bool
+          def secured_by_valid?: () -> bool
+        end
+
+        def initialize: (asset_type: String, ?algorithm_properties: AlgorithmProperties?, ?certificate_properties: CertificateProperties?, ?related_crypto_material_properties: RelatedCryptoMaterialProperties?, ?protocol_properties: ProtocolProperties?, ?oid: String?) -> void
+
+        @asset_type: String
+        def asset_type: () -> String
+        def asset_type=: (String) -> String
+        def asset_type?: () -> bool
+        def asset_type_valid?: () -> bool
+
+        @algorithm_properties: AlgorithmProperties?
+        def algorithm_properties: () -> AlgorithmProperties?
+        def algorithm_properties=: (AlgorithmProperties?) -> AlgorithmProperties?
+        def algorithm_properties?: () -> bool
+        def algorithm_properties_valid?: () -> bool
+
+        @certificate_properties: CertificateProperties?
+        def certificate_properties: () -> CertificateProperties?
+        def certificate_properties=: (CertificateProperties?) -> CertificateProperties?
+        def certificate_properties?: () -> bool
+        def certificate_properties_valid?: () -> bool
+
+        @related_crypto_material_properties: RelatedCryptoMaterialProperties?
+        def related_crypto_material_properties: () -> RelatedCryptoMaterialProperties?
+        def related_crypto_material_properties=: (RelatedCryptoMaterialProperties?) -> RelatedCryptoMaterialProperties?
+        def related_crypto_material_properties?: () -> bool
+        def related_crypto_material_properties_valid?: () -> bool
+
+        @protocol_properties: ProtocolProperties?
+        def protocol_properties: () -> ProtocolProperties?
+        def protocol_properties=: (ProtocolProperties?) -> ProtocolProperties?
+        def protocol_properties?: () -> bool
+        def protocol_properties_valid?: () -> bool
+
+        @oid: String?
+        def oid: () -> String?
+        def oid=: (String?) -> String?
+        def oid?: () -> bool
+        def oid_valid?: () -> bool
+      end
+    end
+  end
+end

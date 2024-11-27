@@ -1,0 +1,61 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class ComponentIdentityEvidence < Base
+        class Method < Base
+          def initialize: (technique: String, confidence: Float, ?value: String?) -> void
+
+          @technique: String
+          def technique: () -> String
+          def technique=: (String) -> String
+          def technique?: () -> bool
+          def technique_valid?: () -> bool
+
+          @confidence: Float
+          def confidence: () -> Float
+          def confidence=: (Float) -> Float
+          def confidence?: () -> bool
+          def confidence_valid?: () -> bool
+
+          @value: String?
+          def value: () -> String?
+          def value=: (String?) -> String?
+          def value?: () -> bool
+          def value_valid?: () -> bool
+        end
+
+        def initialize: (field: String, ?confidence: Float?, ?concluded_value: String?, ?methods_used: Array[Method]?, ?tools: Array[String]?) -> void
+
+        @field: String
+        def field: () -> String
+        def field=: (String) -> String
+        def field?: () -> bool
+        def field_valid?: () -> bool
+
+        @confidence: Float?
+        def confidence: () -> Float?
+        def confidence=: (Float?) -> Float?
+        def confidence?: () -> bool
+        def confidence_valid?: () -> bool
+
+        @concluded_value: String?
+        def concluded_value: () -> String?
+        def concluded_value=: (String?) -> String?
+        def concluded_value?: () -> bool
+        def concluded_value_valid?: () -> bool
+
+        @methods_used: Array[Method]?
+        def methods_used: () -> Array[Method]?
+        def methods_used=: (Array[Method]?) -> Array[Method]?
+        def methods_used?: () -> bool
+        def methods_used_valid?: () -> bool
+
+        @tools: Array[String]?
+        def tools: () -> Array[String]?
+        def tools=: (Array[String]?) -> Array[String]?
+        def tools?: () -> bool
+        def tools_valid?: () -> bool
+      end
+    end
+  end
+end

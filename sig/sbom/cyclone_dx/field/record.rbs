@@ -1,0 +1,16 @@
+module SBOM
+  module CycloneDX
+    module Field
+      class Record [T < SBOM::CycloneDX::Record::Base] < Base[T]
+        def initialize: (
+          type: Class & SBOM::CycloneDX::Record::_Klass,
+          name: Symbol,
+          ?required: bool,
+          ?const: T? | NotSet,
+          ?default: fieldDefault[T] | NotSet,
+          ?json_name: ::String?
+        ) -> void
+      end
+    end
+  end
+end

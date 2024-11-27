@@ -1,26 +1,44 @@
-type fieldValue = String |
-                  Integer |
-                  Float |
-                  bool |
-                  DateTime |
-                  URI |
-                  SBOM::CycloneDX::EmailAddress |
-                  Array[fieldValue] |
-                  SBOM::CycloneDX::SchemaObject::ClassMethods |
-                  nil
-
-type uriString = String | URI::HTTP
-type emailString = String | SBOM::CycloneDX::EmailAddress
-type dateTimeString = String | DateTime | Time
+type dateTime = DateTime | Time | String
+type emailAddress = SBOM::CycloneDX::EmailAddress | String
+type number = Integer | Float
+type uri = URI::Generic | String
+type fieldValue =
+  Array[fieldValue]
+| bool
+| dateTime
+| emailAddress
+| Float
+| Integer
+| SBOM::CycloneDX::Record::Base
+| String
+| URI::Generic
+| nil
+type fieldTypeLabel =
+  :array
+| :boolean
+| :date_time
+| :email_address
+| :float
+| :integer
+| Class & SBOM::CycloneDX::Record::_Klass
+| :string
+| :union
+| :uri
+type fieldType = Class & (
+  singleton(Array)
+  | singleton(TrueClass)
+  | singleton(FalseClass)
+  | singleton(DateTime)
+  | singleton(Time)
+  | singleton(SBOM::CycloneDX::EmailAddress)
+  | singleton(Float)
+  | singleton(Integer)
+  | singleton(String)
+  | singleton(URI::Generic)
+  | SBOM::CycloneDX::Record::_Klass
+)
 
 type jsonObject = Float | Integer | String | bool | Array[jsonObject] | Hash[String, jsonObject] | nil
-
-module URI
-  def self.parse: (String) -> URI
-
-  class HTTP
-  end
-end
 
 # Steep can't find this for some raeason
 class Date::Error < Exception

@@ -1,0 +1,99 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Root < Base
+        def initialize: (?serial_number: String?, ?version: Integer, ?metadata: Metadata?, ?components: Array[Component]?, ?services: Array[Service]?, ?external_references: Array[ExternalReference]?, ?dependencies: Array[Dependency]?, ?compositions: Array[Composition]?, ?vulnerabilities: Array[Vulnerability]?, ?annotations: Array[Annotation]?, ?formulation: Array[Formula]?, ?declarations: Declarations?, ?definitions: Definitions?, ?properties: Array[Property]?, ?signature: Signature::signatureChoice?) -> void
+
+        @serial_number: String?
+        def serial_number: () -> String?
+        def serial_number=: (String?) -> String?
+        def serial_number?: () -> bool
+        def serial_number_valid?: () -> bool
+
+        @version: Integer
+        def version: () -> Integer
+        def version=: (Integer) -> Integer
+        def version?: () -> bool
+        def version_valid?: () -> bool
+
+        @metadata: Metadata?
+        def metadata: () -> Metadata?
+        def metadata=: (Metadata?) -> Metadata?
+        def metadata?: () -> bool
+        def metadata_valid?: () -> bool
+
+        @components: Array[Component]?
+        def components: () -> Array[Component]?
+        def components=: (Array[Component]?) -> Array[Component]?
+        def components?: () -> bool
+        def components_valid?: () -> bool
+
+        @services: Array[Service]?
+        def services: () -> Array[Service]?
+        def services=: (Array[Service]?) -> Array[Service]?
+        def services?: () -> bool
+        def services_valid?: () -> bool
+
+        @external_references: Array[ExternalReference]?
+        def external_references: () -> Array[ExternalReference]?
+        def external_references=: (Array[ExternalReference]?) -> Array[ExternalReference]?
+        def external_references?: () -> bool
+        def external_references_valid?: () -> bool
+
+        @dependencies: Array[Dependency]?
+        def dependencies: () -> Array[Dependency]?
+        def dependencies=: (Array[Dependency]?) -> Array[Dependency]?
+        def dependencies?: () -> bool
+        def dependencies_valid?: () -> bool
+
+        @compositions: Array[Composition]?
+        def compositions: () -> Array[Composition]?
+        def compositions=: (Array[Composition]?) -> Array[Composition]?
+        def compositions?: () -> bool
+        def compositions_valid?: () -> bool
+
+        @vulnerabilities: Array[Vulnerability]?
+        def vulnerabilities: () -> Array[Vulnerability]?
+        def vulnerabilities=: (Array[Vulnerability]?) -> Array[Vulnerability]?
+        def vulnerabilities?: () -> bool
+        def vulnerabilities_valid?: () -> bool
+
+        @annotations: Array[Annotation]?
+        def annotations: () -> Array[Annotation]?
+        def annotations=: (Array[Annotation]?) -> Array[Annotation]?
+        def annotations?: () -> bool
+        def annotations_valid?: () -> bool
+
+        @formulation: Array[Formula]?
+        def formulation: () -> Array[Formula]?
+        def formulation=: (Array[Formula]?) -> Array[Formula]?
+        def formulation?: () -> bool
+        def formulation_valid?: () -> bool
+
+        @declarations: Declarations?
+        def declarations: () -> Declarations?
+        def declarations=: (Declarations?) -> Declarations?
+        def declarations?: () -> bool
+        def declarations_valid?: () -> bool
+
+        @definitions: Definitions?
+        def definitions: () -> Definitions?
+        def definitions=: (Definitions?) -> Definitions?
+        def definitions?: () -> bool
+        def definitions_valid?: () -> bool
+
+        @properties: Array[Property]?
+        def properties: () -> Array[Property]?
+        def properties=: (Array[Property]?) -> Array[Property]?
+        def properties?: () -> bool
+        def properties_valid?: () -> bool
+
+        @signature: Signature::signatureChoice?
+        def signature: () -> Signature::signatureChoice?
+        def signature=: (Signature::signatureChoice?) -> Signature::signatureChoice?
+        def signature?: () -> bool
+        def signature_valid?: () -> bool
+      end
+    end
+  end
+end

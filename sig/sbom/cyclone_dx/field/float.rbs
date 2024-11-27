@@ -1,0 +1,17 @@
+module SBOM
+  module CycloneDX
+    module Field
+      class Float < Base[::Float]
+        def initialize: (
+          name: Symbol,
+          ?minimum: number?,
+          ?maximum: number?,
+          ?required: bool,
+          ?const: ::Float | NotSet,
+          ?default: fieldDefault[::Float] | NotSet,
+          ?json_name: ::String?
+        ) -> void
+      end
+    end
+  end
+end

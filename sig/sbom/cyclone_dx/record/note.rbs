@@ -1,0 +1,21 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Note < Base
+        def initialize: (?locale: String?, text: Attachment) -> void
+
+        @locale: String?
+        def locale: () -> String?
+        def locale=: (String?) -> String?
+        def locale?: () -> bool
+        def locale_valid?: () -> bool
+
+        @text: Attachment
+        def text: () -> Attachment
+        def text=: (Attachment) -> Attachment
+        def text?: () -> bool
+        def text_valid?: () -> bool
+      end
+    end
+  end
+end

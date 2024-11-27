@@ -1,0 +1,75 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class ReleaseNotes < Base
+        def initialize: (type: String, ?title: String?, ?featured_image: uri?, ?social_image: uri?, ?description: String?, ?timestamp: dateTime?, ?aliases: Array[String]?, ?tags: Array[String]?, ?resolves: Array[Issue]?, ?notes: Array[Note]?, ?properties: Array[Property]?) -> void
+
+        @type: String
+        def type: () -> String
+        def type=: (String) -> String
+        def type?: () -> bool
+        def type_valid?: () -> bool
+
+        @title: String?
+        def title: () -> String?
+        def title=: (String?) -> String?
+        def title?: () -> bool
+        def title_valid?: () -> bool
+
+        @featured_image: uri?
+        def featured_image: () -> uri?
+        def featured_image=: (uri?) -> uri?
+        def featured_image?: () -> bool
+        def featured_image_valid?: () -> bool
+
+        @social_image: uri?
+        def social_image: () -> uri?
+        def social_image=: (uri?) -> uri?
+        def social_image?: () -> bool
+        def social_image_valid?: () -> bool
+
+        @description: String?
+        def description: () -> String?
+        def description=: (String?) -> String?
+        def description?: () -> bool
+        def description_valid?: () -> bool
+
+        @timestamp: dateTime?
+        def timestamp: () -> dateTime?
+        def timestamp=: (dateTime?) -> dateTime?
+        def timestamp?: () -> bool
+        def timestamp_valid?: () -> bool
+
+        @aliases: Array[String]?
+        def aliases: () -> Array[String]?
+        def aliases=: (Array[String]?) -> Array[String]?
+        def aliases?: () -> bool
+        def aliases_valid?: () -> bool
+
+        @tags: Array[String]?
+        def tags: () -> Array[String]?
+        def tags=: (Array[String]?) -> Array[String]?
+        def tags?: () -> bool
+        def tags_valid?: () -> bool
+
+        @resolves: Array[Issue]?
+        def resolves: () -> Array[Issue]?
+        def resolves=: (Array[Issue]?) -> Array[Issue]?
+        def resolves?: () -> bool
+        def resolves_valid?: () -> bool
+
+        @notes: Array[Note]?
+        def notes: () -> Array[Note]?
+        def notes=: (Array[Note]?) -> Array[Note]?
+        def notes?: () -> bool
+        def notes_valid?: () -> bool
+
+        @properties: Array[Property]?
+        def properties: () -> Array[Property]?
+        def properties=: (Array[Property]?) -> Array[Property]?
+        def properties?: () -> bool
+        def properties_valid?: () -> bool
+      end
+    end
+  end
+end

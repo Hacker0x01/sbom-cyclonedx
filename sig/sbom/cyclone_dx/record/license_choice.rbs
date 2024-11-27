@@ -1,0 +1,43 @@
+module SBOM
+  module CycloneDX
+    module Record
+      module LicenseChoice
+        type licenseChoice = LicenseExpression | WrappedLicense
+
+        UNION_TYPE: [singleton(LicenseExpression), singleton(WrappedLicense)]
+
+        class WrappedLicense < Base
+          def initialize: (license: License) -> void
+
+          @license: License
+          def license: () -> License
+          def license=: (License) -> License
+          def license?: () -> bool
+          def license_valid?: () -> bool
+        end
+
+        class LicenseExpression < Base
+            def initialize: (expression: String, ?acknowledgement: String?, ?bom_ref: String?) -> void
+
+            @expression: String
+            def expression: () -> String
+            def expression=: (String) -> String
+            def expression?: () -> bool
+            def expression_valid?: () -> bool
+
+            @acknowledgement: String?
+            def acknowledgement: () -> String?
+            def acknowledgement=: (String?) -> String?
+            def acknowledgement?: () -> bool
+            def acknowledgement_valid?: () -> bool
+
+            @bom_ref: String?
+            def bom_ref: () -> String?
+            def bom_ref=: (String?) -> String?
+            def bom_ref?: () -> bool
+            def bom_ref_valid?: () -> bool
+          end
+        end
+      end
+  end
+end

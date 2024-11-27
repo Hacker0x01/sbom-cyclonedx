@@ -1,0 +1,81 @@
+module SBOM
+  module CycloneDX
+    module Record
+      class Trigger < Base
+        def initialize: (bom_ref: String, uid: String, ?name: String?, ?description: String?, ?resource_references: Array[ResourceReferenceChoice]?, type: String, ?event: Event?, ?conditions: Array[Condition]?, ?time_activated: dateTime?, ?inputs: Array[Input]?, ?outputs: Array[Output]?, ?properties: Array[Property]?) -> void
+
+        @bom_ref: String
+        def bom_ref: () -> String
+        def bom_ref=: (String) -> String
+        def bom_ref?: () -> bool
+        def bom_ref_valid?: () -> bool
+
+        @uid: String
+        def uid: () -> String
+        def uid=: (String) -> String
+        def uid?: () -> bool
+        def uid_valid?: () -> bool
+
+        @name: String?
+        def name: () -> String?
+        def name=: (String?) -> String?
+        def name?: () -> bool
+        def name_valid?: () -> bool
+
+        @description: String?
+        def description: () -> String?
+        def description=: (String?) -> String?
+        def description?: () -> bool
+        def description_valid?: () -> bool
+
+        @resource_references: Array[ResourceReferenceChoice]?
+        def resource_references: () -> Array[ResourceReferenceChoice]?
+        def resource_references=: (Array[ResourceReferenceChoice]?) -> Array[ResourceReferenceChoice]?
+        def resource_references?: () -> bool
+        def resource_references_valid?: () -> bool
+
+        @type: String
+        def type: () -> String
+        def type=: (String) -> String
+        def type?: () -> bool
+        def type_valid?: () -> bool
+
+        @event: Event?
+        def event: () -> Event?
+        def event=: (Event?) -> Event?
+        def event?: () -> bool
+        def event_valid?: () -> bool
+
+        @conditions: Array[Condition]?
+        def conditions: () -> Array[Condition]?
+        def conditions=: (Array[Condition]?) -> Array[Condition]?
+        def conditions?: () -> bool
+        def conditions_valid?: () -> bool
+
+        @time_activated: dateTime?
+        def time_activated: () -> dateTime?
+        def time_activated=: (dateTime?) -> dateTime?
+        def time_activated?: () -> bool
+        def time_activated_valid?: () -> bool
+
+        @inputs: Array[Input]?
+        def inputs: () -> Array[Input]?
+        def inputs=: (Array[Input]?) -> Array[Input]?
+        def inputs?: () -> bool
+        def inputs_valid?: () -> bool
+
+        @outputs: Array[Output]?
+        def outputs: () -> Array[Output]?
+        def outputs=: (Array[Output]?) -> Array[Output]?
+        def outputs?: () -> bool
+        def outputs_valid?: () -> bool
+
+        @properties: Array[Property]?
+        def properties: () -> Array[Property]?
+        def properties=: (Array[Property]?) -> Array[Property]?
+        def properties?: () -> bool
+        def properties_valid?: () -> bool
+      end
+    end
+  end
+end

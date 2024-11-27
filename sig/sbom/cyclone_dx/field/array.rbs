@@ -1,0 +1,17 @@
+module SBOM
+  module CycloneDX
+    module Field
+      class Array < Base[::Array[fieldValue]]
+        def initialize: (
+          name: Symbol,
+          items: ^(untyped) -> bool | Validator::ArrayValidator::validSingleTypeLabel | Validator::arrayItemValidatorParams,
+          ?unique: bool,
+          ?required: bool,
+          ?const: ::Array[fieldValue] | NotSet,
+          ?default: fieldDefault[::Array[fieldValue]] | NotSet,
+          ?json_name: ::String?
+        ) -> void
+      end
+    end
+  end
+end
