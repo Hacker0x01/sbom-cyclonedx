@@ -13,7 +13,7 @@ module SBOM
         | :string
         | :uri
 
-        @items_validator: itemsValidator
+        @items_validator: BaseValidator[fieldValue]
         @unique: bool
 
         def initialize: (

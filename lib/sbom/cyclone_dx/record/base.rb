@@ -38,7 +38,7 @@ module SBOM
             @errors[:_base] += validate_custom(*props, message: message, &block)
           end
 
-          @errors.all?(&:empty?)
+          @errors.values.all?(&:empty?)
         end
 
         def valid!

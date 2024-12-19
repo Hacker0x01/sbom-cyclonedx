@@ -16,15 +16,15 @@ module SBOM
           @items_validator =
             case items
             when :array, :boolean, :date_time, :email_address, :float, :integer, :string, :uri
-              validator_method(Validator.for(items, required: true))
-            when Proc
-              proc_validator(items)
+              Validator.for(items, required: true)
+            # when Proc
+            #   proc_validator(items)
             when Array
-              validator_method(Validator.for(items.first, required: true, **items.last))
+              Validator.for(items.first, required: true, **items.last)
             when Class
               raise "Unsupported items type: #{items}" unless items < Record::Base
 
-              validator_method(RecordValidator.new(type: items, required: true))
+              RecordValidator.new(type: items, required: true)
             else
               raise ArgumentError, "Unsupported items type: #{items}"
             end
@@ -35,8 +35,12 @@ module SBOM
           return rv unless value.is_a?(Array)
 
           rv << "Unique array contains non-unique values" if @unique && value.uniq.length != value.length
-          value.each { |item| rv += @items_validator.call(item) }
+          value.each { |item| rv += @items_validator.validate(item) }
           rv
+        end
+
+        def raw_types
+          @items_validator.raw_types
         end
 
         private

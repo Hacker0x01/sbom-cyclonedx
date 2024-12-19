@@ -114,18 +114,37 @@ module SBOM
       class << self # rubocop:disable Metrics/ClassLength
         def array(field_name:, items:, unique: false, required: false, json_name: nil, const: :undefined, # rubocop:disable Metrics/MethodLength
                   default: :undefined)
+          validator = Validator::ArrayValidator.new(items: items, unique: unique, required: required)
           Field(
             field_name: field_name,
             type: :array,
-            validator: Validator::ArrayValidator.new(items: items, unique: unique, required: required),
+            validator: validator,
             json_name: json_name,
             const: const,
             default: default
           ) do |value|
-            # TODO: Recursive coerce
-            next _ = value if value.is_a?(::Array) || value.nil?
+            raise TypeError, "Expected Array, got #{value.class}" unless value.is_a?(::Array) || value.nil?
+            next value if value.nil?
 
-            raise TypeError, "Expected Array, got #{value.class}"
+            value.map do |item|
+              next item if validator.raw_types.any? { |type| item.is_a?(type) } || item.nil?
+
+              if item.is_a?(Hash)
+                coerced_value = validator.raw_types.filter_map do |type|
+                  next nil unless type < SBOM::CycloneDX::Record::Base
+
+                  begin
+                    type.new(**item)
+                  rescue StandardError
+                    nil
+                  end
+                end
+
+                next coerced_value.first if coerced_value.any?
+              end
+
+              raise TypeError, "Expected one of #{items.to_json}, got #{value.class}"
+            end
           end
         end
 
