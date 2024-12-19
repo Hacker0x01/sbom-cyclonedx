@@ -4,43 +4,36 @@ module SBOM
       class Output < Base
         def initialize: (type: String, ?source: ResourceReferenceChoice?, ?target: ResourceReferenceChoice?, ?resource: ResourceReferenceChoice?, ?data: Attachment?, ?environment_vars: Array[Property | String]?, ?properties: Array[Property]?) -> void
 
-        @type: String
         def type: () -> String
         def type=: (String) -> String
         def type?: () -> bool
         def type_valid?: () -> bool
 
-        @source: ResourceReferenceChoice?
         def source: () -> ResourceReferenceChoice?
         def source=: (ResourceReferenceChoice?) -> ResourceReferenceChoice?
         def source?: () -> bool
         def source_valid?: () -> bool
 
-        @target: ResourceReferenceChoice?
         def target: () -> ResourceReferenceChoice?
         def target=: (ResourceReferenceChoice?) -> ResourceReferenceChoice?
         def target?: () -> bool
         def target_valid?: () -> bool
 
-        @resource: ResourceReferenceChoice?
         def resource: () -> ResourceReferenceChoice?
         def resource=: (ResourceReferenceChoice?) -> ResourceReferenceChoice?
         def resource?: () -> bool
         def resource_valid?: () -> bool
 
-        @data: Attachment?
         def data: () -> Attachment?
         def data=: (Attachment?) -> Attachment?
         def data?: () -> bool
         def data_valid?: () -> bool
 
-        @environment_vars: Array[Property | String]?
         def environment_vars: () -> (Array[Property | String])?
         def environment_vars=: (Array[Property | String]?) -> (Array[Property | String])?
         def environment_vars?: () -> bool
         def environment_vars_valid?: () -> bool
 
-        @properties: Array[Property]?
         def properties: () -> Array[Property]?
         def properties=: (Array[Property]?) -> Array[Property]?
         def properties?: () -> bool

@@ -4,13 +4,11 @@ module SBOM
       class EnvironmentalConsideration < Base
         def initialize: (?energy_consumptions: Array[EnergyConsumption]?, ?properties: Array[Property]?) -> void
 
-        @energy_consumptions: Array[EnergyConsumption]?
         def energy_consumptions: () -> Array[EnergyConsumption]?
         def energy_consumptions=: (Array[EnergyConsumption]?) -> Array[EnergyConsumption]?
         def energy_consumptions?: () -> bool
         def energy_consumptions_valid?: () -> bool
 
-        @properties: Array[Property]?
         def properties: () -> Array[Property]?
         def properties=: (Array[Property]?) -> Array[Property]?
         def properties?: () -> bool

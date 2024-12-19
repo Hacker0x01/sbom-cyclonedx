@@ -9,7 +9,6 @@ gem "debug", "~> 1.9", ">= 1.9.2"
 gem "rake", "~> 13.0"
 
 gem "rbs", "~> 3.5", ">= 3.5.2"
-gem "rbs-inline", "~> 0.6", ">= 0.6.0"
 gem "steep", "~> 1.8", ">= 1.8.1", require: false
 gem "typeprof", "~> 0.21", ">= 0.21.11"
 

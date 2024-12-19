@@ -4,13 +4,11 @@ module SBOM
       class SecuredBy < Base
         def initialize: (?mechanism: String?, ?algorithm_ref: String?) -> void
 
-        @mechanism: String?
         def mechanism: () -> String?
         def mechanism=: (String?) -> String?
         def mechanism?: () -> bool
         def mechanism_valid?: () -> bool
 
-        @algorithm_ref: String?
         def algorithm_ref: () -> String?
         def algorithm_ref=: (String?) -> String?
         def algorithm_ref?: () -> bool

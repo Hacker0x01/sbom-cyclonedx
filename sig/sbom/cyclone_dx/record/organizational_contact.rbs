@@ -4,25 +4,21 @@ module SBOM
       class OrganizationalContact < Base
         def initialize: (?bom_ref: String?, ?name: String?, ?email: emailAddress?, ?phone: String?) -> void
 
-        @bom_ref: String?
         def bom_ref: () -> String?
         def bom_ref=: (String?) -> String?
         def bom_ref?: () -> bool
         def bom_ref_valid?: () -> bool
 
-        @name: String?
         def name: () -> String?
         def name=: (String?) -> String?
         def name?: () -> bool
         def name_valid?: () -> bool
 
-        @email: emailAddress?
         def email: () -> emailAddress?
         def email=: (emailAddress?) -> emailAddress?
         def email?: () -> bool
         def email_valid?: () -> bool
 
-        @phone: String?
         def phone: () -> String?
         def phone=: (String?) -> String?
         def phone?: () -> bool

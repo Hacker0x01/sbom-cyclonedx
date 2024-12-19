@@ -5,25 +5,21 @@ module SBOM
         class Annotator < Base
           def initialize: (?organization: OrganizationalEntity?, ?individual: OrganizationalContact?, ?component: Component?, ?service: Service?) -> void
 
-          @organization: OrganizationalEntity?
           def organization: () -> OrganizationalEntity?
           def organization=: (OrganizationalEntity?) -> OrganizationalEntity?
           def organization?: () -> bool
           def organization_valid?: () -> bool
 
-          @individual: OrganizationalContact?
           def individual: () -> OrganizationalContact?
           def individual=: (OrganizationalContact?) -> OrganizationalContact?
           def individual?: () -> bool
           def individual_valid?: () -> bool
 
-          @component: Component?
           def component: () -> Component?
           def component=: (Component?) -> Component?
           def component?: () -> bool
           def component_valid?: () -> bool
 
-          @service: Service?
           def service: () -> Service?
           def service=: (Service?) -> Service?
           def service?: () -> bool
@@ -32,37 +28,31 @@ module SBOM
 
         def initialize: (?bom_ref: String?, subjects: Array[String], annotator: Annotator, timestamp: dateTime, text: String, ?signature: Signature::signatureChoice?) -> void
 
-        @bom_ref: String?
         def bom_ref: () -> String?
         def bom_ref=: (String?) -> String?
         def bom_ref?: () -> bool
         def bom_ref_valid?: () -> bool
 
-        @subjects: Array[String]
         def subjects: () -> Array[String]
         def subjects=: (Array[String]) -> Array[String]
         def subjects?: () -> bool
         def subjects_valid?: () -> bool
 
-        @annotator: Annotator
         def annotator: () -> Annotator
         def annotator=: (Annotator) -> Annotator
         def annotator?: () -> bool
         def annotator_valid?: () -> bool
 
-        @timestamp: dateTime
         def timestamp: () -> dateTime
         def timestamp=: (dateTime) -> dateTime
         def timestamp?: () -> bool
         def timestamp_valid?: () -> bool
 
-        @text: String
         def text: () -> String
         def text=: (String) -> String
         def text?: () -> bool
         def text_valid?: () -> bool
 
-        @signature: Signature::signatureChoice?
         def signature: () -> Signature::signatureChoice?
         def signature=: (Signature::signatureChoice?) -> Signature::signatureChoice?
         def signature?: () -> bool

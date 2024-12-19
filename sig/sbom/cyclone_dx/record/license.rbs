@@ -6,13 +6,11 @@ module SBOM
           class Licensee < Base
             def initialize: (?organization: OrganizationalEntity?, ?individual: OrganizationalContact?) -> void
 
-            @organization: OrganizationalEntity?
             def organization: () -> OrganizationalEntity?
             def organization=: (OrganizationalEntity?) -> OrganizationalEntity?
             def organization?: () -> bool
             def organization_valid?: () -> bool
 
-            @individual: OrganizationalContact?
             def individual: () -> OrganizationalContact?
             def individual=: (OrganizationalContact?) -> OrganizationalContact?
             def individual?: () -> bool
@@ -22,13 +20,11 @@ module SBOM
           class Licensor < Base
             def initialize: (?organization: OrganizationalEntity?, ?individual: OrganizationalContact?) -> void
 
-            @organization: OrganizationalEntity?
             def organization: () -> OrganizationalEntity?
             def organization=: (OrganizationalEntity?) -> OrganizationalEntity?
             def organization?: () -> bool
             def organization_valid?: () -> bool
 
-            @individual: OrganizationalContact?
             def individual: () -> OrganizationalContact?
             def individual=: (OrganizationalContact?) -> OrganizationalContact?
             def individual?: () -> bool
@@ -38,13 +34,11 @@ module SBOM
           class Purchaser < Base
             def initialize: (?organization: OrganizationalEntity?, ?individual: OrganizationalContact?) -> void
 
-            @organization: OrganizationalEntity?
             def organization: () -> OrganizationalEntity?
             def organization=: (OrganizationalEntity?) -> OrganizationalEntity?
             def organization?: () -> bool
             def organization_valid?: () -> bool
 
-            @individual: OrganizationalContact?
             def individual: () -> OrganizationalContact?
             def individual=: (OrganizationalContact?) -> OrganizationalContact?
             def individual?: () -> bool
@@ -52,49 +46,41 @@ module SBOM
           end
           def initialize: (?alt_ids: Array[String]?, ?licensor: Licensor?, ?licensee: Licensee?, ?purchaser: Purchaser?, ?purchase_order: String?, ?license_types: Array[String]?, ?last_renewal: dateTime?, ?expiration: dateTime?) -> void
 
-          @alt_ids: Array[String]?
           def alt_ids: () -> Array[String]?
           def alt_ids=: (Array[String]?) -> Array[String]?
           def alt_ids?: () -> bool
           def alt_ids_valid?: () -> bool
 
-          @licensor: Licensor?
           def licensor: () -> Licensor?
           def licensor=: (Licensor?) -> Licensor?
           def licensor?: () -> bool
           def licensor_valid?: () -> bool
 
-          @licensee: Licensee?
           def licensee: () -> Licensee?
           def licensee=: (Licensee?) -> Licensee?
           def licensee?: () -> bool
           def licensee_valid?: () -> bool
 
-          @purchaser: Purchaser?
           def purchaser: () -> Purchaser?
           def purchaser=: (Purchaser?) -> Purchaser?
           def purchaser?: () -> bool
           def purchaser_valid?: () -> bool
 
-          @purchase_order: String?
           def purchase_order: () -> String?
           def purchase_order=: (String?) -> String?
           def purchase_order?: () -> bool
           def purchase_order_valid?: () -> bool
 
-          @license_types: Array[String]?
           def license_types: () -> Array[String]?
           def license_types=: (Array[String]?) -> Array[String]?
           def license_types?: () -> bool
           def license_types_valid?: () -> bool
 
-          @last_renewal: dateTime?
           def last_renewal: () -> dateTime?
           def last_renewal=: (dateTime?) -> dateTime?
           def last_renewal?: () -> bool
           def last_renewal_valid?: () -> bool
 
-          @expiration: dateTime?
           def expiration: () -> dateTime?
           def expiration=: (dateTime?) -> dateTime?
           def expiration?: () -> bool
@@ -103,49 +89,41 @@ module SBOM
 
         def initialize: (?bom_ref: String?, ?id: String?, ?name: String?, ?acknowledgement: String?, ?text: Attachment?, ?url: uri?, ?licensing: Licensing?, ?properties: Array[Property]?) -> void
 
-        @bom_ref: String?
         def bom_ref: () -> String?
         def bom_ref=: (String?) -> String?
         def bom_ref?: () -> bool
         def bom_ref_valid?: () -> bool
 
-        @id: String?
         def id: () -> String?
         def id=: (String?) -> String?
         def id?: () -> bool
         def id_valid?: () -> bool
 
-        @name: String?
         def name: () -> String?
         def name=: (String?) -> String?
         def name?: () -> bool
         def name_valid?: () -> bool
 
-        @acknowledgement: String?
         def acknowledgement: () -> String?
         def acknowledgement=: (String?) -> String?
         def acknowledgement?: () -> bool
         def acknowledgement_valid?: () -> bool
 
-        @text: Attachment?
         def text: () -> Attachment?
         def text=: (Attachment?) -> Attachment?
         def text?: () -> bool
         def text_valid?: () -> bool
 
-        @url: uri?
         def url: () -> uri?
         def url=: (uri?) -> uri?
         def url?: () -> bool
         def url_valid?: () -> bool
 
-        @licensing: Licensing?
         def licensing: () -> Licensing?
         def licensing=: (Licensing?) -> Licensing?
         def licensing?: () -> bool
         def licensing_valid?: () -> bool
 
-        @properties: Array[Property]?
         def properties: () -> Array[Property]?
         def properties=: (Array[Property]?) -> Array[Property]?
         def properties?: () -> bool

@@ -4,5 +4,9 @@ module SBOM
 
     class Error < StandardError
     end
+
+    def self.create: (Hash[String | Symbol, fieldValue]) -> Record::Root
+    def self.load: (File) -> Record::Root
+    def self.parse: (String) -> Record::Root
   end
 end

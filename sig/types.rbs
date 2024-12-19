@@ -1,10 +1,9 @@
 type dateTime = DateTime | Time | String
-type emailAddress = SBOM::CycloneDX::EmailAddress | String
+type emailAddress = EmailAddress::Address | String
 type number = Integer | Float
 type uri = URI::Generic | String
 type fieldValue =
-  Array[fieldValue]
-| bool
+  bool
 | dateTime
 | emailAddress
 | Float
@@ -13,6 +12,7 @@ type fieldValue =
 | String
 | URI::Generic
 | nil
+| Array[fieldValue]
 type fieldTypeLabel =
   :array
 | :boolean
@@ -20,7 +20,7 @@ type fieldTypeLabel =
 | :email_address
 | :float
 | :integer
-| Class & SBOM::CycloneDX::Record::_Klass
+| singleton(SBOM::CycloneDX::Record::Base)
 | :string
 | :union
 | :uri
@@ -30,12 +30,12 @@ type fieldType = Class & (
   | singleton(FalseClass)
   | singleton(DateTime)
   | singleton(Time)
-  | singleton(SBOM::CycloneDX::EmailAddress)
+  | singleton(EmailAddress::Address)
   | singleton(Float)
   | singleton(Integer)
   | singleton(String)
   | singleton(URI::Generic)
-  | SBOM::CycloneDX::Record::_Klass
+  | singleton(SBOM::CycloneDX::Record::Base)
 )
 
 type jsonObject = Float | Integer | String | bool | Array[jsonObject] | Hash[String, jsonObject] | nil

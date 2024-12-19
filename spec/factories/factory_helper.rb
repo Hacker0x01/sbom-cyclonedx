@@ -42,7 +42,7 @@ module FactoryHelper
       gen_email = Faker::Internet.email
       next gen_email if Faker::Boolean.boolean
 
-      SBOM::CycloneDX::EmailAddress.new(gen_email)
+      EmailAddress::Address.new(gen_email)
     end
   }.freeze
 

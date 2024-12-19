@@ -4,13 +4,11 @@ module SBOM
       class HashData < Base
         def initialize: (alg: String, content: String) -> void
 
-        @alg: String
         def alg: () -> String
         def alg=: (String) -> String
         def alg?: () -> bool
         def alg_valid?: () -> bool
 
-        @content: String
         def content: () -> String
         def content=: (String) -> String
         def content?: () -> bool

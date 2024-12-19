@@ -4,31 +4,26 @@ module SBOM
       class Commit < Base
         def initialize: (?uid: String?, ?url: uri?, ?author: IdentifiableAction?, ?committer: IdentifiableAction?, ?message: String?) -> void
 
-        @uid: String?
         def uid: () -> String?
         def uid=: (String?) -> String?
         def uid?: () -> bool
         def uid_valid?: () -> bool
 
-        @url: uri?
         def url: () -> uri?
         def url=: (uri?) -> uri?
         def url?: () -> bool
         def url_valid?: () -> bool
 
-        @author: IdentifiableAction?
         def author: () -> IdentifiableAction?
         def author=: (IdentifiableAction?) -> IdentifiableAction?
         def author?: () -> bool
         def author_valid?: () -> bool
 
-        @committer: IdentifiableAction?
         def committer: () -> IdentifiableAction?
         def committer=: (IdentifiableAction?) -> IdentifiableAction?
         def committer?: () -> bool
         def committer_valid?: () -> bool
 
-        @message: String?
         def message: () -> String?
         def message=: (String?) -> String?
         def message?: () -> bool

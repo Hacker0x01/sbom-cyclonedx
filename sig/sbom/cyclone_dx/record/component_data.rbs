@@ -5,19 +5,16 @@ module SBOM
         class Content < Base
           def initialize: (?attachment: Attachment?, ?url: uri?, ?properties: Array[Property]?) -> void
 
-          @attachment: Attachment?
           def attachment: () -> Attachment?
           def attachment=: (Attachment?) -> Attachment?
           def attachment?: () -> bool
           def attachment_valid?: () -> bool
 
-          @url: uri?
           def url: () -> uri?
           def url=: (uri?) -> uri?
           def url?: () -> bool
           def url_valid?: () -> bool
 
-          @properties: Array[Property]?
           def properties: () -> Array[Property]?
           def properties=: (Array[Property]?) -> Array[Property]?
           def properties?: () -> bool
@@ -26,55 +23,46 @@ module SBOM
 
         def initialize: (?bom_ref: String?, type: String, ?name: String?, ?contents: Content?, ?classification: String?, ?sensitive_data: Array[String]?, ?graphics: GraphicsCollection?, ?description: String?, ?governance: DataGovernance?) -> void
 
-        @bom_ref: String?
         def bom_ref: () -> String?
         def bom_ref=: (String?) -> String?
         def bom_ref?: () -> bool
         def bom_ref_valid?: () -> bool
 
-        @type: String
         def type: () -> String
         def type=: (String) -> String
         def type?: () -> bool
         def type_valid?: () -> bool
 
-        @name: String?
         def name: () -> String?
         def name=: (String?) -> String?
         def name?: () -> bool
         def name_valid?: () -> bool
 
-        @contents: Content?
         def contents: () -> Content?
         def contents=: (Content?) -> Content?
         def contents?: () -> bool
         def contents_valid?: () -> bool
 
-        @classification: String?
         def classification: () -> String?
         def classification=: (String?) -> String?
         def classification?: () -> bool
         def classification_valid?: () -> bool
 
-        @sensitive_data: Array[String]?
         def sensitive_data: () -> Array[String]?
         def sensitive_data=: (Array[String]?) -> Array[String]?
         def sensitive_data?: () -> bool
         def sensitive_data_valid?: () -> bool
 
-        @graphics: GraphicsCollection?
         def graphics: () -> GraphicsCollection?
         def graphics=: (GraphicsCollection?) -> GraphicsCollection?
         def graphics?: () -> bool
         def graphics_valid?: () -> bool
 
-        @description: String?
         def description: () -> String?
         def description=: (String?) -> String?
         def description?: () -> bool
         def description_valid?: () -> bool
 
-        @governance: DataGovernance?
         def governance: () -> DataGovernance?
         def governance=: (DataGovernance?) -> DataGovernance?
         def governance?: () -> bool

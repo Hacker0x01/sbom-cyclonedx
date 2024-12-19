@@ -10,13 +10,13 @@ module SBOM
         | [:email_address, emailAddressValidatorParams]
         | [:float, floatValidatorParams]
         | [:integer, integerValidatorParams]
-        | [Class & Record::_Klass, recordValidatorParams]
+        | [singleton(SBOM::CycloneDX::Record::Base), recordValidatorParams]
         | [:string, stringValidatorParams]
         | [:uri, uriValidatorParams]
 
         @nested_validators: Array[BaseValidator[untyped]]
 
-        def initialize: (of: Array[unionableValidatorParams], ?required: bool, **untyped) -> void
+        def initialize: (of: Array[unionableValidatorParams], ?required: bool) -> void
         def valid?: (untyped) -> bool
       end
     end

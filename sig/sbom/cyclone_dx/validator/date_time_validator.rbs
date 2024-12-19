@@ -2,6 +2,7 @@ module SBOM
   module CycloneDX
     module Validator
       class DateTimeValidator < BaseValidator[dateTime]
+        def initialize: (?required: bool) -> void
         def valid?: (untyped) -> bool
       end
     end

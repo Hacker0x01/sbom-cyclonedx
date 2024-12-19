@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "base"
-require_relative "../email_address"
+require_relative "../../../email_address_extension"
 
 # Identifiable Action - Specifies an individual commit
 module SBOM

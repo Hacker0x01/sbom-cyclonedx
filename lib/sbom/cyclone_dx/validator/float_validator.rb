@@ -7,16 +7,22 @@ module SBOM
     # TODO: Add helpful errors
     module Validator
       class FloatValidator < BaseValidator
-        def initialize(maximum: nil, minimum: nil, required: false, **kwargs)
-          super(required: required, **kwargs)
+        def initialize(maximum: nil, minimum: nil, required: false)
+          if maximum && minimum && maximum < minimum
+            raise ArgumentError, "maximum must be greater than or equal to minimum"
+          end
+
+          super(Float, required: required)
 
           @range = (minimum..maximum)
         end
 
-        def valid?(value)
-          return false unless super(value, Float)
+        def validate(value)
+          rv = super
+          return rv unless value.is_a?(Float)
 
-          @range.cover?(value)
+          rv << "Value is not within range" unless @range.cover?(value)
+          rv
         end
       end
     end

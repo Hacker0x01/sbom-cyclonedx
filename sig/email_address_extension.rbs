@@ -1,0 +1,14 @@
+interface _EmailAddress
+  def initialize: (String, ?Hash[Symbol, untyped], ?String) -> void
+end
+
+module EmailAddressExtension
+  include _EmailAddress
+
+  def to_json: (*untyped) -> ::String
+  def as_json: (*untyped) -> ::String
+end
+
+class EmailAddress::Address
+  prepend EmailAddressExtension
+end

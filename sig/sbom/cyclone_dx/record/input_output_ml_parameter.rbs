@@ -4,7 +4,6 @@ module SBOM
       class InputOutputMLParameter < Base
         def initialize: (?format: String?) -> void
 
-        @format: String?
         def format: () -> String?
         def format=: (String?) -> String?
         def format?: () -> bool

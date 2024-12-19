@@ -57,6 +57,8 @@ RSpec/MultipleExpectations:
   Max: 4
 RSpec/MultipleMemoizedHelpers:
   Max: 12
+RSpec/NestedGroups:
+  Max: 4
 RSpec/SpecFilePathFormat:
   Exclude:
     - "spec/sbom/cyclone_dx/record/*_spec.rb"

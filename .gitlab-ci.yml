@@ -27,7 +27,7 @@ rspec:
   stage: test
   script:
     - bundle exec rbs collection update
-    - RUBYOPT="-rrbs/test/setup" RBS_TEST_TARGET="SBOM::CycloneDX::*" bundle exec rspec
+    - bin/rbs_spec
     - |
       echo "Adjusting junit report based on project_path..."
       sed -i 's|file="\./\([^"]*\)"|file="\./\1"|g' "rspec.xml" || true

@@ -4,19 +4,16 @@ module SBOM
       class IdentifiableAction < Base
         def initialize: (?timestamp: dateTime?, ?name: String?, ?email: emailAddress?) -> void
 
-        @timestamp: dateTime?
         def timestamp: () -> dateTime?
         def timestamp=: (dateTime?) -> dateTime?
         def timestamp?: () -> bool
         def timestamp_valid?: () -> bool
 
-        @name: String?
         def name: () -> String?
         def name=: (String?) -> String?
         def name?: () -> bool
         def name_valid?: () -> bool
 
-        @email: emailAddress?
         def email: () -> emailAddress?
         def email=: (emailAddress?) -> emailAddress?
         def email?: () -> bool

@@ -15,24 +15,20 @@ module SBOM
             class EC < Base
               def initialize: (crv: String, x: String, y: String) -> void
 
-              @kty: "EC"
               def kty: () -> "EC"
               def kty?: () -> true
               def kty_valid?: () -> true
 
-              @crv: String
               def crv: () -> String
               def crv=: (String) -> String
               def crv?: () -> bool
               def crv_valid?: () -> bool
 
-              @x: String
               def x: () -> String
               def x=: (String) -> String
               def x?: () -> bool
               def x_valid?: () -> bool
 
-              @y: String
               def y: () -> String
               def y=: (String) -> String
               def y?: () -> bool
@@ -42,18 +38,15 @@ module SBOM
             class OKP < Base
               def initialize: (crv: String, x: String) -> void
 
-              @kty: "OKP"
               def kty: () -> "OKP"
               def kty?: () -> true
               def kty_valid?: () -> true
 
-              @crv: String
               def crv: () -> String
               def crv=: (String) -> String
               def crv?: () -> bool
               def crv_valid?: () -> bool
 
-              @x: String
               def x: () -> String
               def x=: (String) -> String
               def x?: () -> bool
@@ -63,18 +56,15 @@ module SBOM
             class RSA < Base
               def initialize: (n: String, e: String) -> void
 
-              @kty: "RSA"
               def kty: () -> "RSA"
               def kty?: () -> true
               def kty_valid?: () -> true
 
-              @n: String
               def n: () -> String
               def n=: (String) -> String
               def n?: () -> bool
               def n_valid?: () -> bool
 
-              @e: String
               def e: () -> String
               def e=: (String) -> String
               def e?: () -> bool
@@ -86,37 +76,31 @@ module SBOM
 
           def initialize: (algorithm: uri | String, ?key_id: String?, ?public_key: PublicKey::publicKeyChoice?, ?certificate_path: Array[String]?, ?excludes: Array[String]?, value: String) -> void
 
-          @algorithm: (uri | String)
           def algorithm: () -> ((uri | String))
           def algorithm=: (uri | String) -> ((uri | String))
           def algorithm?: () -> bool
           def algorithm_valid?: () -> bool
 
-          @key_id: String?
           def key_id: () -> String?
           def key_id=: (String?) -> String?
           def key_id?: () -> bool
           def key_id_valid?: () -> bool
 
-          @public_key: PublicKey::publicKeyChoice?
           def public_key: () -> PublicKey::publicKeyChoice?
           def public_key=: (PublicKey::publicKeyChoice?) -> PublicKey::publicKeyChoice?
           def public_key?: () -> bool
           def public_key_valid?: () -> bool
 
-          @certificate_path: Array[String]?
           def certificate_path: () -> Array[String]?
           def certificate_path=: (Array[String]?) -> Array[String]?
           def certificate_path?: () -> bool
           def certificate_path_valid?: () -> bool
 
-          @excludes: Array[String]?
           def excludes: () -> Array[String]?
           def excludes=: (Array[String]?) -> Array[String]?
           def excludes?: () -> bool
           def excludes_valid?: () -> bool
 
-          @value: String
           def value: () -> String
           def value=: (String) -> String
           def value?: () -> bool
@@ -126,7 +110,6 @@ module SBOM
         class SignatureChain < Base
           def initialize: (?signatures: Array[JSFSignature]?) -> void
 
-          @signatures: Array[JSFSignature]?
           def signatures: () -> Array[JSFSignature]?
           def signatures=: (Array[JSFSignature]?) -> Array[JSFSignature]?
           def signatures?: () -> bool
@@ -136,7 +119,6 @@ module SBOM
         class SignerList < Base
           def initialize: (?signers: Array[JSFSignature]?) -> void
 
-          @signers: Array[JSFSignature]?
           def signers: () -> Array[JSFSignature]?
           def signers=: (Array[JSFSignature]?) -> Array[JSFSignature]?
           def signers?: () -> bool

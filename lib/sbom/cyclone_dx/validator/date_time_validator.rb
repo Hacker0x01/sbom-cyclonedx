@@ -8,15 +8,19 @@ module SBOM
     # TODO: Add helpful errors
     module Validator
       class DateTimeValidator < BaseValidator
-        def valid?(value)
-          return false unless super(value, DateTime, Time, String)
-          return true unless value.is_a?(String)
+        def initialize(required: false)
+          super(DateTime, Time, String, required: required)
+        end
+
+        def validate(value)
+          rv = super
+          return rv unless value.is_a?(String)
 
           begin
             DateTime.iso8601(value)
-            true
+            rv
           rescue ArgumentError, TypeError
-            false
+            rv << "Invalid ISO8601 date-time"
           end
         end
       end

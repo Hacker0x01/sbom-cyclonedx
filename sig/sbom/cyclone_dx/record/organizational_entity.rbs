@@ -4,31 +4,26 @@ module SBOM
       class OrganizationalEntity < Base
         def initialize: (?bom_ref: String?, ?name: String?, ?address: PostalAddress?, ?url: Array[uri]?, ?contact: Array[OrganizationalContact]?) -> void
 
-        @bom_ref: String?
         def bom_ref: () -> String?
         def bom_ref=: (String?) -> String?
         def bom_ref?: () -> bool
         def bom_ref_valid?: () -> bool
 
-        @name: String?
         def name: () -> String?
         def name=: (String?) -> String?
         def name?: () -> bool
         def name_valid?: () -> bool
 
-        @address: PostalAddress?
         def address: () -> PostalAddress?
         def address=: (PostalAddress?) -> PostalAddress?
         def address?: () -> bool
         def address_valid?: () -> bool
 
-        @url: Array[uri]?
         def url: () -> Array[uri]?
         def url=: (Array[uri]?) -> Array[uri]?
         def url?: () -> bool
         def url_valid?: () -> bool
 
-        @contact: Array[OrganizationalContact]?
         def contact: () -> Array[OrganizationalContact]?
         def contact=: (Array[OrganizationalContact]?) -> Array[OrganizationalContact]?
         def contact?: () -> bool

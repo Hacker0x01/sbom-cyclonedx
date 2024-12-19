@@ -4,49 +4,41 @@ module SBOM
       class Volume < Base
         def initialize: (?uid: String?, ?name: String?, ?mode: String?, ?path: String?, ?size_allocated: String?, ?persistent: bool?, ?remote: bool?, ?properties: Array[Property]?) -> void
 
-        @uid: String?
         def uid: () -> String?
         def uid=: (String?) -> String?
         def uid?: () -> bool
         def uid_valid?: () -> bool
 
-        @name: String?
         def name: () -> String?
         def name=: (String?) -> String?
         def name?: () -> bool
         def name_valid?: () -> bool
 
-        @mode: String?
         def mode: () -> String?
         def mode=: (String?) -> String?
         def mode?: () -> bool
         def mode_valid?: () -> bool
 
-        @path: String?
         def path: () -> String?
         def path=: (String?) -> String?
         def path?: () -> bool
         def path_valid?: () -> bool
 
-        @size_allocated: String?
         def size_allocated: () -> String?
         def size_allocated=: (String?) -> String?
         def size_allocated?: () -> bool
         def size_allocated_valid?: () -> bool
 
-        @persistent: bool?
         def persistent: () -> bool?
         def persistent=: (bool?) -> bool?
         def persistent?: () -> bool
         def persistent_valid?: () -> bool
 
-        @remote: bool?
         def remote: () -> bool?
         def remote=: (bool?) -> bool?
         def remote?: () -> bool
         def remote_valid?: () -> bool
 
-        @properties: Array[Property]?
         def properties: () -> Array[Property]?
         def properties=: (Array[Property]?) -> Array[Property]?
         def properties?: () -> bool

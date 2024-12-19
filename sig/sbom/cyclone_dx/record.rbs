@@ -2,20 +2,148 @@ module SBOM
   module CycloneDX
     module Record
       type presenceCheck = :all | :any | :one
+      type arrayFieldOptions =
+        {
+          ?unique: bool,
+          ?json_name: ::String?,
+          ?const: ::Array[fieldValue]?,
+          ?default: ::SBOM::CycloneDX::Field::undefined
+        }
+        | {
+          ?unique: bool,
+          ?json_name: ::String?,
+          ?const: Field::undefined,
+          ?default: Field::defaultValue[::Array[fieldValue]] | Field::undefined
+        }
+      type booleanFieldOptions =
+        {
+          ?json_name: ::String?,
+          ?const: bool?,
+          ?default: ::SBOM::CycloneDX::Field::undefined
+        }
+        | {
+          ?json_name: ::String?,
+          ?const: Field::undefined,
+          ?default: Field::defaultValue[bool] | Field::undefined
+        }
+      type dateTimeFieldOptions =
+        {
+          ?json_name: ::String?,
+          ?const: dateTime?,
+          ?default: ::SBOM::CycloneDX::Field::undefined
+        }
+        | {
+          ?json_name: ::String?,
+          ?const: Field::undefined,
+          ?default: Field::defaultValue[dateTime] | Field::undefined
+        }
+      type emailAddressFieldOptions =
+        {
+          ?json_name: ::String?,
+          ?const: emailAddress?,
+          ?default: ::SBOM::CycloneDX::Field::undefined
+        }
+        | {
+          ?json_name: ::String?,
+          ?const: Field::undefined,
+          ?default: Field::defaultValue[emailAddress] | Field::undefined
+        }
+      type floatFieldOptions =
+        {
+          ?minimum: ::Float?,
+          ?maximum: ::Float?,
+          ?json_name: ::String?,
+          ?const: ::Float?,
+          ?default: ::SBOM::CycloneDX::Field::undefined
+        }
+        | {
+          ?minimum: ::Float?,
+          ?maximum: ::Float?,
+          ?json_name: ::String?,
+          ?const: Field::undefined,
+          ?default: Field::defaultValue[::Float] | Field::undefined
+        }
+      type integerFieldOptions =
+        {
+          ?minimum: ::Integer?,
+          ?maximum: ::Integer?,
+          ?json_name: ::String?,
+          ?const: ::Integer?,
+          ?default: ::SBOM::CycloneDX::Field::undefined
+        }
+        | {
+          ?minimum: ::Integer?,
+          ?maximum: ::Integer?,
+          ?json_name: ::String?,
+          ?const: Field::undefined,
+          ?default: Field::defaultValue[::Integer] | Field::undefined
+        }
+      type recordFieldOptions =
+        {
+          ?json_name: ::String?,
+          ?const: ::SBOM::CycloneDX::Record::Base?,
+          ?default: ::SBOM::CycloneDX::Field::undefined
+        }
+        | {
+          ?json_name: ::String?,
+          ?const: Field::undefined,
+          ?default: Field::defaultValue[::SBOM::CycloneDX::Record::Base] | Field::undefined
+        }
+      type stringFieldOptions =
+        {
+          ?enum: ::Array[::String]?,
+          ?max_length: ::Integer?,
+          ?min_length: ::Integer?,
+          ?pattern: ::Regexp,
+          ?json_name: ::String?,
+          ?const: ::String?,
+          ?default: ::SBOM::CycloneDX::Field::undefined
+        }
+        | {
+          ?enum: ::Array[::String]?,
+          ?max_length: ::Integer?,
+          ?min_length: ::Integer?,
+          ?pattern: ::Regexp,
+          ?json_name: ::String?,
+          ?const: Field::undefined,
+          ?default: Field::defaultValue[::String] | Field::undefined
+        }
+      type unionFieldOptions =
+        {
+          ?json_name: ::String?,
+          ?const: fieldValue?,
+          ?default: ::SBOM::CycloneDX::Field::undefined
+        }
+        | {
+          ?json_name: ::String?,
+          ?const: Field::undefined,
+          ?default: Field::defaultValue[fieldValue] | Field::undefined
+        }
+      type uriFieldOptions =
+        {
+          ?json_name: ::String?,
+          ?const: uri?,
+          ?default: ::SBOM::CycloneDX::Field::undefined
+        }
+        | {
+          ?json_name: ::String?,
+          ?const: Field::undefined,
+          ?default: Field::defaultValue[uri] | Field::undefined
+        }
 
       interface _Instance
         def initialize: (**untyped) -> void
         def valid?: () -> bool
         def as_json: (?Hash[Symbol, untyped]?) -> Hash[String, jsonObject]
         def to_json: (?::JSON::State?) -> ::String
-        def formatted_errors: () -> String
+        def formatted_errors: () -> Array[String]
         def errors: () -> Hash[Symbol | String, Array[String]]
       end
 
       interface _Klass
         def create: (**untyped) -> SBOM::CycloneDX::Record::Base
         def create!: (**untyped) -> SBOM::CycloneDX::Record::Base
-        def json_name: (Symbol, String) -> void | (Symbol) -> String
+        def json_name: (String) -> void | (?nil) -> String
         def prop: (Symbol, fieldTypeLabel, ?required: bool, **untyped) -> void
         def const: (Symbol, fieldTypeLabel, fieldValue, ?required: bool, **untyped) -> void
         def validate:
@@ -24,7 +152,7 @@ module SBOM
         | (*Symbol, presence: :one | :all | :any | nil, ?message: String?) ?{ (*fieldValue?) -> (bool? | String | Array[String]) } -> void
         def prop_names: (?include_const: bool) -> Array[Symbol]
         def const_names: () -> Array[Symbol]
-        def fields: [T < SBOM::CycloneDX::Field::Base] () -> Hash[Symbol, T]
+        def fields: [T < SBOM::CycloneDX::Field::Base] () -> Hash[Symbol, singleton(SBOM::CycloneDX::Field::Base)]
         def custom_validators: () -> Array[[Array[Symbol], String?, ^(*fieldValue?) -> (bool? | String | Array[String])]]
       end
 

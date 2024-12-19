@@ -13,16 +13,16 @@ module SBOM
       | UnionValidator
       | URIValidator
 
-      type arrayValidatorParams = { items: ^(untyped) -> bool | fieldTypeLabel | arrayItemValidatorParams, ?unique: bool, ?const: Array[fieldValue], ?required: bool }
-      type booleanValidatorParams = { ?const: bool, ?required: bool }
-      type dateTimeValidatorParams = { ?const: dateTime, ?required: bool }
-      type emailAddressValidatorParams = { ?const: emailAddress, ?required: bool }
-      type floatValidatorParams = { ?const: Float, ?maximum: number?, ?minimum: number, ?required: bool }
-      type integerValidatorParams = { ?const: Integer, ?maximum: Integer, ?minimum: Integer, ?required: bool }
-      type recordValidatorParams = { ?const: Record::Base, type: Class & Record::_Klass, ?required: bool }
-      type stringValidatorParams = { ?const: String, ?enum: Array[String], ?max_length: Integer?, ?min_length: Integer?, ?pattern: Regexp, ?required: bool }
-      type unionValidatorParams = { ?const: fieldValue, of: Array[UnionValidator::unionableValidatorParams], ?required: bool }
-      type uriValidatorParams = { ?const: uri, ?required: bool }
+      type arrayValidatorParams = { items: ^(untyped) -> bool | fieldTypeLabel | arrayItemValidatorParams, ?unique: bool, ?required: bool }
+      type booleanValidatorParams = { ?required: bool }
+      type dateTimeValidatorParams = { ?required: bool }
+      type emailAddressValidatorParams = { ?required: bool }
+      type floatValidatorParams = { ?maximum: number?, ?minimum: number, ?required: bool }
+      type integerValidatorParams = { ?maximum: Integer, ?minimum: Integer, ?required: bool }
+      type recordValidatorParams = { type: singleton(SBOM::CycloneDX::Record::Base), ?required: bool }
+      type stringValidatorParams = { ?enum: Array[String], ?max_length: Integer?, ?min_length: Integer?, ?pattern: Regexp, ?required: bool }
+      type unionValidatorParams = { of: Array[UnionValidator::unionableValidatorParams], ?required: bool }
+      type uriValidatorParams = { ?required: bool }
       type anyValidatorParams =
         arrayValidatorParams
       | booleanValidatorParams
@@ -42,10 +42,12 @@ module SBOM
       | [:email_address, emailAddressValidatorParams]
       | [:float, floatValidatorParams]
       | [:integer, integerValidatorParams]
-      | [Class & Record::_Klass, recordValidatorParams]
+      | [singleton(SBOM::CycloneDX::Record::Base), recordValidatorParams]
       | [:string, stringValidatorParams]
       | [:union, unionValidatorParams]
       | [:uri, uriValidatorParams]
+
+      SIMPLE_TYPES: [:array, :boolean, :date_time, :email_address, :float, :integer, :string, :uri]
 
       def self.for:
         (:array type, **untyped) -> ArrayValidator
@@ -54,7 +56,7 @@ module SBOM
       | (:email_address type, **untyped) -> EmailAddressValidator
       | (:float type, **untyped) -> FloatValidator
       | (:integer type, **untyped) -> IntegerValidator
-      | (::Class & ::SBOM::CycloneDX::Record::_Klass type, **untyped) -> RecordValidator
+      | (singleton(SBOM::CycloneDX::Record::Base) type, **untyped) -> RecordValidator
       | (:string type, **untyped) -> StringValidator
       | (:union type, **untyped) -> UnionValidator
       | (:uri type, **untyped) -> URIValidator

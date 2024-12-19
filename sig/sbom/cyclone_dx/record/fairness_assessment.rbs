@@ -4,25 +4,21 @@ module SBOM
       class FairnessAssessment < Base
         def initialize: (?group_at_risk: String?, ?benefits: String?, ?harms: String?, ?mitigation_strategy: String?) -> void
 
-        @group_at_risk: String?
         def group_at_risk: () -> String?
         def group_at_risk=: (String?) -> String?
         def group_at_risk?: () -> bool
         def group_at_risk_valid?: () -> bool
 
-        @benefits: String?
         def benefits: () -> String?
         def benefits=: (String?) -> String?
         def benefits?: () -> bool
         def benefits_valid?: () -> bool
 
-        @harms: String?
         def harms: () -> String?
         def harms=: (String?) -> String?
         def harms?: () -> bool
         def harms_valid?: () -> bool
 
-        @mitigation_strategy: String?
         def mitigation_strategy: () -> String?
         def mitigation_strategy=: (String?) -> String?
         def mitigation_strategy?: () -> bool

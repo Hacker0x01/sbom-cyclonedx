@@ -2,7 +2,7 @@ module SBOM
   module CycloneDX
     module Validator
       class BooleanValidator < BaseValidator[bool]
-        def valid?: (untyped) -> bool
+        def initialize: (?required: bool) -> void
       end
     end
   end

@@ -67,7 +67,7 @@ FactoryBot.define do
       end
       swid
       modified { Faker::Boolean.boolean }
-      pedigree
+      pedigree { association(:pedigree) }
       external_references { association_list(:external_reference) }
       components { [] }
       evidence factory: :component_evidence
@@ -81,7 +81,7 @@ FactoryBot.define do
     end
 
     after(:build) do |component|
-      if component.pedigree.present?
+      if component.pedigree? && !component.pedigree.nil?
         component.pedigree.ancestors ||= []
         component.pedigree.ancestors << component
         component.pedigree.ancestors.uniq!

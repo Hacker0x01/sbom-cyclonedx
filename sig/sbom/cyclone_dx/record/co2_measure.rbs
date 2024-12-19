@@ -4,7 +4,6 @@ module SBOM
       class CO2Measure < Base
         def initialize: (value: Float) -> void
 
-        @value: Float
         def value: () -> Float
         def value=: (Float) -> Float
         def value?: () -> bool

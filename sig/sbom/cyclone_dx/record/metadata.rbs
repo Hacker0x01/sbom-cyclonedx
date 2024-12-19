@@ -5,13 +5,11 @@ module SBOM
         class CustomPhase < Base
           def initialize: (name: String, ?description: String?) -> void
 
-          @name: String
           def name: () -> String
           def name=: (String) -> String
           def name?: () -> bool
           def name_valid?: () -> bool
 
-          @description: String?
           def description: () -> String?
           def description=: (String?) -> String?
           def description?: () -> bool
@@ -21,7 +19,6 @@ module SBOM
         class PreDefinedPhase < Base
           def initialize: (phase: String) -> void
 
-          @phase: String
           def phase: () -> String
           def phase=: (String) -> String
           def phase?: () -> bool
@@ -30,61 +27,51 @@ module SBOM
 
         def initialize: (?timestamp: dateTime?, ?lifecycles: Array[PreDefinedPhase | CustomPhase]?, ?tools: Tools?, ?manufacturer: OrganizationalEntity?, ?authors: Array[OrganizationalContact]?, ?component: Component?, ?manufacture: OrganizationalEntity?, ?supplier: OrganizationalEntity?, ?licenses: Array[LicenseChoice::licenseChoice]?, ?properties: Array[Property]?) -> void
 
-        @timestamp: dateTime?
         def timestamp: () -> dateTime?
         def timestamp=: (dateTime?) -> dateTime?
         def timestamp?: () -> bool
         def timestamp_valid?: () -> bool
 
-        @lifecycles: Array[PreDefinedPhase | CustomPhase]?
         def lifecycles: () -> (Array[PreDefinedPhase | CustomPhase])?
         def lifecycles=: (Array[PreDefinedPhase | CustomPhase]?) -> (Array[PreDefinedPhase | CustomPhase])?
         def lifecycles?: () -> bool
         def lifecycles_valid?: () -> bool
 
-        @tools: Tools?
         def tools: () -> Tools?
         def tools=: (Tools?) -> Tools?
         def tools?: () -> bool
         def tools_valid?: () -> bool
 
-        @manufacturer: OrganizationalEntity?
         def manufacturer: () -> OrganizationalEntity?
         def manufacturer=: (OrganizationalEntity?) -> OrganizationalEntity?
         def manufacturer?: () -> bool
         def manufacturer_valid?: () -> bool
 
-        @authors: Array[OrganizationalContact]?
         def authors: () -> Array[OrganizationalContact]?
         def authors=: (Array[OrganizationalContact]?) -> Array[OrganizationalContact]?
         def authors?: () -> bool
         def authors_valid?: () -> bool
 
-        @component: Component?
         def component: () -> Component?
         def component=: (Component?) -> Component?
         def component?: () -> bool
         def component_valid?: () -> bool
 
-        @manufacture: OrganizationalEntity?
         def manufacture: () -> OrganizationalEntity?
         def manufacture=: (OrganizationalEntity?) -> OrganizationalEntity?
         def manufacture?: () -> bool
         def manufacture_valid?: () -> bool
 
-        @supplier: OrganizationalEntity?
         def supplier: () -> OrganizationalEntity?
         def supplier=: (OrganizationalEntity?) -> OrganizationalEntity?
         def supplier?: () -> bool
         def supplier_valid?: () -> bool
 
-        @licenses: Array[LicenseChoice::licenseChoice]?
         def licenses: () -> Array[LicenseChoice::licenseChoice]?
         def licenses=: (Array[LicenseChoice::licenseChoice]?) -> Array[LicenseChoice::licenseChoice]?
         def licenses?: () -> bool
         def licenses_valid?: () -> bool
 
-        @properties: Array[Property]?
         def properties: () -> Array[Property]?
         def properties=: (Array[Property]?) -> Array[Property]?
         def properties?: () -> bool

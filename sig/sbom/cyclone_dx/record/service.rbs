@@ -4,109 +4,91 @@ module SBOM
       class Service < Base
         def initialize: (?bom_ref: String?, ?provider: OrganizationalEntity?, ?group: String?, name: String, ?version: String?, ?description: String?, ?endpoints: Array[uri]?, ?authenticated: bool?, ?x_trust_boundary: bool?, ?trust_zone: String?, ?data: Array[ServiceData]?, ?licenses: Array[LicenseChoice::licenseChoice]?, ?external_references: Array[ExternalReference]?, ?services: Array[Service]?, ?release_notes: ReleaseNotes?, ?properties: Array[Property]?, ?tags: Array[String]?, ?signature: Signature::signatureChoice?) -> void
 
-        @bom_ref: String?
         def bom_ref: () -> String?
         def bom_ref=: (String?) -> String?
         def bom_ref?: () -> bool
         def bom_ref_valid?: () -> bool
 
-        @provider: OrganizationalEntity?
         def provider: () -> OrganizationalEntity?
         def provider=: (OrganizationalEntity?) -> OrganizationalEntity?
         def provider?: () -> bool
         def provider_valid?: () -> bool
 
-        @group: String?
         def group: () -> String?
         def group=: (String?) -> String?
         def group?: () -> bool
         def group_valid?: () -> bool
 
-        @name: String
         def name: () -> String
         def name=: (String) -> String
         def name?: () -> bool
         def name_valid?: () -> bool
 
-        @version: String?
         def version: () -> String?
         def version=: (String?) -> String?
         def version?: () -> bool
         def version_valid?: () -> bool
 
-        @description: String?
         def description: () -> String?
         def description=: (String?) -> String?
         def description?: () -> bool
         def description_valid?: () -> bool
 
-        @endpoints: Array[uri]?
         def endpoints: () -> Array[uri]?
         def endpoints=: (Array[uri]?) -> Array[uri]?
         def endpoints?: () -> bool
         def endpoints_valid?: () -> bool
 
-        @authenticated: bool?
         def authenticated: () -> bool?
         def authenticated=: (bool?) -> bool?
         def authenticated?: () -> bool
         def authenticated_valid?: () -> bool
 
-        @x_trust_boundary: bool?
         def x_trust_boundary: () -> bool?
         def x_trust_boundary=: (bool?) -> bool?
         def x_trust_boundary?: () -> bool
         def x_trust_boundary_valid?: () -> bool
 
-        @trust_zone: String?
         def trust_zone: () -> String?
         def trust_zone=: (String?) -> String?
         def trust_zone?: () -> bool
         def trust_zone_valid?: () -> bool
 
-        @data: Array[ServiceData]?
         def data: () -> Array[ServiceData]?
         def data=: (Array[ServiceData]?) -> Array[ServiceData]?
         def data?: () -> bool
         def data_valid?: () -> bool
 
-        @licenses: Array[LicenseChoice::licenseChoice]?
         def licenses: () -> Array[LicenseChoice::licenseChoice]?
         def licenses=: (Array[LicenseChoice::licenseChoice]?) -> Array[LicenseChoice::licenseChoice]?
         def licenses?: () -> bool
         def licenses_valid?: () -> bool
 
-        @external_references: Array[ExternalReference]?
         def external_references: () -> Array[ExternalReference]?
         def external_references=: (Array[ExternalReference]?) -> Array[ExternalReference]?
         def external_references?: () -> bool
         def external_references_valid?: () -> bool
 
-        @services: Array[Service]?
         def services: () -> Array[Service]?
         def services=: (Array[Service]?) -> Array[Service]?
         def services?: () -> bool
         def services_valid?: () -> bool
 
-        @release_notes: ReleaseNotes?
         def release_notes: () -> ReleaseNotes?
         def release_notes=: (ReleaseNotes?) -> ReleaseNotes?
         def release_notes?: () -> bool
         def release_notes_valid?: () -> bool
 
-        @properties: Array[Property]?
         def properties: () -> Array[Property]?
         def properties=: (Array[Property]?) -> Array[Property]?
         def properties?: () -> bool
         def properties_valid?: () -> bool
 
-        @tags: Array[String]?
         def tags: () -> Array[String]?
         def tags=: (Array[String]?) -> Array[String]?
         def tags?: () -> bool
         def tags_valid?: () -> bool
 
-        @signature: Signature::signatureChoice?
         def signature: () -> Signature::signatureChoice?
         def signature=: (Signature::signatureChoice?) -> Signature::signatureChoice?
         def signature?: () -> bool

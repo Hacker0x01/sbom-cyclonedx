@@ -4,37 +4,31 @@ module SBOM
       class EnergyProvider < Base
         def initialize: (?bom_ref: String?, ?description: String?, organization: OrganizationalEntity, energy_source: String, energy_provided: EnergyMeasure, ?external_references: Array[ExternalReference]?) -> void
 
-        @bom_ref: String?
         def bom_ref: () -> String?
         def bom_ref=: (String?) -> String?
         def bom_ref?: () -> bool
         def bom_ref_valid?: () -> bool
 
-        @description: String?
         def description: () -> String?
         def description=: (String?) -> String?
         def description?: () -> bool
         def description_valid?: () -> bool
 
-        @organization: OrganizationalEntity
         def organization: () -> OrganizationalEntity
         def organization=: (OrganizationalEntity) -> OrganizationalEntity
         def organization?: () -> bool
         def organization_valid?: () -> bool
 
-        @energy_source: String
         def energy_source: () -> String
         def energy_source=: (String) -> String
         def energy_source?: () -> bool
         def energy_source_valid?: () -> bool
 
-        @energy_provided: EnergyMeasure
         def energy_provided: () -> EnergyMeasure
         def energy_provided=: (EnergyMeasure) -> EnergyMeasure
         def energy_provided?: () -> bool
         def energy_provided_valid?: () -> bool
 
-        @external_references: Array[ExternalReference]?
         def external_references: () -> Array[ExternalReference]?
         def external_references=: (Array[ExternalReference]?) -> Array[ExternalReference]?
         def external_references?: () -> bool

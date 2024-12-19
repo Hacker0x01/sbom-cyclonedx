@@ -9,31 +9,52 @@ module SBOM
     # TODO: Add helpful errors
     module Validator
       class ArrayValidator < BaseValidator
-        def initialize(items:, unique: false, required: false, **kwargs)
-          super(required: required, **kwargs)
+        def initialize(items:, unique: false, required: false)
+          super(Array, required: required)
 
           @unique = unique
           @items_validator =
             case items
+            when :array, :boolean, :date_time, :email_address, :float, :integer, :string, :uri
+              validator_method(Validator.for(items, required: true))
             when Proc
-              items
+              proc_validator(items)
             when Array
-              ->(item) { Validator.for(items.first, required: true, **items.last).valid?(item) }
+              validator_method(Validator.for(items.first, required: true, **items.last))
             when Class
-              ->(item) { RecordValidator.new(type: items, required: true).valid?(item) }
+              raise "Unsupported items type: #{items}" unless items < Record::Base
+
+              validator_method(RecordValidator.new(type: items, required: true))
             else
-              ->(item) { Validator.for(items, required: true).valid?(item) }
+              raise ArgumentError, "Unsupported items type: #{items}"
             end
         end
 
-        def valid?(value)
-          return false unless super(value, Array)
+        def validate(value)
+          rv = super
+          return rv unless value.is_a?(Array)
 
-          value.is_a?(Array) &&
-            (!@unique || value.uniq.length == value.length) &&
-            value.all? do |item|
-              @items_validator.call(item)
+          rv << "Unique array contains non-unique values" if @unique && value.uniq.length != value.length
+          value.each { |item| rv += @items_validator.call(item) }
+          rv
+        end
+
+        private
+
+        def validator_method(klass)
+          proc { |item| klass.validate(item) } #: ^(untyped) -> Array[String]
+        end
+
+        def proc_validator(validator)
+          lambda do |item|
+            rv = validator.call(item)
+            case rv
+            when Array then rv.map(&:to_s)
+            when true then []
+            when false then ["#{item} is invalid"]
+            else [rv.to_s]
             end
+          end
         end
       end
     end

@@ -4,43 +4,36 @@ module SBOM
       class Event < Base
         def initialize: (?uid: String?, ?description: String?, ?time_received: dateTime?, ?data: Attachment?, ?source: ResourceReferenceChoice?, ?target: ResourceReferenceChoice?, ?properties: Array[Property]?) -> void
 
-        @uid: String?
         def uid: () -> String?
         def uid=: (String?) -> String?
         def uid?: () -> bool
         def uid_valid?: () -> bool
 
-        @description: String?
         def description: () -> String?
         def description=: (String?) -> String?
         def description?: () -> bool
         def description_valid?: () -> bool
 
-        @time_received: dateTime?
         def time_received: () -> dateTime?
         def time_received=: (dateTime?) -> dateTime?
         def time_received?: () -> bool
         def time_received_valid?: () -> bool
 
-        @data: Attachment?
         def data: () -> Attachment?
         def data=: (Attachment?) -> Attachment?
         def data?: () -> bool
         def data_valid?: () -> bool
 
-        @source: ResourceReferenceChoice?
         def source: () -> ResourceReferenceChoice?
         def source=: (ResourceReferenceChoice?) -> ResourceReferenceChoice?
         def source?: () -> bool
         def source_valid?: () -> bool
 
-        @target: ResourceReferenceChoice?
         def target: () -> ResourceReferenceChoice?
         def target=: (ResourceReferenceChoice?) -> ResourceReferenceChoice?
         def target?: () -> bool
         def target_valid?: () -> bool
 
-        @properties: Array[Property]?
         def properties: () -> Array[Property]?
         def properties=: (Array[Property]?) -> Array[Property]?
         def properties?: () -> bool

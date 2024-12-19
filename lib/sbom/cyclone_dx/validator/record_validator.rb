@@ -7,14 +7,18 @@ module SBOM
     # TODO: Add helpful errors
     module Validator
       class RecordValidator < BaseValidator
-        def initialize(type:, required: false, **kwargs)
-          super(required: required, **kwargs)
+        def initialize(type:, required: false)
+          super(type, required: required)
 
           @record_type = type
         end
 
-        def valid?(value)
-          super(value, @record_type)
+        def validate(value)
+          rv = super
+          return rv unless value.is_a?(@record_type)
+
+          rv += value.valid? ? [] : value.formatted_errors
+          rv.compact
         end
       end
     end

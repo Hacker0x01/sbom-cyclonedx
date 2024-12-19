@@ -4,43 +4,36 @@ module SBOM
       class ServiceData < Base
         def initialize: (flow: String, classification: String, ?name: String?, ?description: String?, ?governance: DataGovernance?, source: uri | String, destination: uri | String) -> void
 
-        @flow: String
         def flow: () -> String
         def flow=: (String) -> String
         def flow?: () -> bool
         def flow_valid?: () -> bool
 
-        @classification: String
         def classification: () -> String
         def classification=: (String) -> String
         def classification?: () -> bool
         def classification_valid?: () -> bool
 
-        @name: String?
         def name: () -> String?
         def name=: (String?) -> String?
         def name?: () -> bool
         def name_valid?: () -> bool
 
-        @description: String?
         def description: () -> String?
         def description=: (String?) -> String?
         def description?: () -> bool
         def description_valid?: () -> bool
 
-        @governance: DataGovernance?
         def governance: () -> DataGovernance?
         def governance=: (DataGovernance?) -> DataGovernance?
         def governance?: () -> bool
         def governance_valid?: () -> bool
 
-        @source: uri | String
         def source: () -> (uri | String)
         def source=: (uri | String) -> (uri | String)
         def source?: () -> bool
         def source_valid?: () -> bool
 
-        @destination: uri | String
         def destination: () -> (uri | String)
         def destination=: (uri | String) -> (uri | String)
         def destination?: () -> bool

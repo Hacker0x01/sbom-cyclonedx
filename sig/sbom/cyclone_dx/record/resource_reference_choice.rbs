@@ -4,13 +4,11 @@ module SBOM
       class ResourceReferenceChoice < Base
         def initialize: (?ref: String?, ?external_reference: ExternalReference?) -> void
 
-        @ref: String?
         def ref: () -> String?
         def ref=: (String?) -> String?
         def ref?: () -> bool
         def ref_valid?: () -> bool
 
-        @external_reference: ExternalReference?
         def external_reference: () -> ExternalReference?
         def external_reference=: (ExternalReference?) -> ExternalReference?
         def external_reference?: () -> bool

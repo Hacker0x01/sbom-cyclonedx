@@ -1,27 +1,434 @@
 module SBOM
   module CycloneDX
-    module Field
-      type fieldDefault [T < fieldValue] = (T | ^() -> T)?
+    interface _FieldClass
+    end
 
-      class NotSet < ::Data
-        def self.new: () -> NotSet
-        def self.[]: () -> NotSet
+    module Field
+      type undefined = :undefined
+      type defaultValue[T < fieldValue] = T? | ^() -> T?
+
+      interface _FieldBaseClass[T < fieldValue]
+        def field_name: -> Symbol
+        def validator: -> Validator::BaseValidator[T]
+        def json_name: -> String
+        def required?: -> bool
+        def const?: -> bool
+        def const: -> T?
+        def default?: -> bool
+        def default: -> T?
+        def coerce: (untyped) -> T?
       end
 
-      NOT_SET: NotSet
+      class Base[T < fieldValue]
+        extend _FieldBaseClass
 
-      def self.for:
-        (:array type, Symbol name, **untyped) -> Field::Array
-      | (:boolean type, Symbol name, **untyped) -> Field::Boolean
-      | (:date_time type, Symbol name, **untyped) -> Field::DateTime
-      | (:email_address type, Symbol name, **untyped) -> Field::EmailAddress
-      | (:float type, Symbol name, **untyped) -> Field::Float
-      | (:integer type, Symbol name, **untyped) -> Field::Integer
-      | (::Class & ::SBOM::CycloneDX::Record::_Klass type, Symbol name, **untyped) -> Field::Record[untyped]
-      | (:string type, Symbol name, **untyped) -> Field::String
-      | (:union type, Symbol name, **untyped) ->Field::Union[untyped]
-      | (:uri type, Symbol name, **untyped) -> Field::URI
-      | (fieldTypeLabel type, Symbol name, **untyped) -> Field::Base[untyped]
+        attr_reader errors: ::Array[::String]
+        attr_reader value: T?
+
+        @value_set: bool
+
+        self.@const_present: bool
+        self.@default: fieldValue? | ^() -> fieldValue?
+        self.@default_present: bool
+
+        def initialize: -> void
+        def value=: (T?) -> void
+        def value?: -> bool
+        def valid?: -> bool
+
+        def field_name: -> Symbol
+        def validator: -> Validator::BaseValidator[T]
+        def json_name: -> String
+        def required?: -> bool
+        def const: -> T?
+        def const?: -> bool
+        def default: -> T?
+        def default?: -> bool
+      end
+
+      class ConstBase[T < fieldValue] < Base[T]
+        def initialize: -> void
+      end
+
+      class PropBase[T < fieldValue] < Base[T]
+        def initialize: (*T?) -> void
+
+        def value=: (T?) -> void
+        def unset_value: -> void
+        def self.coerce: [T < fieldValue] (untyped) -> T?
+      end
+
+      def self.array:
+        [T < fieldValue, U < singleton(ConstBase)] (
+          field_name: Symbol,
+          items: Validator::ArrayValidator::itemsValidator | Validator::ArrayValidator::validSingleTypeLabel | Validator::arrayItemValidatorParams,
+          ?unique: bool,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: ::Array[T]?,
+          ?default: undefined
+        ) -> U
+      | [T < fieldValue, U < singleton(PropBase)] (
+          field_name: Symbol,
+          items: Validator::ArrayValidator::itemsValidator | Validator::ArrayValidator::validSingleTypeLabel | Validator::arrayItemValidatorParams,
+          ?unique: bool,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[::Array[T]] | undefined
+        ) -> U
+
+      def self.boolean:
+        [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: bool?,
+          ?default: undefined
+        ) -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[bool] | undefined
+        ) -> T
+
+      def self.date_time:
+        [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: dateTime?,
+          ?default: undefined
+        ) -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[dateTime] | undefined
+        ) -> T
+
+      def self.email_address:
+        [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: emailAddress?,
+          ?default: undefined
+        ) -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[emailAddress] | undefined
+        ) -> T
+
+      def self.float:
+        [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          ?minimum: number?,
+          ?maximum: number?,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: ::Float?,
+          ?default: undefined
+        ) -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          ?minimum: number?,
+          ?maximum: number?,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[::Float] | undefined
+        ) -> T
+
+      def self.integer:
+        [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          ?minimum: number?,
+          ?maximum: number?,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: ::Integer?,
+          ?default: undefined
+        ) -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          ?minimum: number?,
+          ?maximum: number?,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[::Integer] | undefined
+        ) -> T
+
+      def self.record:
+        [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          klass: singleton(SBOM::CycloneDX::Record::Base),
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: CycloneDX::Record::Base?,
+          ?default: undefined
+        ) -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          klass: singleton(SBOM::CycloneDX::Record::Base),
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[CycloneDX::Record::Base] | undefined
+        ) -> T
+
+      def self.string:
+        [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          ?enum: ::Array[::String]?,
+          ?max_length: ::Integer?,
+          ?min_length: ::Integer?,
+          ?pattern: Regexp,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: ::String?,
+          ?default: undefined
+        ) -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          ?enum: ::Array[::String]?,
+          ?max_length: ::Integer?,
+          ?min_length: ::Integer?,
+          ?pattern: Regexp,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[::String] | undefined
+        ) -> T
+
+      def self.union:
+        [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          of: ::Array[Validator::UnionValidator::unionableValidatorParams],
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: fieldValue?,
+          ?default: undefined
+        ) -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          of: ::Array[Validator::UnionValidator::unionableValidatorParams],
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[fieldValue] | undefined
+        ) -> T
+
+      def self.uri:
+        [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: uri?,
+          ?default: undefined
+        ) -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          ?required: bool,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[uri] | undefined
+        ) -> T
+
+      private def self.Field:
+        [T < singleton(PropBase)] (
+          field_name: Symbol,
+          type: :array,
+          validator: Validator::ArrayValidator,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[::Array[fieldValue]] | undefined
+        ) { (untyped) -> ::Array[fieldValue]? } -> T
+      | [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          type: :array,
+          validator: Validator::ArrayValidator,
+          ?json_name: ::String?,
+          ?const: ::Array[fieldValue]?,
+          ?default: undefined
+        ) { (untyped) -> ::Array[fieldValue]? } -> T
+      | [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          type: :boolean,
+          validator: Validator::BooleanValidator,
+          ?json_name: ::String?,
+          ?const: bool?,
+          ?default: undefined
+        ) { (untyped) -> bool? } -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          type: :boolean,
+          validator: Validator::BooleanValidator,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[bool] | undefined
+        ) { (untyped) -> bool? } -> T
+      | [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          type: :date_time,
+          validator: Validator::DateTimeValidator,
+          ?json_name: ::String?,
+          ?const: dateTime?,
+          ?default: undefined
+        ) { (untyped) -> dateTime? } -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          type: :date_time,
+          validator: Validator::DateTimeValidator,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[dateTime] | undefined
+        ) { (untyped) -> dateTime? } -> T
+      | [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          type: :email_address,
+          validator: Validator::EmailAddressValidator,
+          ?json_name: ::String?,
+          ?const: emailAddress?,
+          ?default: undefined
+        ) { (untyped) -> emailAddress? } -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          type: :email_address,
+          validator: Validator::EmailAddressValidator,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[emailAddress] | undefined
+        ) { (untyped) -> emailAddress? } -> T
+      | [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          type: :float,
+          validator: Validator::FloatValidator,
+          ?json_name: ::String?,
+          ?const: ::Float?,
+          ?default: undefined
+        ) { (untyped) -> ::Float? } -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          type: :float,
+          validator: Validator::FloatValidator,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[::Float] | undefined
+        ) { (untyped) -> ::Float? } -> T
+      | [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          type: :integer,
+          validator: Validator::IntegerValidator,
+          ?json_name: ::String?,
+          ?const: ::Integer?,
+          ?default: undefined
+        ) { (untyped) -> ::Integer? } -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          type: :integer,
+          validator: Validator::IntegerValidator,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[::Integer] | undefined
+        ) { (untyped) -> ::Integer? } -> T
+      | [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          type: singleton(SBOM::CycloneDX::Record::Base),
+          validator: Validator::RecordValidator,
+          ?json_name: ::String?,
+          ?const: CycloneDX::Record::Base?,
+          ?default: undefined
+        ) { (untyped) -> CycloneDX::Record::Base? } -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          type: singleton(SBOM::CycloneDX::Record::Base),
+          validator: Validator::RecordValidator,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[CycloneDX::Record::Base?] | undefined
+        ) { (untyped) -> CycloneDX::Record::Base? } -> T
+      | [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          type: :string,
+          validator: Validator::StringValidator,
+          ?json_name: ::String?,
+          ?const: ::String?,
+          ?default: undefined
+        ) { (untyped) -> ::String? } -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          type: :string,
+          validator: Validator::StringValidator,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[::String] | undefined
+        ) { (untyped) -> ::String? } -> T
+      | [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          type: :union,
+          validator: Validator::UnionValidator,
+          ?json_name: ::String?,
+          ?const: fieldValue?,
+          ?default: undefined
+        ) { (untyped) -> fieldValue? } -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          type: :union,
+          validator: Validator::UnionValidator,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[fieldValue] | undefined
+        ) { (untyped) -> fieldValue? } -> T
+      | [T < singleton(ConstBase)] (
+          field_name: Symbol,
+          type: :uri,
+          validator: Validator::URIValidator,
+          ?json_name: ::String?,
+          ?const: uri?,
+          ?default: undefined
+        ) { (untyped) -> uri? } -> T
+      | [T < singleton(PropBase)] (
+          field_name: Symbol,
+          type: :uri,
+          validator: Validator::URIValidator,
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[uri] | undefined
+        ) { (untyped) -> uri? } -> T
+      | [T < fieldValue, U < singleton(PropBase)] (
+          field_name: Symbol,
+          type: fieldTypeLabel,
+          validator: Validator::BaseValidator[T],
+          ?json_name: ::String?,
+          ?const: undefined,
+          ?default: defaultValue[T] | undefined
+        ) { (untyped) -> T? } -> U
+      | [T < fieldValue, U < singleton(ConstBase)] (
+          field_name: Symbol,
+          type: fieldTypeLabel,
+          validator: Validator::BaseValidator[T],
+          ?json_name: ::String?,
+          ?const: T?,
+          ?default: undefined
+        ) { (untyped) -> T? } -> U
+      | [T < fieldValue, U < singleton(ConstBase)] (
+          field_name: Symbol,
+          type: fieldTypeLabel,
+          validator: Validator::BaseValidator[T],
+          ?json_name: ::String?,
+          ?const: T? | undefined,
+          ?default: defaultValue[T] | undefined
+        ) { (untyped) -> T? } -> U
+
+      private def self.validate_types: [T < fieldValue] (fieldTypeLabel, Validator::BaseValidator[untyped], **(T? | defaultValue[T])) -> void
     end
   end
 end

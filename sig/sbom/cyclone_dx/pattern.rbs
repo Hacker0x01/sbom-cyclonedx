@@ -2,34 +2,23 @@ module SBOM
   module CycloneDX
     module Pattern
       BOM_SERIAL_NUMBER: ::Regexp
-
       CDX_BOM_VERSION: ::Regexp
-
       CDX_URN_ASSIGNED_NAME: ::Regexp
-
       CDX_URN_FRAGMENT: ::Regexp
-
       CDX_URN_NSS: ::Regexp
-
       CDX_URN_WITH_FRAGMENT: ::Regexp
-
       CDX_URN: ::Regexp
-
       CONTENT_TYPE: ::Regexp
-
       HASH_VALUE: ::Regexp
-
       LOCALE: ::Regexp
-
       MIME_TYPE: ::Regexp
-
       OPEN_CRE: ::Regexp
-
       REF_LINK: ::Regexp
-
       REF_OR_CDX_URN: ::Regexp
-
       UUID: ::Regexp
+      DEFAULT: ::Regexp
+
+      def self.match_exactly?: (::Regexp, ::String) -> bool
     end
   end
 end

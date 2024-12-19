@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Dir[File.join(__dir__ || ".", "record", "*.rb")].each do |file|
-  warn "requiring '#{file}'"
   require_relative file
 end
 

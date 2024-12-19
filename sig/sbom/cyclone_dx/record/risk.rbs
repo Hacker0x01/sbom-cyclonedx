@@ -4,13 +4,11 @@ module SBOM
       class Risk < Base
         def initialize: (?name: String?, ?mitigation_strategy: String?) -> void
 
-        @name: String?
         def name: () -> String?
         def name=: (String?) -> String?
         def name?: () -> bool
         def name_valid?: () -> bool
 
-        @mitigation_strategy: String?
         def mitigation_strategy: () -> String?
         def mitigation_strategy=: (String?) -> String?
         def mitigation_strategy?: () -> bool

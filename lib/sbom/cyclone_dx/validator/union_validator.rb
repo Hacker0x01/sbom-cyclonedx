@@ -8,8 +8,8 @@ module SBOM
     # TODO: Add helpful errors
     module Validator
       class UnionValidator < BaseValidator
-        def initialize(of:, required: false, **kwargs)
-          super(required: required, **kwargs)
+        def initialize(of:, required: false)
+          super(required: required)
 
           @nested_validators = []
 
@@ -20,8 +20,18 @@ module SBOM
           end
         end
 
-        def valid?(value)
-          @nested_validators.any? { |validator| validator.valid?(value) }
+        def validate(value)
+          # TODO: Build message based on type and params, e.g.
+          # "Expected one of: [String, Integer], got: Float"
+          # "Expected one of: [String with length <= 2, Integer with maximum 99], got: String with length 3"
+          rv = @nested_validators.map { |validator| validator.validate(value) }
+          return [] if rv.any?(&:empty?)
+
+          rv.flatten
+        end
+
+        def raw_types
+          @nested_validators.flat_map(&:raw_types)
         end
       end
     end

@@ -4,13 +4,11 @@ module SBOM
       class Advisory < Base
         def initialize: (?title: String?, url: uri) -> void
 
-        @title: String?
         def title: () -> String?
         def title=: (String?) -> String?
         def title?: () -> bool
         def title_valid?: () -> bool
 
-        @url: uri
         def url: () -> uri
         def url=: (uri) -> uri
         def url?: () -> bool

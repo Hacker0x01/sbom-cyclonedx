@@ -4,7 +4,7 @@ module SBOM
       class FloatValidator < BaseValidator[Float]
         @range: Range[number?]
 
-        def initialize: (?maximum: number?, ?minimum: number?, ?required: bool, **untyped) -> void
+        def initialize: (?maximum: number?, ?minimum: number?, ?required: bool) -> void
         def valid?: (untyped) -> bool
       end
     end

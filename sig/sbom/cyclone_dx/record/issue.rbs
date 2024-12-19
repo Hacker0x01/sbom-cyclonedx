@@ -5,13 +5,11 @@ module SBOM
         class Source < Base
           def initialize: (?name: String?, ?url: uri?) -> void
 
-          @name: String?
           def name: () -> String?
           def name=: (String?) -> String?
           def name?: () -> bool
           def name_valid?: () -> bool
 
-          @url: uri?
           def url: () -> uri?
           def url=: (uri?) -> uri?
           def url?: () -> bool
@@ -20,37 +18,31 @@ module SBOM
 
         def initialize: (type: String, ?id: String?, ?name: String?, ?description: String?, ?source: Source?, ?references: Array[uri]?) -> void
 
-        @type: String
         def type: () -> String
         def type=: (String) -> String
         def type?: () -> bool
         def type_valid?: () -> bool
 
-        @id: String?
         def id: () -> String?
         def id=: (String?) -> String?
         def id?: () -> bool
         def id_valid?: () -> bool
 
-        @name: String?
         def name: () -> String?
         def name=: (String?) -> String?
         def name?: () -> bool
         def name_valid?: () -> bool
 
-        @description: String?
         def description: () -> String?
         def description=: (String?) -> String?
         def description?: () -> bool
         def description_valid?: () -> bool
 
-        @source: Source?
         def source: () -> Source?
         def source=: (Source?) -> Source?
         def source?: () -> bool
         def source_valid?: () -> bool
 
-        @references: Array[uri]?
         def references: () -> Array[uri]?
         def references=: (Array[uri]?) -> Array[uri]?
         def references?: () -> bool

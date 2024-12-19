@@ -4,19 +4,16 @@ module SBOM
       class Patch < Base
         def initialize: (type: String, ?diff: Diff?, ?resolves: Array[Issue]?) -> void
 
-        @type: String
         def type: () -> String
         def type=: (String) -> String
         def type?: () -> bool
         def type_valid?: () -> bool
 
-        @diff: Diff?
         def diff: () -> Diff?
         def diff=: (Diff?) -> Diff?
         def diff?: () -> bool
         def diff_valid?: () -> bool
 
-        @resolves: Array[Issue]?
         def resolves: () -> Array[Issue]?
         def resolves=: (Array[Issue]?) -> Array[Issue]?
         def resolves?: () -> bool

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+export RUBYOPT="-rrbs/test/setup"
+export RBS_TEST_TARGET="SBOM::CycloneDX::*"
+export RBS_TEST_LOGLEVEL="warn"
+
+bundle exec rspec --tag '~rbs_test:skip' "$@"

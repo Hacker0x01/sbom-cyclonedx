@@ -4,19 +4,16 @@ module SBOM
       class Parameter < Base
         def initialize: (?name: String?, ?value: String?, ?data_type: String?) -> void
 
-        @name: String?
         def name: () -> String?
         def name=: (String?) -> String?
         def name?: () -> bool
         def name_valid?: () -> bool
 
-        @value: String?
         def value: () -> String?
         def value=: (String?) -> String?
         def value?: () -> bool
         def value_valid?: () -> bool
 
-        @data_type: String?
         def data_type: () -> String?
         def data_type=: (String?) -> String?
         def data_type?: () -> bool

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "active_support/all"
-require_relative "../email_address"
+require_relative "../../../email_address_extension"
 require_relative "../enum"
 require_relative "../pattern"
 require_relative "../validator"
@@ -18,87 +18,55 @@ module SBOM
           raise "Cannot instantiate abstract Record" unless self.class < Base
 
           populate_fields(**args)
-          populate_consts_and_defaults
-
           valid?
         end
 
         def <=>(other)
           return nil unless other.is_a?(self.class)
 
-          self.class.fields.each_key do |name|
-            cmp = public_send(name) <=> other.public_send(name)
-            return cmp unless cmp.zero?
-          end
-
-          0
+          as_json <=> other.as_json
         end
 
         def valid?
-          @errors = self.class.prop_names.to_h { |name| [name, validate_value(name).presence] }.compact
-
-          @errors.merge!(
-            self.class.custom_validators.to_h do |(props, message, block)|
-              [props.join(", "), validate_custom(*props, message: message, &block)]
-            end.compact
-          )
-
-          @errors.empty?
-        end
-
-        def as_json(options = nil)
-          raise SBOM::CycloneDX::Error, "Record is not valid" unless valid?
-
-          self.class.prop_names(include_const: true).each_with_object({}) do |name, memo| #$ Hash[String, jsonObject]
-            next unless public_send(:"#{name}?")
-
-            memo[json_name(name)] = public_send(name).as_json(options)
+          @errors = @_fields.transform_values do |field|
+            field.valid?
+            field.errors
           end
+          @errors[:_base] = []
+
+          self.class.custom_validators.each do |props, message, block|
+            @errors[:_base] += validate_custom(*props, message: message, &block)
+          end
+
+          @errors.all?(&:empty?)
         end
 
-        def to_json(state = nil)
-          raise SBOM::CycloneDX::Error, "Record is not valid" unless valid?
-
-          # RBS is a niusance with this method
-          state ? as_json.to_json(state) : as_json.to_json
+        def valid!
+          raise ArgumentError, formatted_errors
         end
 
         def formatted_errors
-          errors.map { |k, v| "#{k}: #{v.join(", ")}" }.join("\n")
+          errors.filter_map do |field_name, field_errors|
+            next if field_errors.empty?
+
+            field_name = self.class.json_name if field_name == :_base
+            field_errors.map { |error| "#{field_name} #{error}" }
+          end.flatten
         end
 
         private
 
+        attr_reader :_fields
+
         def populate_fields(**args)
-          args.each do |name, value|
-            raise ArgumentError, "Unknown property: #{name}" unless self.class.fields.key?(name)
-            raise ArgumentError, "Attempted to set a constant: #{name}" if self.class.fields.fetch(name).const?
+          @_fields = self.class.fields.to_h do |name, field_class|
+            if args.key?(name)
+              raise ArgumentError, "Can not reassign a const field" if field_class < Field::ConstBase
+              next [name, field_class.new(field_class.coerce(args.fetch(name)))] if field_class < Field::PropBase
+            end
 
-            instance_variable_set(:"@#{name}", value)
+            [name, field_class.new]
           end
-        end
-
-        def populate_consts_and_defaults
-          self.class.fields.each do |name, field|
-            next if instance_variable_defined?(:"@#{name}")
-
-            instance_variable_set(:"@#{name}", field.const) if field.const?
-            instance_variable_set(:"@#{name}", field.default) if field.default?
-          end
-        end
-
-        def json_name(member_name)
-          self.class.json_name(member_name)
-        end
-
-        def validator_for(name)
-          self.class.fields.fetch(name).validator
-        end
-
-        def validate_value(name)
-          return validator_for(name).validate(public_send(name)) if public_send(:"#{name}?")
-
-          validator_for(name).required? ? [SBOM::CycloneDX::Validator::BaseValidator::MISSING_REQUIRED] : []
         end
 
         def validate_custom(*props, message: nil) # rubocop:disable Metrics/MethodLength
@@ -110,52 +78,86 @@ module SBOM
           when Array
             rv
           when false
-            [message || "#{props.join(", ")} is invalid"]
-          else # rubocop:disable Lint/DuplicateBranch
-            []
+            [message || "#{props.join(", ")} invalid"]
+          else
+            [rv.to_s]
           end
         end
 
         class << self
-          def custom_validators
-            @custom_validators ||= []
-          end
-
           def fields
-            @fields ||= {}
-          end
-
-          def create(**args)
-            # TODO: Coerce requisite types
-            new(**args)
-          end
-
-          def create!(**args)
-            create(**args).tap do |instance|
-              raise SBOM::CycloneDX::Error, instance.formatted_errors unless instance.valid?
-            end
+            @fields ||= {} #: Hash[Symbol, singleton(SBOM::CycloneDX::Field::Base)]
           end
 
           def json_create(object)
             # TODO: Transform and symbolize keys
-            create(**object)
+            new(**object)
           end
 
-          def json_name(member_name, string_name = nil)
-            return json_name_map[member_name] if string_name.nil?
+          def json_name(klass_name = nil) # rubocop:disable Metrics/CyclomaticComplexity
+            unless klass_name.nil?
+              raise ArgumentError, "json_name can only be set within the class body" unless in_subclass_body?
 
-            json_name_map[member_name] = string_name
+              return @json_name = klass_name
+            end
+
+            @json_name ||= self.class.name&.split("::")&.last || "Record" if klass_name.nil?
           end
 
-          def prop(name, type, required: false, **kwargs)
+          ###############################
+          # DSL Methods
+          ###############################
+
+          def prop(field_name, type, required: false, **kwargs) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength
             raise "properties cannot be defined for abstract Record" if self == Record
             raise "properties must be defined in the class body of a subclass of Record" unless in_subclass_body?
+            raise "property #{field_name} already defined" if fields.key?(field_name)
 
-            build_prop(name, type, resolve_prop_kwargs(type, **kwargs), required: required)
+            new_prop =
+              case type
+              when :array
+                opts = kwargs.slice(:const, :default, :unique) #: arrayFieldOptions
+                Field.array(field_name: field_name, items: kwargs.fetch(:items), required: required, **opts)
+              when :boolean
+                opts = kwargs.slice(:const, :default) #: booleanFieldOptions
+                Field.boolean(field_name: field_name, required: required, **opts)
+              when :date_time
+                opts = kwargs.slice(:const, :default) #: dateTimeFieldOptions
+                Field.date_time(field_name: field_name, required: required, **opts)
+              when :email_address
+                opts = kwargs.slice(:const, :default) #: emailAddressFieldOptions
+                Field.email_address(field_name: field_name, required: required, **opts)
+              when :float
+                opts = kwargs.slice(:const, :default, :maximum, :minimum) #: floatFieldOptions
+                Field.float(field_name: field_name, required: required, **opts)
+              when :integer
+                opts = kwargs.slice(:const, :default, :maximum, :minimum) #: integerFieldOptions
+                Field.integer(field_name: field_name, required: required, **opts)
+              when Class
+                opts = kwargs.slice(:const, :default) #: recordFieldOptions
+                Field.record(field_name: field_name, klass: type, required: required, **opts)
+              when :string
+                opts = kwargs.slice(:const, :default, :enum, :max_length, :min_length, :pattern) #: stringFieldOptions
+                Field.string(field_name: field_name, required: required, **opts)
+              when :union
+                opts = kwargs.slice(:const, :default) #: unionFieldOptions
+                Field.union(field_name: field_name, of: kwargs.fetch(:of), required: required, **opts)
+              when :uri
+                opts = kwargs.slice(:const, :default) #: uriFieldOptions
+                Field.uri(field_name: field_name, required: required, **opts)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+
+            @fields[field_name] = new_prop
+            define_method(field_name) { @_fields.fetch(field_name).value }
+            define_method(:"#{field_name}=") { |value| @_fields.fetch(field_name).value = value } unless new_prop.const?
+            define_method(:"#{field_name}?") { @_fields.fetch(field_name).value? }
+            define_method(:"#{field_name}_valid?") { @_fields.fetch(field_name).valid? }
           end
 
-          def const(name, type, value, required: true, **kwargs)
-            prop(name, type, const: value, required: required, **kwargs)
+          def const(field_name, type, value, required: false, **kwargs)
+            prop(field_name, type, required: required, const: value, **kwargs)
           end
 
           def validate(*props, presence: nil, message: nil, &block) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity,Metrics/MethodLength
@@ -175,14 +177,8 @@ module SBOM
               end
           end
 
-          def prop_names(include_const: false)
-            return @fields.keys if include_const
-
-            @fields.reject { |_name, field| field.const? }.keys
-          end
-
-          def const_names
-            @fields.select { |_name, field| field.const? }.keys
+          def custom_validators
+            @custom_validators ||= []
           end
 
           private
@@ -193,44 +189,6 @@ module SBOM
             end
 
             self < Base && (caller_location&.label&.start_with?("<class:") || false)
-          end
-
-          def json_name_map
-            @json_name_map ||= Hash.new { |h, k| h[k] = k.to_s.camelize(:lower) }
-          end
-
-          def build_prop(name, type, field_params, required: false)
-            @fields ||= {} #: Hash[Symbol, SBOM::CycloneDX::Field::Base[untyped]]
-            @fields[name] = SBOM::CycloneDX::Field.for(type, name, required: required, **field_params)
-
-            unless field_params.to_h.key?(:const)
-              define_method(:"#{name}=") { |value| instance_variable_set(:"@#{name}", value) }
-            end
-
-            define_method(name) { instance_variable_get(:"@#{name}") }
-            define_method(:"#{name}?") { instance_variable_defined?(:"@#{name}") }
-            define_method(:"#{name}_valid?") { validate_value(name).empty? }
-          end
-
-          def resolve_prop_kwargs(type, **kwargs) # rubocop:disable Metrics/MethodLength,Metrics/CyclomaticComplexity
-            case type
-            when :array
-              kwargs.slice(:items, :unique, :const).compact #$ Validator::arrayValidatorParams
-            when :boolean, :date_time, :email_address, :uri
-              kwargs.slice(:const).compact #$ { const: untyped }
-            when :float, :integer
-              kwargs.slice(:minimum, :maximum, :const).compact #$ { minimum: number, maximum: number, const: number }
-            when :string
-              kwargs.slice(:enum, :max_length, :min_length, :pattern, :const).compact #$ Validator::stringValidatorParams
-            when :union
-              kwargs.slice(:of, :const).compact #$ Validator::unionValidatorParams
-            when Class
-              raise "Unknown type: #{type}" unless type < Base
-
-              kwargs.slice(:const).compact #$ Validator::recordValidatorParams[type]
-            else
-              raise "Unknown type: #{type}"
-            end #: Validator::arrayValidatorParams | Validator::booleanValidatorParams | Validator::dateTimeValidatorParams | Validator::emailAddressValidatorParams | Validator::floatValidatorParams | Validator::integerValidatorParams | Validator::stringValidatorParams | Validator::unionValidatorParams | Validator::uriValidatorParams | Validator::recordValidatorParams
           end
 
           def validate_presence(props, presence, message = nil) # rubocop:disable Metrics/MethodLength

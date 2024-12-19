@@ -2,22 +2,19 @@ module SBOM
   module CycloneDX
     module Validator
       class BaseValidator[in T < fieldValue]
-        REDEFINED_CONST: String
         MISSING_REQUIRED: String
         INVALID_TYPE: String
 
-        @defined_as_const: bool
-        @const: fieldValue?
+        @types: Array[fieldType]
         @required: bool
         @errors: Array[String]
 
-        def initialize: (?required: bool, **untyped) -> void
-        def valid?: (untyped, *fieldType) -> bool
-        def validate: (untyped, *fieldType) -> Array[String]
+        def initialize: (*fieldType, ?required: bool) -> void
+        def valid?: (untyped) -> bool
+        def validate: (untyped) -> Array[String]
         def required?: () -> bool
         def const?: () -> bool
-
-        private def parse_kwargs: (?const: T?, **untyped) -> void
+        def raw_types: () -> Array[fieldType]
       end
     end
   end

@@ -7,8 +7,8 @@ module SBOM
     # TODO: Add helpful errors
     module Validator
       class BooleanValidator < BaseValidator
-        def valid?(value)
-          super(value, TrueClass, FalseClass)
+        def initialize(required: false)
+          super(TrueClass, FalseClass, required: required)
         end
       end
     end

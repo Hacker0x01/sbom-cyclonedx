@@ -4,19 +4,16 @@ module SBOM
       class Version < Base
         def initialize: (?version: String?, ?range: String?, ?status: String?) -> void
 
-        @version: String?
         def version: () -> String?
         def version=: (String?) -> String?
         def version?: () -> bool
         def version_valid?: () -> bool
 
-        @range: String?
         def range: () -> String?
         def range=: (String?) -> String?
         def range?: () -> bool
         def range_valid?: () -> bool
 
-        @status: String?
         def status: () -> String?
         def status=: (String?) -> String?
         def status?: () -> bool

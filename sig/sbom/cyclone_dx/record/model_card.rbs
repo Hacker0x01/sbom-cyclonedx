@@ -5,43 +5,36 @@ module SBOM
         class Considerations < Base
           def initialize: (?users: Array[String]?, ?use_cases: Array[String]?, ?technical_limitations: Array[String]?, ?performance_tradeoffs: Array[String]?, ?ethical_considerations: Array[Risk]?, ?environmental_considerations: EnvironmentalConsideration?, ?fairness_assessments: Array[FairnessAssessment]?) -> void
 
-          @users: Array[String]?
           def users: () -> Array[String]?
           def users=: (Array[String]?) -> Array[String]?
           def users?: () -> bool
           def users_valid?: () -> bool
 
-          @use_cases: Array[String]?
           def use_cases: () -> Array[String]?
           def use_cases=: (Array[String]?) -> Array[String]?
           def use_cases?: () -> bool
           def use_cases_valid?: () -> bool
 
-          @technical_limitations: Array[String]?
           def technical_limitations: () -> Array[String]?
           def technical_limitations=: (Array[String]?) -> Array[String]?
           def technical_limitations?: () -> bool
           def technical_limitations_valid?: () -> bool
 
-          @performance_tradeoffs: Array[String]?
           def performance_tradeoffs: () -> Array[String]?
           def performance_tradeoffs=: (Array[String]?) -> Array[String]?
           def performance_tradeoffs?: () -> bool
           def performance_tradeoffs_valid?: () -> bool
 
-          @ethical_considerations: Array[Risk]?
           def ethical_considerations: () -> Array[Risk]?
           def ethical_considerations=: (Array[Risk]?) -> Array[Risk]?
           def ethical_considerations?: () -> bool
           def ethical_considerations_valid?: () -> bool
 
-          @environmental_considerations: EnvironmentalConsideration?
           def environmental_considerations: () -> EnvironmentalConsideration?
           def environmental_considerations=: (EnvironmentalConsideration?) -> EnvironmentalConsideration?
           def environmental_considerations?: () -> bool
           def environmental_considerations_valid?: () -> bool
 
-          @fairness_assessments: Array[FairnessAssessment]?
           def fairness_assessments: () -> Array[FairnessAssessment]?
           def fairness_assessments=: (Array[FairnessAssessment]?) -> Array[FairnessAssessment]?
           def fairness_assessments?: () -> bool
@@ -52,7 +45,6 @@ module SBOM
           class Approach < Base
             def initialize: (?type: String?) -> void
 
-            @type: String?
             def type: () -> String?
             def type=: (String?) -> String?
             def type?: () -> bool
@@ -62,7 +54,6 @@ module SBOM
           class DataReference < Base
             def initialize: (?ref: String?) -> void
 
-            @ref: String?
             def ref: () -> String?
             def ref=: (String?) -> String?
             def ref?: () -> bool
@@ -70,43 +61,36 @@ module SBOM
           end
           def initialize: (?approach: Approach?, ?task: String?, ?architecture_family: String?, ?model_architecture: String?, ?datasets: Array[ComponentData | DataReference]?, ?inputs: Array[InputOutputMLParameter]?, ?outputs: Array[InputOutputMLParameter]?) -> void
 
-          @approach: Approach?
           def approach: () -> Approach?
           def approach=: (Approach?) -> Approach?
           def approach?: () -> bool
           def approach_valid?: () -> bool
 
-          @task: String?
           def task: () -> String?
           def task=: (String?) -> String?
           def task?: () -> bool
           def task_valid?: () -> bool
 
-          @architecture_family: String?
           def architecture_family: () -> String?
           def architecture_family=: (String?) -> String?
           def architecture_family?: () -> bool
           def architecture_family_valid?: () -> bool
 
-          @model_architecture: String?
           def model_architecture: () -> String?
           def model_architecture=: (String?) -> String?
           def model_architecture?: () -> bool
           def model_architecture_valid?: () -> bool
 
-          @datasets: Array[ComponentData | DataReference]?
           def datasets: () -> (Array[ComponentData | DataReference])?
           def datasets=: (Array[ComponentData | DataReference]?) -> (Array[ComponentData | DataReference])?
           def datasets?: () -> bool
           def datasets_valid?: () -> bool
 
-          @inputs: Array[InputOutputMLParameter]?
           def inputs: () -> Array[InputOutputMLParameter]?
           def inputs=: (Array[InputOutputMLParameter]?) -> Array[InputOutputMLParameter]?
           def inputs?: () -> bool
           def inputs_valid?: () -> bool
 
-          @outputs: Array[InputOutputMLParameter]?
           def outputs: () -> Array[InputOutputMLParameter]?
           def outputs=: (Array[InputOutputMLParameter]?) -> Array[InputOutputMLParameter]?
           def outputs?: () -> bool
@@ -116,13 +100,11 @@ module SBOM
         class QuantitativeAnalysis < Base
           def initialize: (?performance_metrics: Array[PerformanceMetric]?, ?graphics: GraphicsCollection?) -> void
 
-          @performance_metrics: Array[PerformanceMetric]?
           def performance_metrics: () -> Array[PerformanceMetric]?
           def performance_metrics=: (Array[PerformanceMetric]?) -> Array[PerformanceMetric]?
           def performance_metrics?: () -> bool
           def performance_metrics_valid?: () -> bool
 
-          @graphics: GraphicsCollection?
           def graphics: () -> GraphicsCollection?
           def graphics=: (GraphicsCollection?) -> GraphicsCollection?
           def graphics?: () -> bool
@@ -131,31 +113,26 @@ module SBOM
 
         def initialize: (?bom_ref: String?, ?model_parameters: ModelParameters?, ?quantitative_analysis: QuantitativeAnalysis?, ?considerations: Considerations?, ?properties: Array[Property]?) -> void
 
-        @bom_ref: String?
         def bom_ref: () -> String?
         def bom_ref=: (String?) -> String?
         def bom_ref?: () -> bool
         def bom_ref_valid?: () -> bool
 
-        @model_parameters: ModelParameters?
         def model_parameters: () -> ModelParameters?
         def model_parameters=: (ModelParameters?) -> ModelParameters?
         def model_parameters?: () -> bool
         def model_parameters_valid?: () -> bool
 
-        @quantitative_analysis: QuantitativeAnalysis?
         def quantitative_analysis: () -> QuantitativeAnalysis?
         def quantitative_analysis=: (QuantitativeAnalysis?) -> QuantitativeAnalysis?
         def quantitative_analysis?: () -> bool
         def quantitative_analysis_valid?: () -> bool
 
-        @considerations: Considerations?
         def considerations: () -> Considerations?
         def considerations=: (Considerations?) -> Considerations?
         def considerations?: () -> bool
         def considerations_valid?: () -> bool
 
-        @properties: Array[Property]?
         def properties: () -> Array[Property]?
         def properties=: (Array[Property]?) -> Array[Property]?
         def properties?: () -> bool

@@ -9,18 +9,22 @@ module SBOM
         @errors: Hash[Symbol | String, Array[String]]
 
         def <=>: (untyped other) -> Integer?
+        def valid!: -> void
 
         private def populate_fields: (**untyped) -> void
-        private def populate_consts_and_defaults: () -> void
         private def json_name: (Symbol) -> String
         private def validator_for: (Symbol) -> SBOM::CycloneDX::Validator::BaseValidator[fieldValue]
         private def validate_value: (Symbol) -> Array[String]
         private def validate_custom: (*Symbol, ?message: String?) { (*fieldValue?) -> (bool? | String | Array[String]) } -> Array[String]
 
+        @_fields: Hash[Symbol, SBOM::CycloneDX::Field::Base[fieldValue]]
+        self.@json_name: String
         self.@json_name_map: Hash[Symbol, String]
-        self.@fields: Hash[Symbol, SBOM::CycloneDX::Field::Base[untyped]]
+        self.@fields: Hash[Symbol, singleton(SBOM::CycloneDX::Field::Base)]
         self.@custom_validators: Array[[Array[Symbol], String?, ^(*fieldValue?) -> (bool? | String | Array[String])]]
 
+        def self.load: (File) -> instance
+        def self.parse: (String) -> instance
         private def self.in_subclass_body?: () -> bool
         private def self.json_name_map: () -> Hash[Symbol, String]
         private def self.build_prop:
@@ -30,7 +34,7 @@ module SBOM
         | (Symbol, :email_address, Validator::emailAddressValidatorParams, ?required: bool) -> void
         | (Symbol, :float, Validator::floatValidatorParams, ?required: bool) -> void
         | (Symbol, :integer, Validator::integerValidatorParams, ?required: bool) -> void
-        | (Symbol, Class & _Klass, Validator::recordValidatorParams, ?required: bool) -> void
+        | (Symbol, singleton(SBOM::CycloneDX::Record::Base), Validator::recordValidatorParams, ?required: bool) -> void
         | (Symbol, :string, Validator::stringValidatorParams, ?required: bool) -> void
         | (Symbol, :union, Validator::unionValidatorParams, ?required: bool) -> void
         | (Symbol, :uri, Validator::uriValidatorParams, ?required: bool) -> void
@@ -43,7 +47,7 @@ module SBOM
         | (:email_address, **untyped) -> Validator::emailAddressValidatorParams
         | (:float, **untyped) -> Validator::floatValidatorParams
         | (:integer, **untyped) -> Validator::integerValidatorParams
-        | (Class & _Klass, **untyped) -> Validator::recordValidatorParams
+        | (singleton(SBOM::CycloneDX::Record::Base), **untyped) -> Validator::recordValidatorParams
         | (:string, **untyped) -> Validator::stringValidatorParams
         | (:union, **untyped) -> Validator::unionValidatorParams
         | (:uri, **untyped) -> Validator::uriValidatorParams
