@@ -27,8 +27,7 @@ rspec:
   stage: test
   script:
     - bundle exec rbs collection update
-    - chmod +x ./bin/rbs_spec
-    - ./bin/rbs_spec
+    - RUBYOPT="-rrbs/test/setup" RBS_TEST_TARGET="SBOM::CycloneDX::*" RBS_TEST_LOGLEVEL="warn" bundle exec rspec --tag '~rbs_test:skip'
     - |
       echo "Adjusting junit report based on project_path..."
       sed -i 's|file="\./\([^"]*\)"|file="\./\1"|g' "rspec.xml" || true
