@@ -112,7 +112,7 @@ module SBOM
       end
 
       class << self # rubocop:disable Metrics/ClassLength
-        def array(field_name:, items:, unique: false, required: false, json_name: nil, const: :undefined, # rubocop:disable Metrics/MethodLength
+        def array(field_name:, items:, unique: false, required: false, json_name: nil, const: :undefined, # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
                   default: :undefined)
           validator = Validator::ArrayValidator.new(items: items, unique: unique, required: required)
           Field(
