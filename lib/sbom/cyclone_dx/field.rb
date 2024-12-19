@@ -72,8 +72,6 @@ module SBOM
           raise "Cannot instantiate abstract Field" unless self.class < ConstBase
 
           @errors = []
-          return if self.class < Base
-
           @value_set = true
           @value = const
         end
