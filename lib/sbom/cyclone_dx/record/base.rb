@@ -58,15 +58,26 @@ module SBOM
 
         attr_reader :_fields
 
-        def populate_fields(**args)
+        def populate_fields(**args) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
           @_fields = self.class.fields.to_h do |name, field_class|
-            if args.key?(name)
+            arg_name =
+              if args.key?(name)
+                name
+              elsif args.key?(field_class.json_name.to_sym)
+                field_class.json_name.to_sym
+              end
+
+            unless arg_name.nil?
               raise ArgumentError, "Can not reassign a const field" if field_class < Field::ConstBase
-              next [name, field_class.new(field_class.coerce(args.fetch(name)))] if field_class < Field::PropBase
+              next [name, field_class.new(field_class.coerce(args.delete(arg_name)))] if field_class < Field::PropBase
             end
 
             [name, field_class.new]
           end
+
+          raise ArgumentError, "Unknown field(s): #{args.keys.join(", ")}" unless args.empty?
+
+          @_fields
         end
 
         def validate_custom(*props, message: nil) # rubocop:disable Metrics/MethodLength
@@ -90,26 +101,25 @@ module SBOM
           end
 
           def json_create(object)
-            # TODO: Transform and symbolize keys
-            new(**object)
+            new(**object.deep_symbolize_keys)
           end
 
-          def json_name(klass_name = nil) # rubocop:disable Metrics/CyclomaticComplexity
+          def json_name(klass_name = nil)
             unless klass_name.nil?
               raise ArgumentError, "json_name can only be set within the class body" unless in_subclass_body?
 
               return @json_name = klass_name
             end
 
-            @json_name ||= self.class.name&.split("::")&.last || "Record" if klass_name.nil?
+            @json_name ||= name&.split("::")&.last || "Record"
           end
 
           ###############################
           # DSL Methods
           ###############################
 
-          def prop(field_name, type, required: false, **kwargs) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength
-            raise "properties cannot be defined for abstract Record" if self == Record
+          def prop(field_name, type, required: false, json_name: nil, **kwargs) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength
+            raise "properties cannot be defined for abstract Record" unless self < Base
             raise "properties must be defined in the class body of a subclass of Record" unless in_subclass_body?
             raise "property #{field_name} already defined" if fields.key?(field_name)
 
@@ -117,34 +127,36 @@ module SBOM
               case type
               when :array
                 opts = kwargs.slice(:const, :default, :unique) #: arrayFieldOptions
-                Field.array(field_name: field_name, items: kwargs.fetch(:items), required: required, **opts)
+                Field.array(field_name: field_name, items: kwargs.fetch(:items), required: required,
+                            json_name: json_name, **opts)
               when :boolean
                 opts = kwargs.slice(:const, :default) #: booleanFieldOptions
-                Field.boolean(field_name: field_name, required: required, **opts)
+                Field.boolean(field_name: field_name, required: required, json_name: json_name, **opts)
               when :date_time
                 opts = kwargs.slice(:const, :default) #: dateTimeFieldOptions
-                Field.date_time(field_name: field_name, required: required, **opts)
+                Field.date_time(field_name: field_name,  required: required, json_name: json_name, **opts)
               when :email_address
                 opts = kwargs.slice(:const, :default) #: emailAddressFieldOptions
-                Field.email_address(field_name: field_name, required: required, **opts)
+                Field.email_address(field_name: field_name, required: required, json_name: json_name, **opts)
               when :float
                 opts = kwargs.slice(:const, :default, :maximum, :minimum) #: floatFieldOptions
-                Field.float(field_name: field_name, required: required, **opts)
+                Field.float(field_name: field_name, required: required, json_name: json_name, **opts)
               when :integer
                 opts = kwargs.slice(:const, :default, :maximum, :minimum) #: integerFieldOptions
-                Field.integer(field_name: field_name, required: required, **opts)
+                Field.integer(field_name: field_name, required: required, json_name: json_name, **opts)
               when Class
                 opts = kwargs.slice(:const, :default) #: recordFieldOptions
-                Field.record(field_name: field_name, klass: type, required: required, **opts)
+                Field.record(field_name: field_name, klass: type, required: required, json_name: json_name, **opts)
               when :string
                 opts = kwargs.slice(:const, :default, :enum, :max_length, :min_length, :pattern) #: stringFieldOptions
-                Field.string(field_name: field_name, required: required, **opts)
+                Field.string(field_name: field_name,  required: required, json_name: json_name, **opts)
               when :union
                 opts = kwargs.slice(:const, :default) #: unionFieldOptions
-                Field.union(field_name: field_name, of: kwargs.fetch(:of), required: required, **opts)
+                Field.union(field_name: field_name, of: kwargs.fetch(:of), required: required, json_name: json_name,
+                            **opts)
               when :uri
                 opts = kwargs.slice(:const, :default) #: uriFieldOptions
-                Field.uri(field_name: field_name, required: required, **opts)
+                Field.uri(field_name: field_name, required: required, json_name: json_name, **opts)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
@@ -156,12 +168,12 @@ module SBOM
             define_method(:"#{field_name}_valid?") { @_fields.fetch(field_name).valid? }
           end
 
-          def const(field_name, type, value, required: false, **kwargs)
-            prop(field_name, type, required: required, const: value, **kwargs)
+          def const(field_name, type, value, required: false, json_name: nil, **kwargs)
+            prop(field_name, type, required: required, json_name: json_name, const: value, **kwargs)
           end
 
           def validate(*props, presence: nil, message: nil, &block) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity,Metrics/MethodLength
-            raise "custom validators cannot be defined for abstract Record" if self == Record
+            raise "custom validators cannot be defined for abstract Record" unless self < Base
             raise "custom validators must be defined in the class body of a subclass of Record" unless in_subclass_body?
 
             @custom_validators ||= [] #: Array[[Array[Symbol], String, ^(*fieldValue?) -> (bool? | String | Array[String])]]
@@ -191,25 +203,25 @@ module SBOM
             self < Base && (caller_location&.label&.start_with?("<class:") || false)
           end
 
-          def validate_presence(props, presence, message = nil) # rubocop:disable Metrics/MethodLength
+          def validate_presence(props, presence, message = nil) # rubocop:disable Metrics/MethodLength,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
             case presence
             when :all
               [
                 props,
                 message || "all of #{props.join(", ")} must be present",
-                ->(*values) { values.all? }
+                ->(*values) { values.none?(&:nil?) }
               ]
             when :any
               [
                 props,
                 message || "at least one of #{props.join(", ")} must be present",
-                ->(*values) { values.any? }
+                ->(*values) { !values.all?(&:nil?) }
               ]
             when :one
               [
                 props,
                 message || "exactly one of #{props.join(", ")} must be present",
-                ->(*values) { values.one? }
+                ->(*values) { values.count { |v| !v.nil? } == 1 }
               ]
             else
               raise ArgumentError, "unknown value for presence: #{presence}"

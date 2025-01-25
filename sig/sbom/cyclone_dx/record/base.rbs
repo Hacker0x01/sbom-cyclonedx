@@ -28,17 +28,17 @@ module SBOM
         private def self.in_subclass_body?: () -> bool
         private def self.json_name_map: () -> Hash[Symbol, String]
         private def self.build_prop:
-          (Symbol, :array, Validator::arrayValidatorParams, ?required: bool) -> void
-        | (Symbol, :boolean, Validator::booleanValidatorParams, ?required: bool) -> void
-        | (Symbol, :date_time, Validator::dateTimeValidatorParams, ?required: bool) -> void
-        | (Symbol, :email_address, Validator::emailAddressValidatorParams, ?required: bool) -> void
-        | (Symbol, :float, Validator::floatValidatorParams, ?required: bool) -> void
-        | (Symbol, :integer, Validator::integerValidatorParams, ?required: bool) -> void
-        | (Symbol, singleton(SBOM::CycloneDX::Record::Base), Validator::recordValidatorParams, ?required: bool) -> void
-        | (Symbol, :string, Validator::stringValidatorParams, ?required: bool) -> void
-        | (Symbol, :union, Validator::unionValidatorParams, ?required: bool) -> void
-        | (Symbol, :uri, Validator::uriValidatorParams, ?required: bool) -> void
-        | (Symbol, fieldTypeLabel, Validator::anyValidatorParams, ?required: bool) -> void
+          (Symbol, :array, Validator::arrayValidatorParams, ?required: bool, ?json_name: String?) -> void
+        | (Symbol, :boolean, Validator::booleanValidatorParams, ?required: bool, ?json_name: String?) -> void
+        | (Symbol, :date_time, Validator::dateTimeValidatorParams, ?required: bool, ?json_name: String?) -> void
+        | (Symbol, :email_address, Validator::emailAddressValidatorParams, ?required: bool, ?json_name: String?) -> void
+        | (Symbol, :float, Validator::floatValidatorParams, ?required: bool, ?json_name: String?) -> void
+        | (Symbol, :integer, Validator::integerValidatorParams, ?required: bool, ?json_name: String?) -> void
+        | (Symbol, singleton(SBOM::CycloneDX::Record::Base), Validator::recordValidatorParams, ?required: bool, ?json_name: String?) -> void
+        | (Symbol, :string, Validator::stringValidatorParams, ?required: bool, ?json_name: String?) -> void
+        | (Symbol, :union, Validator::unionValidatorParams, ?required: bool, ?json_name: String?) -> void
+        | (Symbol, :uri, Validator::uriValidatorParams, ?required: bool, ?json_name: String?) -> void
+        | (Symbol, fieldTypeLabel, Validator::anyValidatorParams, ?required: bool, ?json_name: String?) -> void
         private def self.validator_for: (Symbol) -> SBOM::CycloneDX::Validator::BaseValidator[fieldValue]
         private def self.resolve_prop_kwargs:
           (:array, **untyped) -> Validator::arrayValidatorParams

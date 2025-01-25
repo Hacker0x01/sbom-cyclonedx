@@ -144,8 +144,8 @@ module SBOM
         def create: (**untyped) -> SBOM::CycloneDX::Record::Base
         def create!: (**untyped) -> SBOM::CycloneDX::Record::Base
         def json_name: (String) -> void | (?nil) -> String
-        def prop: (Symbol, fieldTypeLabel, ?required: bool, **untyped) -> void
-        def const: (Symbol, fieldTypeLabel, fieldValue, ?required: bool, **untyped) -> void
+        def prop: (Symbol, fieldTypeLabel, ?required: bool, ?json_name: String?, **untyped) -> void
+        def const: (Symbol, fieldTypeLabel, fieldValue, ?required: bool, ?json_name: String?, **untyped) -> void
         def validate:
           (*Symbol, presence: :one | :all | :any, ?message: String?) -> void
         | (*Symbol, ?message: String?) { (*fieldValue?) -> (bool? | String | Array[String]) } -> void
