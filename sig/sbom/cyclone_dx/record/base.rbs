@@ -23,8 +23,7 @@ module SBOM
         self.@fields: Hash[Symbol, singleton(SBOM::CycloneDX::Field::Base)]
         self.@custom_validators: Array[[Array[Symbol], String?, ^(*fieldValue?) -> (bool? | String | Array[String])]]
 
-        def self.load: (File) -> instance
-        def self.parse: (String) -> instance
+        def self.json_create: (::Hash[Symbol | String, untyped]) -> instance
         private def self.in_subclass_body?: () -> bool
         private def self.json_name_map: () -> Hash[Symbol, String]
         private def self.build_prop:

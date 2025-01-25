@@ -7,6 +7,7 @@ require_relative "cyclone_dx/pattern"
 require_relative "cyclone_dx/record"
 require_relative "cyclone_dx/validator"
 require_relative "cyclone_dx/version"
+require "json"
 
 # Disable DNS lookup and host validation for the EmailAddress gem, so we don't accidentally hit the network.
 # We also override this in the EmailAddressExtension module, but this is a good safety net.
@@ -22,11 +23,12 @@ module SBOM
       end
 
       def load(file)
-        Record::Root.load(file)
+        parse(file.read)
       end
 
       def parse(string)
-        Record::Root.parse(string)
+        json_hash = JSON.parse(string, symbolize_names: true)
+        Record::Root.json_create(json_hash)
       end
     end
   end
