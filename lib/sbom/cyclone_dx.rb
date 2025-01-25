@@ -30,6 +30,10 @@ module SBOM
         json_hash = JSON.parse(string, symbolize_names: true)
         Record::Root.json_create(json_hash)
       end
+
+      def json_create(hash)
+        Record::Root.json_create(hash)
+      end
     end
   end
 end

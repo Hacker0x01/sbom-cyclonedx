@@ -54,6 +54,10 @@ module SBOM
           end.flatten
         end
 
+        def self.json_create(object)
+          new(**object.deep_symbolize_keys)
+        end
+
         private
 
         attr_reader :_fields
@@ -98,10 +102,6 @@ module SBOM
         class << self
           def fields
             @fields ||= {} #: Hash[Symbol, singleton(SBOM::CycloneDX::Field::Base)]
-          end
-
-          def json_create(object)
-            new(**object.deep_symbolize_keys)
           end
 
           def json_name(klass_name = nil)

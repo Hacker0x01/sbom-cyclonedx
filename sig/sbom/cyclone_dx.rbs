@@ -8,5 +8,6 @@ module SBOM
     def self.create: (Hash[String | Symbol, fieldValue]) -> Record::Root
     def self.load: (File) -> Record::Root
     def self.parse: (String) -> Record::Root
+    def self.json_create: (::Hash[String | Symbol, untyped]) -> Record::Root
   end
 end
