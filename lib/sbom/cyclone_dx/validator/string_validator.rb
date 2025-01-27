@@ -2,7 +2,6 @@
 
 require_relative "base_validator"
 require_relative "../pattern"
-require "debug"
 
 module SBOM
   module CycloneDX
