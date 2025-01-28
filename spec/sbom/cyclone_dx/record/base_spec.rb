@@ -231,7 +231,7 @@ describe SBOM::CycloneDX::Record::Base do
       it "raises an error when a value is provided for a const field" do
         expect do
           record_class.new(const_prop: "new value")
-        end.to raise_error("Can not reassign a const field")
+        end.to raise_error("Sbom value does not match const field ('test' != 'new value')")
       end
 
       it "raises an error when an unknown field is provided" do

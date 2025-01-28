@@ -72,7 +72,17 @@ module SBOM
               end
 
             unless arg_name.nil?
-              raise ArgumentError, "Can not reassign a const field" if field_class < Field::ConstBase
+              if field_class < Field::ConstBase
+                const_object = field_class.new
+                input_object_value = args.delete(arg_name)
+                if const_object.value != input_object_value
+                  raise ArgumentError,
+                        "Sbom value does not match const field ('#{const_object.value}' != '#{input_object_value}')"
+                end
+
+                next [name, const_object]
+              end
+
               next [name, field_class.new(field_class.coerce(args.delete(arg_name)))] if field_class < Field::PropBase
             end
 
