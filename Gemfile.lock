@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     sbom-cyclonedx (0.1.0)
-      activesupport (~> 6.1, >= 6.1)
+      activesupport (>= 6.1, < 8)
       email_address (~> 0.2, >= 0.2.4)
 
 GEM
