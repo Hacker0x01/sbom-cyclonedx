@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.files = `git ls-files`.split("\n")
   spec.bindir = "bin"
-  spec.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  spec.executables = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
 
   spec.require_paths = ["lib"]
 
