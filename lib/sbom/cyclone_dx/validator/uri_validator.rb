@@ -19,7 +19,7 @@ module SBOM
           begin
             # Steep is, for some reason, looking at OpenURI's ::URI, and not ::URI from stdlib...
             uri_value = value.is_a?(URI::Generic) ? value : URI.parse(value)
-            return rv if uri_value.scheme.present? && uri_value.host.present?
+            return rv if uri_value.scheme.present?
           rescue NoMethodError, URI::Error
             # Do nothing, all errors handled below
           end
